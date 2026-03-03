@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 const data = [
   {
-    count: 12,
+    count: 8,
     text: "Años de experiencia en golf",
     image: "golf-1.jpg",
   },
@@ -17,7 +17,7 @@ const data = [
     image: "golf-2.jpg",
   },
   {
-    count: 320,
+    count: 520,
     text: "Alumnos formados",
     image: "golf-3.jpg",
   },
@@ -267,6 +267,27 @@ const Areas = () => {
               </Grid>
             ))}
           </Grid>
+        </Grid>
+        {/* Columna de imagen characters.png */}
+        <Grid item xs={12} md={6}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: isMobile ? "center" : "flex-end",
+              alignItems: "center",
+              height: "100%",
+              mt: isMobile ? 4 : 0,
+            }}
+          >
+            <img
+              src="/characters.png"
+              alt="Characters"
+              style={{
+                maxWidth: isMobile ? "80%" : "100%",
+                height: "auto",
+              }}
+            />
+          </Box>
         </Grid>
       </Grid>
     </Box >

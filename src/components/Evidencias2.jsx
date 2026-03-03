@@ -62,16 +62,16 @@ const SeccionDestacada = () => {
                 sx={{
                     position: 'absolute',
                     inset: 0,
-                    bgcolor: 'rgb(0 30 43)', // si quieres puedes quitar esto, el fondo lo cubre
                     zIndex: 0,
-                    backgroundImage: "url('/fondo-celeste.avif')",
+                    backgroundImage: "url('/fondo-6.jpg')",
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
                     backgroundAttachment: 'fixed',
+                    transform: 'scaleX(-1)', // refleja horizontalmente
+                    transformOrigin: 'center', // asegura que el reflejo sea centrado
                 }}
-            >
-            </Box>
+            />
 
             {/* Contenido */}
             <Box
@@ -157,41 +157,46 @@ const SeccionDestacada = () => {
                         </Typography>
 
                         {/* Video que reemplaza "En desarrollo..." */}
+                        {/* Texto "En construcción..." solo letras */}
                         <Box
                             ref={ref}
                             sx={{
                                 mt: 2,
                                 ml: 7,
-                                alignSelf: 'flex-end', // 👈 lo empuja a la derecha del panel
+                                alignSelf: 'flex-end',
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 position: 'relative',
-                                overflow: 'hidden',
-                                borderRadius: '12px',
-                                boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
                                 width: '100%',
                                 maxWidth: '265px',
                                 aspectRatio: '9 / 16',
                             }}
                         >
-                            <motion.video
-                                src="/trabajos.mp4"
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
+                            <motion.div
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
                                 transition={{ duration: 1.5, ease: 'easeOut' }}
                                 style={{
                                     width: '100%',
                                     height: '100%',
-                                    objectFit: 'cover',
-                                    borderRadius: '12px',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
                                 }}
-                                onClick={handleVideoClick}
-                            />
+                            >
+                                <Typography
+                                    variant="h6"
+                                    sx={{
+                                        color: '#FFA500', // naranja vivo
+                                        fontWeight: 700,
+                                        textAlign: 'center',
+                                        px: 2,
+                                    }}
+                                >
+                                    En construcción...
+                                </Typography>
+                            </motion.div>
                         </Box>
 
                     </Box>

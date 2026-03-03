@@ -5,7 +5,7 @@ import { FaTshirt } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useInView } from 'react-intersection-observer';
 import { useOutletContext } from "react-router-dom";
-import { Checkroom, Storefront, DesignServices, LocalShipping } from "@mui/icons-material";
+import { SportsGolf, School, EmojiEvents, Groups } from "@mui/icons-material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import "./css/Informations.css";
 import "swiper/css";
@@ -15,7 +15,7 @@ const promotions = [
     id: 1,
     title: "🏌️ Para Niños",
     description: "Aprenden golf jugando y divirtiéndose desde el primer día.",
-    image: "/Informations-1.webp",
+    image: "/fondo-1.png",
     price: "Comienza hoy",
     bgColor: "linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3))",
     textColor: "white",
@@ -32,7 +32,7 @@ const promotions = [
     id: 2,
     title: "👨‍👩‍👧 Para Padres",
     description: "Acompaña y sigue el progreso de tus hijos en cada etapa.",
-    image: "/Informations-3.webp",
+    image: "/fondo-3.jpg",
     price: "Descubre más",
     bgColor: "linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2))",
     textColor: "white",
@@ -49,7 +49,7 @@ const promotions = [
     id: 3,
     title: "🏆 Para Coaches",
     description: "Herramientas modernas para enseñar golf de forma efectiva.",
-    image: "/Informations-2.webp",
+    image: "/fondo-4.png",
     price: "Potencia tu enseñanza",
     bgColor: "linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2))",
     textColor: "white",
@@ -127,7 +127,7 @@ function Informations({ informationsRef, triggerInformations }) {
       sx={{
         position: "relative",
         zIndex: 10,
-        backgroundImage: 'url(fondo-mobile.webp)',
+        backgroundImage: 'url(fondo-7.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
@@ -141,8 +141,18 @@ function Informations({ informationsRef, triggerInformations }) {
         borderBottomRightRadius: isMobile ? '90px' : '120px',
       }}
     >
-
-      <Container sx={{ textAlign: "center", color: "black", maxWidth: "1400px !important" }}>
+      {/* Overlay solo sobre la imagen */}
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          backgroundColor: 'rgba(0,0,0,0.5)', // oscurece solo la imagen
+          zIndex: 1, // debajo del contenido
+          borderBottomLeftRadius: isMobile ? '90px' : '120px',
+          borderBottomRightRadius: isMobile ? '90px' : '120px',
+        }}
+      />
+      <Container sx={{ textAlign: "center", position: "relative", color: "black", maxWidth: "1400px !important" }}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
             <Typography
@@ -159,30 +169,25 @@ function Informations({ informationsRef, triggerInformations }) {
                 letterSpacing: "2px",
                 fontSize: { xs: "1.2rem", md: "1.6rem" },
 
-                // 🎨 Gradiente de texto suave (no blanco puro)
-                background: "linear-gradient(90deg, #355f5b, #4f7f79)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-
-                // ✨ Sombra sutil (menos agresiva)
-                textShadow: "0 1px 6px rgba(53,95,91,0.25)",
+                color: "#ffffff",        // blanco puro
+                textShadow: "0 2px 8px rgba(0,0,0,0.5)", // 🔹 sombra sutil para resaltar sobre fondo oscuro
 
                 position: "relative",
                 display: "inline-block",
 
+                zIndex: 2, // asegúrate de que esté sobre cualquier overlay
+
                 "&::after": {
                   content: '""',
                   position: "absolute",
-                  bottom: -2,
+                  bottom: -4,
                   left: 0,
                   width: showPopularBadge ? "100%" : "0%",
-                  height: "3px",
-                  borderRadius: "3px",
-
-                  // 🌿 Underline turquesa pastel
-                  background: "linear-gradient(90deg, #9fd8cf, #5fb3a2)",
-
+                  height: "4px",
+                  borderRadius: "4px",
+                  background: "#ffffff", // underline blanco
                   transition: "width 0.6s ease-out",
+                  zIndex: 2,
                 },
               }}
             >
@@ -433,26 +438,28 @@ function Informations({ informationsRef, triggerInformations }) {
 
             <Box
               sx={{
-                width: 25,
-                height: 25,
+                width: 30,  // un poquito más grande
+                height: 30,
                 borderRadius: "50%",
-                backgroundColor: "rgb(102, 205, 205)",
+                background: "linear-gradient(135deg, #4fd1c5, #38b2ac)", // gradiente turquesa vibrante
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                border: "2px solid white",
+                border: "1.5px solid rgba(255,255,255,0.9)", // borde blanco semitransparente
                 mx: "auto",
                 mb: 0.5,
+                boxShadow: "0 4px 12px rgba(0,0,0,0.35)", // halo para resaltar sobre fondo oscuro
+                position: "relative",
+                zIndex: 2,
               }}
             >
               <motion.div
-                initial={{ rotate: 0 }}
-                animate={inView || hasAnimated2 ? { rotate: 360 } : {}} // 🔹 Solo se activa cuando `shouldAnimate` es `true`
+                initial={{ rotate: 0, scale: 0.85 }}
+                animate={inView || hasAnimated2 ? { rotate: 360, scale: 1 } : { rotate: 0, scale: 0.85 }}
                 transition={{
-                  duration: 0.3,
-                  delay: 0.3,
-                  repeat: 1, // Se repite una vez más (total: dos veces)
-                  ease: "linear", // Movimiento fluido
+                  duration: 1.2,
+                  repeat: 2,
+                  ease: "easeInOut",
                 }}
                 style={{
                   display: "flex",
@@ -462,186 +469,184 @@ function Informations({ informationsRef, triggerInformations }) {
                   height: "100%",
                 }}
               >
-                <FaTshirt size={15} color="white" />
+                <EmojiEvents sx={{ fontSize: 18, color: "white" }} />
               </motion.div>
             </Box>
-            <Typography
-              component="div"   // 🔑 clave
-              sx={{
-                display: "grid",            // 🔑 clave
-                gridTemplateRows: "auto auto",
-                justifyItems: "center",
-                alignItems: "center",
-
-                fontFamily: "'Montserrat', Helvetica, Arial, sans-serif !important",
-                fontSize: { xs: "1.8rem", md: "2rem" },
-                px: { xs: 4, md: 3 },
-                letterSpacing: "3px",
-                color: "#355f5b",
-                width: "100%",
-                lineHeight: 1.25,
-                textAlign: "center",
-              }}
+            <motion.div
+              initial={{ opacity: 0, y: 80 }} // ⬇️ Aparece más abajo
+              animate={inView || hasAnimated2 ? { opacity: 1, y: 0 } : { opacity: 0, y: 80 }}
+              transition={{ duration: 1, ease: 'easeOut' }}
             >
-              La elegancia está
-              en los detalles
-            </Typography>
+              <Typography
+                variant="h3"
+                gutterBottom
+                sx={{
+                  fontFamily: "'Montserrat', Helvetica, Arial, sans-serif !important",
+                  fontSize: { xs: "1.5rem", md: "2rem" },
+                  paddingLeft: { xs: "40px", md: "30px" },
+                  paddingRight: { xs: "40px", md: "30px" },
+                  letterSpacing: "3px",
+                  my: 0,
+                  display: "inline-block",
+                  position: "relative",
+                  zIndex: 1,
+                  backgroundColor: "transparent",
+                  color: "white",
+                  "::after": {
+                    content: '""',
+                    position: "absolute",
+                    left: 0,
+                    right: 0,
+                    bottom: "-5px",
+                    height: "10px",
+                    backgroundColor: "transparent",
+                    zIndex: 2,
+                  },
+                }}
+              >
+                Entrena hoy, compite mañana!
+              </Typography>
+            </motion.div>
 
           </Box>
           {/* Columna de los íconos */}
           <Grid item xs={12} md={6}>
             {[
               {
-                icon: <Checkroom sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Producción para mayoristas.",
-                desc: "Elabora lotes de prendas personalizadas para clientes a gran escala.",
+                icon: <SportsGolf sx={{ color: "white", fontSize: "2.2rem" }} />,
+                text: "Clases personalizadas de golf.",
+                desc: "Entrenamiento adaptado a tu nivel para perfeccionar técnica y precisión.",
                 hideLine: false,
               },
               {
-                icon: <Storefront sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Venta directa de nuestras confecciones.",
-                desc: "Comercializamos ropa confeccionada en nuestro propio taller, con calidad y estilo.",
+                icon: <School sx={{ color: "white", fontSize: "2.2rem" }} />,
+                text: "Formación para niños y jóvenes.",
+                desc: "Programas formativos enfocados en fundamentos y desarrollo deportivo.",
                 hideLine: false,
               },
               {
-                icon: <LocalShipping sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Envíos a todo Venezuela.",
-                desc: "Despacha tus productos desde el taller a cualquier parte del país.",
+                icon: <EmojiEvents sx={{ color: "white", fontSize: "2.2rem" }} />,
+                text: "Preparación para torneos.",
+                desc: "Entrenamiento competitivo para mejorar rendimiento en el campo.",
                 hideLine: false,
               },
               {
-                icon: <DesignServices sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Servicios de costura y arreglos.",
-                desc: "Ofrece composturas, ajustes y trabajos a medida con acabado profesional.",
+                icon: <Groups sx={{ color: "white", fontSize: "2.2rem" }} />,
+                text: "Clínicas y eventos de golf.",
+                desc: "Sesiones grupales y experiencias diseñadas para potenciar tu juego.",
                 hideLine: true,
               },
-            ]
-              .map((item, index) => {
-                const { ref: itemRef, inView: itemInView } = useInView({
-                  threshold: 0.43,
-                  triggerOnce: true,
-                });
+            ].map((item, index) => {
+              const { ref: itemRef, inView: itemInView } = useInView({
+                threshold: 0.43,
+                triggerOnce: true,
+              });
 
-                return (
-                  <motion.div
-                    key={`animated-${index}-${animationKey}`} // 👈 clave dinámica
-                    ref={itemRef}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={itemInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{
-                      delay: 0.2 * index,
-                      duration: 0.5,
+              return (
+                <motion.div
+                  key={`animated-${index}-${animationKey}`}
+                  ref={itemRef}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={itemInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.2 * index, duration: 0.5 }}
+                >
+                  <ListItem
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      zIndex: 2,
+                      paddingLeft: isMobile ? "0" : "16px",
+                      paddingRight: isMobile ? "0" : "16px",
                     }}
                   >
-                    <ListItem
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        zIndex: 2,
-                        paddingLeft: isMobile ? "0" : "16px",
-                        paddingRight: isMobile ? "0" : "16px",
-                      }}
-                    >
-                      <ListItemIcon sx={{ zIndex: 2 }}>
+                    <ListItemIcon sx={{ zIndex: 2 }}>
+                      <Box
+                        sx={{
+                          position: "relative",
+                          width: 100,
+                          height: 85,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {!item.hideLine && (
+                          <motion.div
+                            initial={{ height: 0 }}
+                            animate={itemInView ? { height: 40 } : { height: 0 }}
+                            transition={{
+                              delay: 0.2 * index,
+                              duration: 1,
+                              ease: "easeInOut",
+                            }}
+                            style={{
+                              position: "absolute",
+                              top: "80%",
+                              left: "50%",
+                              transform: "translateX(-50%)",
+                              width: "2px",
+                              backgroundImage: "linear-gradient(white 40%, rgba(255,255,255,0) 0%)",
+                              backgroundPosition: "left",
+                              backgroundSize: "2px 6px",
+                              backgroundRepeat: "repeat-y",
+                              zIndex: 1,
+                              opacity: 0.5,
+                            }}
+                          />
+                        )}
+
                         <Box
                           sx={{
-                            position: "relative",
-                            width: 100,
-                            height: 85,
+                            width: 70,
+                            height: 70,
+                            borderRadius: "50%",
+                            border: "2px solid white", // borde blanco para contraste
+                            backgroundColor: "rgba(255,255,255,0.1)", // fondo translúcido blanco
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
+                            position: "relative",
+                            zIndex: 2,
                           }}
                         >
-                          {!item.hideLine && (
-                            <motion.div
-                              initial={{ height: 0 }}
-                              animate={itemInView ? { height: 40 } : { height: 0 }}
-                              transition={{
-                                delay: 0.2 * index,
-                                duration: 1,
-                                ease: "easeInOut",
-                              }}
-                              style={{
-                                position: "absolute",
-                                top: "80%",
-                                left: "50%",
-                                transform: "translateX(-50%)",
-                                width: "2px",
+                          {item.icon} {/* Icono en color blanco o principal */}
 
-                                // 🎨 Línea punteada turquesa sutil
-                                backgroundImage:
-                                  "linear-gradient(#355f5b 40%, rgba(53,95,91,0) 0%)",
-
-                                backgroundPosition: "left",
-                                backgroundSize: "2px 6px",
-                                backgroundRepeat: "repeat-y",
-                                zIndex: 1,
-                                opacity: 0.5,
-                              }}
-                            />
-
-                          )}
-
-                          <Box
-                            sx={{
-                              width: 70,
-                              height: 70,
+                          <motion.div
+                            style={{
+                              position: "absolute",
+                              top: 0,
+                              left: 0,
+                              width: "100%",
+                              height: "100%",
                               borderRadius: "50%",
-                              border: "2px solid white",
-
-                              // 🎨 Turquesa pastel
-                              backgroundColor: "rgb(102, 205, 205)", // Medium Turquoise
-
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              position: "relative",
-                              zIndex: 2,
+                              backgroundColor: "rgba(255,255,255,0.15)", // halo sutil
+                              zIndex: 1,
+                              animation: "pulsacion 1s ease-in-out 0.1s infinite",
                             }}
-                          >
-
-                            {item.icon}
-                            <motion.div
-                              style={{
-                                position: "absolute",
-                                top: 0,
-                                left: 0,
-                                width: "100%",
-                                height: "100%",
-                                borderRadius: "50%",
-
-                                // 🎨 Halo turquesa pastel
-                                backgroundColor: "rgba(95, 180, 170, 0.35)",
-
-                                zIndex: 1,
-                                animation: "pulsacion 1s ease-in-out 0.1s infinite",
-                              }}
-                            />
-
-                          </Box>
+                          />
                         </Box>
-                      </ListItemIcon>
+                      </Box>
+                    </ListItemIcon>
 
-                      <ListItemText
-                        sx={{
-                          fontFamily: "'Montserrat', Helvetica, Arial, sans-serif !important",
-                          "& .MuiListItemText-primary": {
-                            fontSize: isMobile ? "0.99rem" : "1.2rem",
-                            color: "#355f5b", // <--- Agrega esta línea
-                            fontWeight: 500, // Opcional: para que resalte más que el secondary
-                          },
-                          "& .MuiListItemText-secondary": {
-                            color: "#355f5b",
-                          },
-                        }}
-                        primary={item.text}
-                        secondary={item.desc}
-                      />
-                    </ListItem>
-                  </motion.div>
-                );
-              })}
+                    <ListItemText
+                      sx={{
+                        fontFamily: "'Montserrat', Helvetica, Arial, sans-serif !important",
+                        "& .MuiListItemText-primary": {
+                          fontSize: isMobile ? "0.99rem" : "1.2rem",
+                          color: "white",
+                          fontWeight: 500,
+                        },
+                        "& .MuiListItemText-secondary": {
+                          color: "rgba(255,255,255,0.8)",
+                        },
+                      }}
+                      primary={item.text}
+                      secondary={item.desc}
+                    />
+                  </ListItem>
+                </motion.div>
+              );
+            })}
           </Grid>
 
 
@@ -653,7 +658,7 @@ function Informations({ informationsRef, triggerInformations }) {
 
 
       </Container>
-    </Box>
+    </Box >
   );
 };
 

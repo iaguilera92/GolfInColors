@@ -117,11 +117,12 @@ function Hero({ informationsRef, setVideoReady }) {
         gutterBottom
         className="text"
         sx={{
-          fontSize: isMobile ? "1.64rem !important" : "2.5rem !important",
+          fontSize: isMobile ? "1.1rem !important" : "2.2rem !important",
           whiteSpace: "pre",
           textAlign: "center",
           position: "relative",
           display: "inline-block",
+          lineHeight: 1.2,
         }}
       >
         {letters.map((char, index) => {

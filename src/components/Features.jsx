@@ -172,18 +172,17 @@ function Features({ videoReady, informationsRef }) {
                 fontWeight: 600,
                 color: "#fff",
 
-                // 🎨 TURQUESA PRINCIPAL
-                background:
-                  "linear-gradient(135deg, #26c6da 0%, #00acc1 45%, #00838f 85%)",
+                // 🔥 NUEVO GRADIENT NARANJA / DORADO
+                background: "linear-gradient(135deg, #ff9800 0%, #ffc107 100%)",
                 backgroundSize: "200% 200%",
                 animation:
                   "gradientShift 8s ease infinite, pulseGlow 6s ease-in-out infinite",
 
-                // ✨ Glow turquesa
+                // ✨ Glow cálido
                 boxShadow: `
-  0 4px 12px rgba(0, 200, 210, 0.45),
-  inset 0 0 6px rgba(255,255,255,0.25)
-`,
+      0 4px 14px rgba(255,193,7,0.5),
+      inset 0 0 6px rgba(255,255,255,0.25)
+    `,
 
                 position: "relative",
                 overflow: "hidden",
@@ -191,34 +190,31 @@ function Features({ videoReady, informationsRef }) {
                 gap: 0,
                 maxWidth: { xs: "100%", md: "520px" },
 
-                border: "2px solid rgba(178, 235, 242, 0.9)", // turquesa claro
+                border: "2px solid rgba(255,193,7,0.9)", // borde cálido
                 zIndex: 1,
                 transition: "all 0.3s ease",
 
                 // 🔥 Hover
                 "&:hover": {
-                  background:
-                    "linear-gradient(135deg, #4dd0e1, #26c6da, #00acc1)",
+                  background: "linear-gradient(135deg, #ffc107, #ffb300, #ff9800)",
                   boxShadow:
-                    "0 0 10px rgba(0,220,230,.9), inset 0 0 8px rgba(255,255,255,0.35)",
+                    "0 0 12px rgba(255,215,0,.9), inset 0 0 8px rgba(255,255,255,0.35)",
                 },
 
-                /* ✨ Hover icon (si hay iconos dentro) */
+                // ✨ Hover icon (si hay iconos dentro)
                 "&:hover .MuiSvgIcon-root": {
-                  filter: "drop-shadow(0 0 14px rgba(0,220,230,1))",
+                  filter: "drop-shadow(0 0 14px rgba(255,215,0,1))",
                   animation: "clock 4s linear infinite !important",
                 },
 
-                /* 💥 Click feedback */
+                // 💥 Click feedback
                 "&:active::before": {
                   background:
-                    "radial-gradient(circle at center, rgba(77,208,225,0.55) 0%, transparent 70%)",
+                    "radial-gradient(circle at center, rgba(255,193,7,0.55) 0%, transparent 70%)",
                   animation: "none",
                 },
 
-
-
-                /* ✨ BRILLO INTERNO — Sheen diagonal */
+                // ✨ BRILLO INTERNO — Sheen diagonal
                 "&::after": {
                   content: '""',
                   position: "absolute",
@@ -237,12 +233,6 @@ function Features({ videoReady, informationsRef }) {
                 },
 
                 // 🎞 Animaciones
-                "@keyframes shineBorderSweep": {
-                  "0%": { backgroundPosition: "-300% 0" },
-                  "100%": { backgroundPosition: "300% 0" },
-                },
-
-
                 "@keyframes shineDiagonal": {
                   "0%": { transform: "translateX(-120%)" },
                   "100%": { transform: "translateX(120%)" },
@@ -274,17 +264,14 @@ function Features({ videoReady, informationsRef }) {
                   initial={{ opacity: 0, scale: 1.2 }}
                   animate={
                     hasAnimated
-                      ? {
-                        opacity: 1,
-                        scale: 1.2,
-                      }
+                      ? { opacity: 1, scale: 1.2 }
                       : { opacity: 0, scale: 0.7 }
                   }
                   transition={{ duration: 0.6, ease: "easeOut" }}
                   style={{
                     position: "absolute",
-                    left: "48%",
-                    top: "7%",
+                    left: "50%",
+                    top: "3%",
                     transform: "translate(-50%, -50%)",
                   }}
                 >
@@ -294,8 +281,8 @@ function Features({ videoReady, informationsRef }) {
                       hasAnimated
                         ? {
                           x: [0, 0, isMobile ? "-90px" : "-115px"],
-                          y: [0, 0, "2px"], // 🔼 mantiene alineado con el texto
-                          scale: [1.4, 1.3, 0.7]
+                          y: [0, 0, "2px"],
+                          scale: [1.4, 1.3, 0.7],
                         }
                         : { x: 0, y: 0, scale: 1.5 }
                     }
@@ -315,11 +302,11 @@ function Features({ videoReady, informationsRef }) {
                         fontSize: { xs: 26, sm: 28 },
                         color: "#ffffff",
 
-                        // 🎨 Glow turquesa frío (coherente con el fondo)
+                        // 🎨 Glow cálido (naranja/dorado)
                         filter: `
-      drop-shadow(0 0 6px rgba(0, 200, 210, .55))
-      drop-shadow(0 0 14px rgba(0, 220, 230, .45))
-    `,
+          drop-shadow(0 0 6px rgba(255,193,7,0.55))
+          drop-shadow(0 0 14px rgba(255,215,0,0.45))
+        `,
 
                         animation: "clock 12s linear infinite",
                         transformOrigin: "50% 50%",
@@ -330,7 +317,6 @@ function Features({ videoReady, informationsRef }) {
                         },
                       }}
                     />
-
                   </motion.div>
                 </motion.div>
 
@@ -347,7 +333,7 @@ function Features({ videoReady, informationsRef }) {
                     display: "flex",
                     alignItems: "center",
                     gap: 6,
-                    marginLeft: "35px",
+                    marginLeft: "25px",
                     zIndex: 2,
                   }}
                 >
@@ -359,10 +345,10 @@ function Features({ videoReady, informationsRef }) {
                       fontFamily: "Poppins, sans-serif",
                     }}
                   >
-                    EN PRODUCCIÓN:
+                    Tareas:
                   </Typography>
 
-                  {/* 🧱 Chip verde */}
+                  {/* 🧱 Chip cálido */}
                   <Box
                     sx={{
                       minWidth: { xs: 90, sm: 120 },
@@ -372,37 +358,36 @@ function Features({ videoReady, informationsRef }) {
                       borderRadius: "8px",
                       fontWeight: 700,
 
-                      // 🎨 TURQUESA
-                      background: "linear-gradient(135deg, #26c6da, #00838f)",
+                      // 🎨 Gradiente cálido más vivo
+                      background: "linear-gradient(135deg, #ff9800 0%, #ffc107 50%, #ffb300 100%)",
 
                       color: "#fff",
-                      border: "2px solid rgba(255,255,255,.85)",
+                      border: "2px solid rgba(255,193,7,0.9)",
 
-                      // ✨ Glow turquesa
+                      // ✨ Glow interno + externo
                       boxShadow: `
-  inset 0 0 6px rgba(255,255,255,0.25),
-  inset 0 0 10px rgba(0, 200, 210, 0.35)
-`,
-
+      inset 0 0 6px rgba(255,255,255,0.25),
+      inset 0 0 10px rgba(255,193,7,0.35),
+      0 0 8px rgba(255,193,7,0.45)
+    `,
 
                       whiteSpace: "nowrap",
                       position: "relative",
                       zIndex: 1,
                       transition: "all .25s ease",
 
-                      // 🔥 Hover
+                      // 🔥 Hover dinámico
                       "&:hover": {
-                        background:
-                          "linear-gradient(135deg, #4dd0e1, #26c6da, #00acc1)",
+                        background: "linear-gradient(135deg, #ffc107 0%, #ffb300 50%, #ff9800 100%)",
                         boxShadow: `
-    inset 0 0 8px rgba(255,255,255,0.35),
-    inset 0 0 14px rgba(0,220,230,.55)
-  `,
+        inset 0 0 8px rgba(255,255,255,0.35),
+        inset 0 0 14px rgba(255,215,0,0.55),
+        0 0 12px rgba(255,215,0,0.7)
+      `,
                       },
-
                     }}
                   >
-                    Coaching
+                    Stories
                   </Box>
 
 

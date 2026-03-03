@@ -8,7 +8,7 @@ import { MapContainer, TileLayer, Marker, useMapEvent } from "react-leaflet";
 import L from "leaflet";
 import ContactoForm from './ContactoForm';
 
-const finalPosition = [7.770933, -72.232036];
+const finalPosition = [-1.0346771795706384, -80.66313357370939];
 
 const letterVariants = {
   hidden: { opacity: 0, x: -20 },
@@ -279,7 +279,7 @@ function Contacto() {
                             <Marker
                               position={finalPosition}
                               icon={new L.Icon({
-                                iconUrl: "/costura-mapa.webp",
+                                iconUrl: "/logo.png",
                                 iconSize: [125, 105],        // Imagen más pequeña
                                 iconAnchor: [65, 65],       // Punto exacto donde "pincha" el mapa (más abajo del centro)
                                 popupAnchor: [0, -110],      // Popup justo encima del icono

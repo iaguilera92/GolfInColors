@@ -138,7 +138,7 @@ const Trabajos = ({ trabajo }) => {
           {trabajo.TipoTrabajo === 1 && (
             <Box
               component="img"
-              src="/logo-rosmiya.png"
+              src="/logo.png"
               alt="logo rosmiya"
               sx={{
                 width: 48,

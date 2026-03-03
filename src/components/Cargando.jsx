@@ -37,19 +37,6 @@ const Cargando = () => {
     }, []);
 
 
-    useEffect(() => {
-        const timerGlow = setTimeout(() => {
-            setGlow(true);
-            setShowElectricEffect(true);
-
-            setTimeout(() => {
-                setShowElectricEffect(false);
-            }, 1000);
-        }, 2000);
-
-        return () => clearTimeout(timerGlow);
-    }, []);
-
     //FONDO TIRAS VERTICALES
     useEffect(() => {
         const showImageTimer = setTimeout(() => {
@@ -93,31 +80,55 @@ const Cargando = () => {
                     }}
                 >
                     {/* TIRAS HORIZONTALES CON EFECTO DE LLENADO */}
-                    {Array.from({ length: NUM_ROWS }).map((_, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ scaleX: 0 }}
-                            animate={{ scaleX: 1 }}
-                            transition={{
-                                duration: 0.8,
-                                delay: index * 0.05, // Efecto en cascada
-                                ease: 'easeInOut',
-                            }}
-                            style={{
-                                width: '100%',
-                                height: `${100 / NUM_ROWS}%`, // Altura proporcional
-                                backgroundColor: COLORS.strip,
-                                margin: 0,
-                                padding: 0,
-                                border: 'none',
-                                boxShadow: 'none',
-                                backfaceVisibility: 'hidden',
-                                transform: 'translateZ(0)',
-                                willChange: 'transform',
-                                transformOrigin: index % 2 === 0 ? 'right center' : 'left center', // Alternancia
-                            }}
-                        />
-                    ))}
+                    {Array.from({ length: NUM_ROWS }).map((_, index) => {
+                        const colors = ["rgb(0,117,86)", "rgb(0,131,207)", "rgb(255,106,0)"];
+                        const bgColor = colors[index % colors.length]; // fondo de color
+
+                        return (
+                            <Box
+                                key={index}
+                                sx={{
+                                    width: '100%',
+                                    height: `${100 / NUM_ROWS}%`,
+                                    position: 'relative',
+                                    overflow: 'hidden',
+                                }}
+                            >
+                                {/* fondo animado que desaparece */}
+                                <motion.div
+                                    initial={{ opacity: 1 }}
+                                    animate={{ opacity: 0 }}
+                                    transition={{
+                                        duration: 0.8,
+                                        delay: index * 0.05,
+                                        ease: 'easeInOut',
+                                    }}
+                                    style={{
+                                        position: 'absolute',
+                                        inset: 0,
+                                        backgroundColor: bgColor,
+                                    }}
+                                />
+
+                                {/* barra blanca animada */}
+                                <motion.div
+                                    initial={{ scaleX: 0 }}
+                                    animate={{ scaleX: 1 }}
+                                    transition={{
+                                        duration: 0.8,
+                                        delay: index * 0.08,
+                                        ease: 'easeInOut',
+                                    }}
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        backgroundColor: '#f8fcfc', // blanca
+                                        transformOrigin: index % 2 === 0 ? 'right center' : 'left center',
+                                    }}
+                                />
+                            </Box>
+                        );
+                    })}
                 </Box>
             )}
 
@@ -133,7 +144,7 @@ const Cargando = () => {
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
                     zIndex: 1,
-                    opacity: showImage ? 1 : 0,
+                    opacity: 1,
                     animation: 'fadeInBg 2s ease-in forwards',
 
                     // 🔑 CLAVE
@@ -151,7 +162,7 @@ const Cargando = () => {
                     alignItems: 'center',
                     transform: 'translateY(-5%)',
                     zIndex: 3,
-                    opacity: showImage ? 1 : 0,
+                    opacity: 1,
                     transition: 'opacity 2s ease-in',
                 }}
             >
@@ -164,49 +175,46 @@ const Cargando = () => {
                         position: 'relative',
                     }}
                 >
-                    {/* ⚡ Efecto eléctrico */}
-                    {showElectricEffect && (
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: [0, 0.6, 1, 0.6, 0] }}
-                            transition={{ duration: 1.8, ease: [0.4, 0, 0.2, 1] }}
-                            style={{
-                                position: 'absolute',
-                                top: '50%',
-                                left: '50%',
-                                transform: 'translate(-50%, -50%)',
-                                width: '120px',
-                                height: '60px',
-                                borderRadius: '50%',
-                                background: 'radial-gradient(circle,rgba(255, 255, 255, 0.9) 0%,rgba(255,255,255,0.35) 40%,transparent 70%)',
-                                boxShadow: `
-                    0 0 16px rgba(255,255,255,0.9),
-                    0 0 32px rgba(255,255,255,0.5)
-                    `,
-                                filter: 'blur(6px)',
-                                pointerEvents: 'none',
-                                zIndex: 0,
-                            }}
-                        />
-                    )}
 
                     {/* Logo */}
                     <motion.div
-                        initial={{ y: -60, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 1.2, ease: 'easeOut' }}
-                        style={{ position: 'relative', zIndex: 2 }}
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                            visible: {
+                                transition: {
+                                    staggerChildren: 0.2,
+                                },
+                            },
+                        }}
                     >
-                        <img
-                            src="/logo-golf.avif"
-                            alt="Logo"
-                            style={{
-                                width: 245,
-                                height: 'auto',
-                                display: 'block',
-                                transition: 'filter 0.6s ease-in-out',
+                        <Box
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                gap: 0.5, // 👈 más juntas
                             }}
-                        />
+                        >
+                            {[
+                                "/logo-golfincolors-1.png",
+                                "/logo-golfincolors-2.png",
+                                "/logo-golfincolors-3.png",
+                            ].map((src, index) => (
+                                <motion.img
+                                    key={index}
+                                    src={src}
+                                    variants={{
+                                        hidden: { x: 80, opacity: 0 },
+                                        visible: { x: 0, opacity: 1 },
+                                    }}
+                                    transition={{ duration: 0.7, ease: "easeOut" }}
+                                    style={{
+                                        height: isMobile ? 32 : 48, // 👈 ajusta tamaño según pantalla
+                                    }}
+                                />
+                            ))}
+                        </Box>
 
                         <Box
                             sx={{
@@ -227,11 +235,15 @@ const Cargando = () => {
                                         gap: 6,
                                     }}
                                 >
-                                    {[0, 1, 2].map((i) => (
+                                    {[
+                                        "rgb(0, 117, 86)",   // verde
+                                        "rgb(0, 131, 207)",  // azul
+                                        "rgb(255, 106, 0)",  // naranja
+                                    ].map((color, i) => (
                                         <motion.div
                                             key={i}
                                             animate={{
-                                                scaleY: glow ? [0.7, 1.15, 0.7] : 1, // ⬅️ más sutil
+                                                scaleY: glow ? [0.7, 1.15, 0.7] : 1,
                                                 opacity: [0.6, 1, 0.6],
                                             }}
                                             transition={{
@@ -244,7 +256,7 @@ const Cargando = () => {
                                                 width: 4,
                                                 height: 14,
                                                 borderRadius: 2,
-                                                backgroundColor: '#000000',
+                                                backgroundColor: color, // ⬅️ color individual
                                             }}
                                         />
                                     ))}

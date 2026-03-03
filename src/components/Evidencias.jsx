@@ -96,7 +96,7 @@ const Evidencias = () => {
                     position: 'relative',
                     height: isMobile ? '60vh' : '40vh',
                     pt: { xs: 8, sm: 10 },
-                    backgroundImage: `url('fondo-blanco.jpg')`,
+                    backgroundImage: `url('fondo-5.jpg')`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundAttachment: 'scroll',
@@ -142,9 +142,9 @@ const Evidencias = () => {
     `,
                             }}
                         >
-                            Diseño y costura en{' '}
-                            <span style={{ color: '#5fb3a2' }}>
-                                perfecta armonía.
+                            Inspiramos y enseñamos {' '}
+                            <span style={{ color: '#00c853' }}>
+                                Golf.
                             </span>
                         </Typography>
 
@@ -167,29 +167,7 @@ const Evidencias = () => {
                         pointerEvents: 'none', // para que no bloquee clics
                     }}
                 >
-                    {/* Video detrás */}
-                    <motion.video
-                        src="/video-insta.mp4"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        ref={(el) => (videosRef.current[0] = el)}
-                        initial={{ x: 300, opacity: 0 }}
-                        animate={imagenInView ? { x: '0%', opacity: 1 } : { x: 300, opacity: 0 }}
-                        transition={{ duration: 1, ease: 'easeOut' }}
-                        style={{
-                            position: 'absolute',
-                            top: '5%',
-                            left: '12%',
-                            width: '54.4%',
-                            height: '81.7%',
-                            objectFit: 'cover',
-                            borderRadius: '10px',
-                            zIndex: 0,
-                            backgroundColor: 'black',
-                        }}
-                    />
+
 
                     {/* Imagen PNG encima */}
                     <motion.img
@@ -357,31 +335,27 @@ const Evidencias = () => {
                                     overflow: 'hidden',
                                     borderRadius: '12px',
                                     boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                                    backgroundColor: 'rgba(0,0,0,0.6)', // fondo oscuro opcional
+                                    height: '200px', // altura del “video”
                                 }}
                             >
-                                <motion.video
-                                    src="/trabajos.mp4"
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
+                                <motion.div
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={videoInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
                                     transition={{
-                                        duration: 1.5, // ⏳ ahora con 1.5 seg como pediste
+                                        duration: 1.5,
                                         ease: 'easeOut',
                                     }}
                                     style={{
-                                        width: '100%',
-                                        maxWidth: '800px',
-                                        height: 'auto',
-                                        objectFit: 'cover',
-                                        borderRadius: '12px',
+                                        color: 'white',
+                                        fontSize: '1.5rem',
+                                        fontWeight: 700,
+                                        fontFamily: "'Poppins', sans-serif",
+                                        textAlign: 'center',
                                     }}
-                                />
-
-
-
+                                >
+                                    En construcción...
+                                </motion.div>
                             </Box>
 
 

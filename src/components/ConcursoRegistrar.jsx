@@ -374,7 +374,7 @@ const ConcursoRegistrar = ({ open, onClose }) => {
 
                                 <Box
                                     component="img"
-                                    src="/logo-rosmiya.png"
+                                    src="/logo.png"
                                     alt="rosmiya"
                                     sx={{
                                         height: 28,

@@ -72,9 +72,9 @@ const SocialButton = ({ href, Icon, bgColor, hoverStyles }) => (
 );
 
 const menuItems = [
-  { name: "Inicio", icon: <Home /> }, { name: "Catálogo", icon: <ViewCarouselIcon /> },
+  { name: "Inicio", icon: <Home /> }, //{ name: "Catálogo", icon: <ViewCarouselIcon /> },
   { name: "Nosotros", icon: <GroupsIcon /> }, { name: "Contacto", icon: <Mail /> },
-  { name: "Tutoriales", icon: <SchoolIcon />, disabled: true },
+  { name: "Juegos", icon: <SchoolIcon />, disabled: true },
 
 ];
 
@@ -96,7 +96,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
   useEffect(() => {
     // ✅ cada vez que cambia la ruta, forzamos a mostrar el banner y el logo
     setAnimacionMostrada(true);
-    setTitulo("📦 Envíos a todo Venezuela");
+    setTitulo("📦 Envíos a todo Ecuador");
   }, [location.pathname]);
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
@@ -237,7 +237,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                   {/* Ícono fijo */}
                   {mostrarTexto ? (
                     <img
-                      src="/icon-venezuela.png"
+                      src="/icon-ecuador.png"
                       alt="Bandera"
                       style={{
                         width: "18px",
@@ -336,7 +336,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                       style={{ cursor: "pointer" }}
                     >
                       <motion.img
-                        src="/logo-golf2.webp"
+                        src="/logo.png"
                         alt="Logo"
                         onClick={LogoInicio}
                         initial={{ opacity: 0, x: -200 }}
@@ -433,21 +433,21 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
             maxWidth: "700px",
             minWidth: "300px",
 
-            // 🎨 TURQUESA PRINCIPAL
+            // 🎨 Fondo pasto golf
             background: `
         linear-gradient(
           135deg,
-          rgba(38, 198, 218, 0.95),
-          rgba(0, 150, 165, 0.95)
+          rgba(34, 139, 34, 0.95),    /* verde oscuro */
+          rgba(60, 179, 113, 0.95)    /* verde pasto */
         ),
         radial-gradient(
           circle at 20% 30%,
-          rgba(160, 235, 230, 0.45) 0%,
+          rgba(144, 238, 144, 0.25) 0%, /* verde claro brillante */
           transparent 40%
         ),
         radial-gradient(
           circle at 80% 70%,
-          rgba(120, 220, 215, 0.35) 0%,
+          rgba(152, 251, 152, 0.2) 0%,
           transparent 45%
         )
       `,
@@ -459,8 +459,8 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
             // ✨ Profundidad
             boxShadow: "0 0 30px rgba(0, 0, 0, 0.6)",
 
-            // 🧊 Borde sutil turquesa
-            borderLeft: "1px solid rgba(120, 220, 215, 0.35)",
+            // 🧊 Borde sutil verde
+            borderLeft: "1px solid rgba(144, 238, 144, 0.35)",
 
             p: 0,
           },
@@ -629,7 +629,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                   <Box sx={{ display: "flex", alignItems: "center", mb: 0 }}>
                     <Box
                       component="img"
-                      src="/logo-rosmiya.png"
+                      src="/logo.png"
                       alt="Bienvenidos"
                       sx={{
                         width: 60,
@@ -647,7 +647,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                         letterSpacing: 0.3,
                       }}
                     >
-                      Bienvenid@ a Rosmiya
+                      Bienvenid@ a GolfInColors
                     </Typography>
                   </Box>
 
