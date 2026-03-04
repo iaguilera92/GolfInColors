@@ -250,17 +250,26 @@ function App() {
 
     if (showApp && !userCategory) {
       timer = setTimeout(() => {
-        setShowDialogInicio(true);
-        // opcional: bloquear scroll mientras esté abierto
-        document.body.classList.add('no-scroll');
-      }, 1000); // 3 segundos de retraso
+        setShowDialogInicio(true); // abrir diálogo después de 1s
+      }, 1000);
     } else {
-      setShowDialogInicio(false); // opcional: cerrar el dialog si cambia showApp o userCategory
-      document.body.classList.remove('no-scroll');
+      setShowDialogInicio(false); // cerrar diálogo si cambia showApp o userCategory
     }
 
-    return () => clearTimeout(timer); // limpiar el timer si cambia showApp/userCategory
+    return () => clearTimeout(timer);
   }, [showApp, userCategory]);
+
+  useEffect(() => {
+    const body = document.body;
+
+    if (showDialogInicio) {
+      body.classList.add('no-scroll'); // bloquear scroll mientras está abierto
+    } else {
+      body.classList.remove('no-scroll'); // liberar scroll al cerrar
+    }
+
+    return () => body.classList.remove('no-scroll'); // limpieza por si se desmonta
+  }, [showDialogInicio]);
 
   return (
     <ThemeProvider theme={theme}>

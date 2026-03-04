@@ -81,7 +81,7 @@ export default function DialogSelector({ open, onClose, onSelect }) {
           minHeight: { xs: "50%", sm: 500 },
           borderRadius: 3,
           p: { xs: 3, sm: 5 },
-          background: "linear-gradient(135deg, #f0f8ff, #d0f0ff)",
+          background: "linear-gradient(135deg, #d8f8c8 0%, #a8e0a5 60%, #f0faff 100%)",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
