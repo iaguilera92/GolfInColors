@@ -31,7 +31,7 @@ const Evidencias = () => {
             transition: { delay: 0.4 + i * 0.04 }, // puedes ajustar el tiempo
         }),
     };
-    const textoAnimado = "Nuestros trabajos";
+    const textoAnimado = "Our works";
     const handleSnackbarClose = (_, reason) => {
         if (reason === 'clickaway') return;
         setSnackbarOpen(false);
@@ -142,7 +142,7 @@ const Evidencias = () => {
     `,
                             }}
                         >
-                            Inspiramos y enseñamos {' '}
+                            We inspire and teach {' '}
                             <span style={{ color: '#00c853' }}>
                                 Golf.
                             </span>
@@ -354,7 +354,7 @@ const Evidencias = () => {
                                         textAlign: 'center',
                                     }}
                                 >
-                                    En construcción...
+                                    Under construction...
                                 </motion.div>
                             </Box>
 

@@ -8,22 +8,22 @@ import { motion } from "framer-motion";
 const data = [
   {
     count: 8,
-    text: "Años de experiencia en golf",
+    text: "Years of experience in golf",
     image: "golf-1.jpg",
   },
   {
     count: 2500,
-    text: "Horas de entrenamiento",
+    text: "Training hours",
     image: "golf-2.jpg",
   },
   {
     count: 520,
-    text: "Alumnos formados",
+    text: "Students trained",
     image: "golf-3.jpg",
   },
   {
     count: 25,
-    text: "Torneos y clínicas realizadas",
+    text: "Tournaments and clinics held",
     image: "golf-4.jpg",
   },
 ];

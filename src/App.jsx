@@ -3,22 +3,22 @@ import { CssBaseline, Box, IconButton, useMediaQuery, Snackbar, Alert } from "@m
 import theme from "./theme";
 import { ThemeProvider } from "@mui/material/styles";
 import "@fontsource/poppins";
-const Areas = lazy(() => import("./components/Areas"));
-const Informations = lazy(() => import("./components/Informations"));
-const InformationsMobile = lazy(() => import("./components/InformationsMobile"));
-
-const Contacto = lazy(() => import("./components/Contacto"));
-const Evidencias = lazy(() => import("./components/Evidencias"));
-const Evidencias2 = lazy(() => import("./components/Evidencias2"));
-const Footer = lazy(() => import("./components/Footer"));
-const Navbar = lazy(() => import("./components/Navbar"));
-
 import { WhatsApp as WhatsAppIcon, ArrowUpward as ArrowUpwardIcon } from "@mui/icons-material";
 import { useLocation, Outlet } from "react-router-dom";
 import Cargando from './components/Cargando';
 import { AnimatePresence, motion } from 'framer-motion';
 import "./components/css/App.css";
 import { initGoogleAnalytics, trackPageView } from "./helpers/HelperAnalytics.js"; //GOOGLE ANALYTICS
+import DialogInicio from "./components/DialogInicio";
+
+const Areas = lazy(() => import("./components/Areas"));
+const Informations = lazy(() => import("./components/Informations"));
+const InformationsMobile = lazy(() => import("./components/InformationsMobile"));
+const Contacto = lazy(() => import("./components/Contacto"));
+const Evidencias = lazy(() => import("./components/Evidencias"));
+const Evidencias2 = lazy(() => import("./components/Evidencias2"));
+const Footer = lazy(() => import("./components/Footer"));
+const Navbar = lazy(() => import("./components/Navbar"));
 
 function App() {
   const [showArrow, setShowArrow] = useState(false);
@@ -42,6 +42,8 @@ function App() {
   const [snackbarVersion, setSnackbarVersion] = useState({ open: false, version: "", });
   const triggerInformations = (value) => setShouldAnimateInformations(value);
   const [isFading, setIsFading] = useState(false);
+  const [showDialogInicio, setShowDialogInicio] = useState(false);
+  const [userCategory, setUserCategory] = useState(null);
 
   //EFECTO CAMBIAR DE RUTA
   useEffect(() => {
@@ -236,6 +238,29 @@ function App() {
     }
   }, [location.pathname, location.state]);
 
+  const handleCategorySelect = (category) => {
+    console.log("Usuario seleccionó:", category);
+    setUserCategory(category);
+    setShowDialogInicio(false);
+    localStorage.setItem("user_category", category);
+  };
+
+  useEffect(() => {
+    let timer;
+
+    if (showApp && !userCategory) {
+      timer = setTimeout(() => {
+        setShowDialogInicio(true);
+        // opcional: bloquear scroll mientras esté abierto
+        document.body.classList.add('no-scroll');
+      }, 1000); // 3 segundos de retraso
+    } else {
+      setShowDialogInicio(false); // opcional: cerrar el dialog si cambia showApp o userCategory
+      document.body.classList.remove('no-scroll');
+    }
+
+    return () => clearTimeout(timer); // limpiar el timer si cambia showApp/userCategory
+  }, [showApp, userCategory]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -410,6 +435,11 @@ function App() {
           </IconButton>
         )}
       </Box>
+      <DialogInicio
+        open={showDialogInicio}
+        onClose={() => setShowDialogInicio(false)}
+        onSelect={handleCategorySelect}
+      />
     </ThemeProvider>
   );
 }

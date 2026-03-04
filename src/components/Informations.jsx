@@ -223,7 +223,7 @@ function Informations({ informationsRef, triggerInformations }) {
                 },
               }}
             >
-              Entrena hoy, compite mañana
+              Train today, compete tomorrow!
             </Typography>
           </motion.div>
 
@@ -253,26 +253,26 @@ function Informations({ informationsRef, triggerInformations }) {
             {[
               {
                 icon: <SportsGolf sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Clases personalizadas de golf.",
-                desc: "Entrenamiento adaptado a tu nivel para perfeccionar técnica y precisión.",
+                text: "Personalized golf lessons.",
+                desc: "Training tailored to your level to refine technique and accuracy.",
                 hideLine: false,
               },
               {
                 icon: <School sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Formación para niños y jóvenes.",
-                desc: "Programas formativos enfocados en fundamentos y desarrollo deportivo.",
+                text: "Training for children and youth.",
+                desc: "Development programs focused on fundamentals and athletic growth.",
                 hideLine: false,
               },
               {
                 icon: <EmojiEvents sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Preparación para torneos.",
-                desc: "Entrenamiento competitivo para mejorar rendimiento en el campo.",
+                text: "Tournament preparation.",
+                desc: "Competitive training to improve performance on the course.",
                 hideLine: false,
               },
               {
                 icon: <Groups sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Clínicas y eventos de golf.",
-                desc: "Sesiones grupales y experiencias diseñadas para potenciar tu juego.",
+                text: "Golf clinics and events.",
+                desc: "Group sessions and experiences designed to enhance your game.",
                 hideLine: true,
               },
             ].map((item, index) => {

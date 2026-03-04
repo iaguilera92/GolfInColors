@@ -72,10 +72,10 @@ const SocialButton = ({ href, Icon, bgColor, hoverStyles }) => (
 );
 
 const menuItems = [
-  { name: "Inicio", icon: <Home /> }, //{ name: "Catálogo", icon: <ViewCarouselIcon /> },
-  { name: "Nosotros", icon: <GroupsIcon /> }, { name: "Contacto", icon: <Mail /> },
-  { name: "Juegos", icon: <SchoolIcon />, disabled: true },
-
+  { name: "Home", icon: <Home /> }, //{ name: "Catalog", icon: <ViewCarouselIcon /> },
+  { name: "About Us", icon: <GroupsIcon /> },
+  { name: "Contact", icon: <Mail /> },
+  { name: "Games", icon: <SchoolIcon />, disabled: true },
 ];
 
 function Navbar({ contactoRef, informationsRef, videoReady }) {
@@ -203,7 +203,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
           <AnimatePresence mode="wait">
             {(mostrarAnimacion || animacionMostrada) && (
               <motion.div
-                key={mostrarTexto ? "llamanos" : "telefono"}
+                key={mostrarTexto ? "Call us" : "telefono"}
                 initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -100, opacity: 0 }}
@@ -252,7 +252,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
 
                   {/* Texto fijo */}
                   <span>
-                    {mostrarTexto ? "¡LLÁMANOS AHORA!" : "+1 (561) 7975986"}
+                    {mostrarTexto ? "CALL US NOW!" : "+1 (561) 7975986"}
                   </span>
                 </span>
 

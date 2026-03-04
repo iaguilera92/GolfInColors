@@ -20,16 +20,16 @@ function Hero({ informationsRef, setVideoReady }) {
 
   const titulos = [
     {
-      title: "Clases Personalizadas de Golf",
-      description: "Entrenamiento individual adaptado a tu nivel para mejorar técnica, precisión y consistencia."
+      title: "Personalized Golf Lessons",
+      description: "Individual training tailored to your level to improve technique, accuracy, and consistency."
     },
     {
-      title: "Entrenamiento para Niños y Jóvenes",
-      description: "Formación integral desde temprana edad, enfocada en fundamentos, disciplina y desarrollo deportivo."
+      title: "Training for Children and Youth",
+      description: "Comprehensive development from an early age, focused on fundamentals, discipline, and athletic growth."
     },
     {
-      title: "Perfeccionamiento y Alto Rendimiento",
-      description: "Sesiones avanzadas para optimizar tu swing, estrategia de juego y rendimiento competitivo."
+      title: "Advanced Improvement & High Performance",
+      description: "Advanced sessions to optimize your swing, game strategy, and competitive performance."
     },
   ];
 
@@ -287,7 +287,7 @@ function Hero({ informationsRef, setVideoReady }) {
                         navigate('/catalogo');
                       }}
                     >
-                      <span>Nuestro Catálogo</span>
+                      <span>Our Services</span>
                     </button>
                   </Box>
                 </motion.div>

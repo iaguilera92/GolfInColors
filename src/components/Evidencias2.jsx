@@ -156,7 +156,6 @@ const SeccionDestacada = () => {
                             ))}
                         </Typography>
 
-                        {/* Video que reemplaza "En desarrollo..." */}
                         {/* Texto "En construcción..." solo letras */}
                         <Box
                             ref={ref}
@@ -194,7 +193,7 @@ const SeccionDestacada = () => {
                                         px: 2,
                                     }}
                                 >
-                                    En construcción...
+                                    Under construction...
                                 </Typography>
                             </motion.div>
                         </Box>

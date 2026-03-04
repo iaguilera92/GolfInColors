@@ -196,7 +196,7 @@ function Contacto() {
                   |
                 </motion.span>
 
-                {"Contáctanos".split("").map((char, index) => (
+                {"Contact Us".split("").map((char, index) => (
                   <motion.span
                     key={index}
                     custom={index}

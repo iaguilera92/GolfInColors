@@ -13,53 +13,53 @@ import "swiper/css";
 const promotions = [
   {
     id: 1,
-    title: "🏌️ Para Niños",
-    description: "Aprenden golf jugando y divirtiéndose desde el primer día.",
+    title: "🏌️ For Kids",
+    description: "They learn golf by playing and having fun from day one.",
     image: "/fondo-1.png",
-    price: "Comienza hoy",
+    price: "Start Today",
     bgColor: "linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3))",
     textColor: "white",
     descriptors: [
-      "🎯 Desafíos entretenidos",
-      "🏆 Progreso por niveles",
-      "🎮 Aprendizaje interactivo",
-      "⛳ Fundamentos reales",
-      "🤝 Más confianza",
-      "✨ Diversión asegurada"
+      "🎯 Fun challenges",
+      "🏆 Level-based progress",
+      "🎮 Interactive learning",
+      "⛳ Real fundamentals",
+      "🤝 More confidence",
+      "✨ Guaranteed fun"
     ]
   },
   {
     id: 2,
-    title: "👨‍👩‍👧 Para Padres",
-    description: "Acompaña y sigue el progreso de tus hijos en cada etapa.",
+    title: "👨‍👩‍👧 For Parents",
+    description: "Support and track your children's progress at every stage.",
     image: "/fondo-3.jpg",
-    price: "Descubre más",
+    price: "Discover More",
     bgColor: "linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2))",
     textColor: "white",
     descriptors: [
-      "📊 Seguimiento claro",
-      "🏅 Sistema motivador",
-      "⏱️ Aprendizaje estructurado",
-      "🤝 Participación familiar",
-      "🌱 Desarrollo integral",
-      "💬 Comunicación simple"
+      "📊 Clear tracking",
+      "🏅 Motivational system",
+      "⏱️ Structured learning",
+      "🤝 Family involvement",
+      "🌱 Holistic development",
+      "💬 Simple communication"
     ]
   },
   {
     id: 3,
-    title: "🏆 Para Coaches",
-    description: "Herramientas modernas para enseñar golf de forma efectiva.",
+    title: "🏆 For Coaches",
+    description: "Modern tools to teach golf effectively.",
     image: "/fondo-4.png",
-    price: "Potencia tu enseñanza",
+    price: "Boost Your Teaching",
     bgColor: "linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2))",
     textColor: "white",
     descriptors: [
-      "📈 Seguimiento de alumnos",
-      "🎯 Programas estructurados",
-      "📚 Recursos didácticos",
-      "⚡ Gestión sencilla",
-      "🏌️ Evaluación técnica",
-      "🚀 Enseñanza más eficiente"
+      "📈 Student tracking",
+      "🎯 Structured programs",
+      "📚 Teaching resources",
+      "⚡ Easy management",
+      "🏌️ Technical evaluation",
+      "🚀 More efficient coaching"
     ]
   }
 ];
@@ -191,7 +191,7 @@ function Informations({ informationsRef, triggerInformations }) {
                 },
               }}
             >
-              Nuestros Servicios
+              Our Services
             </Typography>
             <Box ref={swiperRef} sx={{ display: isMobile ? "block" : "block", position: "relative", px: 1, pt: 2, pb: 1, overflow: "hidden" }}>
               <Swiper
@@ -504,7 +504,7 @@ function Informations({ informationsRef, triggerInformations }) {
                   },
                 }}
               >
-                Entrena hoy, compite mañana!
+                Train today, compete tomorrow!
               </Typography>
             </motion.div>
 
@@ -514,26 +514,26 @@ function Informations({ informationsRef, triggerInformations }) {
             {[
               {
                 icon: <SportsGolf sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Clases personalizadas de golf.",
-                desc: "Entrenamiento adaptado a tu nivel para perfeccionar técnica y precisión.",
+                text: "Personalized golf lessons.",
+                desc: "Training tailored to your level to refine technique and accuracy.",
                 hideLine: false,
               },
               {
                 icon: <School sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Formación para niños y jóvenes.",
-                desc: "Programas formativos enfocados en fundamentos y desarrollo deportivo.",
+                text: "Training for children and youth.",
+                desc: "Development programs focused on fundamentals and athletic growth.",
                 hideLine: false,
               },
               {
                 icon: <EmojiEvents sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Preparación para torneos.",
-                desc: "Entrenamiento competitivo para mejorar rendimiento en el campo.",
+                text: "Tournament preparation.",
+                desc: "Competitive training to improve performance on the course.",
                 hideLine: false,
               },
               {
                 icon: <Groups sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Clínicas y eventos de golf.",
-                desc: "Sesiones grupales y experiencias diseñadas para potenciar tu juego.",
+                text: "Golf clinics and events.",
+                desc: "Group sessions and experiences designed to enhance your game.",
                 hideLine: true,
               },
             ].map((item, index) => {

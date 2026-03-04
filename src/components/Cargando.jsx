@@ -69,6 +69,7 @@ const Cargando = () => {
         >
 
             {/* FONDO */}
+            {/*
             {showStrips && (
                 <Box
                     sx={{
@@ -79,7 +80,6 @@ const Cargando = () => {
                         zIndex: 1,
                     }}
                 >
-                    {/* TIRAS HORIZONTALES CON EFECTO DE LLENADO */}
                     {Array.from({ length: NUM_ROWS }).map((_, index) => {
                         const colors = ["rgb(0,117,86)", "rgb(0,131,207)", "rgb(255,106,0)"];
                         const bgColor = colors[index % colors.length]; // fondo de color
@@ -94,7 +94,6 @@ const Cargando = () => {
                                     overflow: 'hidden',
                                 }}
                             >
-                                {/* fondo animado que desaparece */}
                                 <motion.div
                                     initial={{ opacity: 1 }}
                                     animate={{ opacity: 0 }}
@@ -110,7 +109,6 @@ const Cargando = () => {
                                     }}
                                 />
 
-                                {/* barra blanca animada */}
                                 <motion.div
                                     initial={{ scaleX: 0 }}
                                     animate={{ scaleX: 1 }}
@@ -131,7 +129,7 @@ const Cargando = () => {
                     })}
                 </Box>
             )}
-
+        */}
 
             <Box
                 sx={{
