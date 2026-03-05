@@ -341,7 +341,7 @@ function Contacto() {
                       }}
                     >
                       <img
-                        src="/fondo-5.jpg"
+                        src="/fondo-4.png"
                         alt="Imagen de contacto"
                         style={{
                           width: isMobile ? "100%" : "80%",

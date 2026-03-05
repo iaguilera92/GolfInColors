@@ -1,4 +1,4 @@
-import { Box, Typography, Container, Grid, Button, ListItem, ListItemIcon, ListItemText, useMediaQuery, useTheme, IconButton } from "@mui/material";
+﻿import { Box, Typography, Container, Grid, Button, ListItem, ListItemIcon, ListItemText, useMediaQuery, useTheme, IconButton } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaTshirt } from "react-icons/fa";
@@ -163,7 +163,8 @@ function Informations({ informationsRef, triggerInformations }) {
               sx={{
                 fontFamily: "'Poppins', sans-serif",
                 fontWeight: 800,
-                mb: 1,
+                mb: 2,
+                pb: 0.5,
                 textAlign: isMobile ? "center" : "left",
                 textTransform: "uppercase",
                 letterSpacing: "2px",
@@ -180,7 +181,7 @@ function Informations({ informationsRef, triggerInformations }) {
                 "&::after": {
                   content: '""',
                   position: "absolute",
-                  bottom: -4,
+                  bottom: -2,
                   left: 0,
                   width: showPopularBadge ? "100%" : "0%",
                   height: "4px",
@@ -663,3 +664,5 @@ function Informations({ informationsRef, triggerInformations }) {
 };
 
 export default Informations;
+
+

@@ -12,53 +12,53 @@ import "swiper/css";
 const promotions = [
   {
     id: 1,
-    title: "🏌️ Para Niños",
-    description: "Aprenden golf jugando y divirtiéndose desde el primer día.",
+    title: "🏌️ For Kids",
+    description: "They learn golf by playing and having fun from day one.",
     image: "/fondo-1.png",
-    price: "Comienza hoy",
+    price: "Start Today",
     bgColor: "linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3))",
     textColor: "white",
     descriptors: [
-      "🎯 Desafíos entretenidos",
-      "🏆 Progreso por niveles",
-      "🎮 Aprendizaje interactivo",
-      "⛳ Fundamentos reales",
-      "🤝 Más confianza",
-      "✨ Diversión asegurada"
+      "🎯 Fun challenges",
+      "🏆 Level-based progress",
+      "🎮 Interactive learning",
+      "⛳ Real fundamentals",
+      "🤝 More confidence",
+      "✨ Guaranteed fun"
     ]
   },
   {
     id: 2,
-    title: "👨‍👩‍👧 Para Padres",
-    description: "Acompaña y sigue el progreso de tus hijos en cada etapa.",
+    title: "👨‍👩‍👧 For Parents",
+    description: "Support and track your children's progress at every stage.",
     image: "/fondo-3.jpg",
-    price: "Descubre más",
+    price: "Discover More",
     bgColor: "linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2))",
     textColor: "white",
     descriptors: [
-      "📊 Seguimiento claro",
-      "🏅 Sistema motivador",
-      "⏱️ Aprendizaje estructurado",
-      "🤝 Participación familiar",
-      "🌱 Desarrollo integral",
-      "💬 Comunicación simple"
+      "📊 Clear tracking",
+      "🏅 Motivational system",
+      "⏱️ Structured learning",
+      "🤝 Family involvement",
+      "🌱 Holistic development",
+      "💬 Simple communication"
     ]
   },
   {
     id: 3,
-    title: "🏆 Para Coaches",
-    description: "Herramientas modernas para enseñar golf de forma efectiva.",
+    title: "🏆 For Coaches",
+    description: "Modern tools to teach golf effectively.",
     image: "/fondo-4.png",
-    price: "Potencia tu enseñanza",
+    price: "Boost Your Teaching",
     bgColor: "linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2))",
     textColor: "white",
     descriptors: [
-      "📈 Seguimiento de alumnos",
-      "🎯 Programas estructurados",
-      "📚 Recursos didácticos",
-      "⚡ Gestión sencilla",
-      "🏌️ Evaluación técnica",
-      "🚀 Enseñanza más eficiente"
+      "📈 Student tracking",
+      "🎯 Structured programs",
+      "📚 Teaching resources",
+      "⚡ Easy management",
+      "🏌️ Technical evaluation",
+      "🚀 More efficient coaching"
     ]
   }
 ];
