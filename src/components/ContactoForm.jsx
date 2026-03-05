@@ -134,7 +134,7 @@ const ContactoForm = ({ setSnackbar }) => {
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         <TextField
-                            label="Nombre/Apellido"
+                            label="First / Last Name"
                             variant="outlined"
                             fullWidth
                             value={name}
@@ -173,7 +173,7 @@ const ContactoForm = ({ setSnackbar }) => {
                             }}
                         >
                             <TextField
-                                label="Teléfono"
+                                label="Phone"
                                 variant="outlined"
                                 fullWidth
                                 disabled={isSubmitting}
@@ -228,7 +228,7 @@ const ContactoForm = ({ setSnackbar }) => {
                                     }
                                     label={
                                         <Typography sx={{ fontSize: "0.7rem", color: "#E6EDF3", whiteSpace: "nowrap" }}>
-                                            Copia correo
+                                            Copy email
                                         </Typography>
                                     }
                                     sx={{
@@ -240,7 +240,7 @@ const ContactoForm = ({ setSnackbar }) => {
                                 />
                             ) : (
                                 <TextField
-                                    label="Correo electrónico"
+                                    label="Email"
                                     variant="outlined"
                                     disabled={isSubmitting}
                                     InputProps={{
@@ -301,7 +301,7 @@ const ContactoForm = ({ setSnackbar }) => {
 
                     <Grid item xs={12}>
                         <TextField
-                            label="Mensaje"
+                            label="Message"
                             variant="outlined"
                             disabled={isSubmitting}
                             InputProps={{
@@ -358,7 +358,7 @@ const ContactoForm = ({ setSnackbar }) => {
                                 }
                             }}
                         >
-                            {isSubmitting ? "Enviando..." : "Contactar"}
+                            {isSubmitting ? "Sending..." : "Contact"}
                         </Button>
 
                     </Grid>
@@ -398,7 +398,7 @@ const ContactoForm = ({ setSnackbar }) => {
                                     {/* Imagen */}
                                     <img
                                         src="soporte-tecnico-1.png"
-                                        alt="Servicio al cliente"
+                                        alt="Customer Service"
                                         loading="lazy"
                                         style={{
                                             marginLeft: 4,
@@ -422,7 +422,7 @@ const ContactoForm = ({ setSnackbar }) => {
                                             lineHeight: 1.2, // 👈 Ajusta el centro del texto para que no se despegue
                                         }}
                                     >
-                                        Servicio al cliente
+                                        Customer Service
                                     </Typography>
                                 </Box>
 
@@ -431,7 +431,7 @@ const ContactoForm = ({ setSnackbar }) => {
                                         variant="body1"
                                         sx={{ fontSize: "0.9rem", mb: 1, color: "#000", marginLeft: 1 }}
                                     >
-                                        Ponte en contacto con uno de nuestros ejecutivos para asistirte.
+                                        Get in touch with one of our advisors for assistance.
                                     </Typography>
                                     <Button
                                         href="tel:6002000202"
@@ -452,7 +452,7 @@ const ContactoForm = ({ setSnackbar }) => {
                                         }}
                                     >
                                         <SupportAgentIcon sx={{ fontSize: 18 }} />
-                                        Contactar ahora
+                                        Contact now
                                         <ArrowForwardIcon sx={{ fontSize: 16 }} />
                                     </Button>
                                 </Box>
@@ -534,7 +534,7 @@ const ContactoForm = ({ setSnackbar }) => {
                                         }}
                                     >
                                         <WhatsAppIcon sx={{ fontSize: 18 }} />
-                                        Chatear ahora
+                                        Chat now
                                         <ArrowForwardIcon sx={{ fontSize: 16 }} />
                                     </Button>
                                 </Box>
@@ -548,3 +548,7 @@ const ContactoForm = ({ setSnackbar }) => {
 };
 
 export default ContactoForm;
+
+
+
+

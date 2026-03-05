@@ -304,7 +304,7 @@ function Contacto() {
                                 pointerEvents: "none",
                               }}
                             >
-                              ¡Encuéntranos!
+                              Find us!
                               <div
                                 style={{
                                   position: "absolute",
@@ -341,7 +341,7 @@ function Contacto() {
                       }}
                     >
                       <img
-                        src="/mapa-contacto.png"
+                        src="/fondo-5.jpg"
                         alt="Imagen de contacto"
                         style={{
                           width: isMobile ? "100%" : "80%",

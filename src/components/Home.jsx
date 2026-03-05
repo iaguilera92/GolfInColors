@@ -6,10 +6,10 @@ import Features from "./Features";
 import { useOutletContext } from "react-router-dom";
 
 function Home({ informationsRef, setVideoReady }) {
-    const { showApp } = useOutletContext();
+    const { showApp, openDialogInicio } = useOutletContext();
     return (
         <Box>
-            <Hero informationsRef={informationsRef} setVideoReady={setVideoReady} />
+            <Hero informationsRef={informationsRef} setVideoReady={setVideoReady} onStartClick={openDialogInicio} />
             <Box>
                 <Features videoReady={showApp} informationsRef={informationsRef} />
             </Box>
@@ -19,3 +19,4 @@ function Home({ informationsRef, setVideoReady }) {
 
 
 export default Home;
+

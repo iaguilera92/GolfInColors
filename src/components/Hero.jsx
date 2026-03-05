@@ -3,16 +3,16 @@ import { Container, Typography, Box, Snackbar, Alert, useMediaQuery, useTheme } 
 import { motion } from "framer-motion";
 import "./css/Hero.css";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useNavigate } from "react-router-dom";
 
-function Hero({ informationsRef, setVideoReady }) {
+
+function Hero({ informationsRef, setVideoReady, onStartClick }) {
   const [currentText, setCurrentText] = useState(0);
   const [openAlert, setOpenAlert] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [loadingVideo, setLoadingVideo] = useState(true);
   const [isHeroVisible, setIsHeroVisible] = useState(true);
   const [canAdvance, setCanAdvance] = useState(true);
-  const navigate = useNavigate();
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const heroRef = useRef(null);
@@ -270,6 +270,7 @@ function Hero({ informationsRef, setVideoReady }) {
                 flexDirection: "column",
                 alignItems: "center",
                 height: "150px",
+                pt: { xs: 5, sm: 7 },
               }}
             >
               {memoizedTypingText}
@@ -284,10 +285,10 @@ function Hero({ informationsRef, setVideoReady }) {
                     <button
                       className="btn-3"
                       onClick={() => {
-                        navigate('/catalogo');
+                        if (onStartClick) onStartClick();
                       }}
                     >
-                      <span>Our Services</span>
+                      <span>Start</span>
                     </button>
                   </Box>
                 </motion.div>
@@ -312,3 +313,8 @@ function Hero({ informationsRef, setVideoReady }) {
 }
 
 export default Hero;
+
+
+
+
+

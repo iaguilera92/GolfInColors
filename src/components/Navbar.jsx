@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { AppBar, Toolbar, Button, IconButton, Drawer, Typography, ListItem, ListItemButton, ListItemText, Container, Box, useTheme, useMediaQuery, Dialog, DialogTitle, DialogContent } from "@mui/material";
 import { WhatsApp as WhatsAppIcon, Menu as MenuIcon, Home, Mail, Close } from "@mui/icons-material"; // Agregamos Close para la "X"
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -92,6 +92,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
   const [mostrarAdmin, setMostrarAdmin] = useState(false);
   const [titulo, setTitulo] = useState("📦 Envíos a todo Venezuela");
   const [mostrarTexto, setMostrarTexto] = useState(true);
+  const [hideMainLogo, setHideMainLogo] = useState(false);
 
   useEffect(() => {
     // ✅ cada vez que cambia la ruta, forzamos a mostrar el banner y el logo
@@ -99,6 +100,21 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
     setTitulo("📦 Envíos a todo Ecuador");
   }, [location.pathname]);
 
+
+  useEffect(() => {
+    const handleKidsLogoVisibility = (event) => {
+      setHideMainLogo(Boolean(event?.detail?.hidden));
+    };
+
+    window.addEventListener("kids-logo-visibility", handleKidsLogoVisibility);
+    return () => window.removeEventListener("kids-logo-visibility", handleKidsLogoVisibility);
+  }, []);
+
+  useEffect(() => {
+    if (location.pathname !== "/kids") {
+      setHideMainLogo(false);
+    }
+  }, [location.pathname]);
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
   const handleOpenPDF = () => isMobile ? window.open("/plataformasweb-pdf.pdf", "_blank") : setOpenPDF(true);
   const handleClosePDF = () => setOpenPDF(false);
@@ -129,13 +145,23 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
           navigate("/", { state: { scrollTo: "contacto" } });
         }
       },
+      Contact: () => {
+        if (location.pathname === "/") {
+          contactoRef.current?.scrollIntoView({ behavior: "smooth" });
+        } else {
+          navigate("/", { state: { scrollTo: "contacto" } });
+        }
+      },
 
       Inicio: () =>
+        location.pathname !== "/" ? navigate("/") : scrollToTop(),
+      Home: () =>
         location.pathname !== "/" ? navigate("/") : scrollToTop(),
 
       Servicios: () => navigate("/servicios"),
       Catálogo: goToCatalogo,
       Nosotros: () => navigate("/nosotros"),
+      "About Us": () => navigate("/nosotros"),
       Presentación: handleOpenPDF,
     };
 
@@ -350,7 +376,9 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                         style={{
                           height: "55px",
                           marginTop: "10px",
-                          cursor: "pointer"
+                          cursor: "pointer",
+                          visibility: hideMainLogo ? "hidden" : "visible",
+                          pointerEvents: hideMainLogo ? "none" : "auto",
                         }}
                       />
 
@@ -395,7 +423,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                   );
 
                   return item.disabled ? (
-                    <Tooltip key={item.name} title="Próximamente">
+                    <Tooltip key={item.name} title="Coming soon">
                       <span>{button}</span>
                     </Tooltip>
                   ) : (
@@ -434,33 +462,16 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
             minWidth: "300px",
 
             // 🎨 Fondo pasto golf
-            background: `
-        linear-gradient(
-          135deg,
-          rgba(34, 139, 34, 0.95),    /* verde oscuro */
-          rgba(60, 179, 113, 0.95)    /* verde pasto */
-        ),
-        radial-gradient(
-          circle at 20% 30%,
-          rgba(144, 238, 144, 0.25) 0%, /* verde claro brillante */
-          transparent 40%
-        ),
-        radial-gradient(
-          circle at 80% 70%,
-          rgba(152, 251, 152, 0.2) 0%,
-          transparent 45%
-        )
-      `,
-
+            background: "linear-gradient(135deg, #d8f8c8 0%, #a8e0a5 60%, #f0faff 100%)",
             backdropFilter: "blur(20px)",
             WebkitBackdropFilter: "blur(20px)",
-            color: "#ffffff",
+            color: "#163024",
 
             // ✨ Profundidad
-            boxShadow: "0 0 30px rgba(0, 0, 0, 0.6)",
+            boxShadow: "0 10px 28px rgba(0, 0, 0, 0.28)",
 
             // 🧊 Borde sutil verde
-            borderLeft: "1px solid rgba(144, 238, 144, 0.35)",
+            borderLeft: "1px solid rgba(22, 48, 36, 0.16)",
 
             p: 0,
           },
@@ -477,7 +488,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                 animation: open ? `${rotateTwice} 1s ease-in-out` : "none",
               }}
             >
-              <Close sx={{ fontSize: 32, color: "white" }} />
+              <Close sx={{ fontSize: 32, color: "#163024" }} />
             </IconButton>
           </Box>
 
@@ -510,13 +521,13 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                         sx={{
                           px: 2,
                           py: 0.5,
-                          borderBottom: "1px solid rgba(255,255,255,0.1)",
+                          borderBottom: "1px solid rgba(22,48,36,0.16)",
                           borderTop:
-                            index === 0 ? "1px solid rgba(255,255,255,0.2)" : "none",
+                            index === 0 ? "1px solid rgba(22,48,36,0.2)" : "none",
                           "&:hover": {
                             backgroundColor: item.disabled
                               ? "transparent"
-                              : "rgba(255,255,255,0.05)",
+                              : "rgba(22,48,36,0.06)",
                           },
                         }}
                       >
@@ -526,8 +537,8 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                               <Box
                                 sx={{
                                   color: item.disabled
-                                    ? "rgba(255,255,255,0.4)"
-                                    : "white",
+                                    ? "rgba(22,48,36,0.35)"
+                                    : "#163024",
                                   fontSize: "1.7rem",
                                   marginBottom: "-5px",
                                 }}
@@ -539,8 +550,8 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                                 <span
                                   style={{
                                     color: item.disabled
-                                      ? "rgba(255,255,255,0.5)"
-                                      : "#fff",
+                                      ? "rgba(22,48,36,0.45)"
+                                      : "#163024",
                                     fontWeight: "500",
                                     fontSize: "1.05rem",
                                   }}
@@ -551,12 +562,12 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                                 {item.disabled && (
                                   <span
                                     style={{
-                                      color: "rgba(255,255,255,0.45)",
+                                      color: "rgba(22,48,36,0.5)",
                                       fontSize: "0.8rem",
                                       fontWeight: "400",
                                     }}
                                   >
-                                    (Próximamente)
+                                    (Coming soon)
                                   </span>
                                 )}
                               </Box>
@@ -568,7 +579,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                   );
 
                   return item.disabled ? (
-                    <Tooltip key={item.name} title="Próximamente">
+                    <Tooltip key={item.name} title="Coming soon">
                       <span>{content}</span>
                     </Tooltip>
                   ) : (
@@ -601,28 +612,28 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                     mx: 2,
                     mb: 0,
                     pt: 0,
-                    color: "#ffffff",
+                    color: "white",
                     backdropFilter: "blur(8px)",
 
                     // 🎨 Glass turquesa suave
                     background: `
       radial-gradient(
         circle at top left,
-        rgba(160, 235, 230, 0.25),
+        rgba(255, 255, 255, 0.08),
         transparent 70%
       ),
       linear-gradient(
         135deg,
-        rgba(120, 220, 215, 0.14),
-        rgba(0, 150, 165, 0.08)
+        rgba(0, 0, 0, 0.62),
+        rgba(0, 0, 0, 0.48)
       )
     `,
 
                     // 🧊 Borde sutil
-                    border: "1px solid rgba(120, 220, 215, 0.35)",
+                    border: "1px solid rgba(255,255,255,0.24)",
 
                     // ✨ Profundidad leve
-                    boxShadow: "0 0 12px rgba(0, 180, 190, 0.15)",
+                    boxShadow: "0 8px 18px rgba(0,0,0,0.28)",
                   }}
                 >
 
@@ -647,7 +658,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                         letterSpacing: 0.3,
                       }}
                     >
-                      Bienvenid@ a GolfInColors
+                      Welcome to GolfInColors
                     </Typography>
                   </Box>
 
@@ -660,7 +671,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                       fontFamily: 'Poppins, sans-serif',
                     }}
                   >
-                    Conecta y trabaja con nosotros.
+                    Connect and work with us.
                   </Typography>
 
 
@@ -698,7 +709,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                       gap: 0.5,
                       transition: "all 0.3s ease",
                       "&:hover": {
-                        color: "#ffffff",
+                        color: "white",
                         textDecoration: "underline",
                         backgroundColor: "transparent",
                         "& .MuiSvgIcon-root": {
@@ -707,7 +718,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                       },
                     }}
                   >
-                    Empezar ahora
+                    Start now
                   </Button>
 
                 </Box>
@@ -727,18 +738,18 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                 onClick={() => navigate("/administracion")}
                 sx={{
                   background: `
-          radial-gradient(circle at top left, rgba(144,202,249,0.1), transparent 70%),
-          linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))
+          radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 70%),
+          linear-gradient(135deg, rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.48))
         `,
                   borderRadius: 3,
                   px: 2,
                   py: 2,
                   mx: 2,
                   mt: 1,
-                  color: "#ffffff",
+                  color: "white",
                   backdropFilter: "blur(8px)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  boxShadow: "0 0 12px rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.24)",
+                  boxShadow: "0 8px 18px rgba(0,0,0,0.28)",
                   cursor: "pointer",
                   transition: "all 0.3s ease",
                   display: "flex",
@@ -746,8 +757,8 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                   justifyContent: "center",
                   maxHeight: 45,
                   "&:hover": {
-                    backgroundColor: "rgba(255,255,255,0.05)",
-                    boxShadow: "0 0 16px rgba(144,202,249,0.2)",
+                    transform: "translateY(-1px)",
+                    boxShadow: "0 10px 20px rgba(0,0,0,0.32)",
                   },
                 }}
               >
@@ -882,3 +893,19 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
 }
 
 export default Navbar;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,29 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Dialog, DialogTitle, Button, Box, useTheme, useMediaQuery, IconButton } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
-import FamilyRestroomIcon from '@mui/icons-material/FamilyRestroom';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ x: "100%", opacity: 0 }}   // empieza fuera a la derecha
-      animate={{ x: 0, opacity: 1 }}       // se mueve a su posición normal
-      exit={{ x: "100%", opacity: 0 }}     // sale hacia la derecha
-      transition={{ type: "spring", stiffness: 300, damping: 30 }} // movimiento natural tipo resorte
-      {...props}
-    />
-  );
-});
+import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
+import FamilyRestroomIcon from "@mui/icons-material/FamilyRestroom";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import { useNavigate } from "react-router-dom";
 
 export default function DialogSelector({ open, onClose, onSelect }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const navigate = useNavigate();
   const [selected, setSelected] = useState(null);
-  const closeControls = useAnimation();
 
   useEffect(() => {
     if (open) setSelected(null);
@@ -38,20 +25,10 @@ export default function DialogSelector({ open, onClose, onSelect }) {
   const handleSelect = (option) => {
     setSelected(option.value);
     if (onSelect) onSelect(option.value);
-  };
-
-  useEffect(() => {
-    if (open) {
-      // empieza la animación de la X cuando se abre el diálogo
-      closeControls.start({
-        rotate: 1080, // 3 giros
-        transition: { duration: 0.6, ease: "easeInOut" },
-      });
-    } else {
-      // resetear la rotación cuando se cierra
-      closeControls.set({ rotate: 0 });
+    if (option.value === "kids") {
+      navigate("/kids");
     }
-  }, [open, closeControls]);
+  };
 
   return (
     <Dialog
@@ -71,11 +48,6 @@ export default function DialogSelector({ open, onClose, onSelect }) {
         },
       }}
       PaperProps={{
-        component: motion.div,       // 👈 importante
-        initial: { x: "100%", opacity: 0 }, // 👈 props de Framer Motion
-        animate: { x: 0, opacity: 1 },
-        exit: { x: "100%", opacity: 0 },
-        transition: { type: "spring", stiffness: 300, damping: 30 },
         sx: {
           width: { xs: "95%", sm: 700 },
           minHeight: { xs: "50%", sm: 500 },
@@ -87,19 +59,29 @@ export default function DialogSelector({ open, onClose, onSelect }) {
           alignItems: "center",
           justifyContent: "center",
           position: "relative",
+          overflow: "hidden",
         },
       }}
     >
       <DialogTitle
         sx={{
           textAlign: "center",
-          fontWeight: 800,
-          fontSize: { xs: "1.1rem", sm: "1.5rem" },
+          fontWeight: 900,
+          fontSize: { xs: "1.15rem", sm: "1.6rem" },
           fontFamily: "'Poppins', sans-serif",
-          mb: 1.5,
+          mb: 2,
+          color: "#0d2b45",
+          letterSpacing: "0.03em",
+          lineHeight: 1.2,
+          px: 2.5,
+          py: 1,
+          borderRadius: 99,
+          background: "linear-gradient(180deg, rgba(255,255,255,0.82) 0%, rgba(232,247,255,0.74) 100%)",
+          border: "1px solid rgba(13,43,69,0.12)",
+          boxShadow: "0 8px 16px rgba(13,43,69,0.12)",
         }}
       >
-        Select your Category ⛳
+        {"Select your Category \u26F3"}
         <IconButton
           aria-label="Cerrar"
           onClick={onClose}
@@ -108,104 +90,80 @@ export default function DialogSelector({ open, onClose, onSelect }) {
             top: 8,
             right: 8,
             color: "black",
-            zIndex: 3, // 👈 más arriba que ::before y ::after
+            zIndex: 3,
+            width: 40,
+            height: 40,
             "&:hover": { backgroundColor: "rgba(255,255,255,.15)" },
-
-            // animación al abrir
-            animation: open ? "spinTwice 0.6s ease-in-out" : "none",
-            animationFillMode: "forwards",
-            "@keyframes spinTwice": {
+            transition: "background-color 0.2s ease",
+            "@keyframes spinTwiceIcon": {
               "0%": { transform: "rotate(0deg)" },
               "100%": { transform: "rotate(720deg)" },
             },
           }}
         >
-          <CloseRoundedIcon sx={{ fontSize: 28 }} />
+          <CloseRoundedIcon sx={{ fontSize: 28, animation: open ? "spinTwiceIcon 0.6s ease-in-out" : "none", transformOrigin: "center" }} />
         </IconButton>
-
       </DialogTitle>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            key="content"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.4 }}
-            style={{ width: "100%" }}
-          >
-            <Box
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          mt: 1,
+        }}
+      >
+        {options.map((option) => (
+          <Box key={option.value}>
+            <Button
+              fullWidth
+              onClick={() => handleSelect(option)}
               sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 2,
-                mt: 1,
+                fontWeight: 700,
+                textTransform: "none",
+                py: isMobile ? 2 : 2.5,
+                borderRadius: 2,
+                fontSize: isMobile ? "1.2rem" : "1.4rem",
+                position: "relative",
+                overflow: "hidden",
+                color: "#fff",
+                border: "3px solid #FFD700",
+                background: `linear-gradient(145deg, ${option.color} 0%, ${option.color} 70%, #fff 100%)`,
+                boxShadow: "0 6px 15px rgba(0,0,0,0.5), inset 0 -5px 8px rgba(255,255,255,0.15)",
+                transition: "all 0.2s ease",
+                "&::before": {
+                  content: '""',
+                  position: "absolute",
+                  top: -5,
+                  left: -5,
+                  right: -5,
+                  bottom: -5,
+                  borderRadius: "inherit",
+                  border: "2px solid rgba(255,255,255,0.15)",
+                  pointerEvents: "none",
+                  zIndex: 1,
+                  boxShadow: "0 0 15px rgba(255,255,255,0.2)",
+                },
+                "&:hover": {
+                  filter: "brightness(1.12)",
+                  transform: "scale(1.02)",
+                  boxShadow: "0 8px 20px rgba(0,0,0,0.6), inset 0 -6px 10px rgba(255,255,255,0.2)",
+                },
               }}
             >
-              {options.map((option) => (
-                <motion.div
-                  key={option.value}
-                  whileHover={{ scale: 1.08 }}
-                  whileTap={{ scale: 0.96 }}
-                >
-                  <Button
-                    fullWidth
-                    onClick={() => handleSelect(option)}
-                    sx={{
-                      fontWeight: 700,
-                      textTransform: "none",
-                      py: isMobile ? 2 : 2.5,
-                      borderRadius: 2,
-                      fontSize: isMobile ? "1.2rem" : "1.4rem",
-                      position: "relative",
-                      overflow: "hidden",
-                      color: "#fff",
-                      border: "3px solid #FFD700", // borde dorado
-                      background: `linear-gradient(145deg, ${option.color} 0%, ${option.color} 70%, #fff 100%)`,
-                      boxShadow:
-                        "0 6px 15px rgba(0,0,0,0.5), inset 0 -5px 8px rgba(255,255,255,0.15)",
-
-                      transition: "all 0.3s ease",
-
-                      // brillo realista en borde
-                      "&::before": {
-                        content: '""',
-                        position: "absolute",
-                        top: -5,
-                        left: -5,
-                        right: -5,
-                        bottom: -5,
-                        borderRadius: "inherit",
-                        border: "2px solid rgba(255,255,255,0.15)", // borde brillante suave
-                        pointerEvents: "none",
-                        zIndex: 1,
-                        boxShadow: "0 0 15px rgba(255,255,255,0.2)", // ligero resplandor
-                        animation: "softShine 4s ease-in-out infinite alternate",
-                      },
-
-                      "&:hover": {
-                        filter: "brightness(1.15)",
-                        transform: "scale(1.03)",
-                        boxShadow:
-                          "0 8px 20px rgba(0,0,0,0.6), inset 0 -6px 10px rgba(255,255,255,0.2)",
-                      },
-
-                      "@keyframes softShine": {
-                        "0%": { opacity: 0.15, transform: "rotate(0deg)" },
-                        "50%": { opacity: 0.25, transform: "rotate(2deg)" },
-                        "100%": { opacity: 0.15, transform: "rotate(0deg)" },
-                      },
-                    }}
-                  >
-                    {option.icon}{option.label}
-                  </Button>
-                </motion.div>
-              ))}
-            </Box>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </Dialog >
+              {option.icon}
+              {option.label}
+            </Button>
+          </Box>
+        ))}
+      </Box>
+    </Dialog>
   );
 }
+
+
+
+
+
+

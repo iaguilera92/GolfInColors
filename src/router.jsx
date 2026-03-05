@@ -9,6 +9,7 @@ const Administracion = lazy(() => import("./components/Administracion"));
 const Catalogo = lazy(() => import("./components/Catalogo"));
 const Home = lazy(() => import("./components/Home"));
 const Dashboard = lazy(() => import("./components/Dashboard"));
+const Kids = lazy(() => import("./components/Kids"));
 const ConfigurarProductos = lazy(() => import("./components/configuraciones/ConfigurarProductos"));
 const ConfigurarTrabajos = lazy(() => import("./components/configuraciones/ConfigurarTrabajos"));
 
@@ -51,6 +52,7 @@ const router = createBrowserRouter(
                 { path: "administracion", element: withSuspense(Administracion) },
                 { path: "catalogo", element: withSuspense(Catalogo) },
                 { path: "dashboard", element: withSuspense(Dashboard) },
+                { path: "kids", element: withSuspense(Kids) },
                 {
                     path: "configurar-productos",
                     element: (
@@ -78,3 +80,4 @@ const router = createBrowserRouter(
 );
 
 export default router;
+

@@ -134,112 +134,8 @@ function App() {
     };
   }, [videoReady, location.pathname]);
 
-  //LIBERAR CARGANDO
-  useEffect(() => {
-    const body = document.body;
-    const html = document.documentElement;
-
-    if (!showApp) {
-      body.classList.add('no-scroll');
-      html.classList.add('no-scroll');
-    } else {
-      body.classList.remove('no-scroll');
-      html.classList.remove('no-scroll');
-    }
-
-    return () => {
-      body.classList.remove('no-scroll');
-      html.classList.remove('no-scroll');
-    };
-  }, [showApp]);
-
-
-  //LIMPIAR CACHE
-  useEffect(() => {
-    const checkVersionAndClearCache = async () => {
-      try {
-        const response = await fetch("/version.json", {
-          cache: "no-store",
-          headers: {
-            "Cache-Control": "no-store",
-            "Pragma": "no-cache"
-          }
-        });
-
-        const data = await response.json();
-        const storedVersion = localStorage.getItem("app_version");
-        const currentVersion = data.version;
-
-        if (!storedVersion) {
-          localStorage.setItem("app_version", currentVersion);
-          return;
-        }
-
-        if (storedVersion !== currentVersion) {
-          console.log("🆕 Nueva versión detectada. Limpiando caché...");
-          console.log("🗂️ Versión anterior:", storedVersion);
-          console.log("📄 Versión nueva:", currentVersion);
-
-          setSnackbarVersion({ open: true, version: currentVersion }); // tu Snackbar, si usas uno
-
-          setTimeout(async () => {
-            // 🧹 Eliminar todas las caches
-            const cacheNames = await caches.keys();
-            await Promise.all(cacheNames.map(name => caches.delete(name)));
-            console.log("✅ Caches eliminadas:", cacheNames);
-
-            // 🧹 Eliminar todos los Service Workers
-            if ("serviceWorker" in navigator) {
-              const registrations = await navigator.serviceWorker.getRegistrations();
-              for (const registration of registrations) {
-                await registration.unregister();
-                console.log("🧹 Service Worker eliminado");
-              }
-            }
-
-            // 💾 Actualizar versión guardada
-            localStorage.setItem("app_version", currentVersion);
-
-            // 🔁 Recarga completa desde el servidor (no solo pathname)
-            window.location.reload(true); // o usa window.location.href = "/"
-          }, 1500);
-        } else {
-          console.log("✅ App actualizada. Versión:", currentVersion);
-        }
-      } catch (err) {
-        console.warn("⚠️ No se pudo verificar la versión:", err);
-      }
-    };
-
-    checkVersionAndClearCache();
-  }, []);
-
-  useEffect(() => {
-    if (
-      location.pathname === "/" &&
-      location.state?.scrollTo === "contacto"
-    ) {
-      const fromOtherRoute = location.state?.fromRoute;
-
-      const scrollWhenReady = () => {
-        if (contactoRef.current) {
-          scrollToRef(
-            contactoRef,
-            fromOtherRoute ? -120 : -80 // 👈 CLAVE
-          );
-
-          window.history.replaceState({}, document.title);
-        } else {
-          requestAnimationFrame(scrollWhenReady);
-        }
-      };
-
-      scrollWhenReady();
-    }
-  }, [location.pathname, location.state]);
-
   const handleCategorySelect = (category) => {
-    console.log("Usuario seleccionó:", category);
+    console.log("Usuario seleccion�:", category);
     setUserCategory(category);
     setShowDialogInicio(false);
     localStorage.setItem("user_category", category);
@@ -248,28 +144,36 @@ function App() {
   useEffect(() => {
     let timer;
 
-    if (showApp && !userCategory) {
+    const isHomeRoute = ["/", ""].includes(location.pathname);
+
+    if (showApp && !userCategory && isHomeRoute) {
       timer = setTimeout(() => {
-        setShowDialogInicio(true); // abrir diálogo después de 1s
+        setShowDialogInicio(true);
       }, 1000);
     } else {
-      setShowDialogInicio(false); // cerrar diálogo si cambia showApp o userCategory
+      setShowDialogInicio(false);
     }
 
     return () => clearTimeout(timer);
-  }, [showApp, userCategory]);
-
+  }, [showApp, userCategory, location.pathname]);
+  //LIBERAR CARGANDO
   useEffect(() => {
     const body = document.body;
+    const html = document.documentElement;
 
-    if (showDialogInicio) {
-      body.classList.add('no-scroll'); // bloquear scroll mientras está abierto
+    if (!showApp) {
+      body.classList.add("no-scroll");
+      html.classList.add("no-scroll");
     } else {
-      body.classList.remove('no-scroll'); // liberar scroll al cerrar
+      body.classList.remove("no-scroll");
+      html.classList.remove("no-scroll");
     }
 
-    return () => body.classList.remove('no-scroll'); // limpieza por si se desmonta
-  }, [showDialogInicio]);
+    return () => {
+      body.classList.remove("no-scroll");
+      html.classList.remove("no-scroll");
+    };
+  }, [showApp]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -324,7 +228,7 @@ function App() {
 
         {/* Transición entre páginas */}
         <Box sx={{ position: "relative" }}>
-          <Outlet context={{ showApp, informationsRef }} />
+          <Outlet context={{ showApp, informationsRef, openDialogInicio: () => setShowDialogInicio(true) }} />
           {isFading && (
             <motion.div
               initial={{ opacity: 0 }}
@@ -454,3 +358,10 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
+

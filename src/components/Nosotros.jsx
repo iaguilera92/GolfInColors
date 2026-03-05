@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, Container, useTheme, useMediaQuery, Card, CardContent } from "@mui/material";
+﻿import { Box, Typography, Grid, Container, useTheme, useMediaQuery, Card, CardContent } from "@mui/material";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
@@ -91,7 +91,7 @@ const Nosotros = () => {
             },
           }}
         >
-          {"Nosotros".split("").map((char, index) => (
+          {"About Us".split("").map((char, index) => (
             <motion.span
               key={index}
               custom={index}
@@ -139,7 +139,7 @@ const Nosotros = () => {
                         mb: 1.5, // margen inferior más compacto
                       }}
                     >
-                      ¿Quiénes Somos?
+                      Who Are We?
                     </Typography>
 
                     {/* Párrafo 1 */}
@@ -153,7 +153,7 @@ const Nosotros = () => {
                         lineHeight: 1.5,
                       }}
                     >
-                      Golf in Color busca integrar orgánicamente un equipo que incluye al padre, quien lidera el proyecto; al entrenador, quien dirige el proceso; y al niño, a quien el sistema busca beneficiar e inspirar para que se enamore y apasione por el golf. Este equipo tendrá roles definidos para garantizar que cada miembro se mantenga alineado con nuestra experiencia y enfoque.
+                      Golf in Color aims to organically integrate a team that includes the parent, who leads the project; the coach, who guides the process; and the child, whom the system is designed to support and inspire to fall in love with golf. This team has clearly defined roles to ensure every member stays aligned with our experience and approach.
                     </Typography>
 
                     {/* Párrafo 2 */}
@@ -167,7 +167,7 @@ const Nosotros = () => {
                         lineHeight: 1.5,
                       }}
                     >
-                      <strong>El sistema:</strong> El sistema está diseñado con materiales educativos interactivos, como libros para colorear, rompecabezas, juegos de preguntas, cuentos y actividades divertidas, para mantener a los niños entretenidos tanto dentro como fuera del campo de golf, sin depender exclusivamente de la tecnología.
+                      <strong>The system:</strong> The system is designed with interactive educational materials such as coloring books, puzzles, quiz games, stories, and fun activities to keep children engaged both on and off the golf course, without relying exclusively on technology.
                     </Typography>
 
                     {/* Párrafo 3 */}
@@ -180,7 +180,7 @@ const Nosotros = () => {
                         lineHeight: 1.5,
                       }}
                     >
-                      Además, ofrecemos contenido de video y herramientas tecnológicas para mantenernos a la vanguardia, compitiendo creativamente con actividades que a menudo captan la atención de los niños de maneras menos atractivas. Queremos mantenerlos concentrados y entretenidos de una manera divertida, sin ser invasivos, a la vez que garantizamos su motivación y entusiasmo.
+                      In addition, we offer video content and technology tools to stay at the forefront, creatively competing with activities that often capture children's attention in less meaningful ways. We want to keep them focused and entertained in a fun, non-invasive way while ensuring their motivation and enthusiasm.
                     </Typography>
                   </CardContent>
                 </Card>
@@ -254,7 +254,7 @@ const Nosotros = () => {
               textAlign: 'right',
             }}
           >
-            Inspiramos y enseñamos <span style={{ color: '#00c853' }}>Golf</span>
+            We inspire and teach <span style={{ color: '#00c853' }}>Golf</span>
           </Typography>
         </Container>
       </Box>
@@ -292,7 +292,7 @@ const Nosotros = () => {
             </motion.div>
           </Grid>
 
-          {/* Misión + Visión a la derecha con animación */}
+          {/* Mission + Vision a la derecha con animación */}
           <Grid item xs={12} md={6}>
             <Box px={{ xs: 2, sm: 0 }}>
 
@@ -311,20 +311,20 @@ const Nosotros = () => {
                   }}
                 >
                   <CardContent sx={{ p: 2 }}> {/* ajuste adicional de padding interno */}
-                    {/* Misión */}
+                    {/* Mission */}
                     <Typography variant="h5" color="black" gutterBottom>
-                      Misión
+                      Mission
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify', mb: 1.5 }}>
-                      Nuestra misión es desarrollar una plataforma y un sistema fáciles de replicar y adaptar en campos de golf, clubes, ciudades y países donde se practica. El objetivo es garantizar que cada niño, en su primera clase, tenga una experiencia tan impactante que lo motive a continuar y a participar en este deporte toda la vida.
+                      Our mission is to develop a platform and system that are easy to replicate and adapt in golf courses, clubs, cities, and countries where golf is played. The goal is to ensure that every child has such an impactful first lesson that they feel motivated to continue and stay connected to the sport for life.
                     </Typography>
 
-                    {/* Visión */}
+                    {/* Vision */}
                     <Typography variant="h5" color="black" gutterBottom>
-                      Visión
+                      Vision
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify' }}>
-                      Nuestra visión es posicionar nuestro servicio, plataforma o sistema como un método eficaz y rentable para todos los clubes, ciudades y países donde se juega al golf. Nuestro objetivo es guiar a entrenadores, padres y abuelos en el noble, pero a la vez desafiante, objetivo de impactar al mayor número posible de niños, introduciéndolos al golf de una manera creativa y divertida.
+                      Our vision is to position our service, platform, and system as an effective and cost-efficient method for clubs, cities, and countries where golf is played. Our objective is to guide coaches, parents, and grandparents in the noble yet challenging mission of reaching as many children as possible and introducing them to golf in a creative and fun way.
                     </Typography>
                   </CardContent>
                 </Card>
@@ -356,7 +356,7 @@ const Nosotros = () => {
             },
           }}
         >
-          EQUIPO
+          TEAM
         </Typography>
 
         <Typography
@@ -368,7 +368,7 @@ const Nosotros = () => {
             px: { xs: 2, sm: 6 },
           }}
         >
-          Guiamos a nuevos entrenadores para enseñar golf a niños de 2 a 8 años, usando materiales dinámicos y divertidos que generan clases atractivas. Buscamos que la primera experiencia del niño y sus padres sea memorable y motive su pasión por el golf.
+          We guide new coaches to teach golf to children ages 2 to 8 using dynamic and fun materials that create engaging classes. We aim for the first experience for both the child and their parents to be memorable and to spark a lasting passion for golf.
         </Typography>
 
         <Grid container spacing={0} justifyContent="center">
@@ -425,3 +425,4 @@ const Nosotros = () => {
 };
 
 export default Nosotros;
+
