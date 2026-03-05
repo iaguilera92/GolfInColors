@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { Dialog, DialogTitle, Button, Box, useTheme, useMediaQuery, IconButton } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
@@ -53,7 +53,7 @@ export default function DialogSelector({ open, onClose, onSelect }) {
           minHeight: { xs: "50%", sm: 500 },
           borderRadius: 3,
           p: { xs: 3, sm: 5 },
-          background: "linear-gradient(135deg, #d8f8c8 0%, #a8e0a5 60%, #f0faff 100%)",
+          background: "linear-gradient(135deg, #d6f5d0 0%, #8fd39a 58%, #e9fff2 100%)",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -161,6 +161,7 @@ export default function DialogSelector({ open, onClose, onSelect }) {
     </Dialog>
   );
 }
+
 
 
 
