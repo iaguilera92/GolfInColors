@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+﻿import React, { useEffect, useMemo, useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -53,7 +53,7 @@ export default function DialogSelector({ open, onClose, onSelect }) {
         toneA: "#1aa97a",
         toneB: "#0b7f59",
         icon: <SportsEsportsIcon sx={{ fontSize: 22 }} />,
-        description: "Stories, videos and games for playful learning.",
+        description: "Stories, videos, games.",
       },
       {
         label: "Parents",
@@ -61,7 +61,7 @@ export default function DialogSelector({ open, onClose, onSelect }) {
         toneA: "#2c95e3",
         toneB: "#0f6fb8",
         icon: <FamilyRestroomIcon sx={{ fontSize: 22 }} />,
-        description: "Tools to guide and support each child at home.",
+        description: "Support your child at home.",
       },
       {
         label: "Coaches",
@@ -69,7 +69,7 @@ export default function DialogSelector({ open, onClose, onSelect }) {
         toneA: "#f08b32",
         toneB: "#cf6710",
         icon: <EmojiEventsIcon sx={{ fontSize: 22 }} />,
-        description: "Programs and methodology to teach with confidence.",
+        description: "Teach with confidence.",
       },
     ],
     []
@@ -157,7 +157,7 @@ export default function DialogSelector({ open, onClose, onSelect }) {
       }}
     >
 
-      {/* BOTÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“N CERRAR */}
+      {/* BOTÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œN CERRAR */}
       <IconButton
         aria-label="Close category dialog"
         onClick={onClose}
@@ -242,28 +242,11 @@ export default function DialogSelector({ open, onClose, onSelect }) {
                   : "1px solid rgba(255,255,255,0.45)",
                 background: `linear-gradient(120deg, ${option.toneA} 0%, ${option.toneB} 100%)`,
                 boxShadow: selected === option.value
-                  ? "0 0 0 3px rgba(255,255,255,0.32), 0 10px 24px rgba(0,0,0,0.28)"
-                  : "0 8px 18px rgba(0,0,0,0.2)",
-                transition: "all 0.22s ease",
-                "&::after": {
-                  content: '""',
-                  position: "absolute",
-                  top: -18,
-                  left: -60,
-                  width: 58,
-                  height: "170%",
-                  transform: "skewX(-16deg)",
-                  background: "linear-gradient(110deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.34) 52%, rgba(255,255,255,0) 100%)",
-                  animation: "pillSweep 3.2s ease-in-out infinite",
-                },
-                "@keyframes pillSweep": {
-                  "0%": { left: "-70%", opacity: 0 },
-                  "30%": { opacity: 0.85 },
-                  "100%": { left: "130%", opacity: 0 },
-                },
+                  ? "0 0 0 2px rgba(255,255,255,0.26), 0 7px 14px rgba(0,0,0,0.2)"
+                  : "0 4px 10px rgba(0,0,0,0.16)",
+                transition: "all 0.2s ease",
                 "&:hover": {
-                  transform: "translateY(-2px) scale(1.01)",
-                  filter: "brightness(1.04)",
+                  transform: "translateY(-1px)",
                 },
                 "&:focus-visible": {
                   outline: "3px solid rgba(255,255,255,0.88)",
@@ -313,7 +296,7 @@ export default function DialogSelector({ open, onClose, onSelect }) {
                 {selected === option.value ? (
                   <CheckCircleRoundedIcon sx={{ fontSize: 18, color: "#fff" }} />
                 ) : (
-                  <ArrowForwardRoundedIcon sx={{ fontSize: 17, color: "#fff" }} />
+                  <motion.span style={{ display: "grid", placeItems: "center" }} animate={{ scale: [1, 1.14, 1] }} transition={{ duration: 1.05, repeat: Infinity, ease: "easeInOut" }}><ArrowForwardRoundedIcon sx={{ fontSize: 17, color: "#fff" }} /></motion.span>
                 )}
               </Box>
             </Button>
@@ -364,52 +347,7 @@ export default function DialogSelector({ open, onClose, onSelect }) {
             animation: "none",
             transition:
               "transform 0.24s, box-shadow 0.24s, filter 0.24s, background 0.24s",
-
-            "&::before": {
-              content: '""',
-              position: "absolute",
-              top: -28,
-              left: -60,
-              width: 64,
-              height: "165%",
-              background:
-                "linear-gradient(110deg, rgba(255,255,255,0) 0%, rgba(255,247,210,0.75) 52%, rgba(255,255,255,0) 100%)",
-              transform: "skewX(-12deg)",
-              animation:
-                "royalGoldSweep 3.1s cubic-bezier(.4,0,.2,1) infinite",
-            },
-
-            "&::after": {
-              content: '""',
-              position: "absolute",
-              inset: 0,
-              borderRadius: "inherit",
-              background:
-                "radial-gradient(circle at 22% 25%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 44%), radial-gradient(circle at 78% 30%, rgba(255,245,210,0.2) 0%, rgba(255,255,255,0) 36%), radial-gradient(circle at 50% 75%, rgba(255,240,190,0.14) 0%, rgba(255,255,255,0) 42%)",
-              animation: "royalGoldPulse 2.4s ease-in-out infinite",
-              pointerEvents: "none",
-            },
-
-            "@keyframes royalGoldSweep": {
-              "0%": { left: "-70%", opacity: 0 },
-              "28%": { opacity: 0.85 },
-              "55%": { opacity: 0.55 },
-              "100%": { left: "135%", opacity: 0 },
-            },
-
-            "@keyframes royalGoldPulse": {
-              "0%": { opacity: 0.3 },
-              "50%": { opacity: 0.58 },
-              "100%": { opacity: 0.3 },
-            },
-
-            "@keyframes royalFloat": {
-              "0%": { transform: "translateY(0px)" },
-              "50%": { transform: "translateY(-2px)" },
-              "100%": { transform: "translateY(0px)" },
-            },
-
-            "&:hover": {
+                "&:hover": {
               transform: "scale(1.05)",
               filter: "brightness(1.1)",
               background:
@@ -441,6 +379,12 @@ export default function DialogSelector({ open, onClose, onSelect }) {
     </Dialog>
   );
 }
+
+
+
+
+
+
 
 
 

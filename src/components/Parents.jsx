@@ -1,13 +1,13 @@
 ﻿import { Box, Button, Container, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import EmojiFlagsRoundedIcon from "@mui/icons-material/EmojiFlagsRounded";
-import StarRoundedIcon from "@mui/icons-material/StarRounded";
-import BackpackRoundedIcon from "@mui/icons-material/BackpackRounded";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 export default function Parents() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
@@ -20,20 +20,6 @@ export default function Parents() {
         "Tee Box is a 5-level at-home golf program designed to help kids learn while parents stay connected and involved",
       colors: ["#0a6abf", "#1B83CC"],
       cta: "Explore",
-    },
-    {
-      title: "STAR PATH",
-      description:
-        "A fun golf and movement program where kids earn stars as they progress through physical and golf challenges",
-      colors: ["#ff7b31", "#ff5a1f"],
-      cta: "Start",
-    },
-    {
-      title: "KIDS KIT",
-      description:
-        "Playful learning materials that motivate kids to learn golf and strengthen the parent-child connection.",
-      colors: ["#2b9d57", "#1f7e43"],
-      cta: "Learn at home",
     },
   ];
 
@@ -233,14 +219,11 @@ export default function Parents() {
               Our Programs
             </Typography>
 
-            <Grid container spacing={isMobile ? 1.6 : 2.2}>
+            <Grid container spacing={isMobile ? 1.6 : 2.2} justifyContent="center">
               {programs.map((program, index) => {
-                const programIcon =
-                  index === 0 ? <EmojiFlagsRoundedIcon sx={{ fontSize: 22 }} /> :
-                    index === 1 ? <StarRoundedIcon sx={{ fontSize: 22 }} /> :
-                      <BackpackRoundedIcon sx={{ fontSize: 22 }} />;
+                const programIcon = <EmojiFlagsRoundedIcon sx={{ fontSize: 22 }} />;
                 return (
-                  <Grid item xs={12} md={4} key={program.title}>
+                  <Grid item xs={12} md={7} key={program.title}>
                     <Box
                       sx={{
                         height: "100%",
@@ -321,6 +304,7 @@ export default function Parents() {
                       <Box sx={{ mt: 1.25, display: "flex", justifyContent: "flex-end" }}>
                         <Button
                           variant="contained"
+                          onClick={() => navigate("/catalogo")}
                           sx={{
                             textTransform: "none",
                             fontWeight: 700,
