@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, lazy, Suspense } from "react";
+﻿import React, { useEffect, useState, useRef, lazy, Suspense } from "react";
 import { CssBaseline, Box, IconButton, useMediaQuery, Snackbar, Alert } from "@mui/material";
 import theme from "./theme";
 import { ThemeProvider } from "@mui/material/styles";
@@ -44,6 +44,21 @@ function App() {
   const [isFading, setIsFading] = useState(false);
   const [showDialogInicio, setShowDialogInicio] = useState(false);
   const [userCategory, setUserCategory] = useState(null);
+
+  useEffect(() => {
+    const remember = localStorage.getItem("remember_category_choice") === "1";
+    const localCategory = localStorage.getItem("user_category");
+    const sessionCategory = sessionStorage.getItem("user_category");
+
+    if (remember && localCategory) {
+      setUserCategory(localCategory);
+      return;
+    }
+
+    if (sessionCategory) {
+      setUserCategory(sessionCategory);
+    }
+  }, []);
 
   //EFECTO CAMBIAR DE RUTA
   useEffect(() => {
@@ -134,11 +149,25 @@ function App() {
     };
   }, [videoReady, location.pathname]);
 
-  const handleCategorySelect = (category) => {
-    console.log("Usuario seleccion�:", category);
+  const handleCategorySelect = (payload) => {
+    const category = typeof payload === "string" ? payload : payload?.value;
+    const remember = typeof payload === "string" ? true : Boolean(payload?.remember);
+
+    if (!category) return;
+
+    console.log("Usuario seleccionó:", category);
     setUserCategory(category);
     setShowDialogInicio(false);
-    localStorage.setItem("user_category", category);
+
+    if (remember) {
+      localStorage.setItem("remember_category_choice", "1");
+      localStorage.setItem("user_category", category);
+      sessionStorage.removeItem("user_category");
+    } else {
+      localStorage.removeItem("remember_category_choice");
+      localStorage.removeItem("user_category");
+      sessionStorage.setItem("user_category", category);
+    }
   };
 
   useEffect(() => {
@@ -269,9 +298,6 @@ function App() {
               </Box>
             </Suspense>
 
-            <Suspense fallback={null}>
-              {isMobile ? <Evidencias /> : <Evidencias2 />}
-            </Suspense>
 
             <Suspense fallback={null}>
               <Box ref={contactoRef}>
@@ -358,6 +384,7 @@ function App() {
 }
 
 export default App;
+
 
 
 

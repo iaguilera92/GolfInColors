@@ -1,17 +1,6 @@
-﻿import React, { useEffect, useMemo, useRef, useState } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import {
-  Container,
-  Snackbar,
-  Box,
-  Alert,
-  useTheme,
-  useMediaQuery,
-  Grid,
-  IconButton,
-  Typography,
-  Skeleton,
-} from '@mui/material';
+import { Container, Snackbar, Box, Alert, useTheme, useMediaQuery, Button, Grid, IconButton } from '@mui/material';
 import './css/Catalogo.css';
 import { motion } from 'framer-motion';
 import Productos from './Productos';
@@ -26,14 +15,10 @@ const staticProducts = [
     NombreProducto: 'TEE BOX - BLUE STARTER',
     Valor: 100,
     ConDescuento: false,
-    Stock: 10,
+    Stock: 8,
     ImageUrl: 'https://golfincolors.com/wp-content/uploads/2025/12/TEE_BOX_SM3-300x300.png',
     VideoUrl: '',
     UrlCompra: 'https://golfincolors.com/product/tee-box-blue-starter/',
-    Nivel: 'Starter',
-    Tag: 'Blue Starter',
-    Popularidad: 96,
-    Featured: 1,
   },
   {
     IdProducto: 5026,
@@ -44,52 +29,36 @@ const staticProducts = [
     ImageUrl: 'https://golfincolors.com/wp-content/uploads/2025/12/ChatGPT-Image-Dec-25-2025-at-01_34_56-PM-300x300.png',
     VideoUrl: '',
     UrlCompra: 'https://golfincolors.com/product/tee-box-green-champion/',
-    Nivel: 'Champion',
-    Tag: 'Green Champion',
-    Popularidad: 91,
-    Featured: 2,
   },
   {
     IdProducto: 5024,
     NombreProducto: 'TEE BOX - ORANGE COMPETITOR',
     Valor: 100,
     ConDescuento: false,
-    Stock: 7,
+    Stock: 8,
     ImageUrl: 'https://golfincolors.com/wp-content/uploads/2025/12/ChatGPT-Image-Dec-25-2025-at-01_34_58-PM-300x300.png',
     VideoUrl: '',
     UrlCompra: 'https://golfincolors.com/product/tee-box-orange-competitor/',
-    Nivel: 'Competitor',
-    Tag: 'Orange Competitor',
-    Popularidad: 88,
-    Featured: 3,
   },
   {
     IdProducto: 5022,
     NombreProducto: 'TEE BOX - TOMATO STRIKER',
     Valor: 100,
     ConDescuento: false,
-    Stock: 5,
+    Stock: 8,
     ImageUrl: 'https://golfincolors.com/wp-content/uploads/2025/12/ChatGPT-Image-Dec-25-2025-at-01_35_07-PM-300x300.png',
     VideoUrl: '',
     UrlCompra: 'https://golfincolors.com/product/tee-box-tomato-striker/',
-    Nivel: 'Striker',
-    Tag: 'Tomato Striker',
-    Popularidad: 84,
-    Featured: 4,
   },
   {
     IdProducto: 5020,
     NombreProducto: 'TEE BOX - YELLOW BUILDER',
     Valor: 100,
     ConDescuento: false,
-    Stock: 6,
+    Stock: 8,
     ImageUrl: 'https://golfincolors.com/wp-content/uploads/2025/12/ChatGPT-Image-Dec-25-2025-at-12_34_29-PM-300x300.png',
     VideoUrl: '',
     UrlCompra: 'https://golfincolors.com/product/tee-box-yellow-builder/',
-    Nivel: 'Builder',
-    Tag: 'Yellow Builder',
-    Popularidad: 82,
-    Featured: 5,
   },
 ];
 
@@ -103,6 +72,8 @@ const Catalogo = () => {
   const CalcularValorOld = (valor) => FormatearPesos(valor + 5);
   const [productoActivo, setProductoActivo] = useState({});
   const [showArrow, setShowArrow] = useState({});
+  const [videoFullScreenProducto, setVideoFullScreenProducto] = useState(null);
+  const [mostrarControlesVideo, setMostrarControlesVideo] = useState(false);
   const [animarFlecha, setAnimarFlecha] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
   const [entered, setEntered] = useState(false);
@@ -122,14 +93,14 @@ const Catalogo = () => {
     let cargadas = 0;
 
     if (imagenes.length === 0) {
-      setTimeout(() => setIsLoaded(true), 700);
+      setTimeout(() => setIsLoaded(true), 800);
       return;
     }
 
     const verificarCarga = () => {
       cargadas++;
       if (cargadas === imagenes.length) {
-        setTimeout(() => setIsLoaded(true), 800);
+        setTimeout(() => setIsLoaded(true), 900);
       }
     };
 
@@ -148,16 +119,13 @@ const Catalogo = () => {
     }
   }, [location.state]);
 
-  const filteredSorted = useMemo(() => [...productos], [productos]);
-  const spotlight = filteredSorted[0] || null;
-
   const chunkProductos = (arr, size) => {
     const chunks = [];
     for (let i = 0; i < arr.length; i += size) chunks.push(arr.slice(i, i + size));
     return chunks;
   };
 
-  const grupos = chunkProductos(filteredSorted, 3);
+  const grupos = chunkProductos(productos, 3);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -165,6 +133,10 @@ const Catalogo = () => {
     }, 3000);
     return () => clearTimeout(timeout);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = videoFullScreenProducto ? 'hidden' : 'auto';
+  }, [videoFullScreenProducto]);
 
   useEffect(() => {
     const timer = setTimeout(() => setAnimarFlecha(false), 3000);
@@ -214,31 +186,6 @@ const Catalogo = () => {
               '& > *': { position: 'relative', zIndex: 1 },
             }}
           >
-            <Box sx={{ maxWidth: 1200, mx: 'auto', mb: 1.8 }}>
-              {spotlight && (
-                <Box
-                  sx={{
-                    borderRadius: 2.5,
-                    border: '2px solid rgba(255,214,102,0.92)',
-                    p: { xs: 1.4, sm: 1.8 },
-                    mb: 1.4,
-                    background: 'linear-gradient(145deg, rgba(255,193,7,0.18), rgba(255,152,0,0.08))',
-                    boxShadow: '0 8px 18px rgba(0,0,0,0.25)',
-                  }}
-                >
-                  <Typography sx={{ color: '#ffe082', fontWeight: 900, fontSize: { xs: '0.78rem', sm: '0.85rem' }, mb: 0.5 }}>
-                    PRODUCT SPOTLIGHT
-                  </Typography>
-                  <Typography sx={{ color: '#fff', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.15rem' }, mb: 0.35 }}>
-                    {spotlight.NombreProducto}
-                  </Typography>
-                  <Typography sx={{ color: 'rgba(255,255,255,0.92)', fontSize: { xs: '0.82rem', sm: '0.9rem' } }}>
-                    Available on Amazon • Open with Details or Buy
-                  </Typography>
-                </Box>
-              )}
-            </Box>
-
             {isMobile ? (
               grupos.map((grupo, grupoIndex) => (
                 <Box key={`swiper-container-${grupoIndex}`} sx={{ position: 'relative', py: 0 }}>
@@ -246,11 +193,11 @@ const Catalogo = () => {
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, ml: 1 }}>
                       <Box component="img" loading="lazy" decoding="async" src="cine.png" alt="Reels icon" sx={{ width: 16, height: 16, filter: 'invert(1)', alignSelf: 'center', mt: 0 }} />
                       <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', color: 'white', fontFamily: '"Segoe UI", sans-serif', lineHeight: 1.2 }}>
-                        <Box sx={{ fontWeight: 'bold', fontSize: '0.85rem' }}>{grupoIndex === 0 ? 'Explore catalog' : 'More active products'}</Box>
+                        <Box sx={{ fontWeight: 'bold', fontSize: '0.85rem' }}>{grupoIndex === 0 ? 'Explora el catálogo' : 'Más productos activos..'}</Box>
                         {grupoIndex === 0 && (
-                          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.4, ease: 'easeOut' }}>
+                          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.5, duration: 0.5, ease: 'easeOut' }}>
                             <Box sx={{ fontWeight: 400, fontSize: '0.75rem', opacity: 0.9 }}>
-                              Last stock update <Box component="span" sx={{ fontWeight: 'bold' }}>{fechaActual}</Box>
+                              Última actualización de stock <Box component="span" sx={{ fontWeight: 'bold' }}>{fechaActual}</Box>
                             </Box>
                           </motion.div>
                         )}
@@ -289,8 +236,9 @@ const Catalogo = () => {
                     {grupo.map((producto, index) => {
                       const productoIndexGlobal = index + grupoIndex * 5;
                       const isGirado = productoActivo[grupoIndex] === index;
+
                       return (
-                        <SwiperSlide key={producto.IdProducto} style={{ width: '45vw', maxWidth: '200px', scrollSnapAlign: 'start', overflow: 'visible' }}>
+                        <SwiperSlide key={producto.IdProducto} style={{ width: isMobile ? '45vw' : '18vw', maxWidth: isMobile ? '200px' : '260px', scrollSnapAlign: 'start', overflow: 'visible' }}>
                           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                             <Productos
                               index={productoIndexGlobal}
@@ -299,6 +247,7 @@ const Catalogo = () => {
                               onGirar={() => setProductoActivo((prevState) => ({ ...prevState, [grupoIndex]: prevState[grupoIndex] === index ? null : index }))}
                               FormatearPesos={FormatearPesos}
                               CalcularValorOld={CalcularValorOld}
+                              onVisualizarMobile={setVideoFullScreenProducto}
                             />
                           </Box>
                         </SwiperSlide>
@@ -312,7 +261,7 @@ const Catalogo = () => {
                 <Grid container spacing={2}>
                   <Grid item xs={12} md={6}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0 }}>
-                      <Box sx={{ fontWeight: 'bold', fontSize: '1rem', color: 'white', ml: 1 }}>Product catalog</Box>
+                      <Box sx={{ fontWeight: 'bold', fontSize: '1rem', color: 'white', ml: 1 }}>Catálogo de productos</Box>
                       <Box sx={{ width: 40, textAlign: 'right' }}>
                         {showArrow.desktop !== false ? (
                           animarFlecha ? (
@@ -331,7 +280,7 @@ const Catalogo = () => {
                     </Box>
 
                     <Swiper modules={[Virtual]} slidesPerView={1} spaceBetween={20} onSwiper={(swiper) => (swiperRefs.current.desktop = swiper)} style={{ padding: '10px' }}>
-                      {chunkProductos(filteredSorted, 8).map((grupo, grupoIndex) => (
+                      {chunkProductos(productos, 8).map((grupo, grupoIndex) => (
                         <SwiperSlide key={`desktop-slide-${grupoIndex}`}>
                           <Grid container spacing={2}>
                             {Array.from({ length: 9 }).map((_, slotIndex) => {
@@ -373,33 +322,51 @@ const Catalogo = () => {
                 {snackbar.message}
               </Alert>
             </Snackbar>
+
+            {videoFullScreenProducto && (
+              <Box
+                component={motion.div}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                sx={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', bgcolor: 'black', zIndex: 9999, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', overflowY: 'auto', py: 4 }}
+              >
+                <video
+                  key={videoFullScreenProducto?.IdProducto}
+                  src={videoFullScreenProducto?.VideoUrl}
+                  autoPlay
+                  muted
+                  playsInline
+                  preload="auto"
+                  disablePictureInPicture
+                  controlsList="nodownload"
+                  controls={mostrarControlesVideo}
+                  style={{ width: '100%', height: 'auto', maxHeight: '70vh', objectFit: 'contain', backgroundColor: 'black' }}
+                  onClick={() => setMostrarControlesVideo(true)}
+                />
+
+                <Button
+                  variant="contained"
+                  sx={{ mt: 2, bgcolor: '#25D366', color: 'white', textTransform: 'none', fontSize: '1rem', px: 4, py: 1, borderRadius: '30px', boxShadow: '0px 4px 12px rgba(0,0,0,0.4)' }}
+                  onClick={() => {
+                    const url = videoFullScreenProducto?.UrlCompra || 'https://golfincolors.com';
+                    window.open(url, '_blank');
+                  }}
+                >
+                  Buy now
+                </Button>
+
+                <Button onClick={() => setVideoFullScreenProducto(null)} sx={{ mt: 1, color: 'white', textTransform: 'none' }}>
+                  Close
+                </Button>
+              </Box>
+            )}
           </Container>
         </motion.div>
-      ) : (
-        <Container
-          maxWidth={false}
-          disableGutters
-          sx={{ minHeight: '100vh', py: 14, px: 1.2, backgroundColor: '#0f2a3f' }}
-        >
-          <Box sx={{ maxWidth: 1200, mx: 'auto' }}>
-            <Grid container spacing={2}>
-              {Array.from({ length: 6 }).map((_, i) => (
-                <Grid item xs={12} sm={6} md={4} key={`s-${i}`}>
-                  <Box sx={{ p: 1.2, borderRadius: 2, border: '1px solid rgba(255,255,255,0.2)' }}>
-                    <Skeleton variant="rectangular" height={170} sx={{ borderRadius: 1.5, mb: 1, bgcolor: 'rgba(255,255,255,0.15)' }} />
-                    <Skeleton variant="text" width="90%" sx={{ bgcolor: 'rgba(255,255,255,0.2)' }} />
-                    <Skeleton variant="text" width="50%" sx={{ mb: 1.2, bgcolor: 'rgba(255,255,255,0.2)' }} />
-                    <Skeleton variant="rounded" height={30} sx={{ bgcolor: 'rgba(255,255,255,0.22)' }} />
-                  </Box>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </Container>
-      )}
+      ) : null}
     </Box>
   );
 };
 
 export default Catalogo;
-

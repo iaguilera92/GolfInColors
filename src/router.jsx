@@ -1,4 +1,4 @@
-// src/router.jsx
+﻿// src/router.jsx
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate, useOutletContext } from "react-router-dom";
 import App from "./App";
@@ -10,6 +10,7 @@ const Catalogo = lazy(() => import("./components/Catalogo"));
 const Home = lazy(() => import("./components/Home"));
 const Dashboard = lazy(() => import("./components/Dashboard"));
 const Kids = lazy(() => import("./components/Kids"));
+const Parents = lazy(() => import("./components/Parents"));
 const ConfigurarProductos = lazy(() => import("./components/configuraciones/ConfigurarProductos"));
 const ConfigurarTrabajos = lazy(() => import("./components/configuraciones/ConfigurarTrabajos"));
 
@@ -53,6 +54,7 @@ const router = createBrowserRouter(
                 { path: "catalogo", element: withSuspense(Catalogo) },
                 { path: "dashboard", element: withSuspense(Dashboard) },
                 { path: "kids", element: withSuspense(Kids) },
+                { path: "parents", element: withSuspense(Parents) },
                 {
                     path: "configurar-productos",
                     element: (
@@ -80,4 +82,5 @@ const router = createBrowserRouter(
 );
 
 export default router;
+
 

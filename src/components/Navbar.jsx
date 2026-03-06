@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import CloseIcon from "@mui/icons-material/Close";
 import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
+import StorefrontRoundedIcon from '@mui/icons-material/StorefrontRounded';
 import { useLocation } from 'react-router-dom';
 import Tooltip from "@mui/material/Tooltip";
 
@@ -73,6 +74,7 @@ const SocialButton = ({ href, Icon, bgColor, hoverStyles }) => (
 
 const menuItems = [
   { name: "Home", icon: <Home /> }, //{ name: "Catalog", icon: <ViewCarouselIcon /> },
+  { name: "Shop", icon: <StorefrontRoundedIcon />, highlight: true },
   { name: "About Us", icon: <GroupsIcon /> },
   { name: "Contact", icon: <Mail /> },
   { name: "Games", icon: <SchoolIcon />, disabled: true },
@@ -157,6 +159,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
         location.pathname !== "/" ? navigate("/") : scrollToTop(),
       Home: () =>
         location.pathname !== "/" ? navigate("/") : scrollToTop(),
+      Shop: goToCatalogo,
 
       Servicios: () => navigate("/servicios"),
       Catálogo: goToCatalogo,
@@ -198,119 +201,13 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
     return () => clearInterval(intervalo);
   }, []);
 
+  const drawerMenuItems = [
+    ...menuItems.filter((item) => item.name !== "Shop"),
+    ...menuItems.filter((item) => item.name === "Shop"),
+  ];
+
   return (
     <>
-      <motion.div
-        style={{
-          transform: `translateY(-${translateY}px)`,
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          zIndex: 1200,
-        }}
-      >
-        <Box
-          onClick={() => {
-            window.open("https://api.whatsapp.com/send?phone=15617975986", "_blank");
-          }}
-          sx={{
-            backgroundColor: "#E02424",
-            height: { xs: 30, sm: 32 },
-            px: 2,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            overflow: "hidden",
-            boxShadow: scrollY < maxScroll ? "0px 2px 8px rgba(0,0,0,0.2)" : "none",
-            transition: "box-shadow 0.3s ease"
-          }}
-        >
-          <AnimatePresence mode="wait">
-            {(mostrarAnimacion || animacionMostrada) && (
-              <motion.div
-                key={mostrarTexto ? "Call us" : "telefono"}
-                initial={{ x: 100, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: -100, opacity: 0 }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  color: "white",
-                  fontWeight: 600,
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "0.95rem",
-                  lineHeight: "1",
-                }}
-              >
-                <span
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                    fontWeight: "bold",
-                    color: "white",
-                    textShadow: `
-           -1px -1px 0 #000,  
-            1px -1px 0 #000,
-           -1px  1px 0 #000,
-            1px  1px 0 #000
-         `,
-                  }}
-                >
-                  {/* Ícono fijo */}
-                  {mostrarTexto ? (
-                    <img
-                      src="/icon-ecuador.png"
-                      alt="Bandera"
-                      style={{
-                        width: "18px",
-                        height: "auto",
-                        borderRadius: "2px",
-                        display: "inline-block",
-                      }}
-                    />
-                  ) : (
-                    <span style={{ fontSize: "1rem" }}>📞</span>
-                  )}
-
-                  {/* Texto fijo */}
-                  <span>
-                    {mostrarTexto ? "CALL US NOW!" : "+1 (561) 7975986"}
-                  </span>
-                </span>
-
-                {/* Botón WhatsApp solo cuando es el texto */}
-                {mostrarTexto && (
-                  <IconButton
-                    sx={{
-                      width: 20,
-                      height: 20,
-                      p: 0,
-                      backgroundColor: "#25d366",
-                      color: "#FFF",
-                      borderRadius: "50%",
-                      boxShadow: "2px 2px 3px #999",
-                      "&:hover": { backgroundColor: "#1ebe5d" },
-                      zIndex: 101,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <WhatsAppIcon sx={{ fontSize: 14 }} />
-                  </IconButton>
-                )}
-              </motion.div>
-
-            )}
-          </AnimatePresence>
-        </Box>
-      </motion.div >
-
-
 
       <Box
         sx={{
@@ -322,7 +219,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
           borderRadius: "50px",
           overflow: "hidden",
           transition: 'margin-top 0.2s ease',
-          marginTop: `${Math.max(40 - translateY, 15)}px`,
+          marginTop: 1,
 
         }}
       >
@@ -503,7 +400,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                 variants={listVariants}
                 style={{ listStyle: "none", padding: 0, margin: 0, width: "100%" }}
               >
-                {menuItems.map((item, index) => {
+                {drawerMenuItems.map((item, index) => {
                   const content = (
                     <ListItem
                       key={item.name}
@@ -520,14 +417,81 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                         onClick={() => !item.disabled && handleClick(item)}
                         sx={{
                           px: 2,
-                          py: 0.5,
+                          py: 0.7,
                           borderBottom: "1px solid rgba(22,48,36,0.16)",
-                          borderTop:
-                            index === 0 ? "1px solid rgba(22,48,36,0.2)" : "none",
+                          borderTop: index === 0 ? "1px solid rgba(22,48,36,0.2)" : "none",
+
+                          ...(item.name === "Shop" && {
+                            fontWeight: 800,
+                            borderRadius: 2,
+                            mx: 1,
+                            my: 0.5,
+                            position: "relative",
+                            overflow: "hidden",
+                            color: "#fff",
+                            textShadow: "0 1px 2px rgba(0,0,0,0.45)",
+                            border: "2px solid rgba(255, 230, 120, 0.95)",
+
+                            background:
+                              "linear-gradient(160deg, #FFE082 0%, #FFC43D 38%, #FFB300 62%, #E68A00 100%)",
+
+                            boxShadow:
+                              "0 0 18px rgba(255, 195, 45, 0.72), 0 8px 20px rgba(120, 72, 0, 0.42), inset 0 2px 6px rgba(255,255,255,0.35), inset 0 -7px 12px rgba(130,80,0,0.28)",
+
+                            "&::before": {
+                              content: '""',
+                              position: "absolute",
+                              top: -28,
+                              left: -60,
+                              width: 64,
+                              height: "165%",
+                              background:
+                                "linear-gradient(110deg, rgba(255,255,255,0) 0%, rgba(255,247,210,0.75) 52%, rgba(255,255,255,0) 100%)",
+                              transform: "skewX(-12deg)",
+                              animation: "goldSweep 3.1s cubic-bezier(.4,0,.2,1) infinite",
+                            },
+
+                            "&::after": {
+                              content: '""',
+                              position: "absolute",
+                              inset: 0,
+                              borderRadius: "inherit",
+                              background:
+                                "radial-gradient(circle at 22% 25%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 44%)",
+                              animation: "goldPulse 2.4s ease-in-out infinite",
+                              pointerEvents: "none",
+                            },
+
+                            "&:hover": {
+                              transform: "scale(1.04)",
+                              filter: "brightness(1.1)",
+                              background:
+                                "linear-gradient(160deg, #FFE79A 0%, #FFC94F 35%, #FFB623 62%, #F58B00 100%)",
+                              boxShadow:
+                                "0 0 26px rgba(255, 210, 85, 0.92), 0 10px 24px rgba(120,72,0,0.54)",
+                            },
+                          }),
+
                           "&:hover": {
-                            backgroundColor: item.disabled
-                              ? "transparent"
-                              : "rgba(22,48,36,0.06)",
+                            backgroundColor:
+                              item.name === "Shop"
+                                ? undefined
+                                : item.disabled
+                                  ? "transparent"
+                                  : "rgba(22,48,36,0.06)",
+                          },
+
+                          "@keyframes goldSweep": {
+                            "0%": { left: "-70%", opacity: 0 },
+                            "28%": { opacity: 0.85 },
+                            "55%": { opacity: 0.55 },
+                            "100%": { left: "135%", opacity: 0 },
+                          },
+
+                          "@keyframes goldPulse": {
+                            "0%": { opacity: 0.3 },
+                            "50%": { opacity: 0.58 },
+                            "100%": { opacity: 0.3 },
                           },
                         }}
                       >
@@ -538,7 +502,9 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                                 sx={{
                                   color: item.disabled
                                     ? "rgba(22,48,36,0.35)"
-                                    : "#163024",
+                                    : item.name === "Shop"
+                                      ? "white"
+                                      : "#163024",
                                   fontSize: "1.7rem",
                                   marginBottom: "-5px",
                                 }}
@@ -551,8 +517,11 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                                   style={{
                                     color: item.disabled
                                       ? "rgba(22,48,36,0.45)"
-                                      : "#163024",
-                                    fontWeight: "500",
+                                      : item.name === "Shop"
+                                        ? "white"
+                                        : "#163024",
+
+                                    fontWeight: item.name === "Shop" ? "700" : "500",
                                     fontSize: "1.05rem",
                                   }}
                                 >
@@ -893,6 +862,8 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
 }
 
 export default Navbar;
+
+
 
 
 

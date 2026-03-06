@@ -11,8 +11,8 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
   useEffect(() => {
     if (girado && videoRef.current) {
       videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-      videoRef.current.play();
+      videoRef.current.currentTime = 0; // Reinicia claramente el video al inicio
+      videoRef.current.play();          // Reproduce claramente el video
     }
   }, [girado]);
 
@@ -23,8 +23,9 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
       const video = videoRef.current;
 
       if (isMobile) {
+        // ✅ MÓVIL: Safari o Chrome
         if (video.webkitEnterFullscreen) {
-          video.webkitEnterFullscreen();
+          video.webkitEnterFullscreen(); // Safari iOS
           video.currentTime = 0;
           video.play();
         } else if (video.requestFullscreen) {
@@ -33,6 +34,7 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
           video.play();
         }
       } else if (containerRef.current) {
+        // ✅ DESKTOP: usa tu código actual
         const container = containerRef.current;
 
         const afterFullscreen = () => {
@@ -67,6 +69,7 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
       }
     }
   };
+
 
   useEffect(() => {
     const contenedor = containerRef.current;
@@ -109,13 +112,15 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
       setTimeout(() => {
         const playPromise = video.play();
         if (playPromise !== undefined) {
-          playPromise.catch((err) => console.warn('Error al reproducir:', err));
+          playPromise.catch((err) => console.warn("Error al reproducir:", err));
         }
       }, 100);
     } else {
       video.pause();
     }
   }, [girado]);
+
+
 
   return (
     <Box
@@ -137,9 +142,10 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
           height: '100%',
           perspective: 1200,
           cursor: 'pointer',
-          position: 'relative',
+          position: 'relative'
         }}
       >
+
         <motion.div
           animate={{ rotateY: girado ? 180 : 0 }}
           transition={{ duration: 0.8, ease: 'easeInOut' }}
@@ -151,14 +157,15 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
             transformStyle: 'preserve-3d',
           }}
         >
+          {/* Cara frontal */}
           <Box
             sx={{
               position: 'absolute',
               width: '100%',
               height: '100%',
               backfaceVisibility: 'hidden',
-              WebkitBackfaceVisibility: 'hidden',
-              zIndex: 2,
+              WebkitBackfaceVisibility: 'hidden', // Safari fix
+              zIndex: 2, // Asegura que esté sobre la trasera cuando se ve
               transform: 'rotateY(0deg)',
               borderRadius: 3,
               overflow: 'hidden',
@@ -167,28 +174,6 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
             }}
           >
             <Card sx={{ width: '100%', height: '100%', position: 'relative' }}>
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: 7,
-                  left: 7,
-                  zIndex: 2,
-                  px: 0.8,
-                  py: 0.18,
-                  borderRadius: 1,
-                  bgcolor: 'rgba(0,0,0,0.68)',
-                  color: '#ffd54f',
-                  fontWeight: 800,
-                  fontSize: { xs: '0.52rem', sm: '0.58rem' },
-                  letterSpacing: 0.35,
-                  textTransform: 'uppercase',
-                  pointerEvents: 'none',
-                  border: '1px solid rgba(255,255,255,0.45)',
-                }}
-              >
-                {producto.Tag || producto.Nivel || 'Tee Box'}
-              </Box>
-
               <Box
                 sx={{
                   position: 'absolute',
@@ -217,7 +202,6 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
               >
                 {producto.Stock}
               </Box>
-
               <Box
                 component="img"
                 decode="async"
@@ -238,7 +222,6 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
                   transition: 'filter 0.6s ease',
                 }}
               />
-
               {producto.Stock === 0 && (
                 <Box
                   sx={{
@@ -254,20 +237,21 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
                     zIndex: 3,
                     pointerEvents: 'none',
                     textAlign: 'center',
-                    px: 2,
+                    px: 2
                   }}
                 >
                   <Typography
                     sx={{
                       color: 'white',
                       fontSize: '1rem',
-                      whiteSpace: 'pre-line',
+                      whiteSpace: 'pre-line'
                     }}
                   >
-                    {'Reponiendo stock.\nDisponible pronto...'}
+                    {"Reponiendo stock.\nDisponible pronto..."}
                   </Typography>
                 </Box>
               )}
+
 
               <Box
                 sx={{
@@ -276,74 +260,49 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
                   left: 0,
                   right: 0,
                   zIndex: 2,
-                  p: { xs: 0.7, sm: 1 },
-                  background: 'linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.84))',
+                  p: { xs: 1, sm: 1.5 },
+                  background: 'rgba(0,0,0,0.6)',
                   color: 'white',
                   pointerEvents: girado ? 'none' : 'auto',
                 }}
               >
-                <Typography
-                  sx={{
-                    fontWeight: 800,
-                    fontSize: { xs: '0.63rem', sm: '0.7rem' },
-                    lineHeight: 1.1,
-                    mb: 0.35,
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    textTransform: 'uppercase',
-                  }}
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  spacing={0.5}
+                  sx={{ width: '100%' }}
                 >
-                  {producto.NombreProducto}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: { xs: '0.56rem', sm: '0.62rem' },
-                    mb: 0.45,
-                    color: producto.Stock > 0 ? '#c8e6c9' : '#ffcdd2',
-                    fontWeight: 700,
-                    lineHeight: 1,
-                  }}
-                >
-                  {producto.Stock > 0 ? `In stock: ${producto.Stock}` : 'Out of stock'}
-                </Typography>
-
-                <Stack direction="row" alignItems="center" spacing={0.3} sx={{ width: '100%' }}>
+                  {/* Botón Visualizar - más chico */}
                   <Button
                     variant="outlined"
                     sx={{
-                      flex: 0.75,
-                      minWidth: 56,
-                      fontSize: { xs: '0.5rem', sm: '0.62rem' },
+                      flex: 0.7, // 🔹 más angosto aún
+                      minWidth: 0,
+                      fontSize: { xs: '0.6rem', sm: '0.7rem' }, // 🔹 más pequeño
                       borderRadius: '8px',
-                      py: { xs: 0.15, sm: 0.28 },
+                      py: { xs: 0.25, sm: 0.4 },
                       borderColor: '#FFF',
                       color: '#FFF',
                       textTransform: 'none',
-                      boxShadow: 'none',
                     }}
                     onClick={(e) => {
                       e.stopPropagation();
-                      const destino = producto.UrlCompra || producto.LinkAmazon || producto.LinkCompra;
-                      if (destino) {
-                        window.open(destino, '_blank');
-                        return;
-                      }
                       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                      if (isMobile && onVisualizarMobile) {
+                      if (isMobile) {
                         onVisualizarMobile(producto);
-                        return;
+                      } else {
+                        handleFullScreen();
                       }
-                      handleFullScreen();
                     }}
                   >
-                    Details
+                    Ver
                   </Button>
 
+                  {/* Precio */}
                   <Box
                     sx={{
-                      flex: 1,
-                      minWidth: 54,
+                      flex: 1.2,
+                      minWidth: 70,
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',
@@ -355,12 +314,16 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
                       fontWeight="bold"
                       sx={{
                         fontFamily: '"RC Type Cond", Arial, sans-serif',
-                        fontSize: { xs: '0.78rem', sm: '0.9rem' },
+                        fontSize: { xs: '0.95rem', sm: '1rem' },
                         color: producto.Stock === 0 ? '#FF5252' : producto.ConDescuento ? '#00e676' : '#FFFFFF',
                         textAlign: 'center',
                       }}
                     >
-                      {producto.Stock === 0 ? 'Agotado' : `${FormatearPesos(producto.Valor)}`}
+                      {producto.Stock === 0
+                        ? 'Agotado'
+                        : `${FormatearPesos(producto.Valor)}`
+                      }
+
                     </Typography>
                     {producto.ConDescuento && (
                       <Typography
@@ -375,25 +338,23 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
                     )}
                   </Box>
 
+                  {/* Botón Solicitar - más ancho */}
                   <Button
                     variant="contained"
                     disabled={producto.Stock === 0}
                     sx={{
-                      flex: 1.1,
-                      minWidth: 56,
-                      fontSize: { xs: '0.52rem', sm: '0.63rem' },
+                      flex: 1.5, // 🔹 más ancho que todos
+                      minWidth: 0,
+                      fontSize: { xs: '0.65rem', sm: '0.7rem' }, // 🔹 tipografía más pequeña
                       borderRadius: '8px',
-                      py: { xs: 0.15, sm: 0.28 },
-                      bgcolor: '#ffe082',
-                      color: '#1a1a1a',
+                      py: { xs: 0.25, sm: 0.4 },
+                      bgcolor: '#FFF',
+                      color: '#222',
                       textTransform: 'none',
-                      boxShadow: producto.Stock === 0 ? 'none' : '0 0 10px rgba(255, 213, 74, 0.6)',
                       opacity: producto.Stock === 0 ? 0.4 : 1,
                       cursor: producto.Stock === 0 ? 'not-allowed' : 'pointer',
                       '&:hover': {
-                        bgcolor: producto.Stock === 0 ? '#ffe082' : '#ffd54f',
-                        transform: producto.Stock === 0 ? 'none' : 'scale(1.04)',
-                        boxShadow: producto.Stock === 0 ? 'none' : '0 0 16px rgba(255, 193, 7, 0.85)',
+                        bgcolor: producto.Stock === 0 ? '#FFF' : '#f0f0f0',
                       },
                     }}
                     onClick={(e) => {
@@ -414,9 +375,12 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
                   </Button>
                 </Stack>
               </Box>
+
             </Card>
           </Box>
 
+
+          {/* Cara trasera */}
           <Box
             ref={containerRef}
             sx={{
@@ -433,6 +397,7 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
               border: '2px solid white',
             }}
           >
+
             <Card sx={{ width: '100%', height: '100%', position: 'relative' }}>
               {girado && (
                 <Box
@@ -451,7 +416,7 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
-                    objectPosition: 'center 60%',
+                    objectPosition: 'center 60%', // 💡 Esto asegura que el recorte comience desde arriba
                     backgroundColor: 'black',
                     borderRadius: 0,
                     zIndex: 2,
@@ -460,8 +425,9 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
                     onGirar();
                   }}
                 />
-              )}
 
+              )}
+              {/* Botón "Me interesa!" siempre visible en fullscreen */}
               <Button
                 ref={botonWhatsappRef}
                 variant="contained"
@@ -478,13 +444,13 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
                   px: 3,
                   py: 1,
                   zIndex: 9999,
-                  display: 'none',
+                  display: 'none', // ← lo controlamos desde el fullscreen listener
                   boxShadow: '0px 4px 10px rgba(0,0,0,0.3)',
                   '@media (max-width: 600px)': {
                     fontSize: '0.95rem',
                     px: 2,
                     py: 0.8,
-                  },
+                  }
                 }}
                 onClick={(e) => {
                   e.stopPropagation();
@@ -499,15 +465,18 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
                   window.open(urlWhatsapp, '_blank');
                 }}
               >
-                I'm interested
+                Me interesa!
               </Button>
             </Card>
           </Box>
+
         </motion.div>
-      </Box>
-    </Box>
+      </Box >
+    </Box >
   );
 };
 
 export default Productos;
+
+
 
