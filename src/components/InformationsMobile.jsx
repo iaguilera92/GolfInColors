@@ -1,4 +1,4 @@
-﻿import { Box, Typography, Container, Grid, Button, ListItem, ListItemIcon, ListItemText, useMediaQuery, useTheme, IconButton } from "@mui/material";
+import { Box, Typography, Container, Grid, Button, ListItem, ListItemIcon, ListItemText, useMediaQuery, useTheme, IconButton } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaTshirt } from "react-icons/fa";
@@ -13,53 +13,53 @@ import "swiper/css";
 const promotions = [
   {
     id: 1,
-    title: "🏌️ For Kids",
+    title: "??? For Kids",
     description: "They learn golf by playing and having fun from day one.",
     image: "/fondo-1.png",
     price: "Start Today",
     bgColor: "linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3))",
     textColor: "white",
     descriptors: [
-      "🎯 Fun challenges",
-      "🏆 Level-based progress",
-      "🎮 Interactive learning",
-      "⛳ Real fundamentals",
-      "🤝 More confidence",
-      "✨ Guaranteed fun"
+      "?? Fun challenges",
+      "?? Level-based progress",
+      "?? Interactive learning",
+      "? Real fundamentals",
+      "?? More confidence",
+      "? Guaranteed fun"
     ]
   },
   {
     id: 2,
-    title: "👨‍👩‍👧 For Parents",
+    title: "???????? For Parents",
     description: "Support and track your children's progress at every stage.",
     image: "/fondo-3.jpg",
     price: "Discover More",
     bgColor: "linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2))",
     textColor: "white",
     descriptors: [
-      "📊 Clear tracking",
-      "🏅 Motivational system",
-      "⏱️ Structured learning",
-      "🤝 Family involvement",
-      "🌱 Holistic development",
-      "💬 Simple communication"
+      "?? Clear tracking",
+      "?? Motivational system",
+      "?? Structured learning",
+      "?? Family involvement",
+      "?? Holistic development",
+      "?? Simple communication"
     ]
   },
   {
     id: 3,
-    title: "🏆 For Coaches",
+    title: "?? For Coaches",
     description: "Modern tools to teach golf effectively.",
     image: "/fondo-4.png",
     price: "Boost Your Teaching",
     bgColor: "linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2))",
     textColor: "white",
     descriptors: [
-      "📈 Student tracking",
-      "🎯 Structured programs",
-      "📚 Teaching resources",
-      "⚡ Easy management",
-      "🏌️ Technical evaluation",
-      "🚀 More efficient coaching"
+      "?? Student tracking",
+      "?? Structured programs",
+      "?? Teaching resources",
+      "? Easy management",
+      "??? Technical evaluation",
+      "?? More efficient coaching"
     ]
   }
 ];
@@ -80,20 +80,20 @@ function Informations({ informationsRef, triggerInformations }) {
 
   const { ref: swiperRef, inView: swiperInView } = useInView({ threshold: 0.2, triggerOnce: true, });
 
-  //CANCELAR PRIMERA ANIMACIÓN
+  //CANCELAR PRIMERA ANIMACI�N
   const [hasAnimated, setHasAnimated] = useState(false);
   const [hasAnimated2, setHasAnimated2] = useState(false);
 
   useEffect(() => {
     if (inView) {
-      setShouldAnimate(true); // 🔹 Activa la animación cuando el componente es visible
+      setShouldAnimate(true); // ?? Activa la animaci�n cuando el componente es visible
     }
   }, [inView]);
 
-  //ANIMACIÓN DESCRIPTORES
+  //ANIMACI�N DESCRIPTORES
   useEffect(() => {
     if (swiperInView && swiperInstance && !hasAnimated) {
-      swiperInstance.slideTo(0, 1500); // mueve del último al primero
+      swiperInstance.slideTo(0, 1500); // mueve del �ltimo al primero
       setHasAnimated(true);
     }
   }, [swiperInView, swiperInstance, hasAnimated]);
@@ -102,13 +102,13 @@ function Informations({ informationsRef, triggerInformations }) {
     if (hasAnimated) {
       const timeout = setTimeout(() => {
         setShowPopularBadge(true);
-      }, 2000); // Delay de 3 segundos después que el swiper terminó su animación
+      }, 2000); // Delay de 3 segundos despu�s que el swiper termin� su animaci�n
       return () => clearTimeout(timeout);
     }
   }, [hasAnimated]);
 
 
-  //EVITAR ANIMACIÓN DUPLICADA
+  //EVITAR ANIMACI�N DUPLICADA
   useEffect(() => {
     if (inView && !hasAnimated2) {
       const timer = setTimeout(() => {
@@ -119,7 +119,7 @@ function Informations({ informationsRef, triggerInformations }) {
   }, [inView, hasAnimated2]);
 
   const handleContactClick = (title) => {
-    const mensaje = `¡Hola! Me interesó la promoción de ${encodeURIComponent(title)} ¿Me comentas?`;
+    const mensaje = `�Hola! Me interes� la promoci�n de ${encodeURIComponent(title)} �Me comentas?`;
     window.open(`https://api.whatsapp.com/send?phone=15617975986&text=${mensaje}`, "_blank");
   };
   return (
@@ -171,12 +171,12 @@ function Informations({ informationsRef, triggerInformations }) {
                 fontSize: { xs: "1.2rem", md: "1.6rem" },
 
                 color: "#ffffff",        // blanco puro
-                textShadow: "0 2px 8px rgba(0,0,0,0.5)", // 🔹 sombra sutil para resaltar sobre fondo oscuro
+                textShadow: "0 2px 8px rgba(0,0,0,0.5)", // ?? sombra sutil para resaltar sobre fondo oscuro
 
                 position: "relative",
                 display: "inline-block",
 
-                zIndex: 2, // asegúrate de que esté sobre cualquier overlay
+                zIndex: 2, // aseg�rate de que est� sobre cualquier overlay
 
                 "&::after": {
                   content: '""',
@@ -226,7 +226,7 @@ function Informations({ informationsRef, triggerInformations }) {
                           top: 0,
                           left: 0,
                           right: 0,
-                          zIndex: 0,      // 👈 este contexto queda detrás
+                          zIndex: 0,      // ?? este contexto queda detr�s
                           pointerEvents: "none", // evita bloquear clics de la card
                         }}
                       >
@@ -273,7 +273,7 @@ function Informations({ informationsRef, triggerInformations }) {
                           boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
                           position: "relative",
                           bgcolor: "white",
-                          zIndex: 2,   // 👈 card siempre sobre el badge
+                          zIndex: 2,   // ?? card siempre sobre el badge
                         }}
                       >
 
@@ -309,7 +309,7 @@ function Informations({ informationsRef, triggerInformations }) {
 
                           }}
                         >
-                          {/* Título y descripción */}
+                          {/* T�tulo y descripci�n */}
                           <Box sx={{ mb: 1 }}>
                             <Typography
                               variant="h6"
@@ -366,7 +366,7 @@ function Informations({ informationsRef, triggerInformations }) {
                               </Typography>
                             ))}
                           </Box>
-                          {/* Botón Cotizar (queda abajo gracias a mt:auto) */}
+                          {/* Bot�n Cotizar (queda abajo gracias a mt:auto) */}
                           <motion.button
                             onClick={() => handleContactClick(promo.title)}
                             whileHover={{ scale: 1.05 }}
@@ -392,14 +392,14 @@ function Informations({ informationsRef, triggerInformations }) {
                             <Box
                               component="img"
                               src="/clic.jpg"
-                              alt="Ícono de clic"
+                              alt="�cono de clic"
                               sx={{
                                 width: 20,
                                 height: 20,
                                 userSelect: "none",
                                 filter: "invert(1) brightness(2)",
                               }}
-                            />  Cotizar
+                            />  Get Quote
                           </motion.button>
                         </Box>
                       </Box>
@@ -439,7 +439,7 @@ function Informations({ informationsRef, triggerInformations }) {
 
             <Box
               sx={{
-                width: 30,  // un poquito más grande
+                width: 30,  // un poquito m�s grande
                 height: 30,
                 borderRadius: "50%",
                 background: "linear-gradient(135deg, #4fd1c5, #38b2ac)", // gradiente turquesa vibrante
@@ -474,7 +474,7 @@ function Informations({ informationsRef, triggerInformations }) {
               </motion.div>
             </Box>
             <motion.div
-              initial={{ opacity: 0, y: 80 }} // ⬇️ Aparece más abajo
+              initial={{ opacity: 0, y: 80 }} // ?? Aparece m�s abajo
               animate={inView || hasAnimated2 ? { opacity: 1, y: 0 } : { opacity: 0, y: 80 }}
               transition={{ duration: 1, ease: 'easeOut' }}
             >
@@ -510,7 +510,7 @@ function Informations({ informationsRef, triggerInformations }) {
             </motion.div>
 
           </Box>
-          {/* Columna de los íconos */}
+          {/* Columna de los �conos */}
           <Grid item xs={12} md={6}>
             {[
               {
@@ -602,7 +602,7 @@ function Informations({ informationsRef, triggerInformations }) {
                             height: 70,
                             borderRadius: "50%",
                             border: "2px solid white", // borde blanco para contraste
-                            backgroundColor: "rgba(255,255,255,0.1)", // fondo translúcido blanco
+                            backgroundColor: "rgba(255,255,255,0.1)", // fondo transl�cido blanco
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
@@ -664,5 +664,6 @@ function Informations({ informationsRef, triggerInformations }) {
 };
 
 export default Informations;
+
 
 

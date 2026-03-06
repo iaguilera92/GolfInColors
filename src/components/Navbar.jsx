@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { AppBar, Toolbar, Button, IconButton, Drawer, Typography, ListItem, ListItemButton, ListItemText, Container, Box, useTheme, useMediaQuery, Dialog, DialogTitle, DialogContent } from "@mui/material";
 import { WhatsApp as WhatsAppIcon, Menu as MenuIcon, Home, Mail, Close } from "@mui/icons-material"; // Agregamos Close para la "X"
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -257,7 +257,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                           height: "55px",
                           marginTop: "10px",
                           cursor: "pointer",
-                          
+
                         }}
                       />
 
@@ -271,7 +271,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
 
               <Box sx={{ flexGrow: 1 }} />
 
-                            <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1 }}>
+              <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1 }}>
                 {menuItems.map((item, index) => {
                   const isShop = item.name === "Shop";
                   const button = (
@@ -734,7 +734,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                     textAlign: "center",
                   }}
                 >
-                  ?? Administración
+                  ⚙️ Administration
                 </Typography>
               </Box>
             </motion.div>
