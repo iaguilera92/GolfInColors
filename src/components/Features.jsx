@@ -37,7 +37,7 @@ const features = [
     imageSrc: "/golf-5.jpg",
   },
 ];
-const disabledLabels = ["Clínicas y Talleres"]; // ejemplo
+const disabledLabels = ["ClÃ­nicas y Talleres"]; // ejemplo
 
 
 
@@ -70,7 +70,7 @@ function Features({ videoReady, informationsRef }) {
   }, []);
 
 
-  //EVITAR ANIMACIÓN DUPLICADA
+  //EVITAR ANIMACIÃ“N DUPLICADA
   useEffect(() => {
     let timer;
     if (inView && !hasAnimated) {
@@ -83,7 +83,7 @@ function Features({ videoReady, informationsRef }) {
     return () => clearTimeout(timer);
   }, [videoReady, inView, hasAnimated]);
 
-  //APARICIÓN
+  //APARICIÃ“N
   const cardAnimation = {
     hidden: { opacity: 0, x: 150 },
     visible: (index) => ({
@@ -172,7 +172,7 @@ function Features({ videoReady, informationsRef }) {
                       <Box
                         sx={{
                           width: "100%",
-                          height: 160,
+                          height: { xs: 132, sm: 160 },
                           borderRadius: 3,
                           overflow: "hidden",
                           position: "relative",
@@ -186,9 +186,10 @@ function Features({ videoReady, informationsRef }) {
                           style={{
                             width: "100%",
                             height: "100%",
+                            objectFit: "cover",
                             objectPosition:
                               feature.label === "Adulto"
-                                ? "center 30%"   // baja la imagen (muestra más arriba)
+                                ? "center 30%"   // baja la imagen (muestra mÃ¡s arriba)
                                 : "top",
                           }}
                         />
@@ -203,7 +204,7 @@ function Features({ videoReady, informationsRef }) {
                           }}
                         />
 
-                        {/* Próximamente */}
+                        {/* PrÃ³ximamente */}
                         {isDisabled && (
                           <Box
                             sx={{
@@ -219,7 +220,7 @@ function Features({ videoReady, informationsRef }) {
                               color: "#444",
                             }}
                           >
-                            Próximamente
+                            PrÃ³ximamente
                           </Box>
                         )}
                       </Box>
@@ -269,3 +270,4 @@ function Features({ videoReady, informationsRef }) {
 }
 
 export default Features;
+

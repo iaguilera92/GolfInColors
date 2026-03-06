@@ -46,7 +46,6 @@ export default function Kids() {
   const [activeMenu, setActiveMenu] = useState("Stories");
   const [storiesOpen, setStoriesOpen] = useState(false);
   const [spinMenu, setSpinMenu] = useState(null);
-  const shouldHideNavbarLogo = (activeMenu === "Stories" && storiesOpen) || activeMenu === "Videos" || activeMenu === "Games";
   const activeMenuRef = useRef("Stories");
 
   useEffect(() => {
@@ -71,23 +70,6 @@ export default function Kids() {
 
     return () => clearTimeout(timer);
   }, []);
-
-
-  useEffect(() => {
-    window.dispatchEvent(
-      new CustomEvent("kids-logo-visibility", {
-        detail: { hidden: shouldHideNavbarLogo },
-      })
-    );
-
-    return () => {
-      window.dispatchEvent(
-        new CustomEvent("kids-logo-visibility", {
-          detail: { hidden: false },
-        })
-      );
-    };
-  }, [shouldHideNavbarLogo]);
   const handleSectionClick = (menu) => {
     if (menu === "Stories") {
       if (!storiesOpen) {
@@ -678,6 +660,7 @@ export default function Kids() {
     </Box>
   );
 }
+
 
 
 

@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { AppBar, Toolbar, Button, IconButton, Drawer, Typography, ListItem, ListItemButton, ListItemText, Container, Box, useTheme, useMediaQuery, Dialog, DialogTitle, DialogContent } from "@mui/material";
 import { WhatsApp as WhatsAppIcon, Menu as MenuIcon, Home, Mail, Close } from "@mui/icons-material"; // Agregamos Close para la "X"
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -74,10 +74,10 @@ const SocialButton = ({ href, Icon, bgColor, hoverStyles }) => (
 
 const menuItems = [
   { name: "Home", icon: <Home /> }, //{ name: "Catalog", icon: <ViewCarouselIcon /> },
-  { name: "Shop", icon: <StorefrontRoundedIcon />, highlight: true },
   { name: "About Us", icon: <GroupsIcon /> },
   { name: "Contact", icon: <Mail /> },
   { name: "Games", icon: <SchoolIcon />, disabled: true },
+  { name: "Shop", icon: <StorefrontRoundedIcon />, highlight: true },
 ];
 
 function Navbar({ contactoRef, informationsRef, videoReady }) {
@@ -92,30 +92,13 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
   const opacity = Math.max(0, 1 - scrollY / maxScroll);
   const translateY = Math.min(scrollY, maxScroll);
   const [mostrarAdmin, setMostrarAdmin] = useState(false);
-  const [titulo, setTitulo] = useState("📦 Envíos a todo Venezuela");
+  const [titulo, setTitulo] = useState("?? Envíos a todo Venezuela");
   const [mostrarTexto, setMostrarTexto] = useState(true);
-  const [hideMainLogo, setHideMainLogo] = useState(false);
 
   useEffect(() => {
-    // ✅ cada vez que cambia la ruta, forzamos a mostrar el banner y el logo
+    // ? cada vez que cambia la ruta, forzamos a mostrar el banner y el logo
     setAnimacionMostrada(true);
-    setTitulo("📦 Envíos a todo Ecuador");
-  }, [location.pathname]);
-
-
-  useEffect(() => {
-    const handleKidsLogoVisibility = (event) => {
-      setHideMainLogo(Boolean(event?.detail?.hidden));
-    };
-
-    window.addEventListener("kids-logo-visibility", handleKidsLogoVisibility);
-    return () => window.removeEventListener("kids-logo-visibility", handleKidsLogoVisibility);
-  }, []);
-
-  useEffect(() => {
-    if (location.pathname !== "/kids") {
-      setHideMainLogo(false);
-    }
+    setTitulo("?? Envíos a todo Ecuador");
   }, [location.pathname]);
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
   const handleOpenPDF = () => isMobile ? window.open("/plataformasweb-pdf.pdf", "_blank") : setOpenPDF(true);
@@ -193,7 +176,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
     }
   }, []);
 
-  // ⏱️ Alternar cada 4 segundos
+  // ?? Alternar cada 4 segundos
   useEffect(() => {
     const intervalo = setInterval(() => {
       setMostrarTexto((prev) => !prev);
@@ -254,7 +237,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                       exit={{ opacity: 0 }}
                       transition={{
                         duration: 1,
-                        delay: mostrarAnimacion ? 1 : 0, // ✅ delay según si fue forzado o no
+                        delay: mostrarAnimacion ? 1 : 0, // ? delay según si fue forzado o no
                       }}
                       style={{ cursor: "pointer" }}
                     >
@@ -274,8 +257,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                           height: "55px",
                           marginTop: "10px",
                           cursor: "pointer",
-                          visibility: hideMainLogo ? "hidden" : "visible",
-                          pointerEvents: hideMainLogo ? "none" : "auto",
+                          
                         }}
                       />
 
@@ -289,8 +271,9 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
 
               <Box sx={{ flexGrow: 1 }} />
 
-              <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1 }}>
+                            <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1 }}>
                 {menuItems.map((item, index) => {
+                  const isShop = item.name === "Shop";
                   const button = (
                     <Button
                       key={item.name}
@@ -304,14 +287,24 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                       sx={{
                         color: item.disabled ? "rgba(255,255,255,0.4)" : "white",
                         fontFamily: "Poppins, sans-serif",
-                        padding: "10px 14px",
-                        background: "transparent",
-                        border: "none",
+                        padding: isShop ? "10px 18px" : "10px 14px",
+                        background: isShop
+                          ? "linear-gradient(160deg, #FFE082 0%, #FFC43D 38%, #FFB300 62%, #E68A00 100%)"
+                          : "transparent",
+                        border: isShop ? "2px solid rgba(255, 230, 120, 0.95)" : "none",
+                        borderRadius: isShop ? "999px" : "8px",
+                        boxShadow: isShop
+                          ? "0 0 18px rgba(255, 195, 45, 0.72), 0 8px 20px rgba(120, 72, 0, 0.42), inset 0 2px 6px rgba(255,255,255,0.35), inset 0 -7px 12px rgba(130,80,0,0.28)"
+                          : "none",
+                        textShadow: isShop ? "0 1px 2px rgba(0,0,0,0.45)" : "none",
                         cursor: item.disabled ? "not-allowed" : "pointer",
                         "&:hover": {
-                          backgroundColor: item.disabled
+                          background: item.disabled
                             ? "transparent"
-                            : "rgba(255, 255, 255, 0.1)"
+                            : isShop
+                              ? "linear-gradient(160deg, #FFE79A 0%, #FFC94F 35%, #FFB623 62%, #F58B00 100%)"
+                              : "rgba(255, 255, 255, 0.1)",
+                          transform: isShop ? "scale(1.03)" : "none",
                         }
                       }}
                     >
@@ -358,16 +351,16 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
             maxWidth: "700px",
             minWidth: "300px",
 
-            // 🎨 Fondo pasto golf
+            // ?? Fondo pasto golf
             backgroundColor: "rgba(255,255,255,0.22)",
             backdropFilter: "blur(14px)",
             WebkitBackdropFilter: "blur(14px)",
             color: "white",
 
-            // ✨ Profundidad
+            // ? Profundidad
             boxShadow: "0 10px 28px rgba(0, 0, 0, 0.28)",
 
-            // 🧊 Borde sutil verde
+            // ?? Borde sutil verde
             borderLeft: "1px solid rgba(255,255,255,0.38)",
 
             p: 0,
@@ -390,7 +383,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
           </Box>
 
 
-          {/* 📋 Menú navegación */}
+          {/* ?? Menú navegación */}
           <AnimatePresence mode="wait">
             {open && (
               <motion.ul
@@ -561,10 +554,10 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
             )}
           </AnimatePresence>
 
-          {/* 🧱 Espacio flexible para empujar bienvenida y redes al fondo */}
+          {/* ?? Espacio flexible para empujar bienvenida y redes al fondo */}
           <Box sx={{ flexGrow: 1 }} />
 
-          {/* 🌟 Tarjeta bienvenida */}
+          {/* ?? Tarjeta bienvenida */}
           <AnimatePresence mode="wait">
             {open && (
               <motion.div
@@ -584,7 +577,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                     color: "white",
                     backdropFilter: "blur(8px)",
 
-                    // 🎨 Glass turquesa suave
+                    // ?? Glass turquesa suave
                     background: `
       radial-gradient(
         circle at top left,
@@ -598,10 +591,10 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
       )
     `,
 
-                    // 🧊 Borde sutil
+                    // ?? Borde sutil
                     border: "1px solid rgba(255,255,255,0.24)",
 
-                    // ✨ Profundidad leve
+                    // ? Profundidad leve
                     boxShadow: "0 8px 18px rgba(0,0,0,0.28)",
                   }}
                 >
@@ -741,7 +734,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                     textAlign: "center",
                   }}
                 >
-                  ⚙️ Administración
+                  ?? Administración
                 </Typography>
               </Box>
             </motion.div>
@@ -862,6 +855,11 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
 }
 
 export default Navbar;
+
+
+
+
+
 
 
 

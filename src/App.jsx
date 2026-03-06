@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState, useRef, lazy, Suspense } from "react";
+import React, { useEffect, useState, useRef, lazy, Suspense } from "react";
 import { CssBaseline, Box, IconButton, useMediaQuery, Snackbar, Alert } from "@mui/material";
 import theme from "./theme";
 import { ThemeProvider } from "@mui/material/styles";
@@ -41,9 +41,9 @@ function App() {
   const [showApp, setShowApp] = useState(false);
   const [snackbarVersion, setSnackbarVersion] = useState({ open: false, version: "", });
   const triggerInformations = (value) => setShouldAnimateInformations(value);
-  const [isFading, setIsFading] = useState(false);
   const [showDialogInicio, setShowDialogInicio] = useState(false);
   const [userCategory, setUserCategory] = useState(null);
+  const [isRouteFallbackVisible, setIsRouteFallbackVisible] = useState(false);
 
   useEffect(() => {
     const remember = localStorage.getItem("remember_category_choice") === "1";
@@ -60,13 +60,14 @@ function App() {
     }
   }, []);
 
-  //EFECTO CAMBIAR DE RUTA
   useEffect(() => {
-    setIsFading(true);
-    const timer = setTimeout(() => setIsFading(false), 400);
-    return () => clearTimeout(timer);
-  }, [location.pathname]);
+    const handleRouteFallback = (event) => {
+      setIsRouteFallbackVisible(Boolean(event?.detail?.visible));
+    };
 
+    window.addEventListener("route-fallback-visibility", handleRouteFallback);
+    return () => window.removeEventListener("route-fallback-visibility", handleRouteFallback);
+  }, []);
   //GOOGLE ANALYTICS
   useEffect(() => {
     initGoogleAnalytics(); // solo una vez
@@ -116,11 +117,11 @@ function App() {
   //location.pathname
   useEffect(() => {
     if (location.pathname === "/") {
-      // Ejecutar lógica cuando se vuelva a la ruta de inicio
+      // Ejecutar lÃƒÂ³gica cuando se vuelva a la ruta de inicio
     }
   }, [location.pathname]);
 
-  // ⏳ CARGANDO
+  // ? CARGANDO
   useEffect(() => {
 
     if (["/dashboard", "/administracion"].includes(location.pathname)) {
@@ -137,11 +138,11 @@ function App() {
       if (!requiereVideo || videoReady) {
         setShowApp(true);
       }
-    }, 2500); // mínimo visible
+    }, 2500); // mÃƒÂ­nimo visible
 
     const maxTimeout = setTimeout(() => {
       setShowApp(true); // fuerza mostrar app
-    }, 4000); // máximo espera
+    }, 4000); // mÃƒÂ¡ximo espera
 
     return () => {
       clearTimeout(minTimeout);
@@ -155,7 +156,7 @@ function App() {
 
     if (!category) return;
 
-    console.log("Usuario seleccionó:", category);
+    console.log("Usuario seleccionÃƒÂ³:", category);
     setUserCategory(category);
     setShowDialogInicio(false);
 
@@ -175,16 +176,16 @@ function App() {
 
     const isHomeRoute = ["/", ""].includes(location.pathname);
 
-    if (showApp && !userCategory && isHomeRoute) {
+    if (showApp && isHomeRoute) {
       timer = setTimeout(() => {
         setShowDialogInicio(true);
-      }, 1000);
+      }, 3000);
     } else {
       setShowDialogInicio(false);
     }
 
     return () => clearTimeout(timer);
-  }, [showApp, userCategory, location.pathname]);
+  }, [showApp, location.pathname]);
   //LIBERAR CARGANDO
   useEffect(() => {
     const body = document.body;
@@ -227,15 +228,15 @@ function App() {
                   boxShadow: 3,
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "center", // ✅ centra horizontalmente el contenido
+                  alignItems: "center", // ? centra horizontalmente el contenido
                   justifyContent: "center",
-                  textAlign: "center",  // ✅ centra el texto
+                  textAlign: "center",  // ? centra el texto
                 }}
               >
                 <Box>
-                  ✅ Nueva versión disponible: {snackbarVersion.version}
+                  ? Nueva versiÃƒÂ³n disponible: {snackbarVersion.version}
                   <br />
-                  🔄 Actualizando...
+                  ?? Actualizando...
                 </Box>
               </Alert>
             </Snackbar>
@@ -246,7 +247,7 @@ function App() {
 
       {/* Contenido principal, oculto mientras se carga */}
       <Box sx={{ visibility: showApp ? "visible" : "hidden", pointerEvents: showApp ? "auto" : "none", overflowX: 'hidden' }}>
-        {/* Navbar solo si no estás en /administracion */}
+        {/* Navbar solo si no estÃƒÂ¡s en /administracion */}
         {location.pathname !== "/administracion" && (
           <div className="app-chrome">
             <Suspense fallback={null}>
@@ -255,25 +256,10 @@ function App() {
           </div>
         )}
 
-        {/* Transición entre páginas */}
+        {/* TransiciÃƒÂ³n entre pÃƒÂ¡ginas */}
         <Box sx={{ position: "relative" }}>
-          <Outlet context={{ showApp, informationsRef, openDialogInicio: () => setShowDialogInicio(true) }} />
-          {isFading && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              style={{
-                position: "fixed",
-                inset: 0,
-                background: "white",
-                zIndex: 2000
-              }}
-            />
-          )}
-        </Box>
-        {/* Secciones visibles solo en la página de inicio */}
+          <Outlet context={{ showApp, informationsRef, openDialogInicio: () => setShowDialogInicio(true) }} />        </Box>
+        {/* Secciones visibles solo en la pÃƒÂ¡gina de inicio */}
         {["/", ""].includes(location.pathname) && (
           <>
             <Suspense fallback={null}>
@@ -308,14 +294,14 @@ function App() {
           </>
         )}
 
-        {/* Footer (excepto en administración) */}
-        {location.pathname !== "/administracion" && location.pathname !== "/dashboard" && location.pathname !== "/configurar-productos" && location.pathname !== "/configurar-trabajos" && (
+        {/* Footer (excepto en administraciÃƒÂ³n) */}
+        {!isRouteFallbackVisible && location.pathname !== "/administracion" && location.pathname !== "/dashboard" && location.pathname !== "/configurar-productos" && location.pathname !== "/configurar-trabajos" && (
           <div className="app-chrome">
             <Footer />
           </div>
         )}
-        {/* Botón WhatsApp */}
-        {location.pathname !== "/administracion" && location.pathname !== "/dashboard" && location.pathname !== "/configurar-productos" && location.pathname !== "/configurar-trabajos" && (
+        {/* BotÃƒÂ³n WhatsApp */}
+        {!isRouteFallbackVisible && location.pathname !== "/administracion" && location.pathname !== "/dashboard" && location.pathname !== "/configurar-productos" && location.pathname !== "/configurar-trabajos" && (
           <Box sx={{ position: "fixed", bottom: "40px", right: "20px", zIndex: 100, transition: "bottom 0.3s ease", }}>
             <IconButton onClick={() => { window.open("https://api.whatsapp.com/send?phone=15617975986", "_blank"); setHasInteracted(true); }} sx={{
               width: 60, height: 60, backgroundColor: "#25d366", color: "#FFF", borderRadius: "50%", boxShadow: "2px 2px 3px #999", "&:hover": { backgroundColor: "#1ebe5d" }, zIndex: 101
@@ -349,7 +335,7 @@ function App() {
           </Box>
         )}
 
-        {/* Botón scroll arriba */}
+        {/* BotÃƒÂ³n scroll arriba */}
         {showArrow && (
           <IconButton onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             sx={{
@@ -384,6 +370,11 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
 
 
 

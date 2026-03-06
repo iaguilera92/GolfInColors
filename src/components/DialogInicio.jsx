@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -15,6 +15,7 @@ import FamilyRestroomIcon from "@mui/icons-material/FamilyRestroom";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import StorefrontRoundedIcon from "@mui/icons-material/StorefrontRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
@@ -49,23 +50,26 @@ export default function DialogSelector({ open, onClose, onSelect }) {
       {
         label: "For Kids",
         value: "kids",
-        color: "rgb(0,117,86)",
-        icon: <SportsEsportsIcon sx={{ mr: 1 }} />,
-        pattern: "repeating-linear-gradient(135deg, rgba(255,255,255,0.12) 0 6px, rgba(255,255,255,0.02) 6px 12px)",
+        toneA: "#1aa97a",
+        toneB: "#0b7f59",
+        icon: <SportsEsportsIcon sx={{ fontSize: 22 }} />,
+        description: "Stories, videos and games for playful learning.",
       },
       {
         label: "Parents",
         value: "parents",
-        color: "rgb(0,131,207)",
-        icon: <FamilyRestroomIcon sx={{ mr: 1 }} />,
-        pattern: "repeating-linear-gradient(45deg, rgba(255,255,255,0.12) 0 7px, rgba(255,255,255,0.02) 7px 14px)",
+        toneA: "#2c95e3",
+        toneB: "#0f6fb8",
+        icon: <FamilyRestroomIcon sx={{ fontSize: 22 }} />,
+        description: "Tools to guide and support each child at home.",
       },
       {
         label: "Coaches",
         value: "coaches",
-        color: "rgb(255,106,0)",
-        icon: <EmojiEventsIcon sx={{ mr: 1 }} />,
-        pattern: "repeating-linear-gradient(120deg, rgba(255,255,255,0.12) 0 8px, rgba(255,255,255,0.02) 8px 16px)",
+        toneA: "#f08b32",
+        toneB: "#cf6710",
+        icon: <EmojiEventsIcon sx={{ fontSize: 22 }} />,
+        description: "Programs and methodology to teach with confidence.",
       },
     ],
     []
@@ -93,6 +97,7 @@ export default function DialogSelector({ open, onClose, onSelect }) {
   const routeByCategory = {
     kids: "/kids",
     parents: "/parents",
+    coaches: "/coaches",
   };
 
   const handleSelect = (option) => {
@@ -138,7 +143,7 @@ export default function DialogSelector({ open, onClose, onSelect }) {
           width: { xs: "95%", sm: 700 },
           minHeight: { xs: "43%", sm: 415 },
           borderRadius: 3,
-          pt: { xs: 6, sm: 5 }, // 👈 espacio reservado para la X
+          pt: { xs: 6, sm: 5 }, // ?? espacio reservado para la X
           pb: { xs: 2.1, sm: 3.5 },
           px: { xs: 2.1, sm: 3.5 },
           background: "linear-gradient(135deg, #d6f5d0 0%, #8fd39a 58%, #e9fff2 100%)",
@@ -152,13 +157,13 @@ export default function DialogSelector({ open, onClose, onSelect }) {
       }}
     >
 
-      {/* BOTÓN CERRAR */}
+      {/* BOTÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“N CERRAR */}
       <IconButton
         aria-label="Close category dialog"
         onClick={onClose}
         sx={{
           position: "absolute",
-          top: 16, // 👈 antes 10
+          top: 16, // ?? antes 10
           right: 16,
           color: "black",
           zIndex: 10,
@@ -190,7 +195,7 @@ export default function DialogSelector({ open, onClose, onSelect }) {
             fontSize: { xs: "1.02rem", sm: "1.6rem" },
             fontFamily: "'Poppins', sans-serif",
             mb: 2.4,
-            mt: 1.5, // 👈 espacio para la X
+            mt: 1.5, // ?? espacio para la X
             color: "#0d2b45",
             letterSpacing: "0.03em",
             lineHeight: 1.1,
@@ -223,56 +228,94 @@ export default function DialogSelector({ open, onClose, onSelect }) {
               aria-label={`Select ${option.label}`}
               onClick={() => handleSelect(option)}
               sx={{
-                fontWeight: 700,
                 textTransform: "none",
-                py: isMobile ? 2 : 2.5,
-                borderRadius: 2,
-                fontSize: isMobile ? "1.2rem" : "1.4rem",
+                py: isMobile ? 1.25 : 1.45,
+                px: isMobile ? 1.2 : 1.5,
+                borderRadius: 99,
                 position: "relative",
                 overflow: "hidden",
+                justifyContent: "flex-start",
+                gap: 1.1,
                 color: "#fff",
-                border: selected === option.value ? "3px solid #fff" : "3px solid #FFD700",
-                background: `linear-gradient(145deg, ${option.color} 0%, ${option.color} 70%, #fff 100%)`,
+                border: selected === option.value
+                  ? "2px solid rgba(255,255,255,0.95)"
+                  : "1px solid rgba(255,255,255,0.45)",
+                background: `linear-gradient(120deg, ${option.toneA} 0%, ${option.toneB} 100%)`,
                 boxShadow: selected === option.value
-                  ? "0 0 22px rgba(255,255,255,0.7), 0 8px 20px rgba(0,0,0,0.55)"
-                  : "0 6px 15px rgba(0,0,0,0.5), inset 0 -5px 8px rgba(255,255,255,0.15)",
-                transition: "all 0.2s ease",
-                transform: selected === option.value ? "scale(1.03)" : "scale(1)",
-                "&::before": {
-                  content: '""',
-                  position: "absolute",
-                  top: -5,
-                  left: -5,
-                  right: -5,
-                  bottom: -5,
-                  borderRadius: "inherit",
-                  border: "2px solid rgba(255,255,255,0.15)",
-                  pointerEvents: "none",
-                  zIndex: 1,
-                  boxShadow: "0 0 15px rgba(255,255,255,0.2)",
-                },
+                  ? "0 0 0 3px rgba(255,255,255,0.32), 0 10px 24px rgba(0,0,0,0.28)"
+                  : "0 8px 18px rgba(0,0,0,0.2)",
+                transition: "all 0.22s ease",
                 "&::after": {
                   content: '""',
                   position: "absolute",
-                  inset: 0,
-                  background: option.pattern,
-                  opacity: 0.25,
-                  pointerEvents: "none",
+                  top: -18,
+                  left: -60,
+                  width: 58,
+                  height: "170%",
+                  transform: "skewX(-16deg)",
+                  background: "linear-gradient(110deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.34) 52%, rgba(255,255,255,0) 100%)",
+                  animation: "pillSweep 3.2s ease-in-out infinite",
+                },
+                "@keyframes pillSweep": {
+                  "0%": { left: "-70%", opacity: 0 },
+                  "30%": { opacity: 0.85 },
+                  "100%": { left: "130%", opacity: 0 },
                 },
                 "&:hover": {
-                  filter: "brightness(1.12)",
-                  transform: "scale(1.02)",
-                  boxShadow: "0 8px 20px rgba(0,0,0,0.6), inset 0 -6px 10px rgba(255,255,255,0.2)",
+                  transform: "translateY(-2px) scale(1.01)",
+                  filter: "brightness(1.04)",
                 },
                 "&:focus-visible": {
-                  outline: "3px solid rgba(255,255,255,0.9)",
+                  outline: "3px solid rgba(255,255,255,0.88)",
                   outlineOffset: 2,
                 },
               }}
             >
-              {option.icon}
-              {option.label}
-              {selected === option.value && <CheckCircleRoundedIcon sx={{ ml: 1, fontSize: 22 }} />}
+              <Box
+                sx={{
+                  minWidth: 40,
+                  width: 40,
+                  height: 40,
+                  borderRadius: "50%",
+                  display: "grid",
+                  placeItems: "center",
+                  color: option.toneB,
+                  backgroundColor: "rgba(255,255,255,0.92)",
+                  boxShadow: "inset 0 -2px 4px rgba(0,0,0,0.1)",
+                  zIndex: 1,
+                }}
+              >
+                {option.icon}
+              </Box>
+
+              <Box sx={{ flex: 1, textAlign: "left", zIndex: 1 }}>
+                <Typography sx={{ fontWeight: 800, fontSize: isMobile ? "1rem" : "1.08rem", lineHeight: 1.12 }}>
+                  {option.label}
+                </Typography>
+                <Typography sx={{ mt: 0.15, fontSize: isMobile ? "0.73rem" : "0.78rem", color: "rgba(255,255,255,0.9)" }}>
+                  {option.description}
+                </Typography>
+              </Box>
+
+              <Box
+                sx={{
+                  minWidth: 30,
+                  width: 30,
+                  height: 30,
+                  borderRadius: "50%",
+                  display: "grid",
+                  placeItems: "center",
+                  backgroundColor: "rgba(255,255,255,0.2)",
+                  border: "1px solid rgba(255,255,255,0.4)",
+                  zIndex: 1,
+                }}
+              >
+                {selected === option.value ? (
+                  <CheckCircleRoundedIcon sx={{ fontSize: 18, color: "#fff" }} />
+                ) : (
+                  <ArrowForwardRoundedIcon sx={{ fontSize: 17, color: "#fff" }} />
+                )}
+              </Box>
             </Button>
           </motion.div>
         ))}
@@ -398,6 +441,10 @@ export default function DialogSelector({ open, onClose, onSelect }) {
     </Dialog>
   );
 }
+
+
+
+
 
 
 
