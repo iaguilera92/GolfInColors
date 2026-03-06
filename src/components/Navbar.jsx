@@ -359,16 +359,16 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
             minWidth: "300px",
 
             // 🎨 Fondo pasto golf
-            background: "linear-gradient(135deg, #d6f5d0 0%, #8fd39a 58%, #e9fff2 100%)",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
-            color: "#163024",
+            backgroundColor: "rgba(255,255,255,0.22)",
+            backdropFilter: "blur(14px)",
+            WebkitBackdropFilter: "blur(14px)",
+            color: "white",
 
             // ✨ Profundidad
             boxShadow: "0 10px 28px rgba(0, 0, 0, 0.28)",
 
             // 🧊 Borde sutil verde
-            borderLeft: "1px solid rgba(22, 48, 36, 0.16)",
+            borderLeft: "1px solid rgba(255,255,255,0.38)",
 
             p: 0,
           },
@@ -501,10 +501,10 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                               <Box
                                 sx={{
                                   color: item.disabled
-                                    ? "rgba(22,48,36,0.35)"
+                                    ? "rgba(255,255,255,0.45)"
                                     : item.name === "Shop"
                                       ? "white"
-                                      : "#163024",
+                                      : "white",
                                   fontSize: "1.7rem",
                                   marginBottom: "-5px",
                                 }}
@@ -516,13 +516,13 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                                 <span
                                   style={{
                                     color: item.disabled
-                                      ? "rgba(22,48,36,0.45)"
+                                      ? "rgba(255,255,255,0.55)"
                                       : item.name === "Shop"
                                         ? "white"
-                                        : "#163024",
+                                        : "white",
 
-                                    fontWeight: item.name === "Shop" ? "700" : "500",
-                                    fontSize: "1.05rem",
+                                    fontWeight: item.name === "Shop" ? "700" : "700",
+                                    fontSize: "1.07rem",
                                   }}
                                 >
                                   {item.name}
@@ -862,6 +862,13 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
 }
 
 export default Navbar;
+
+
+
+
+
+
+
 
 
 

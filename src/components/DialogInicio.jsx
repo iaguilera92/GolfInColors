@@ -138,7 +138,9 @@ export default function DialogSelector({ open, onClose, onSelect }) {
           width: { xs: "95%", sm: 700 },
           minHeight: { xs: "43%", sm: 415 },
           borderRadius: 3,
-          p: { xs: 2.1, sm: 3.5 },
+          pt: { xs: 6, sm: 5 }, // 👈 espacio reservado para la X
+          pb: { xs: 2.1, sm: 3.5 },
+          px: { xs: 2.1, sm: 3.5 },
           background: "linear-gradient(135deg, #d6f5d0 0%, #8fd39a 58%, #e9fff2 100%)",
           display: "flex",
           flexDirection: "column",
@@ -156,17 +158,13 @@ export default function DialogSelector({ open, onClose, onSelect }) {
         onClick={onClose}
         sx={{
           position: "absolute",
-          top: 10,
-          right: 10,
+          top: 16, // 👈 antes 10
+          right: 16,
           color: "black",
           zIndex: 10,
           width: 40,
           height: 40,
           "&:hover": { backgroundColor: "rgba(255,255,255,.15)" },
-          "@keyframes spinTwiceIcon": {
-            "0%": { transform: "rotate(0deg)" },
-            "100%": { transform: "rotate(720deg)" },
-          },
         }}
       >
         <CloseRoundedIcon
@@ -192,6 +190,7 @@ export default function DialogSelector({ open, onClose, onSelect }) {
             fontSize: { xs: "1.02rem", sm: "1.6rem" },
             fontFamily: "'Poppins', sans-serif",
             mb: 2.4,
+            mt: 1.5, // 👈 espacio para la X
             color: "#0d2b45",
             letterSpacing: "0.03em",
             lineHeight: 1.1,

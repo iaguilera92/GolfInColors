@@ -28,7 +28,7 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
       description: "Comprehensive development from an early age, focused on fundamentals, discipline, and athletic growth."
     },
     {
-      title: "Advanced Improvement & High Performance",
+      title: "Performance & Growth",
       description: "Advanced sessions to optimize your swing, game strategy, and competitive performance."
     },
   ];
