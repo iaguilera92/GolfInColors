@@ -28,7 +28,7 @@ function AnimatedLine({ text, delay = 0, size, color = "#ffffff", weight = 800, 
           key={`${char}-${index}-${text}`}
           initial={{ y: -30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.25, ease: "easeOut", delay: 1 + delay + index * 0.03 }}
+          transition={{ duration: 0.25, ease: "easeOut", delay: 2 + delay + index * 0.03 }}
           style={{
             position: "relative",
             display: "inline-block",
@@ -49,6 +49,7 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
   const [openAlert, setOpenAlert] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [loadingVideo, setLoadingVideo] = useState(true);
+  const [showStars, setShowStars] = useState(false);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -60,6 +61,15 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
     const timer = setTimeout(() => setShowButton(true), 1000);
     return () => clearTimeout(timer);
   }, []);
+  useEffect(() => {
+    if (loadingVideo) {
+      setShowStars(false);
+      return;
+    }
+    const timer = setTimeout(() => setShowStars(true), 2000);
+    return () => clearTimeout(timer);
+  }, [loadingVideo]);
+
 
   useEffect(() => {
     const video = document.getElementById("background-video");
@@ -200,14 +210,17 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
               </Box>
 
               <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <motion.span
-                  initial={{ scale: 0.7, opacity: 0 }}
-                  animate={{ scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }}
-                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  style={{ color: "#ffe27a", fontSize: isMobile ? "0.95rem" : "1.2rem" }}
-                >
-                  {"\u2726"}
-                </motion.span>
+                {showStars ? (
+                  <motion.span
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }}
+                    transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                    style={{ color: "#ffe27a", fontSize: isMobile ? "0.95rem" : "1.2rem" }}
+                  >
+                    {"\u2726"}
+                  </motion.span>
+                ) : (
+                  <Box sx={{ width: isMobile ? "0.95rem" : "1.2rem", height: isMobile ? "0.95rem" : "1.2rem" }} />
+                )}
 
                 <AnimatedLine
                   text="One colorful step at the time"
@@ -218,14 +231,17 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
                   stroke={isMobile ? "0.4px rgba(255,255,255,0.65)" : "0.8px rgba(255,255,255,0.75)"}
                 />
 
-                <motion.span
-                  initial={{ scale: 0.7, opacity: 0 }}
-                  animate={{ scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }}
-                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 1.4 }}
-                  style={{ color: "#ffe27a", fontSize: isMobile ? "0.95rem" : "1.2rem" }}
-                >
-                  {"\u2726"}
-                </motion.span>
+                {showStars ? (
+                  <motion.span
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }}
+                    transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+                    style={{ color: "#ffe27a", fontSize: isMobile ? "0.95rem" : "1.2rem" }}
+                  >
+                    {"\u2726"}
+                  </motion.span>
+                ) : (
+                  <Box sx={{ width: isMobile ? "0.95rem" : "1.2rem", height: isMobile ? "0.95rem" : "1.2rem" }} />
+                )}
               </Box>
 
               {showButton && (
@@ -264,6 +280,8 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
 }
 
 export default Hero;
+
+
 
 
 

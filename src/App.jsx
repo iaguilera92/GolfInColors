@@ -277,7 +277,7 @@ function App() {
               <Box
                 sx={{
                   position: "fixed",
-                  bottom: 110,
+                  bottom: 90,
                   right: 20,
                   backgroundColor: "#fff",
                   color: "#000",
