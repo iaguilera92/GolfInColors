@@ -43,7 +43,7 @@ const ContactoForm = ({ setSnackbar }) => {
             setErrors(newErrors);
             setSnackbar({
                 open: true,
-                message: "Por favor, completa todos los campos.",
+                message: "Please complete all fields.",
                 type: "error"
             });
             return;
@@ -373,8 +373,14 @@ const ContactoForm = ({ setSnackbar }) => {
                     sx={{
                         width: "100%",
                         display: "flex",
-                        flexDirection: "column"
+                        flexDirection: "column",
+                        height: 0,
+                        minHeight: 0,
+                        opacity: 0,
+                        overflow: "hidden",
+                        pointerEvents: "none",
                     }}
+                    aria-hidden="true"
                 >
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={6}>
@@ -548,6 +554,7 @@ const ContactoForm = ({ setSnackbar }) => {
 };
 
 export default ContactoForm;
+
 
 
 

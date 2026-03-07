@@ -168,7 +168,73 @@ export default function Coaches() {
             </Button>
           </Box>
         </Box>
+
+        <Box
+          sx={{
+            mt: { xs: 2.2, sm: 2.8 },
+            p: { xs: 2.2, sm: 3 },
+            borderRadius: 3.2,
+            color: "#fff",
+            border: "1.5px solid rgba(255,255,255,0.42)",
+            background: "linear-gradient(150deg, rgba(24,117,90,0.9) 0%, rgba(12,89,70,0.9) 100%)",
+            boxShadow: "0 14px 26px rgba(0,0,0,0.22)",
+          }}
+        >
+          <Typography
+            sx={{
+              textAlign: "center",
+              color: "#fff",
+              fontSize: { xs: "1.3rem", sm: "1.6rem" },
+              fontWeight: 900,
+              letterSpacing: "0.03em",
+              mb: 1.6,
+            }}
+          >
+            ROLES
+          </Typography>
+
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+              gap: 1.4,
+            }}
+          >
+            <Box
+              sx={{
+                p: { xs: 1.4, sm: 1.6 },
+                borderRadius: 2.4,
+                backgroundColor: "rgba(255,255,255,0.12)",
+                border: "1px solid rgba(255,255,255,0.34)",
+              }}
+            >
+              <Typography sx={{ fontWeight: 800, fontSize: { xs: "1rem", sm: "1.1rem" }, mb: 0.6 }}>
+                Role for Kids
+              </Typography>
+              <Typography sx={{ color: "rgba(255,255,255,0.95)", fontSize: { xs: "0.92rem", sm: "0.98rem" }, lineHeight: 1.55 }}>
+                Kids explore golf through stories, movement, and playful challenges that build confidence and make every lesson exciting.
+              </Typography>
+            </Box>
+
+            <Box
+              sx={{
+                p: { xs: 1.4, sm: 1.6 },
+                borderRadius: 2.4,
+                backgroundColor: "rgba(255,255,255,0.12)",
+                border: "1px solid rgba(255,255,255,0.34)",
+              }}
+            >
+              <Typography sx={{ fontWeight: 800, fontSize: { xs: "1rem", sm: "1.1rem" }, mb: 0.6 }}>
+                Role for Adults
+              </Typography>
+              <Typography sx={{ color: "rgba(255,255,255,0.95)", fontSize: { xs: "0.92rem", sm: "0.98rem" }, lineHeight: 1.55 }}>
+                Adults guide, motivate, and support each stage, helping children stay consistent while turning golf into a shared family journey.
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
       </Container>
     </Box>
   );
 }
+

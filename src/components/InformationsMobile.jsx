@@ -154,7 +154,7 @@ function Informations({ informationsRef, triggerInformations }) {
       />
       <Container sx={{ textAlign: "center", position: "relative", color: "black", maxWidth: "1400px !important" }}>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6} sx={{ height: 0, minHeight: 0, opacity: 0, overflow: "hidden", pointerEvents: "none" }} aria-hidden="true">
             <Typography
               component={motion.h5}
               initial={{ opacity: 0, y: 20 }}
@@ -249,9 +249,8 @@ function Informations({ informationsRef, triggerInformations }) {
                               height: "22px",
                               minWidth: "110px",
                               textAlign: "center",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
+                              display: "grid",
+                placeItems: "center",
                               gap: 6,
                               boxShadow: "0 0 12px 2px rgba(255, 105, 0, 0.6)",
                               border: "2px solid #ff6a00",
@@ -383,9 +382,8 @@ function Informations({ informationsRef, triggerInformations }) {
                               fontSize: "0.95rem",
                               cursor: "pointer",
                               boxShadow: "0 6px 18px rgba(0,0,0,0.3)",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
+                              display: "grid",
+                placeItems: "center",
                               gap: "8px",
                             }}
                           >
@@ -443,9 +441,8 @@ function Informations({ informationsRef, triggerInformations }) {
                 height: 30,
                 borderRadius: "50%",
                 background: "linear-gradient(135deg, #4fd1c5, #38b2ac)", // gradiente turquesa vibrante
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                display: "grid",
+                placeItems: "center",
                 border: "1.5px solid rgba(255,255,255,0.9)", // borde blanco semitransparente
                 mx: "auto",
                 mb: 0.5,
@@ -463,14 +460,14 @@ function Informations({ informationsRef, triggerInformations }) {
                   ease: "easeInOut",
                 }}
                 style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "100%",
-                  height: "100%",
+                  position: "absolute",
+                  inset: 0,
+                  display: "grid",
+                  placeItems: "center",
+                  transformOrigin: "center center",
                 }}
               >
-                <EmojiEvents sx={{ fontSize: 18, color: "white" }} />
+                <EmojiEvents sx={{ fontSize: 18, color: "white", display: "block", lineHeight: 1 }} />
               </motion.div>
             </Box>
             <motion.div
@@ -566,9 +563,8 @@ function Informations({ informationsRef, triggerInformations }) {
                           position: "relative",
                           width: 100,
                           height: 85,
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
+                          display: "grid",
+                placeItems: "center",
                         }}
                       >
                         {!item.hideLine && (
@@ -603,9 +599,8 @@ function Informations({ informationsRef, triggerInformations }) {
                             borderRadius: "50%",
                             border: "2px solid white", // borde blanco para contraste
                             backgroundColor: "rgba(255,255,255,0.1)", // fondo translúcido blanco
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
+                            display: "grid",
+                placeItems: "center",
                             position: "relative",
                             zIndex: 2,
                           }}
@@ -664,6 +659,9 @@ function Informations({ informationsRef, triggerInformations }) {
 };
 
 export default Informations;
+
+
+
 
 
 

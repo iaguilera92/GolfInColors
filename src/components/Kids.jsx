@@ -3,13 +3,14 @@ import { Box, Button, Collapse, Grid, Paper, Stack, Typography, useMediaQuery, u
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
+import LockRoundedIcon from "@mui/icons-material/LockRounded";
 import CloseIcon from "@mui/icons-material/Close";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import NavigateBeforeRoundedIcon from "@mui/icons-material/NavigateBeforeRounded";
 import NavigateNextRoundedIcon from "@mui/icons-material/NavigateNextRounded";
 import { motion } from "framer-motion";
 
-const menus = ["Stories", "Videos", "Games"];
+const menus = ["Stories", "Games", "Videos"];
 
 const menuStyles = {
   Stories: {
@@ -21,6 +22,7 @@ const menuStyles = {
     bg: "#1f5d3a",
     bgActive: "#17492d",
     icon: OndemandVideoIcon,
+    disabled: true,
   },
   Games: {
     bg: "#1B83CC",
@@ -80,6 +82,16 @@ const storyBookPages = [
   },
 ];
 
+const storyPageImages = [
+  "/IMAGE_01.png",
+  "/IMAGE_02.png",
+  "/IMAGE_03.png",
+  "/IMAGE_04.png",
+  "/IMAGE_05.png",
+  "/IMAGE_06.png",
+  "/IMAGE_07.png",
+];
+
 const characters = [
   { img: "max.png", name: "Max" },
   { img: "sofi.png", name: "Sofi" },
@@ -94,6 +106,7 @@ export default function Kids() {
   const [storiesOpen, setStoriesOpen] = useState(false);
   const [spinMenu, setSpinMenu] = useState(null);
   const [storyPage, setStoryPage] = useState(0);
+  const [activeStoryStage, setActiveStoryStage] = useState(0);
   const [flipDirection, setFlipDirection] = useState(1);
   const [isPageTurning, setIsPageTurning] = useState(false);
   const [turnId, setTurnId] = useState(0);
@@ -102,7 +115,9 @@ export default function Kids() {
   const activeMenuRef = useRef("Stories");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSectionOpen = storiesOpen || activeMenu === "Games" || activeMenu === "Videos";
 
+  const currentRightPageImage = storyPageImages[Math.min(storyPage, storyPageImages.length - 1)];
   useEffect(() => {
     if (!spinMenu) return;
 
@@ -205,10 +220,7 @@ export default function Kids() {
         px: { xs: 2, sm: 4 },
         py: { xs: 6, sm: 8 },
         position: "relative",
-        backgroundImage: "url(/fondo-1.png)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
+        backgroundColor: "#87CEEB",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -217,14 +229,27 @@ export default function Kids() {
     >
       <Box
         sx={{
-          position: "absolute",
+          position: "fixed",
           inset: 0,
-          backgroundColor: "rgba(0,0,0,0.35)",
+          backgroundImage: "url(/IMAGE_02.png)",
+          backgroundSize: "cover",
+          backgroundPositionX: { xs: isSectionOpen ? "60%" : "28%", sm: isSectionOpen ? "54%" : "50%" },
+          backgroundPositionY: "center",
+          backgroundRepeat: "no-repeat",
+          transition: "background-position-x 420ms ease",
           zIndex: 0,
         }}
       />
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          backgroundColor: "rgba(0,0,0,0.35)",
+          zIndex: 1,
+        }}
+      />
 
-      <Box sx={{ position: "relative", zIndex: 1, width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <Box sx={{ position: "relative", zIndex: 2, width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
         <Typography component="h1" sx={{ textAlign: "center", pt: { xs: 7, sm: 9 }, mb: { xs: 3, sm: 5 } }}>
           <Box
             component="span"
@@ -290,15 +315,17 @@ export default function Kids() {
               const isGames = menu === "Games";
               const config = menuStyles[menu];
               const Icon = config.icon;
+              const isDisabled = Boolean(config.disabled);
 
               return (
                 <Box key={menu}>
                   <Paper
                     elevation={0}
-                    onClick={() => handleSectionClick(menu)}
+                    onClick={() => !isDisabled && handleSectionClick(menu)}
                     role="button"
                     tabIndex={0}
                     onKeyDown={(e) => {
+                      if (isDisabled) return;
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
                         handleSectionClick(menu);
@@ -307,19 +334,38 @@ export default function Kids() {
                     sx={{
                       p: { xs: 2, sm: 2.2 },
                       borderRadius: 3,
-                      border: isActive ? "2px solid rgba(255,255,255,0.9)" : "1px solid transparent",
-                      backgroundColor: isActive ? config.bgActive : config.bg,
+                      border: isDisabled
+                        ? "2px dashed rgba(255,255,255,0.75)"
+                        : isActive
+                          ? "2px solid rgba(255,255,255,0.9)"
+                          : "1px solid transparent",
+                      background: isDisabled
+                        ? "linear-gradient(135deg, #5f6670 0%, #434a54 100%)"
+                        : isActive
+                          ? config.bgActive
+                          : config.bg,
                       color: "#fff",
-                      cursor: "pointer",
+                      cursor: isDisabled ? "not-allowed" : "pointer",
+                      position: "relative",
+                      overflow: "hidden",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
                       transition: "all 0.25s ease",
                       "&:hover": {
-                        transform: "translateY(-1px)",
-                        filter: "brightness(1.05)",
-                        boxShadow: "0 10px 22px rgba(13,43,69,0.18)",
+                        transform: isDisabled ? "none" : "translateY(-1px)",
+                        filter: isDisabled ? "none" : "brightness(1.05)",
+                        boxShadow: isDisabled ? "none" : "0 10px 22px rgba(13,43,69,0.18)",
                       },
+                      "&::after": isDisabled
+                        ? {
+                          content: "\"\"",
+                          position: "absolute",
+                          inset: 0,
+                          pointerEvents: "none",
+                          background: "linear-gradient(110deg, rgba(255,255,255,0) 20%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0) 80%)",
+                        }
+                        : undefined,
                     }}
                   >
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -327,10 +373,17 @@ export default function Kids() {
                       <Typography sx={{ fontWeight: 800, color: "#fff", fontSize: "1.1rem" }}>
                         {menu}
                       </Typography>
+                      {isDisabled && (
+                        <Typography sx={{ fontWeight: 700, color: "rgba(255,255,255,0.92)", fontSize: "0.85rem" }}>
+                          (Coming soon)
+                        </Typography>
+                      )}
                     </Box>
 
                     <Box sx={{ color: "rgba(255,255,255,0.95)", display: "flex", alignItems: "center" }}>
-                      {isStories ? (
+                      {isDisabled ? (
+                        <LockRoundedIcon sx={{ fontSize: 21 }} />
+                      ) : isStories ? (
                         storiesOpen ? (
                           <CloseIcon
                             sx={{
@@ -399,266 +452,298 @@ export default function Kids() {
 
 
 
-                          <Box
-                            sx={{
-                              maxWidth: bookOpen ? (isMobile ? "100dvw" : "100vw") : 560,
-                              boxSizing: "border-box",
-                              width: bookOpen ? (isMobile ? "100dvw" : "100vw") : "100%",
-                              height: bookOpen ? (isMobile ? "100dvh" : "100vh") : "auto",
-                              mx: "auto",
-                              mb: bookOpen ? 0 : 2,
-                              borderRadius: bookOpen ? 0 : 4.5,
-                              p: bookOpen ? (isMobile ? 0 : { xs: 1.2, sm: 2.2 }) : { xs: 0.9, sm: 1.2 },
-                              position: bookOpen ? "fixed" : "relative",
-                              inset: bookOpen ? 0 : "auto",
-                              zIndex: bookOpen ? 1600 : "auto",
-                              top: bookOpen ? 0 : "auto",
-                              left: bookOpen ? 0 : "auto",
-                              overflow: "hidden",
-                              transform: "none",
-                              transformOrigin: "center center",
-                              background: "linear-gradient(145deg, #ffcf70 0%, #ff9ca9 48%, #8ad6ff 100%)",
-                              border: bookOpen ? "none" : "3px solid rgba(255,255,255,0.9)",
-                              boxShadow: bookOpen ? "none" : "0 16px 28px rgba(0,0,0,0.24)",
-                            }}
-                          >
-                            {bookOpen && (
-                              <Button
-                                onClick={() => setBookOpen(false)}
-                                sx={{
-                                  position: "absolute",
-                                  top: bookOpen && isMobile ? "auto" : { xs: 10, sm: 12 },
-                                  bottom: bookOpen && isMobile ? { xs: 10, sm: 12 } : "auto",
-                                  right: { xs: 10, sm: 12 },
-                                  left: "auto",
-                                  minWidth: 38,
-                                  width: 38,
-                                  height: 38,
-                                  borderRadius: "50%",
-                                  color: "#fff",
-                                  zIndex: 12,
-                                  backgroundColor: "rgba(0,0,0,0.35)",
-                                  border: "1px solid rgba(255,255,255,0.6)",
-                                }}
-                              >
-                                <CloseIcon />
-                              </Button>
-                            )}
-
-                            {!bookOpen && (
-                              <Box
-                                sx={{
-                                  position: "absolute",
-                                  inset: 0,
-                                  zIndex: 11,
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  textAlign: "center",
-                                  px: 2,
-                                  background: "rgba(5,14,24,0.42)",
-                                  backdropFilter: "blur(2.5px)",
-                                }}
-                              >
-                                <Typography sx={{ color: "#fff", fontWeight: 800, fontSize: { xs: "1.05rem", sm: "1.2rem" }, mb: 1.2, textShadow: "0 2px 8px rgba(0,0,0,0.45)" }}>
-                                  Story Book Experience
-                                </Typography>
-                                <Button
-                                  onClick={() => setBookOpen(true)}
-                                  sx={{
-                                    textTransform: "none",
-                                    fontWeight: 800,
-                                    py: 1,
-                                    px: 3.2,
-                                    borderRadius: 99,
-                                    fontSize: { xs: "1rem", sm: "1.08rem" },
-                                    color: "#fff",
-                                    border: "2px solid rgba(145,255,238,0.92)",
-                                    background: "linear-gradient(160deg, #1cc8b4 0%, #13a38f 45%, #0f8676 100%)",
-                                    boxShadow: "0 0 18px rgba(33,205,188,0.55), 0 8px 18px rgba(8,78,70,0.44)",
-                                  }}
-                                >
-                                  Start
-                                </Button>
-                              </Box>
-                            )}
-
-                            <Box
-                              sx={bookOpen && isMobile ? {
-                                position: "absolute",
-                                top: "50%",
-                                left: "53%",
-                                width: "100dvh",
-                                height: "100dvw",
-                                transform: "translate(-50%, -50%) rotate(90deg)",
-                                transformOrigin: "center center",
-                                boxSizing: "border-box",
-                                p: 1.2,
-                                overflow: "hidden",
-                              } : {}}
-                            >
-
-                            <Box
-                              sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                mb: 1.1,
-                                px: 0.5,
-                                mt: bookOpen ? { xs: 4.1, sm: 1.1 } : 0,
-                              }}
-                            >
-                              <Typography sx={{ fontWeight: 900, color: "#ffffff", textShadow: "0 2px 8px rgba(0,0,0,0.28)", fontSize: { xs: "0.86rem", sm: "0.95rem" } }}>
-                                My Story Book {storyPage + 1}/{storyBookPages.length}
-                              </Typography>
-                            </Box>
-                            <Box sx={{ width: "100%", borderRadius: 3, p: bookOpen ? { xs: 1, sm: 1.4 } : { xs: 0.8, sm: 1 }, border: "2px solid rgba(255,255,255,0.78)", background: "linear-gradient(180deg, #f3d8aa 0%, #dfb174 100%)" }}>
-                              <Grid container spacing={0} alignItems="stretch" sx={{ width: "100%", m: 0, position: "relative", perspective: "1200px" }}>
-                                <Box sx={{ position: "absolute", left: "50%", top: 0, bottom: 0, width: { xs: 10, sm: 13 }, transform: "translateX(-50%)", borderRadius: 99, background: "repeating-linear-gradient(180deg, #7d4e27 0 8px, #9e6535 8px 16px)", zIndex: 2 }} />
-                                <Grid item xs={6} sx={{ pr: { xs: 0.5, sm: 0.6 } }}>
-                                  <Box sx={{ height: bookOpen ? { xs: "56vh", sm: "70vh" } : { xs: 180, sm: 220 }, borderRadius: 2.2, p: { xs: 1.4, sm: 1.7 }, backgroundColor: "#fffdf8", border: "1px solid rgba(148,111,73,0.3)", position: "relative", overflow: "hidden" }}>
-                                    <motion.div key={`page-content-${storyPage}`} initial={{ opacity: 0.1 }} animate={{ opacity: 1 }} transition={{ duration: 0.34, ease: "easeOut" }} style={{ position: "relative", zIndex: 2, height: "100%" }}>
-                                      <Typography sx={{ fontWeight: 900, color: "#0f4b75", fontSize: { xs: "1rem", sm: "1.1rem" }, mb: 0.35 }}>{storyBookPages[storyPage].title}</Typography>
-                                      <Typography sx={{ fontWeight: 800, color: "#ff7f50", fontSize: { xs: "0.86rem", sm: "0.92rem" }, mb: 0.8 }}>{storyBookPages[storyPage].subtitle}</Typography>
-                                      <Typography sx={{ color: "#31546f", lineHeight: 1.55, fontSize: { xs: "0.82rem", sm: "0.9rem" } }}>{storyBookPages[storyPage].text}</Typography>
-                                    </motion.div>
-                                  </Box>
-                                </Grid>
-                                <Grid item xs={6} sx={{ pl: { xs: 0.5, sm: 0.6 } }}>
-                                  <Box sx={{ height: bookOpen ? { xs: "56vh", sm: "70vh" } : { xs: 180, sm: 220 }, borderRadius: 2.2, p: { xs: 1.4, sm: 1.7 }, backgroundColor: "#fffdf8", border: "1px solid rgba(148,111,73,0.3)" }}>
-                                    <Typography sx={{ fontWeight: 900, color: "#4e6d1f", fontSize: { xs: "0.95rem", sm: "1.03rem" }, mb: 0.7 }}>
-                                      {storyPage < storyBookPages.length - 1 ? "Next Adventure" : "The End"}
-                                    </Typography>
-                                    {storyPage < storyBookPages.length - 1 ? (
-                                      <Typography sx={{ color: "#5a7388", lineHeight: 1.45, fontSize: { xs: "0.78rem", sm: "0.84rem" } }}>
-                                        {storyBookPages[storyPage + 1].subtitle}
-                                      </Typography>
-                                    ) : (
-                                      <Typography sx={{ color: "#5a7388", lineHeight: 1.55, fontSize: { xs: "0.8rem", sm: "0.88rem" } }}>
-                                        {"Great job! You finished this mini book. Ready for the stages below?"}
-                                      </Typography>
-                                    )}
-                                  </Box>
-                                </Grid>
-                                                                {isPageTurning && (
-                                  <>
-                                    <motion.div
-                                      key={`page-shadow-${turnId}`}
-                                      initial={{ opacity: 0 }}
-                                      animate={{ opacity: [0, 0.2, 0] }}
-                                      transition={{ duration: 0.62, ease: [0.25, 0.8, 0.25, 1] }}
-                                      style={{
-                                        position: "absolute",
-                                        inset: 0,
-                                        pointerEvents: "none",
-                                        zIndex: 5,
-                                        background:
-                                          "linear-gradient(90deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 65%, rgba(0,0,0,0.08) 100%)",
-                                      }}
-                                    />
-
-                                    <motion.div
-                                      key={`page-flip-${turnId}`}
-                                      initial={{
-                                        rotateY: 0,
-                                        x: "0%",
-                                        opacity: 0.98,
-                                      }}
-                                      animate={{
-                                        rotateY: flipDirection > 0 ? -180 : 180,
-                                        x: flipDirection > 0 ? "-100%" : "100%",
-                                        opacity: [0.98, 0.98, 0.85],
-                                      }}
-                                      transition={{ duration: 0.62, ease: [0.25, 0.8, 0.25, 1] }}
-                                      style={{
-                                        position: "absolute",
-                                        top: 0,
-                                        bottom: 0,
-                                        left: flipDirection > 0 ? "50%" : "0%",
-                                        width: "50%",
-                                        transformOrigin: flipDirection > 0 ? "left center" : "right center",
-                                        transformStyle: "preserve-3d",
-                                        backfaceVisibility: "hidden",
-                                        pointerEvents: "none",
-                                        zIndex: 6,
-                                        background:
-                                          flipDirection > 0
-                                            ? "linear-gradient(90deg, rgba(255,251,245,0.99) 0%, rgba(241,214,175,0.9) 70%, rgba(222,190,148,0.85) 100%)"
-                                            : "linear-gradient(270deg, rgba(255,251,245,0.99) 0%, rgba(241,214,175,0.9) 70%, rgba(222,190,148,0.85) 100%)",
-                                        boxShadow:
-                                          flipDirection > 0
-                                            ? "-24px 0 34px rgba(0,0,0,0.26)"
-                                            : "24px 0 34px rgba(0,0,0,0.26)",
-                                        borderRadius: flipDirection > 0 ? "0 12px 12px 0" : "12px 0 0 12px",
-                                      }}
-                                    />
-                                  </>
-                                )}
-                              </Grid>
-                            </Box>
-                            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", px: { xs: 0.4, sm: 0.8 }, mt: 0.35 }}>
-                              <Button size="small" onClick={() => handlePageTurn(-1)} disabled={storyPage === 0 || isPageTurning} sx={{ minWidth: 54, p: 0.55, borderRadius: 99, color: "#21476b", fontWeight: 900, border: "1px solid rgba(255,255,255,0.95)", backgroundColor: "rgba(255,255,255,0.72)" }}>
-                                <NavigateBeforeRoundedIcon sx={{ fontSize: 30 }} />
-                              </Button>
-                              <Button size="small" onClick={() => handlePageTurn(1)} disabled={storyPage === storyBookPages.length - 1 || isPageTurning} sx={{ minWidth: 54, p: 0.55, borderRadius: 99, color: "#21476b", fontWeight: 900, border: "1px solid rgba(255,255,255,0.95)", backgroundColor: "rgba(255,255,255,0.72)" }}>
-                                <NavigateNextRoundedIcon sx={{ fontSize: 30 }} />
-                              </Button>
-                            </Box>
-                            </Box>
-                          </Box>
-
                           <Stack spacing={1.2} sx={{ maxWidth: 560, mx: "auto" }}>
-                            {storyStages.map((stage, idx) => (
-                              <Box
-                                key={stage}
-                                sx={{
-                                  borderRadius: 2.5,
-                                  py: 1.1,
-                                  px: 1.5,
-                                  display: "flex",
-                                  alignItems: "center",
-                                  gap: 1,
-                                  background:
-                                    idx === 0
-                                      ? "linear-gradient(135deg, #d9f2ff 0%, #bfe4ff 100%)"
-                                      : idx === 1
-                                      ? "linear-gradient(135deg, #ffd9df 0%, #ffc4cf 100%)"
-                                      : idx === 2
-                                      ? "linear-gradient(135deg, #fff6c9 0%, #ffe89f 100%)"
-                                      : "linear-gradient(135deg, #daf8df 0%, #bff0c8 100%)",
-                                  border: "2px solid rgba(255,255,255,0.85)",
-                                  boxShadow: "0 5px 12px rgba(0,0,0,0.1)",
-                                  transition: "transform 0.2s ease",
-                                  "&:hover": { transform: "translateY(-2px) scale(1.01)" },
-                                }}
-                              >
-                                <Box
-                                  sx={{
-                                    minWidth: 32,
-                                    height: 32,
-                                    borderRadius: "50%",
-                                    backgroundColor:
-                                      idx === 0
-                                        ? "#1B83CC"
-                                        : idx === 1
-                                        ? "#e64b5d"
-                                        : idx === 2
-                                        ? "#e7b100"
-                                        : "#2ea44f",
-                                    color: "#fff",
-                                    display: "grid",
-                                    placeItems: "center",
-                                    fontWeight: 900,
-                                  }}
-                                >
-                                  {idx + 1}
+                            {storyStages.map((stage, idx) => {
+                              const isStageActive = activeStoryStage === idx;
+
+                              return (
+                                <Box key={stage}>
+                                  <Box
+                                    role="button"
+                                    tabIndex={0}
+                                    onClick={() => setActiveStoryStage(idx)}
+                                    onKeyDown={(e) => {
+                                      if (e.key === "Enter" || e.key === " ") {
+                                        e.preventDefault();
+                                        setActiveStoryStage(idx);
+                                      }
+                                    }}
+                                    sx={{
+                                      borderRadius: 2.5,
+                                      py: 1.1,
+                                      px: 1.5,
+                                      display: "flex",
+                                      alignItems: "center",
+                                      justifyContent: "space-between",
+                                      gap: 1,
+                                      cursor: "pointer",
+                                      background:
+                                        idx === 0
+                                          ? "linear-gradient(135deg, #d9f2ff 0%, #bfe4ff 100%)"
+                                          : idx === 1
+                                            ? "linear-gradient(135deg, #ffd9df 0%, #ffc4cf 100%)"
+                                            : idx === 2
+                                              ? "linear-gradient(135deg, #fff6c9 0%, #ffe89f 100%)"
+                                              : "linear-gradient(135deg, #daf8df 0%, #bff0c8 100%)",
+                                      border: isStageActive ? "2px solid rgba(27,131,204,0.9)" : "2px solid rgba(255,255,255,0.85)",
+                                      boxShadow: isStageActive ? "0 8px 16px rgba(27,131,204,0.22)" : "0 5px 12px rgba(0,0,0,0.1)",
+                                      transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                                      "&:hover": { transform: "translateY(-2px) scale(1.01)" },
+                                    }}
+                                  >
+                                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                      <Box
+                                        sx={{
+                                          minWidth: 32,
+                                          height: 32,
+                                          borderRadius: "50%",
+                                          backgroundColor:
+                                            idx === 0
+                                              ? "#1B83CC"
+                                              : idx === 1
+                                                ? "#e64b5d"
+                                                : idx === 2
+                                                  ? "#e7b100"
+                                                  : "#2ea44f",
+                                          color: "#fff",
+                                          display: "grid",
+                                          placeItems: "center",
+                                          fontWeight: 900,
+                                        }}
+                                      >
+                                        {idx + 1}
+                                      </Box>
+                                      <Typography sx={{ fontWeight: 800, color: "#123a57", textAlign: "left" }}>
+                                        {stage}
+                                      </Typography>
+                                    </Box>
+                                    {isStageActive ? <CloseIcon sx={{ fontSize: 19, color: "#1B83CC" }} /> : <KeyboardArrowDownIcon sx={{ fontSize: 22, color: "#1B83CC" }} />}
+                                  </Box>
+
+                                  <Collapse in={isStageActive} timeout={650} unmountOnExit>
+                                    <Box sx={{ mt: 1.1 }}>
+                                      <Box
+                                        sx={{
+                                          maxWidth: bookOpen ? (isMobile ? "100dvw" : "100vw") : 560,
+                                          boxSizing: "border-box",
+                                          width: bookOpen ? (isMobile ? "100dvw" : "100vw") : "100%",
+                                          height: bookOpen ? (isMobile ? "100dvh" : "100vh") : "auto",
+                                          mx: "auto",
+                                          mb: bookOpen ? 0 : 2,
+                                          borderRadius: bookOpen ? 0 : 4.5,
+                                          p: bookOpen ? (isMobile ? 0 : { xs: 1.2, sm: 2.2 }) : { xs: 0.9, sm: 1.2 },
+                                          position: bookOpen ? "fixed" : "relative",
+                                          inset: bookOpen ? 0 : "auto",
+                                          zIndex: bookOpen ? 1600 : "auto",
+                                          top: bookOpen ? 0 : "auto",
+                                          left: bookOpen ? 0 : "auto",
+                                          overflow: "hidden",
+                                          transform: "none",
+                                          transformOrigin: "center center",
+                                          background: "linear-gradient(145deg, #ffcf70 0%, #ff9ca9 48%, #8ad6ff 100%)",
+                                          border: bookOpen ? "none" : "3px solid rgba(255,255,255,0.9)",
+                                          boxShadow: bookOpen ? "none" : "0 16px 28px rgba(0,0,0,0.24)",
+                                        }}
+                                      >
+                                        {bookOpen && (
+                                          <Button
+                                            onClick={() => setBookOpen(false)}
+                                            sx={{
+                                              position: "absolute",
+                                              top: bookOpen && isMobile ? "auto" : { xs: 10, sm: 12 },
+                                              bottom: bookOpen && isMobile ? { xs: 10, sm: 12 } : "auto",
+                                              right: { xs: 10, sm: 12 },
+                                              left: "auto",
+                                              minWidth: 38,
+                                              width: 38,
+                                              height: 38,
+                                              borderRadius: "50%",
+                                              color: "#fff",
+                                              zIndex: 12,
+                                              backgroundColor: "rgba(0,0,0,0.35)",
+                                              border: "1px solid rgba(255,255,255,0.6)",
+                                            }}
+                                          >
+                                            <CloseIcon />
+                                          </Button>
+                                        )}
+
+                                        {!bookOpen && (
+                                          <Box
+                                            sx={{
+                                              position: "absolute",
+                                              inset: 0,
+                                              zIndex: 11,
+                                              display: "flex",
+                                              flexDirection: "column",
+                                              alignItems: "center",
+                                              justifyContent: "center",
+                                              textAlign: "center",
+                                              px: 2,
+                                              background: "rgba(5,14,24,0.42)",
+                                              backdropFilter: "blur(2.5px)",
+                                            }}
+                                          >
+                                            <Typography sx={{ color: "#fff", fontWeight: 800, fontSize: { xs: "1.05rem", sm: "1.2rem" }, mb: 1.2, textShadow: "0 2px 8px rgba(0,0,0,0.45)" }}>
+                                              Story Book Experience
+                                            </Typography>
+                                            <Button
+                                              onClick={() => setBookOpen(true)}
+                                              sx={{
+                                                textTransform: "none",
+                                                fontWeight: 800,
+                                                py: 1,
+                                                px: 3.2,
+                                                borderRadius: 99,
+                                                fontSize: { xs: "1rem", sm: "1.08rem" },
+                                                color: "#fff",
+                                                border: "2px solid rgba(145,255,238,0.92)",
+                                                background: "linear-gradient(160deg, #1cc8b4 0%, #13a38f 45%, #0f8676 100%)",
+                                                boxShadow: "0 0 18px rgba(33,205,188,0.55), 0 8px 18px rgba(8,78,70,0.44)",
+                                              }}
+                                            >
+                                              Start
+                                            </Button>
+                                          </Box>
+                                        )}
+
+                                        <Box
+                                          sx={bookOpen && isMobile ? {
+                                            position: "absolute",
+                                            top: "50%",
+                                            left: "53%",
+                                            width: "100dvh",
+                                            height: "100dvw",
+                                            transform: "translate(-50%, -50%) rotate(90deg)",
+                                            transformOrigin: "center center",
+                                            boxSizing: "border-box",
+                                            p: 1.2,
+                                            overflow: "hidden",
+                                          } : {}}
+                                        >
+
+                                          <Box
+                                            sx={{
+                                              display: "flex",
+                                              alignItems: "center",
+                                              justifyContent: "center",
+                                              mb: 1.1,
+                                              px: 0.5,
+                                              mt: bookOpen ? { xs: 4.1, sm: 1.1 } : 0,
+                                            }}
+                                          >
+                                            <Typography sx={{ fontWeight: 900, color: "#ffffff", textShadow: "0 2px 8px rgba(0,0,0,0.28)", fontSize: { xs: "0.86rem", sm: "0.95rem" } }}>
+                                              My Story Book {storyPage + 1}/{storyBookPages.length}
+                                            </Typography>
+                                          </Box>
+                                          <Box sx={{ width: "100%", borderRadius: 3, p: bookOpen ? { xs: 1, sm: 1.4 } : { xs: 0.8, sm: 1 }, border: "2px solid rgba(255,255,255,0.78)", background: "linear-gradient(180deg, #f3d8aa 0%, #dfb174 100%)" }}>
+                                            <Grid container spacing={0} alignItems="stretch" sx={{ width: "100%", m: 0, position: "relative", perspective: "1200px" }}>
+                                              <Box sx={{ position: "absolute", left: "50%", top: 0, bottom: 0, width: { xs: 10, sm: 13 }, transform: "translateX(-50%)", borderRadius: 99, background: "repeating-linear-gradient(180deg, #7d4e27 0 8px, #9e6535 8px 16px)", zIndex: 2 }} />
+                                              <Grid item xs={6} sx={{ pr: { xs: 0.5, sm: 0.6 } }}>
+                                                <Box sx={{ height: bookOpen ? { xs: "56vh", sm: "70vh" } : { xs: 180, sm: 220 }, borderRadius: 2.2, p: { xs: 1.4, sm: 1.7 }, backgroundColor: "#fffdf8", border: "1px solid rgba(148,111,73,0.3)", position: "relative", overflow: "hidden" }}>
+                                                  <motion.div key={`page-content-${storyPage}`} initial={{ opacity: 0.1 }} animate={{ opacity: 1 }} transition={{ duration: 0.34, ease: "easeOut" }} style={{ position: "relative", zIndex: 2, height: "100%" }}>
+                                                    <Typography sx={{ fontWeight: 900, color: "#0f4b75", fontSize: { xs: "1rem", sm: "1.1rem" }, mb: 0.35 }}>{storyBookPages[storyPage].title}</Typography>
+                                                    <Typography sx={{ fontWeight: 800, color: "#1f4f82", fontSize: { xs: "0.86rem", sm: "0.92rem" }, mb: 0.8 }}>{storyBookPages[storyPage].subtitle}</Typography>
+                                                    <Typography sx={{ color: "#31546f", lineHeight: 1.55, fontSize: { xs: "0.82rem", sm: "0.9rem" } }}>{storyBookPages[storyPage].text}</Typography>
+                                                  </motion.div>
+                                                </Box>
+                                              </Grid>
+                                              <Grid item xs={6} sx={{ pl: { xs: 0.5, sm: 0.6 } }}>
+                                                <Box
+                                                  sx={{
+                                                    height: bookOpen ? { xs: "56vh", sm: "70vh" } : { xs: 180, sm: 220 },
+                                                    borderRadius: 2.2,
+                                                    backgroundColor: "#fffdf8",
+                                                    border: "1px solid rgba(148,111,73,0.3)",
+                                                    overflow: "hidden",
+                                                    position: "relative",
+                                                    p: { xs: 0.8, sm: 1.1 },
+                                                  }}
+                                                >
+                                                  <Box
+                                                    component="img"
+                                                    src={currentRightPageImage}
+                                                    alt={`Story illustration ${storyPage + 1}`}
+                                                    sx={{
+                                                      width: "100%",
+                                                      height: "100%",
+                                                      objectFit: "contain",
+                                                      objectPosition: "center",
+                                                    }}
+                                                  />
+                                                </Box>
+                                              </Grid>
+                                              {isPageTurning && (
+                                                <>
+                                                  <motion.div
+                                                    key={`page-shadow-${turnId}`}
+                                                    initial={{ opacity: 0 }}
+                                                    animate={{ opacity: [0, 0.2, 0] }}
+                                                    transition={{ duration: 0.62, ease: [0.25, 0.8, 0.25, 1] }}
+                                                    style={{
+                                                      position: "absolute",
+                                                      inset: 0,
+                                                      pointerEvents: "none",
+                                                      zIndex: 5,
+                                                      background:
+                                                        "linear-gradient(90deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 65%, rgba(0,0,0,0.08) 100%)",
+                                                    }}
+                                                  />
+
+                                                  <motion.div
+                                                    key={`page-flip-${turnId}`}
+                                                    initial={{
+                                                      rotateY: 0,
+                                                      x: "0%",
+                                                      opacity: 0.98,
+                                                    }}
+                                                    animate={{
+                                                      rotateY: flipDirection > 0 ? -180 : 180,
+                                                      x: flipDirection > 0 ? "-100%" : "100%",
+                                                      opacity: [0.98, 0.98, 0.85],
+                                                    }}
+                                                    transition={{ duration: 0.62, ease: [0.25, 0.8, 0.25, 1] }}
+                                                    style={{
+                                                      position: "absolute",
+                                                      top: 0,
+                                                      bottom: 0,
+                                                      left: flipDirection > 0 ? "50%" : "0%",
+                                                      width: "50%",
+                                                      transformOrigin: flipDirection > 0 ? "left center" : "right center",
+                                                      transformStyle: "preserve-3d",
+                                                      backfaceVisibility: "hidden",
+                                                      pointerEvents: "none",
+                                                      zIndex: 6,
+                                                      background:
+                                                        flipDirection > 0
+                                                          ? "linear-gradient(90deg, rgba(255,251,245,0.99) 0%, rgba(241,214,175,0.9) 70%, rgba(222,190,148,0.85) 100%)"
+                                                          : "linear-gradient(270deg, rgba(255,251,245,0.99) 0%, rgba(241,214,175,0.9) 70%, rgba(222,190,148,0.85) 100%)",
+                                                      boxShadow:
+                                                        flipDirection > 0
+                                                          ? "-24px 0 34px rgba(0,0,0,0.26)"
+                                                          : "24px 0 34px rgba(0,0,0,0.26)",
+                                                      borderRadius: flipDirection > 0 ? "0 12px 12px 0" : "12px 0 0 12px",
+                                                    }}
+                                                  />
+                                                </>
+                                              )}
+                                            </Grid>
+                                          </Box>
+                                          <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", px: { xs: 0.4, sm: 0.8 }, mt: 0.35 }}>
+                                            <Button size="small" onClick={() => handlePageTurn(-1)} disabled={storyPage === 0 || isPageTurning} sx={{ minWidth: 54, p: 0.55, borderRadius: 99, color: "#21476b", fontWeight: 900, border: "1px solid rgba(255,255,255,0.95)", backgroundColor: "rgba(255,255,255,0.72)" }}>
+                                              <NavigateBeforeRoundedIcon sx={{ fontSize: 30 }} />
+                                            </Button>
+                                            <Button size="small" onClick={() => handlePageTurn(1)} disabled={storyPage === storyBookPages.length - 1 || isPageTurning} sx={{ minWidth: 54, p: 0.55, borderRadius: 99, color: "#21476b", fontWeight: 900, border: "1px solid rgba(255,255,255,0.95)", backgroundColor: "rgba(255,255,255,0.72)" }}>
+                                              <NavigateNextRoundedIcon sx={{ fontSize: 30 }} />
+                                            </Button>
+                                          </Box>
+                                        </Box>
+                                      </Box>
+                                    </Box>
+                                  </Collapse>
                                 </Box>
-                                <Typography sx={{ fontWeight: 800, color: "#123a57", textAlign: "left" }}>
-                                  {stage}
-                                </Typography>
-                              </Box>
-                            ))}
+                              );
+                            })}
                           </Stack>
                         </Paper>
 
@@ -674,7 +759,7 @@ export default function Kids() {
                           <Typography
                             sx={{
                               fontWeight: 900,
-                              color: "#0d2b45",
+                              color: "#1f4f82",
                               textAlign: "center",
                               fontSize: { xs: "1.35rem", sm: "1.9rem" },
                               letterSpacing: "0.03em",
@@ -701,22 +786,60 @@ export default function Kids() {
                             imagination, teamwork, and confidence grow with every swing.
                           </Typography>
 
+
+                          <Box
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              gap: 1,
+                              mb: 1.7,
+                            }}
+                          >
+                            <Typography
+                              sx={{
+                                fontWeight: 900,
+                                color: "black",
+                                fontSize: { xs: "1rem", sm: "1.15rem" },
+                                letterSpacing: "0.02em",
+                              }}
+                            >
+                              Click to meet me
+                            </Typography>
+                            <Box
+                              component="img"
+                              src="/clic.jpg"
+                              alt="Click"
+                              sx={{ width: { xs: 24, sm: 28 }, height: { xs: 24, sm: 28 }, objectFit: "contain" }}
+                            />
+                          </Box>
+
                           <Grid container spacing={0} justifyContent="center">
                             {characters.map((character, index) => (
                               <Grid item xs="auto" key={index} sx={{ mx: 1.5, mb: 2 }}>
                                 <Box
                                   sx={{
-                                    width: 120,
-                                    height: 120,
+                                    "--ringA": ["#68d391", "#4fc3f7", "#ffe082"][index % 3],
+                                    "--ringB": ["#2fbf71", "#1f8ed4", "#f9c74f"][index % 3],
+                                    width: 132,
+                                    height: 132,
                                     borderRadius: "50%",
                                     p: "4px",
                                     background:
-                                      "linear-gradient(45deg, #feda75 0%, #fa7e1e 25%, #d62976 50%, #962fbf 75%, #4f5bd5 100%)",
+                                      "linear-gradient(140deg, var(--ringA) 0%, var(--ringB) 100%)",
+                                    cursor: "pointer",
                                     transition: "transform 0.3s ease, box-shadow 0.3s ease",
                                     boxShadow: "0 6px 14px rgba(0,0,0,0.2)",
+                                    animation: "characterPulse 1.8s ease-in-out infinite",
+                                    "@keyframes characterPulse": {
+                                      "0%": { transform: "scale(1)", boxShadow: "0 6px 14px rgba(0,0,0,0.2)" },
+                                      "50%": { transform: "scale(1.05)", boxShadow: "0 0 0 6px rgba(255,255,255,0.18), 0 10px 20px rgba(0,0,0,0.24)" },
+                                      "100%": { transform: "scale(1)", boxShadow: "0 6px 14px rgba(0,0,0,0.2)" },
+                                    },
                                     "&:hover": {
+                                      animationPlayState: "paused",
                                       transform: "scale(1.1)",
-                                      boxShadow: "0 10px 20px rgba(0,0,0,0.28)",
+                                      boxShadow: "0 10px 20px rgba(0,0,0,0.28), 0 0 0 5px rgba(255,255,255,0.28)",
                                     },
                                   }}
                                 >
@@ -737,7 +860,7 @@ export default function Kids() {
                                       sx={{
                                         width: "100%",
                                         height: "100%",
-                                        objectFit: "cover",
+                                        objectFit: "contain",
                                         objectPosition:
                                           ["Coach Sergio", "Hugo", "Lisa"].includes(character.name)
                                             ? "center 15%"
@@ -750,7 +873,7 @@ export default function Kids() {
                                 </Box>
                                 <Typography
                                   variant="body2"
-                                  sx={{ mt: 1, fontWeight: 700, color: "#FF7F50", textAlign: "center" }}
+                                  sx={{ mt: 1, fontWeight: 700, color: "#1f4f82", textAlign: "center" }}
                                 >
                                   {character.name}
                                 </Typography>
@@ -978,6 +1101,48 @@ export default function Kids() {
     </Box>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

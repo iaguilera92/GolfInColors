@@ -1,273 +1,282 @@
-import { Container, Grid, Alert, CardActionArea, Snackbar, Typography, Box, Button, useTheme, useMediaQuery, } from "@mui/material";
-import React, { useState, useEffect } from "react";
-import { styled } from "@mui/system";
+import React, { useMemo, useState } from "react";
+import {
+  Container,
+  Typography,
+  Box,
+  Button,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
+import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
+import FamilyRestroomIcon from "@mui/icons-material/FamilyRestroom";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import StorefrontRoundedIcon from "@mui/icons-material/StorefrontRounded";
+import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
-import "./css/Features.css"; // Importamos el CSS
-import dayjs from "dayjs";
-import duration from "dayjs/plugin/duration";
-import DialogTrabajos from "./DialogTrabajos";
-import { cargarTrabajos } from "../helpers/HelperTrabajos";
-import AccessTimeFilledRoundedIcon from '@mui/icons-material/AccessTimeFilledRounded';
-import PrecisionManufacturingRoundedIcon from '@mui/icons-material/PrecisionManufacturingRounded';
 
-dayjs.extend(duration);
-
-// DATA
-const features = [
-  {
-    label: "Classes for Kids",
-    imageSrc: "/golf-1.jpg",
-  },
-  {
-    label: "Classes for Adults",
-    imageSrc: "/golf-2.jpg",
-  },
-  {
-    label: "Personalized Training",
-    imageSrc: "/golf-3.jpg",
-  },
-  {
-    label: "High Performance",
-    imageSrc: "/golf-4.jpg",
-  },
-  {
-    label: "Clinics & Workshops",
-    imageSrc: "/golf-5.jpg",
-  },
-];
-const disabledLabels = ["ClÃ­nicas y Talleres"]; // ejemplo
-
-
-
-// EFECTOS
-function Features({ videoReady, informationsRef }) {
-
+function Features() {
   const theme = useTheme();
-  const timestamp = Date.now();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const { ref, inView } = useInView({ triggerOnce: false, threshold: 0.1 });
-  const [hasAnimated, setHasAnimated] = useState(false);
   const navigate = useNavigate();
-  const [timeLeft, setTimeLeft] = useState("");
-  const deadline = dayjs("2025-09-20T15:00:00").toDate();
+  const [selected, setSelected] = useState(null);
+  const [isSelecting, setIsSelecting] = useState(false);
 
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [trabajos, setTrabajos] = useState([]);
-  const [openTrabajos, setOpenTrabajos] = useState(false);
-  const scrollToRef = (ref, offset = -80) => ref?.current && window.scrollTo({ top: ref.current.getBoundingClientRect().top + window.scrollY + offset, behavior: 'smooth' });
+  const options = useMemo(
+    () => [
+      {
+        label: "For Kids",
+        value: "kids",
+        toneA: "#1aa97a",
+        toneB: "#0b7f59",
+        icon: <SportsEsportsIcon sx={{ fontSize: 22 }} />,
+        description: "Stories, videos, games.",
+      },
+      {
+        label: "Parents",
+        value: "parents",
+        toneA: "#2c95e3",
+        toneB: "#0f6fb8",
+        icon: <FamilyRestroomIcon sx={{ fontSize: 22 }} />,
+        description: "Support your child at home.",
+      },
+      {
+        label: "Coaches",
+        value: "coaches",
+        toneA: "#f08b32",
+        toneB: "#cf6710",
+        icon: <EmojiEventsIcon sx={{ fontSize: 22 }} />,
+        description: "Teach with confidence.",
+      },
+    ],
+    []
+  );
 
-  // handlers
-  const handleTrabajosClick = () => setOpenTrabajos(true);
-  const handleCloseTrabajos = () => setOpenTrabajos(false);
-
-  //TRABAJOS S3
-  useEffect(() => {
-    cargarTrabajos(`https://rosmiyasc.s3.us-east-2.amazonaws.com/Trabajos.xlsx?t=${timestamp}`)
-      .then(setTrabajos);
-  }, []);
-
-
-  //EVITAR ANIMACIÃ“N DUPLICADA
-  useEffect(() => {
-    let timer;
-    if (inView && !hasAnimated) {
-      if (videoReady) {
-        timer = setTimeout(() => {
-          setHasAnimated(true);
-        }, 0);
-      }
-    }
-    return () => clearTimeout(timer);
-  }, [videoReady, inView, hasAnimated]);
-
-  //APARICIÃ“N
-  const cardAnimation = {
-    hidden: { opacity: 0, x: 150 },
-    visible: (index) => ({
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.8, delay: 1 + index * 0.3, ease: "easeOut" },
-    }),
+  const routeByCategory = {
+    kids: "/kids",
+    parents: "/parents",
+    coaches: "/coaches",
   };
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const now = new Date();
-      const diff = deadline - now;
 
-      if (diff <= 0) {
-        setTimeLeft("Finalizado");
-        clearInterval(timer);
-      } else {
-        const d = dayjs.duration(diff);
-        const days = Math.floor(d.asDays());
-        const hours = d.hours();
-        const minutes = d.minutes();
+  const playClick = () => {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "triangle";
+      osc.frequency.value = 620;
+      gain.gain.setValueAtTime(0.001, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.05, ctx.currentTime + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.09);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.1);
+    } catch {
+      // ignore audio failures silently
+    }
+  };
 
-        setTimeLeft(`${days}d ${hours}h ${minutes}m`);
-      }
-    }, 1000);
+  const handleSelect = (option) => {
+    if (isSelecting) return;
+    playClick();
+    setSelected(option.value);
+    setIsSelecting(true);
 
-    return () => clearInterval(timer);
-  }, []);
+    localStorage.setItem("remember_category_choice", "1");
+    localStorage.setItem("user_category", option.value);
+    sessionStorage.removeItem("user_category");
 
-  // TRABAJOS ACTIVOS
-  const trabajosActivos = trabajos.filter(t => Number(t.Estado) === 1);
-
-  // Ahora cuentas sobre los activos
-  const mayoristas = trabajosActivos.filter(t => Number(t.TipoTrabajo) === 2).length;
-  const confeccionesrosmiya = trabajosActivos.filter(t => Number(t.TipoTrabajo) === 1).length;
+    const nextRoute = routeByCategory[option.value];
+    setTimeout(() => {
+      if (nextRoute) navigate(nextRoute);
+      setIsSelecting(false);
+    }, 260);
+  };
 
   return (
     <Box
+      id="category-features-section"
       sx={{
-        background: `
-      linear-gradient(
-        180deg,
-        #ffffff 0%,
-        #f5fcfb 40%,
-        #eaf7f5 70%,
-        #d5ede9 100%
-      )
-    `,
-        py: 1,
-        paddingBottom: "15px",
-        color: "#ffffff",
-        overflowY: "visible",
+        background: "linear-gradient(135deg, #d6f5d0 0%, #8fd39a 58%, #e9fff2 100%)",
+        pt: 0.75,
+        pb: 3,
       }}
     >
+      <Container sx={{ maxWidth: "900px !important" }}>
+        <Box
+          sx={{
+            borderRadius: 4,
+            pt: { xs: 1.2, sm: 1.6 },
+            px: { xs: 2, sm: 3 },
+            pb: { xs: 2, sm: 3 },
+            background: "transparent",
+            boxShadow: "none",
+          }}
+        >
+          <Typography
+            sx={{
+              textAlign: "center",
+              fontWeight: 900,
+              fontSize: { xs: "1.18rem", sm: "1.72rem" },
+              fontFamily: "'Poppins', sans-serif",
+              mb: 2.2,
+              color: "#083c2c",
+              letterSpacing: "0.03em",
+              textShadow: "0 1px 0 rgba(255,255,255,0.35)",
+            }}
+          >
+                        {"Select your Category \u26F3"}
+          </Typography>
 
-      <Container sx={{ py: 0, maxWidth: "1500px !important", overflow: 'hidden' }}>
-        <Box ref={ref} sx={{ mt: 0 }}>
-          <Grid container spacing={2} justifyContent="center" mt={0.8}>
-            {features.map((feature, index) => {
-              const isDisabled = disabledLabels.includes(feature.label);
-              if (isMobile && index >= 4) return null;
-
-              return (
-                <Grid item xs={6} sm={4} md={2.2} key={index}>
-                  <motion.div
-                    initial="hidden"
-                    animate={hasAnimated ? "visible" : "hidden"}
-                    variants={cardAnimation}
-                    custom={index}
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 1.8 }}>
+            {options.map((option) => (
+              <motion.div key={option.value} whileTap={{ scale: 0.985 }}>
+                <Button
+                  fullWidth
+                  aria-label={`Select ${option.label}`}
+                  onClick={() => handleSelect(option)}
+                  sx={{
+                    textTransform: "none",
+                    py: isMobile ? 1.25 : 1.45,
+                    px: isMobile ? 1.2 : 1.5,
+                    borderRadius: 99,
+                    position: "relative",
+                    overflow: "hidden",
+                    justifyContent: "flex-start",
+                    gap: 1.1,
+                    color: "#fff",
+                    border:
+                      selected === option.value
+                        ? "2px solid rgba(255,255,255,0.95)"
+                        : "1px solid rgba(255,255,255,0.45)",
+                    background: `linear-gradient(120deg, ${option.toneA} 0%, ${option.toneB} 100%)`,
+                    boxShadow:
+                      selected === option.value
+                        ? "0 0 0 2px rgba(255,255,255,0.26), 0 7px 14px rgba(0,0,0,0.2)"
+                        : "0 4px 10px rgba(0,0,0,0.16)",
+                    transition: "all 0.2s ease",
+                    "&:hover": { transform: "translateY(-1px)" },
+                  }}
+                >
+                  <Box
+                    sx={{
+                      minWidth: 40,
+                      width: 40,
+                      height: 40,
+                      borderRadius: "50%",
+                      display: "grid",
+                      placeItems: "center",
+                      color: option.toneB,
+                      backgroundColor: "rgba(255,255,255,0.92)",
+                      boxShadow: "inset 0 -2px 4px rgba(0,0,0,0.1)",
+                    }}
                   >
-                    <Box
-                      onClick={() => {
-                        if (!isDisabled) navigate("/catalogo");
-                      }}
-                      sx={{
-                        cursor: isDisabled ? "not-allowed" : "pointer",
-                        opacity: isDisabled ? 0.45 : 1,
-                        pointerEvents: isDisabled ? "none" : "auto",
-                        transition: "transform .3s ease",
-                        "&:hover": {
-                          transform: isDisabled ? "none" : "translateY(-4px)",
-                        },
-                      }}
-                    >
-                      {/* Imagen */}
-                      <Box
-                        sx={{
-                          width: "100%",
-                          height: { xs: 132, sm: 160 },
-                          borderRadius: 3,
-                          overflow: "hidden",
-                          position: "relative",
-                          boxShadow: "0 10px 28px rgba(0,0,0,0.18)",
-                          filter: isDisabled ? "grayscale(100%) brightness(0.85)" : "none",
-                        }}
+                    {option.icon}
+                  </Box>
+
+                  <Box sx={{ flex: 1, textAlign: "left" }}>
+                    <Typography sx={{ fontWeight: 800, fontSize: isMobile ? "1rem" : "1.08rem", lineHeight: 1.12 }}>
+                      {option.label}
+                    </Typography>
+                    <Typography sx={{ mt: 0.15, fontSize: isMobile ? "0.73rem" : "0.78rem", color: "rgba(255,255,255,0.9)" }}>
+                      {option.description}
+                    </Typography>
+                  </Box>
+
+                  <Box
+                    sx={{
+                      minWidth: 30,
+                      width: 30,
+                      height: 30,
+                      borderRadius: "50%",
+                      display: "grid",
+                      placeItems: "center",
+                      backgroundColor: "rgba(255,255,255,0.2)",
+                      border: "1px solid rgba(255,255,255,0.4)",
+                    }}
+                  >
+                    {selected === option.value ? (
+                      <CheckCircleRoundedIcon sx={{ fontSize: 18, color: "#fff" }} />
+                    ) : (
+                      <motion.span
+                        style={{ display: "grid", placeItems: "center" }}
+                        animate={{ scale: [1, 1.14, 1] }}
+                        transition={{ duration: 1.05, repeat: Infinity, ease: "easeInOut" }}
                       >
-                        <img
-                          src={feature.imageSrc}
-                          alt={feature.label}
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover",
-                            objectPosition:
-                              feature.label === "Adulto"
-                                ? "center 30%"   // baja la imagen (muestra mÃ¡s arriba)
-                                : "top",
-                          }}
-                        />
+                        <ArrowForwardRoundedIcon sx={{ fontSize: 17, color: "#fff" }} />
+                      </motion.span>
+                    )}
+                  </Box>
+                </Button>
+              </motion.div>
+            ))}
+          </Box>
 
-                        {/* Overlay */}
-                        <Box
-                          sx={{
-                            position: "absolute",
-                            inset: 0,
-                            background:
-                              "linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,.15))",
-                          }}
-                        />
-
-                        {/* PrÃ³ximamente */}
-                        {isDisabled && (
-                          <Box
-                            sx={{
-                              position: "absolute",
-                              top: 12,
-                              right: 12,
-                              px: 1.2,
-                              py: 0.4,
-                              borderRadius: "999px",
-                              backgroundColor: "rgba(255,255,255,.85)",
-                              fontSize: "0.7rem",
-                              fontWeight: 700,
-                              color: "#444",
-                            }}
-                          >
-                            PrÃ³ximamente
-                          </Box>
-                        )}
-                      </Box>
-
-                      {/* Texto */}
-                      <Box sx={{ mt: 1.2, textAlign: "center" }}>
-                        <Typography
-                          sx={{
-                            fontWeight: 600,
-                            color: "#0f172a",
-                            fontFamily: '"Poppins", sans-serif',
-                          }}
-                        >
-                          {feature.label}
-                        </Typography>
-
-                        <Typography
-                          sx={{
-                            fontSize: "0.85rem",
-                            color: "#475569",
-                          }}
-                        >
-                          {feature.description}
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </motion.div>
-                </Grid>
-              );
-            })}
-          </Grid>
-
-
-
+          <Box sx={{ mt: 2.2, width: { xs: "86%", sm: 320 }, mx: "auto" }}>
+            <Button
+              fullWidth
+              onClick={() => {
+                playClick();
+                navigate("/catalogo");
+              }}
+              aria-label="Open Shop"
+              sx={{
+                fontWeight: 800,
+                textTransform: "none",
+                py: 1.25,
+                borderRadius: 99,
+                position: "relative",
+                overflow: "hidden",
+                fontSize: { xs: "1.05rem", sm: "1.15rem" },
+                color: "#fff",
+                textShadow: "0 1px 2px rgba(0,0,0,0.45)",
+                border: "2px solid rgba(255, 230, 120, 0.95)",
+                background:
+                  "linear-gradient(160deg, #FFE082 0%, #FFC43D 38%, #FFB300 62%, #E68A00 100%)",
+                boxShadow:
+                  "0 0 18px rgba(255, 195, 45, 0.72), 0 8px 20px rgba(120, 72, 0, 0.42), inset 0 2px 6px rgba(255,255,255,0.35), inset 0 -7px 12px rgba(130,80,0,0.28)",
+                transition: "transform 0.24s, box-shadow 0.24s, filter 0.24s, background 0.24s",
+                "&::before": {
+                  content: '""',
+                  position: "absolute",
+                  top: -20,
+                  left: -40,
+                  width: "35%",
+                  height: "180%",
+                  background:
+                    "linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.45) 50%, rgba(255,255,255,0) 100%)",
+                  transform: "rotate(18deg)",
+                  animation: "shopShineSweep 2.4s ease-in-out infinite",
+                  pointerEvents: "none",
+                },
+                "&:hover": {
+                  transform: "scale(1.05)",
+                  filter: "brightness(1.1)",
+                  background:
+                    "linear-gradient(160deg, #FFE79A 0%, #FFC94F 35%, #FFB623 62%, #F58B00 100%)",
+                  boxShadow:
+                    "0 0 26px rgba(255, 210, 85, 0.92), 0 10px 24px rgba(120,72,0,0.54), inset 0 2px 7px rgba(255,255,255,0.42), inset 0 -7px 12px rgba(130,80,0,0.32)",
+                },
+                "@keyframes shopShineSweep": {
+                  "0%": { left: "-45%" },
+                  "55%": { left: "120%" },
+                  "100%": { left: "120%" },
+                },
+              }}
+            >
+              <StorefrontRoundedIcon sx={{ mr: 1, fontSize: { xs: 22, sm: 20 } }} />
+              Shop
+            </Button>
+          </Box>
         </Box>
-      </Container >
-
-      <DialogTrabajos
-        open={openTrabajos}
-        onClose={handleCloseTrabajos}
-        trabajos={trabajosActivos}
-        primaryLabel="Ver Servicios"
-        onPrimaryClick={() => { handleCloseTrabajos(); scrollToRef(informationsRef); }}
-      />
-    </Box >
+      </Container>
+    </Box>
   );
 }
 
 export default Features;
+
+
 

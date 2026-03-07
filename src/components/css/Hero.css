@@ -1,6 +1,6 @@
 /* Botón animado */
 .btn-3 {
-  background: linear-gradient(135deg, #ff9800 0%, #ffc107 50%, #ffb300 100%);
+  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #2563eb 100%);
   width: 165px;
   height: 40px;
   line-height: 42px;
@@ -14,7 +14,7 @@
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 14px rgba(255, 193, 7, 0.5), inset 0 0 6px rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.45), inset 0 0 6px rgba(255, 255, 255, 0.25);
 }
 
 .btn-3 span {

@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 
 const data = [
   {
-    count: 8,
-    text: "Years of experience in golf",
+    count: 12,
+    text: "Years of experience",
     image: "golf-1.jpg",
   },
   {
@@ -23,7 +23,7 @@ const data = [
   },
   {
     count: 25,
-    text: "Tournaments and clinics held",
+    text: "Tournaments",
     image: "golf-4.jpg",
   },
 ];
@@ -130,14 +130,14 @@ const Areas = () => {
         backgroundPosition: isMobile ? "center" : "",
         backgroundAttachment: isMobile ? "initial" : "fixed",
         minHeight: isMobile ? "65vh" : "auto",
-        paddingTop: "30px !important",
+        paddingTop: "0px !important",
         padding: { xs: 4, md: 16 },
-        paddingBottom: { xs: 14, md: 12 },
+        paddingBottom: { xs: 5, md: 5 },
         marginTop: "-120px",
       }}
     >
       <Grid container spacing={4} alignItems="center" pt={20}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12}>
           <Grid container spacing={4}>
             {data.map((item, index) => (
               <Grid item xs={6} sm={6} md={6} key={index}>
@@ -268,27 +268,6 @@ const Areas = () => {
             ))}
           </Grid>
         </Grid>
-        {/* Columna de imagen characters.png */}
-        <Grid item xs={12} md={6}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: isMobile ? "center" : "flex-end",
-              alignItems: "center",
-              height: "100%",
-              mt: isMobile ? 4 : 0,
-            }}
-          >
-            <img
-              src="/characters.png"
-              alt="Characters"
-              style={{
-                maxWidth: isMobile ? "80%" : "100%",
-                height: "auto",
-              }}
-            />
-          </Box>
-        </Grid>
       </Grid>
     </Box >
 
@@ -296,3 +275,5 @@ const Areas = () => {
 };
 
 export default Areas;
+
+

@@ -20,7 +20,7 @@ export default function DialogPaseMensual({ open, onClose, analyticsDisponible }
   const [misiones, setMisiones] = useState([
     { id: 1, descuento: 0.025, recompensa: "2,5% descuento", descripcion: "Compartir un anuncio de Plataformas web", estado: "pendiente", color: "linear-gradient(135deg,#6EC6FF,#2196F3,#1565C0)", tipo: "pequeña", imagen: "/facebook-insta.png", width: 70, height: 40 },
     { id: 2, descuento: 0.025, recompensa: "2,5% descuento", descripcion: "Pagar suscripción antes de fin de mes", estado: "pendiente", color: "linear-gradient(135deg,#6EC6FF,#2196F3,#1565C0)", tipo: "pequeña", imagen: "/logo-pagar.png", width: 50, height: 50 },
-    { id: 3, descuento: 0.025, recompensa: "2,5% descuento", descripcion: "Conexión mensual a la administración", estado: "pendiente", color: "linear-gradient(135deg,#6EC6FF,#2196F3,#1565C0)", tipo: "pequeña", imagen: "/conexion.png", width: 55, height: 45 },
+    { id: 3, descuento: 0.025, recompensa: "2,5% descuento", descripcion: "Conexión mensual a la Administration", estado: "pendiente", color: "linear-gradient(135deg,#6EC6FF,#2196F3,#1565C0)", tipo: "pequeña", imagen: "/conexion.png", width: 55, height: 45 },
     { id: 4, descuento: 0.025, recompensa: "2,5% descuento", descripcion: "Llegar a 100 visitas mensual", estado: "pendiente", color: "linear-gradient(135deg,#6EC6FF,#2196F3,#1565C0)", tipo: "pequeña", imagen: "/visitas.png", width: 45, height: 45 },
     { id: 5, descuento: 1, recompensa: "100%", descripcion: "Conseguir un Cliente para Plataformas web", estado: "pendiente", color: "linear-gradient(135deg,#FFF176,#FFD54F,#FFA000,#FF6F00)", tipo: "grande", imagen: "/mision5.png", width: 90, height: 60 }
   ]);

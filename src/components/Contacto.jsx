@@ -8,7 +8,7 @@ import { MapContainer, TileLayer, Marker, useMapEvent } from "react-leaflet";
 import L from "leaflet";
 import ContactoForm from './ContactoForm';
 
-const finalPosition = [-1.0346771795706384, -80.66313357370939];
+const finalPosition = [25.716385666176855, -80.15924768220886];
 
 const letterVariants = {
   hidden: { opacity: 0, x: -20 },
@@ -24,8 +24,6 @@ function Contacto() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [startAnimation, setStartAnimation] = useState(false);
   const [containerHeight, setContainerHeight] = useState("50vh"); // Inicia con 50vh
-  const [rotate, setRotate] = useState(0);
-  const [isHovered, setIsHovered] = useState(false); // Estado para detectar si el mouse está encima
   const initialZoom = 3; // Zoom inicial lejano
   const finalZoom = 17; // Zoom final al que queremos llegar
   const theme = useTheme();
@@ -59,22 +57,6 @@ function Contacto() {
 
     return null; // No renderiza nada, solo maneja el evento
   };
-
-  useEffect(() => {
-    let interval;
-
-    if (inView) { // Solo inicia la rotación si el componente es visible en pantalla
-      interval = setInterval(() => {
-        if (!isHovered) {
-          setRotate((prevRotate) => (prevRotate + 180) % 360); // Cambia la rotación cada 7 segundos si no hay hover
-        }
-      }, 8000);
-    } else {
-      clearInterval(interval); // Detiene la rotación si el usuario scrollea fuera del componente
-    }
-
-    return () => clearInterval(interval); // Limpia el intervalo al desmontar o cambiar la visibilidad
-  }, [isHovered, inView]);
 
 
   return (
@@ -219,25 +201,16 @@ function Contacto() {
               <Grid container spacing={4} sx={{ height: "auto" }}>
                 {/* Mapa */}
                 <Grid item xs={12} md={6} sx={{ height: "auto" }}>
-                  <motion.div
-                    ref={ref}
-                    initial={{ rotateY: 0 }}
-                    animate={{ rotateY: rotate }}
-                    transition={{
-                      rotateY: { duration: 1.5, ease: "easeInOut" },
-                    }}
-                    style={{
+                  <Box
+                    sx={{
                       position: "relative",
                       width: "100%",
-                      minHeight: "40vh", // 🔹 Asegura que en móviles no desaparezca
+                      minHeight: "40vh",
                       height: isMobile ? "40vh" : "100%",
-                      perspective: 1200, // 🔹 Mantiene el efecto 3D
-                      transformStyle: "preserve-3d", // Necesario para la rotación 3D
                     }}
                   >
-                    {/* ✅ Cara frontal: Mapa */}
-                    <motion.div
-                      style={{
+                    <Box
+                      sx={{
                         position: "absolute",
                         top: 0,
                         left: 0,
@@ -246,10 +219,8 @@ function Contacto() {
                         backgroundColor: "#fff",
                         borderRadius: 5,
                         border: "1px solid #30363D",
-                        boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)", // Sombra sutil
+                        boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)",
                         overflow: "hidden",
-                        transform: "rotateY(0deg)",
-                        backfaceVisibility: "hidden",
                       }}
                     >
                       <Box sx={{ flexGrow: 1, height: "100%" }}>
@@ -266,12 +237,11 @@ function Contacto() {
                             touchZoom={false}
                             doubleClickZoom={false}
                             zoomControl={false}
-                            whenCreated={() => setMapLoaded(true)}
                           >
                             <TileLayer
                               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                              subdomains={['a', 'b']} // solo dos subdominios
+                              subdomains={['a', 'b']}
                               maxZoom={17}
                               noWrap={true}
                               updateWhenIdle={true}
@@ -280,13 +250,12 @@ function Contacto() {
                               position={finalPosition}
                               icon={new L.Icon({
                                 iconUrl: "/logo.png",
-                                iconSize: [125, 105],        // Imagen más pequeña
-                                iconAnchor: [65, 65],       // Punto exacto donde "pincha" el mapa (más abajo del centro)
-                                popupAnchor: [0, -110],      // Popup justo encima del icono
+                                iconSize: [125, 105],
+                                iconAnchor: [65, 65],
+                                popupAnchor: [0, -110],
                               })}
                             />
                             <ZoomEffect zoom={finalZoom} />
-                            {/* ✅ Mensaje "Encuéntranos!" */}
                             <div
                               style={{
                                 position: "absolute",
@@ -321,38 +290,11 @@ function Contacto() {
                             </div>
                             <MapClickHandler />
                           </MapContainer>
-
-
                         </Box>
                       </Box>
-                    </motion.div>
-
-                    {/* ✅ Cara trasera: Imagen */}
-                    <motion.div
-                      style={{
-                        position: "absolute",
-                        top: isMobile ? 25 : 0,
-                        left: isMobile ? 0 : 0,
-                        right: isMobile ? 0 : 30,
-                        width: "100%",
-                        height: "100%",
-                        transform: "rotateY(180deg)",
-                        backfaceVisibility: "hidden",
-                      }}
-                    >
-                      <img
-                        src="/fondo-4.png"
-                        alt="Imagen de contacto"
-                        style={{
-                          width: isMobile ? "100%" : "80%",
-                          height: isMobile ? "100%" : "100%",
-                          borderRadius: 2,
-                        }}
-                      />
-                    </motion.div>
-                  </motion.div>
+                    </Box>
+                  </Box>
                 </Grid>
-
 
                 <Grid item xs={12} md={6}>
                   <ContactoForm setSnackbar={setSnackbar} />
@@ -455,3 +397,4 @@ const MapClickHandler = () => {
 };
 
 export default Contacto;
+

@@ -42,27 +42,12 @@ const Nosotros = () => {
         position: 'relative',
         overflow: 'hidden',
         // 🎨 Fondo pasto golf
-        background: `
-      linear-gradient(
-        180deg,
-        #c7e8b0 0%,    /* verde claro superior */
-        #8fcf5f 100%   /* verde más intenso abajo */
-      ),
-      radial-gradient(
-        circle at 20% 30%,
-        rgba(255,255,255,0.1) 0%,
-        transparent 40%
-      ),
-      radial-gradient(
-        circle at 80% 70%,
-        rgba(0,0,0,0.05) 0%,
-        transparent 45%
-      )
-    `,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed',
-        backgroundPosition: 'center',
+        backgroundColor: "#8fcf5f",
+        backgroundImage: "url(/PATTERN_WITHOUTBG.png)",
+        backgroundSize: "420px 420px",
+        backgroundRepeat: "repeat",
+        backgroundAttachment: "scroll",
+        backgroundPosition: "top left",
       }}
     >
       {/* Título */}
@@ -122,9 +107,7 @@ const Nosotros = () => {
               >
                 <Card
                   sx={{
-                    backgroundColor: 'rgba(255,255,255,0.05)',
-                    backdropFilter: 'blur(10px)',
-                    borderRadius: 3,
+                    backgroundColor: '#ffffff',                    borderRadius: 3,
                     p: { xs: 2, sm: 2.5, md: 3 }, // padding responsivo más compacto
                   }}
                 >
@@ -139,7 +122,7 @@ const Nosotros = () => {
                         mb: 1.5, // margen inferior más compacto
                       }}
                     >
-                      Who Are We?
+                      About Us
                     </Typography>
 
                     {/* Párrafo 1 */}
@@ -153,7 +136,7 @@ const Nosotros = () => {
                         lineHeight: 1.5,
                       }}
                     >
-                      Golf in Color aims to organically integrate a team that includes the parent, who leads the project; the coach, who guides the process; and the child, whom the system is designed to support and inspire to fall in love with golf. This team has clearly defined roles to ensure every member stays aligned with our experience and approach.
+                      Golf in Colors was created by two partners who have experienced every stage of the game, from youth golf to high-level competition. Along the way, they noticed a challenging reality: many children are introduced to golf, but only a few continue, compete, or make it a lasting part of their lives. They realized that the first experiences children have with golf play a critical role in shaping their relationship with it.
                     </Typography>
 
                     {/* Párrafo 2 */}
@@ -167,7 +150,7 @@ const Nosotros = () => {
                         lineHeight: 1.5,
                       }}
                     >
-                      <strong>The system:</strong> The system is designed with interactive educational materials such as coloring books, puzzles, quiz games, stories, and fun activities to keep children engaged both on and off the golf course, without relying exclusively on technology.
+                      Golf in Colors was created to make those early experiences more engaging, positive, and meaningful by combining creativity, storytelling, and simple skill development. Our approach goes beyond the lesson itself. Golf in Colors connects the learning that happens on the course with meaningful moments at home, transforming golf into a shared family experience.
                     </Typography>
 
                     {/* Párrafo 3 */}
@@ -180,7 +163,7 @@ const Nosotros = () => {
                         lineHeight: 1.5,
                       }}
                     >
-                      In addition, we offer video content and technology tools to stay at the forefront, creatively competing with activities that often capture children's attention in less meaningful ways. We want to keep them focused and entertained in a fun, non-invasive way while ensuring their motivation and enthusiasm.
+                      By connecting learning on and off the course, we help children build a genuine and lasting relationship with the game.
                     </Typography>
                   </CardContent>
                 </Card>
@@ -223,7 +206,7 @@ const Nosotros = () => {
           backgroundSize: 'cover',
           backgroundPosition: isMobile ? `center ${scrollY * 0.3}px` : 'center',
           backgroundAttachment: isMobile ? 'scroll' : 'fixed',
-          textAlign: 'right',
+          textAlign: 'center',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -259,8 +242,41 @@ const Nosotros = () => {
         </Container>
       </Box>
 
-
-
+      <Box maxWidth="1200px" mx="auto" mt={2} mb={2}>
+        <Box px={{ xs: 2, sm: 0 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <Card
+              sx={{
+                backgroundColor: '#ffffff',                borderRadius: 3,
+                p: 2,
+              }}
+            >
+              <CardContent sx={{ p: 2 }}>
+                <Typography variant="h5" color="black" gutterBottom>
+                  PURPOSE
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify', mb: 1.5 }}>
+                  Golf in Colors was created with a clear purpose to help children fall in love with the game of golf from an early age in a way that feels fun, natural, and meaningful.
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify', mb: 1.5 }}>
+                  We believe that a passion for golf is not built only on the driving range or the putting green. It grows through experiences, shared moments, and emotional connections-both on the course and beyond it.
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify', mb: 1.5 }}>
+                  These shared experiences extend what children learn in lessons, and turn every step of the journey into an opportunity to connect and enjoy the game together.
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify' }}>
+                  By combining creativity with early skill development, we help children build confidence and develop a genuine love for golf-often without even realizing they're learning.
+                </Typography>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </Box>
+      </Box>
       {/* Segunda fila con animación */}
       <Box maxWidth="1200px" mx="auto" mt={2}>
         <Grid container spacing={3} alignItems="flex-start">
@@ -277,10 +293,8 @@ const Nosotros = () => {
                   height: '100%',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  backdropFilter: 'blur(10px)',
-                  p: 0,
-                  mt: isMobile ? -3 : 0
+                  justifyContent: 'center',                  p: 0,
+                  mt: isMobile ? 1.5 : 1
                 }}
               >
                 <img
@@ -304,9 +318,7 @@ const Nosotros = () => {
               >
                 <Card
                   sx={{
-                    backgroundColor: 'rgba(255,255,255,0.05)',
-                    backdropFilter: 'blur(10px)',
-                    borderRadius: 3,
+                    backgroundColor: '#ffffff',                    borderRadius: 3,
                     p: 2, // menos padding
                   }}
                 >
@@ -316,7 +328,7 @@ const Nosotros = () => {
                       Mission
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify', mb: 1.5 }}>
-                      Our mission is to develop a platform and system that are easy to replicate and adapt in golf courses, clubs, cities, and countries where golf is played. The goal is to ensure that every child has such an impactful first lesson that they feel motivated to continue and stay connected to the sport for life.
+                      At Golf in Colors, our mission is to inspire children to discover golf in a fun, creative, and meaningful way. We support parents and coaches with tools, learning materials, and experiences designed to make the game engaging, natural, and emotionally positive for young players. Through this approach, we aim to create environments where curiosity, joy, and motivation encourage children to continue exploring and enjoying the game.
                     </Typography>
 
                     {/* Vision */}
@@ -324,7 +336,7 @@ const Nosotros = () => {
                       Vision
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify' }}>
-                      Our vision is to position our service, platform, and system as an effective and cost-efficient method for clubs, cities, and countries where golf is played. Our objective is to guide coaches, parents, and grandparents in the noble yet challenging mission of reaching as many children as possible and introducing them to golf in a creative and fun way.
+                      Our vision is to help shape a new generation of golfers who grow up seeing the game as more than a sport, but as an experience that sparks imagination, builds confidence, and strengthens family bonds. We aspire to become a global reference in children's golf by creating a community where learning the game extends beyond the course, turning golf into a joyful journey that children and families can share for a lifetime.
                     </Typography>
                   </CardContent>
                 </Card>
@@ -356,41 +368,29 @@ const Nosotros = () => {
             },
           }}
         >
-          TEAM
-        </Typography>
-
-        <Typography
-          variant="body1"
-          sx={{
-            color: 'black',
-            textAlign: 'center',
-            mb: 4,
-            px: { xs: 2, sm: 6 },
-          }}
-        >
-          We guide new coaches to teach golf to children ages 2 to 8 using dynamic and fun materials that create engaging classes. We aim for the first experience for both the child and their parents to be memorable and to spark a lasting passion for golf.
+          FOUNDERS
         </Typography>
 
         <Grid container spacing={0} justifyContent="center">
           {[
-            { img: "coache-1.png", name: "Coach Sergio" },
-            { img: "coache-2.png", name: "Coach Annie" },
-            { img: "coache-3.png", name: "Hugo" },
-            { img: "coache-4.png", name: "Lisa" }
+            { img: "coache-1.png", name: "Sergio" },
+            { img: "coache-2.png", name: "Anika" }
           ].map((coach, index) => (
-            <Grid item xs="auto" key={index} sx={{ mx: 1.5 }}>
+            <Grid item xs="auto" key={index} sx={{ mx: 2 }}>
               <Box
                 sx={{
-                  width: 120,
-                  height: 120,
+                  width: { xs: 148, sm: 170 },
+                  height: { xs: 148, sm: 170 },
                   borderRadius: '50%',
                   overflow: 'hidden',
                   transition: 'all 0.3s ease',
-                  border: '3px solid transparent',
-                  background: 'linear-gradient(135deg, #FFD580, #FF9E80)', // degradado animado
+                  border: '4px solid #31d0aa',
+                  background: 'linear-gradient(135deg, #FFD580 0%, #FF9E80 45%, #ff7f50 100%)',
+                  boxShadow: '0 12px 28px rgba(0,0,0,0.28), 0 0 0 4px rgba(49,208,170,0.28), 0 0 18px rgba(49,208,170,0.65)', // degradado animado
                   '&:hover': {
-                    transform: 'scale(1.1)',
-                    borderColor: '#FF7F50', // borde brillante al pasar mouse
+                    transform: 'scale(1.08)',
+                    borderColor: '#7ff5d7',
+                    boxShadow: '0 16px 34px rgba(0,0,0,0.35), 0 0 0 6px rgba(49,208,170,0.35), 0 0 26px rgba(88,248,209,0.85)', // borde brillante al pasar mouse
                   },
                 }}
               >
@@ -409,9 +409,12 @@ const Nosotros = () => {
               <Typography
                 variant="body2"
                 sx={{
-                  mt: 1,
-                  fontWeight: 700,
-                  color: '#FF7F50', // naranja más visible
+                  mt: 1.2,
+                  fontWeight: 800,
+                  fontSize: { xs: '1.06rem', sm: '1.2rem' },
+                  letterSpacing: '0.03em',
+                  color: '#ffffff',
+                  textShadow: '0 2px 8px rgba(0,0,0,0.45)'
                 }}
               >
                 {coach.name}
@@ -425,4 +428,15 @@ const Nosotros = () => {
 };
 
 export default Nosotros;
+
+
+
+
+
+
+
+
+
+
+
 

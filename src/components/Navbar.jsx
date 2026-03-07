@@ -1,9 +1,7 @@
 ﻿import { useState, useEffect } from "react";
-import { AppBar, Toolbar, Button, IconButton, Drawer, Typography, ListItem, ListItemButton, ListItemText, Container, Box, useTheme, useMediaQuery, Dialog, DialogTitle, DialogContent } from "@mui/material";
+import { AppBar, Toolbar, Button, IconButton, Drawer, Typography, ListItem, ListItemButton, ListItemText, Container, Box, useTheme, useMediaQuery, Dialog, DialogTitle, DialogContent, SvgIcon } from "@mui/material";
 import { WhatsApp as WhatsAppIcon, Menu as MenuIcon, Home, Mail, Close } from "@mui/icons-material"; // Agregamos Close para la "X"
 import InstagramIcon from "@mui/icons-material/Instagram";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { motion, AnimatePresence } from "framer-motion";
 import SchoolIcon from "@mui/icons-material/School";
 import { keyframes } from "@emotion/react";
@@ -19,11 +17,16 @@ import StorefrontRoundedIcon from '@mui/icons-material/StorefrontRounded';
 import { useLocation } from 'react-router-dom';
 import Tooltip from "@mui/material/Tooltip";
 
+const TikTokIcon = (props) => (
+  <SvgIcon {...props} viewBox="0 0 24 24">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.24h-3.45v13.21a2.89 2.89 0 1 1-2.89-3 2.9 2.9 0 0 1 .72.09V9.23a6.34 6.34 0 0 0-.72-.04A6.34 6.34 0 1 0 15.82 15V8.36a8.2 8.2 0 0 0 4.77 1.53V6.69z" />
+  </SvgIcon>
+);
+
 
 const socialData = {
-  Instagram: { href: "https://www.instagram.com/rosmiyasc/", Icon: InstagramIcon, bgColor: "linear-gradient(45deg, #cf198c, #f41242)", hoverColor: "#cf198c" },
-  Facebook: { href: "https://www.facebook.com/people/rosmiya/61573460535717/#", Icon: FacebookIcon, bgColor: "linear-gradient(45deg, #00B5F5, #002A8F)", hoverColor: "#0077b7" },
-  LinkedIn: { href: "https://www.linkedin.com/company/plataformas-web/", Icon: LinkedInIcon, bgColor: "linear-gradient(45deg, #00B5F5, #0077b7)", hoverColor: "#0077b7" }
+  Instagram: { href: "https://www.instagram.com/golfincolors/", Icon: InstagramIcon, bgColor: "linear-gradient(45deg, #cf198c, #f41242)", hoverColor: "#cf198c" },
+  TikTok: { href: "https://www.tiktok.com/@golfincolors", Icon: TikTokIcon, bgColor: "linear-gradient(45deg, #111111, #25F4EE)", hoverColor: "#25F4EE" }
 };
 
 const shrinkCircle = keyframes`0%{transform:scale(1);opacity:1;}100%{transform:scale(0);opacity:0;}`;
@@ -688,7 +691,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
 
             )}
           </AnimatePresence>
-          {/* Administración */}
+          {/* Administration */}
           {open && (
             <motion.div
               variants={bienvenidaVariants}
@@ -767,7 +770,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                     padding: "20px 0",
                   }}
                 >
-                  {["Instagram", "Facebook", "LinkedIn"].map((social, index) => {
+                  {["Instagram", "TikTok"].map((social) => {
                     const info = socialData[social];
 
                     return (
@@ -855,6 +858,11 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
 }
 
 export default Navbar;
+
+
+
+
+
 
 
 

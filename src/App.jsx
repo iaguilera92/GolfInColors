@@ -41,25 +41,8 @@ function App() {
   const [showApp, setShowApp] = useState(false);
   const [snackbarVersion, setSnackbarVersion] = useState({ open: false, version: "", });
   const triggerInformations = (value) => setShouldAnimateInformations(value);
-  const [showDialogInicio, setShowDialogInicio] = useState(false);
-  const [userCategory, setUserCategory] = useState(null);
   const [isRouteFallbackVisible, setIsRouteFallbackVisible] = useState(false);
   const [isKidsBookFullscreen, setIsKidsBookFullscreen] = useState(false);
-
-  useEffect(() => {
-    const remember = localStorage.getItem("remember_category_choice") === "1";
-    const localCategory = localStorage.getItem("user_category");
-    const sessionCategory = sessionStorage.getItem("user_category");
-
-    if (remember && localCategory) {
-      setUserCategory(localCategory);
-      return;
-    }
-
-    if (sessionCategory) {
-      setUserCategory(sessionCategory);
-    }
-  }, []);
 
   useEffect(() => {
     const handleRouteFallback = (event) => {
@@ -160,42 +143,12 @@ function App() {
     };
   }, [videoReady, location.pathname]);
 
-  const handleCategorySelect = (payload) => {
-    const category = typeof payload === "string" ? payload : payload?.value;
-    const remember = typeof payload === "string" ? true : Boolean(payload?.remember);
-
-    if (!category) return;
-
-    console.log("Usuario seleccionÃƒÂ³:", category);
-    setUserCategory(category);
-    setShowDialogInicio(false);
-
-    if (remember) {
-      localStorage.setItem("remember_category_choice", "1");
-      localStorage.setItem("user_category", category);
-      sessionStorage.removeItem("user_category");
-    } else {
-      localStorage.removeItem("remember_category_choice");
-      localStorage.removeItem("user_category");
-      sessionStorage.setItem("user_category", category);
+  const openCategoryFeatures = () => {
+    const section = document.getElementById("category-features-section");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
-
-  useEffect(() => {
-    let timer;
-
-    const isHomeRoute = ["/", ""].includes(location.pathname);
-
-    if (showApp && isHomeRoute) {
-      timer = setTimeout(() => {
-        setShowDialogInicio(true);
-      }, 3000);
-    } else {
-      setShowDialogInicio(false);
-    }
-
-    return () => clearTimeout(timer);
-  }, [showApp, location.pathname]);
   //LIBERAR CARGANDO
   useEffect(() => {
     const body = document.body;
@@ -268,7 +221,7 @@ function App() {
 
         {/* TransiciÃƒÂ³n entre pÃƒÂ¡ginas */}
         <Box sx={{ position: "relative" }}>
-          <Outlet context={{ showApp, informationsRef, openDialogInicio: () => setShowDialogInicio(true) }} />        </Box>
+          <Outlet context={{ showApp, informationsRef, openDialogInicio: openCategoryFeatures }} />        </Box>
         {/* Secciones visibles solo en la pÃƒÂ¡gina de inicio */}
         {["/", ""].includes(location.pathname) && (
           <>
@@ -371,15 +324,19 @@ function App() {
         )}
       </Box>
       <DialogInicio
-        open={showDialogInicio}
-        onClose={() => setShowDialogInicio(false)}
-        onSelect={handleCategorySelect}
+        open={false}
+        onClose={() => { }}
+        onSelect={() => { }}
       />
     </ThemeProvider>
   );
 }
 
 export default App;
+
+
+
+
 
 
 

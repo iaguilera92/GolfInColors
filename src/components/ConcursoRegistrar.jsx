@@ -608,7 +608,7 @@ const ConcursoRegistrar = ({ open, onClose }) => {
                                                     seguirnos en{" "}
                                                     <Box
                                                         component="a"
-                                                        href="https://www.instagram.com/rosmiyasc/"
+                                                        href="https://www.instagram.com/golfincolors/"
                                                         target="_blank"
                                                         rel="noopener noreferrer"
                                                         sx={{
