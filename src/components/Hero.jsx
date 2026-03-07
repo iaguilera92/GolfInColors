@@ -5,6 +5,46 @@ import { useNavigate } from "react-router-dom";
 import "./css/Hero.css";
 import CircularProgress from "@mui/material/CircularProgress";
 
+function AnimatedLine({ text, delay = 0, size, color = "#ffffff", weight = 800, stroke, isMobile }) {
+  const letters = text.split("");
+
+  return (
+    <Typography
+      variant="h3"
+      className="text"
+      sx={{
+        fontSize: size || (isMobile ? "1.1rem !important" : "2.2rem !important"),
+        whiteSpace: "pre",
+        textAlign: "center",
+        position: "relative",
+        display: "inline-block",
+        lineHeight: 1,
+        marginBottom: 0,
+        letterSpacing: "0.02em",
+      }}
+    >
+      {letters.map((char, index) => (
+        <motion.span
+          key={`${char}-${index}-${text}`}
+          initial={{ y: -30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.25, ease: "easeOut", delay: 1 + delay + index * 0.03 }}
+          style={{
+            position: "relative",
+            display: "inline-block",
+            whiteSpace: "pre",
+            color,
+            fontWeight: weight,
+            textShadow: "0 3px 14px rgba(0,0,0,0.45)",
+            WebkitTextStroke: stroke || "0px transparent",
+          }}
+        >
+          {char}
+        </motion.span>
+      ))}
+    </Typography>
+  );
+}
 function Hero({ informationsRef, setVideoReady, onStartClick }) {
   const [openAlert, setOpenAlert] = useState(false);
   const [showButton, setShowButton] = useState(false);
@@ -38,46 +78,6 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
     return () => clearTimeout(fallback);
   }, [loadingVideo]);
 
-  const AnimatedLine = ({ text, delay = 0, size, color = "#ffffff", weight = 800, stroke }) => {
-    const letters = text.split("");
-
-    return (
-      <Typography
-        variant="h3"
-        className="text"
-        sx={{
-          fontSize: size || (isMobile ? "1.1rem !important" : "2.2rem !important"),
-          whiteSpace: "pre",
-          textAlign: "center",
-          position: "relative",
-          display: "inline-block",
-          lineHeight: 1,
-          marginBottom: 0,
-          letterSpacing: "0.02em",
-        }}
-      >
-        {letters.map((char, index) => (
-          <motion.span
-            key={`${char}-${index}-${text}`}
-            initial={{ y: -30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.25, ease: "easeOut", delay: delay + index * 0.03 }}
-            style={{
-              position: "relative",
-              display: "inline-block",
-              whiteSpace: "pre",
-              color,
-              fontWeight: weight,
-              textShadow: "0 3px 14px rgba(0,0,0,0.45)",
-              WebkitTextStroke: stroke || "0px transparent",
-            }}
-          >
-            {char}
-          </motion.span>
-        ))}
-      </Typography>
-    );
-  };
 
   return (
     <>
@@ -199,10 +199,11 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
                 />
               </Box>
 
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}> 
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                 <motion.span
+                  initial={{ scale: 0.7, opacity: 0 }}
                   animate={{ scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }}
-                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                   style={{ color: "#ffe27a", fontSize: isMobile ? "0.95rem" : "1.2rem" }}
                 >
                   {"\u2726"}
@@ -218,8 +219,9 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
                 />
 
                 <motion.span
+                  initial={{ scale: 0.7, opacity: 0 }}
                   animate={{ scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }}
-                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 1.4 }}
                   style={{ color: "#ffe27a", fontSize: isMobile ? "0.95rem" : "1.2rem" }}
                 >
                   {"\u2726"}
@@ -262,6 +264,9 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
 }
 
 export default Hero;
+
+
+
 
 
 
