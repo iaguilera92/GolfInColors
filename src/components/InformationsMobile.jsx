@@ -80,20 +80,20 @@ function Informations({ informationsRef, triggerInformations }) {
 
   const { ref: swiperRef, inView: swiperInView } = useInView({ threshold: 0.2, triggerOnce: true, });
 
-  //CANCELAR PRIMERA ANIMACIÓN
+  //CANCELAR PRIMERA ANIMACIï¿½N
   const [hasAnimated, setHasAnimated] = useState(false);
   const [hasAnimated2, setHasAnimated2] = useState(false);
 
   useEffect(() => {
     if (inView) {
-      setShouldAnimate(true); // ?? Activa la animación cuando el componente es visible
+      setShouldAnimate(true); // ?? Activa la animaciï¿½n cuando el componente es visible
     }
   }, [inView]);
 
-  //ANIMACIÓN DESCRIPTORES
+  //ANIMACIï¿½N DESCRIPTORES
   useEffect(() => {
     if (swiperInView && swiperInstance && !hasAnimated) {
-      swiperInstance.slideTo(0, 1500); // mueve del último al primero
+      swiperInstance.slideTo(0, 1500); // mueve del ï¿½ltimo al primero
       setHasAnimated(true);
     }
   }, [swiperInView, swiperInstance, hasAnimated]);
@@ -102,13 +102,13 @@ function Informations({ informationsRef, triggerInformations }) {
     if (hasAnimated) {
       const timeout = setTimeout(() => {
         setShowPopularBadge(true);
-      }, 2000); // Delay de 3 segundos después que el swiper terminó su animación
+      }, 2000); // Delay de 3 segundos despuï¿½s que el swiper terminï¿½ su animaciï¿½n
       return () => clearTimeout(timeout);
     }
   }, [hasAnimated]);
 
 
-  //EVITAR ANIMACIÓN DUPLICADA
+  //EVITAR ANIMACIï¿½N DUPLICADA
   useEffect(() => {
     if (inView && !hasAnimated2) {
       const timer = setTimeout(() => {
@@ -119,7 +119,7 @@ function Informations({ informationsRef, triggerInformations }) {
   }, [inView, hasAnimated2]);
 
   const handleContactClick = (title) => {
-    const mensaje = `¡Hola! Me interesó la promoción de ${encodeURIComponent(title)} ¿Me comentas?`;
+    const mensaje = `ï¿½Hola! Me interesï¿½ la promociï¿½n de ${encodeURIComponent(title)} ï¿½Me comentas?`;
     window.open(`https://api.whatsapp.com/send?phone=15617975986&text=${mensaje}`, "_blank");
   };
   return (
@@ -176,7 +176,7 @@ function Informations({ informationsRef, triggerInformations }) {
                 position: "relative",
                 display: "inline-block",
 
-                zIndex: 2, // asegúrate de que esté sobre cualquier overlay
+                zIndex: 2, // asegï¿½rate de que estï¿½ sobre cualquier overlay
 
                 "&::after": {
                   content: '""',
@@ -226,7 +226,7 @@ function Informations({ informationsRef, triggerInformations }) {
                           top: 0,
                           left: 0,
                           right: 0,
-                          zIndex: 0,      // ?? este contexto queda detrás
+                          zIndex: 0,      // ?? este contexto queda detrï¿½s
                           pointerEvents: "none", // evita bloquear clics de la card
                         }}
                       >
@@ -250,7 +250,7 @@ function Informations({ informationsRef, triggerInformations }) {
                               minWidth: "110px",
                               textAlign: "center",
                               display: "grid",
-                placeItems: "center",
+                              placeItems: "center",
                               gap: 6,
                               boxShadow: "0 0 12px 2px rgba(255, 105, 0, 0.6)",
                               border: "2px solid #ff6a00",
@@ -308,7 +308,7 @@ function Informations({ informationsRef, triggerInformations }) {
 
                           }}
                         >
-                          {/* Título y descripción */}
+                          {/* Tï¿½tulo y descripciï¿½n */}
                           <Box sx={{ mb: 1 }}>
                             <Typography
                               variant="h6"
@@ -365,7 +365,7 @@ function Informations({ informationsRef, triggerInformations }) {
                               </Typography>
                             ))}
                           </Box>
-                          {/* Botón Cotizar (queda abajo gracias a mt:auto) */}
+                          {/* Botï¿½n Cotizar (queda abajo gracias a mt:auto) */}
                           <motion.button
                             onClick={() => handleContactClick(promo.title)}
                             whileHover={{ scale: 1.05 }}
@@ -383,14 +383,14 @@ function Informations({ informationsRef, triggerInformations }) {
                               cursor: "pointer",
                               boxShadow: "0 6px 18px rgba(0,0,0,0.3)",
                               display: "grid",
-                placeItems: "center",
+                              placeItems: "center",
                               gap: "8px",
                             }}
                           >
                             <Box
                               component="img"
                               src="/clic.jpg"
-                              alt="Ícono de clic"
+                              alt="ï¿½cono de clic"
                               sx={{
                                 width: 20,
                                 height: 20,
@@ -437,7 +437,7 @@ function Informations({ informationsRef, triggerInformations }) {
 
             <Box
               sx={{
-                width: 30,  // un poquito más grande
+                width: 30,  // un poquito mï¿½s grande
                 height: 30,
                 borderRadius: "50%",
                 background: "linear-gradient(135deg, #4fd1c5, #38b2ac)", // gradiente turquesa vibrante
@@ -445,6 +445,7 @@ function Informations({ informationsRef, triggerInformations }) {
                 placeItems: "center",
                 border: "1.5px solid rgba(255,255,255,0.9)", // borde blanco semitransparente
                 mx: "auto",
+                transform: "translateX(14px)",
                 mb: 0.5,
                 boxShadow: "0 4px 12px rgba(0,0,0,0.35)", // halo para resaltar sobre fondo oscuro
                 position: "relative",
@@ -455,9 +456,9 @@ function Informations({ informationsRef, triggerInformations }) {
                 initial={{ rotate: 0, scale: 0.85 }}
                 animate={inView || hasAnimated2 ? { rotate: 360, scale: 1 } : { rotate: 0, scale: 0.85 }}
                 transition={{
-                  duration: 1.2,
+                  duration: 0.15,
                   repeat: 2,
-                  ease: "easeInOut",
+                  ease: "linear",
                 }}
                 style={{
                   position: "absolute",
@@ -471,7 +472,7 @@ function Informations({ informationsRef, triggerInformations }) {
               </motion.div>
             </Box>
             <motion.div
-              initial={{ opacity: 0, y: 80 }} // ?? Aparece más abajo
+              initial={{ opacity: 0, y: 80 }} // ?? Aparece mï¿½s abajo
               animate={inView || hasAnimated2 ? { opacity: 1, y: 0 } : { opacity: 0, y: 80 }}
               transition={{ duration: 1, ease: 'easeOut' }}
             >
@@ -507,7 +508,7 @@ function Informations({ informationsRef, triggerInformations }) {
             </motion.div>
 
           </Box>
-          {/* Columna de los íconos */}
+          {/* Columna de los ï¿½conos */}
           <Grid item xs={12} md={6}>
             {[
               {
@@ -564,7 +565,7 @@ function Informations({ informationsRef, triggerInformations }) {
                           width: 100,
                           height: 85,
                           display: "grid",
-                placeItems: "center",
+                          placeItems: "center",
                         }}
                       >
                         {!item.hideLine && (
@@ -574,7 +575,7 @@ function Informations({ informationsRef, triggerInformations }) {
                             transition={{
                               delay: 0.2 * index,
                               duration: 1,
-                              ease: "easeInOut",
+                              ease: "linear",
                             }}
                             style={{
                               position: "absolute",
@@ -598,9 +599,9 @@ function Informations({ informationsRef, triggerInformations }) {
                             height: 70,
                             borderRadius: "50%",
                             border: "2px solid white", // borde blanco para contraste
-                            backgroundColor: "rgba(255,255,255,0.1)", // fondo translúcido blanco
+                            backgroundColor: "rgba(255,255,255,0.1)", // fondo translï¿½cido blanco
                             display: "grid",
-                placeItems: "center",
+                            placeItems: "center",
                             position: "relative",
                             zIndex: 2,
                           }}
@@ -659,6 +660,10 @@ function Informations({ informationsRef, triggerInformations }) {
 };
 
 export default Informations;
+
+
+
+
 
 
 

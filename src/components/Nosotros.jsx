@@ -1,4 +1,4 @@
-﻿import { Box, Typography, Grid, Container, useTheme, useMediaQuery, Card, CardContent } from "@mui/material";
+import { Box, Typography, Grid, Container, useTheme, useMediaQuery, Card, CardContent } from "@mui/material";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
@@ -41,7 +41,7 @@ const Nosotros = () => {
         pb: 3.5,
         position: 'relative',
         overflow: 'hidden',
-        // 🎨 Fondo pasto golf
+        // ?? Fondo pasto golf
         backgroundColor: "#8fcf5f",
         backgroundImage: "url(/PATTERN_WITHOUTBG.png)",
         backgroundSize: "420px 420px",
@@ -50,16 +50,16 @@ const Nosotros = () => {
         backgroundPosition: "top left",
       }}
     >
-      {/* Título */}
+      {/* T�tulo */}
       <Box textAlign="center" mb={4}>
         <Typography
-          variant={isMobile ? "h4" : "h4"}
+          variant={isMobile ? "h5" : "h5"}
           fontWeight={800}
           sx={{
             position: "relative",
             display: "inline-flex",
             letterSpacing: "0.04em",
-            background: "white", // naranja más vivo
+            background: "white", // naranja m�s vivo
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
 
@@ -72,7 +72,7 @@ const Nosotros = () => {
               width: "60%",
               height: "4px",
               borderRadius: "4px",
-              background: "white", // mismo degradado en la línea
+              background: "white", // mismo degradado en la l�nea
             },
           }}
         >
@@ -93,7 +93,7 @@ const Nosotros = () => {
 
 
 
-      {/* Primera fila con animación */}
+      {/* Primera fila con animaci�n */}
       <Box maxWidth="1200px" mx="auto">
         <Grid container spacing={3} alignItems="center">
 
@@ -107,31 +107,31 @@ const Nosotros = () => {
               >
                 <Card
                   sx={{
-                    backgroundColor: '#ffffff',                    borderRadius: 3,
-                    p: { xs: 2, sm: 2.5, md: 3 }, // padding responsivo más compacto
+                    backgroundColor: '#ffffff', borderRadius: 3,
+                    p: { xs: 2, sm: 2.5, md: 3 }, // padding responsivo m�s compacto
                   }}
                 >
                   <CardContent>
-                    {/* Título */}
+                    {/* T�tulo */}
                     <Typography
-                      variant="h5" // más pequeño que h4
+                      variant="h5" // m�s peque�o que h4
                       sx={{
                         color: 'black',
-                        fontSize: { xs: '1.25rem', sm: '1.5rem', md: '1.75rem' }, // tamaño responsivo
+                        fontSize: { xs: '1.25rem', sm: '1.5rem', md: '1.75rem' }, // tama�o responsivo
                         fontWeight: 700,
-                        mb: 1.5, // margen inferior más compacto
+                        mb: 1.5, // margen inferior m�s compacto
                       }}
                     >
                       About Us
                     </Typography>
 
-                    {/* Párrafo 1 */}
+                    {/* P�rrafo 1 */}
                     <Typography
                       variant="body2"
                       sx={{
                         color: 'black',
                         textAlign: 'justify',
-                        mb: 1.5, // margen más pequeño
+                        mb: 1.5, // margen m�s peque�o
                         fontSize: { xs: '0.875rem', sm: '0.95rem', md: '1rem' },
                         lineHeight: 1.5,
                       }}
@@ -139,7 +139,7 @@ const Nosotros = () => {
                       Golf in Colors was created by two partners who have experienced every stage of the game, from youth golf to high-level competition. Along the way, they noticed a challenging reality: many children are introduced to golf, but only a few continue, compete, or make it a lasting part of their lives. They realized that the first experiences children have with golf play a critical role in shaping their relationship with it.
                     </Typography>
 
-                    {/* Párrafo 2 */}
+                    {/* P�rrafo 2 */}
                     <Typography
                       variant="body2"
                       sx={{
@@ -153,7 +153,7 @@ const Nosotros = () => {
                       Golf in Colors was created to make those early experiences more engaging, positive, and meaningful by combining creativity, storytelling, and simple skill development. Our approach goes beyond the lesson itself. Golf in Colors connects the learning that happens on the course with meaningful moments at home, transforming golf into a shared family experience.
                     </Typography>
 
-                    {/* Párrafo 3 */}
+                    {/* P�rrafo 3 */}
                     <Typography
                       variant="body2"
                       sx={{
@@ -184,7 +184,7 @@ const Nosotros = () => {
                   src="/logo.png"
                   alt="Logo"
                   style={{
-                    maxWidth: isMobile ? '65%' : '100%',
+                    maxWidth: isMobile ? '40%' : '58%',
                     height: 'auto',
                   }}
                 />
@@ -252,7 +252,7 @@ const Nosotros = () => {
           >
             <Card
               sx={{
-                backgroundColor: '#ffffff',                borderRadius: 3,
+                backgroundColor: '#ffffff', borderRadius: 3,
                 p: 2,
               }}
             >
@@ -277,36 +277,36 @@ const Nosotros = () => {
           </motion.div>
         </Box>
       </Box>
-      {/* Segunda fila con animación */}
+      {/* Segunda fila con animaci�n */}
       <Box maxWidth="1200px" mx="auto" mt={2}>
         <Grid container spacing={3} alignItems="flex-start">
-          {/* Imagen a la izquierda con animación */}
+          {/* Imagen a la izquierda con animaci�n */}
           <Grid item xs={12} md={6}>
             <motion.div
               initial={{ opacity: 0, x: -60 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
-              viewport={{ once: true, amount: 0.3 }} // 👈 mejora el comportamiento en scroll
+              viewport={{ once: true, amount: 0.3 }} // ?? mejora el comportamiento en scroll
             >
               <Box
                 sx={{
                   height: '100%',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',                  p: 0,
+                  justifyContent: 'center', p: 0,
                   mt: isMobile ? 1.5 : 1
                 }}
               >
                 <img
                   src="mision-empresa.png"
                   alt="Logo React"
-                  style={{ maxWidth: '65%', height: 'auto' }}
+                  style={{ maxWidth: isMobile ? '52%' : '58%', height: 'auto' }}
                 />
               </Box>
             </motion.div>
           </Grid>
 
-          {/* Mission + Vision a la derecha con animación */}
+          {/* Mission + Vision a la derecha con animaci�n */}
           <Grid item xs={12} md={6}>
             <Box px={{ xs: 2, sm: 0 }}>
 
@@ -314,11 +314,11 @@ const Nosotros = () => {
                 initial={{ opacity: 0, x: 60 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: 'easeOut' }}
-                viewport={{ once: true, amount: 0.3 }} // 👈 mejora el comportamiento en scroll
+                viewport={{ once: true, amount: 0.3 }} // ?? mejora el comportamiento en scroll
               >
                 <Card
                   sx={{
-                    backgroundColor: '#ffffff',                    borderRadius: 3,
+                    backgroundColor: '#ffffff', borderRadius: 3,
                     p: 2, // menos padding
                   }}
                 >
@@ -346,7 +346,7 @@ const Nosotros = () => {
           </Grid>
         </Grid>
       </Box>
-      {/* Sección Entrenadores */}
+      {/* Secci�n Entrenadores */}
       <Box maxWidth="1200px" mx="auto" mt={6} mb={6} textAlign="center">
         <Typography
           variant={isMobile ? "h5" : "h4"}
@@ -379,8 +379,8 @@ const Nosotros = () => {
             <Grid item xs="auto" key={index} sx={{ mx: 2 }}>
               <Box
                 sx={{
-                  width: { xs: 148, sm: 170 },
-                  height: { xs: 148, sm: 170 },
+                  width: { xs: 130, sm: 170 },
+                  height: { xs: 130, sm: 170 },
                   borderRadius: '50%',
                   overflow: 'hidden',
                   transition: 'all 0.3s ease',
@@ -428,6 +428,7 @@ const Nosotros = () => {
 };
 
 export default Nosotros;
+
 
 
 

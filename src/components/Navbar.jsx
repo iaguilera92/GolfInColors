@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { AppBar, Toolbar, Button, IconButton, Drawer, Typography, ListItem, ListItemButton, ListItemText, Container, Box, useTheme, useMediaQuery, Dialog, DialogTitle, DialogContent, SvgIcon } from "@mui/material";
 import { WhatsApp as WhatsAppIcon, Menu as MenuIcon, Home, Mail, Close } from "@mui/icons-material"; // Agregamos Close para la "X"
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -16,6 +16,7 @@ import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
 import StorefrontRoundedIcon from '@mui/icons-material/StorefrontRounded';
 import { useLocation } from 'react-router-dom';
 import Tooltip from "@mui/material/Tooltip";
+import SettingsSuggestRoundedIcon from "@mui/icons-material/SettingsSuggestRounded";
 
 const TikTokIcon = (props) => (
   <SvgIcon {...props} viewBox="0 0 24 24">
@@ -59,7 +60,7 @@ const itemVariants = {
 
 const SocialButton = ({ href, Icon, bgColor, hoverStyles }) => (
   <Box component="a" href={href} target="_blank" rel="noopener" sx={{
-    width: 55, height: 55, borderRadius: "50%", position: "relative", display: "flex",
+    width: 42, height: 42, borderRadius: "50%", position: "relative", display: "flex",
     alignItems: "center", justifyContent: "center", overflow: "hidden",
     "&:hover .circle": { animation: `${shrinkCircle} 300ms forwards` },
     "&:hover .icon": { animation: `${expandIcon} 300ms forwards`, ...hoverStyles },
@@ -69,7 +70,7 @@ const SocialButton = ({ href, Icon, bgColor, hoverStyles }) => (
       background: bgColor, transition: "transform 300ms ease-out",
     }} />
     <Icon className="icon" sx={{
-      color: "white", fontSize: 37, position: "absolute",
+      color: "white", fontSize: 26, position: "absolute",
       transition: "color 300ms ease-in, transform 300ms ease-in",
     }} />
   </Box>
@@ -91,17 +92,17 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
   const mostrarAnimacion = videoReady || (location.pathname !== '/' && location.pathname !== '');
   const [animacionMostrada, setAnimacionMostrada] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const maxScroll = 80; // hasta dónde se desvanece
+  const maxScroll = 80; // hasta donde se desvanece
   const opacity = Math.max(0, 1 - scrollY / maxScroll);
   const translateY = Math.min(scrollY, maxScroll);
   const [mostrarAdmin, setMostrarAdmin] = useState(false);
-  const [titulo, setTitulo] = useState("?? Envíos a todo Venezuela");
+  const [titulo, setTitulo] = useState("?? Envios a todo Venezuela");
   const [mostrarTexto, setMostrarTexto] = useState(true);
 
   useEffect(() => {
     // ? cada vez que cambia la ruta, forzamos a mostrar el banner y el logo
     setAnimacionMostrada(true);
-    setTitulo("?? Envíos a todo Ecuador");
+    setTitulo("?? Envios a todo Ecuador");
   }, [location.pathname]);
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
   const handleOpenPDF = () => isMobile ? window.open("/plataformasweb-pdf.pdf", "_blank") : setOpenPDF(true);
@@ -148,10 +149,10 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
       Shop: goToCatalogo,
 
       Servicios: () => navigate("/servicios"),
-      Catálogo: goToCatalogo,
+      Catalogo: goToCatalogo,
       Nosotros: () => navigate("/nosotros"),
       "About Us": () => navigate("/nosotros"),
-      Presentación: handleOpenPDF,
+      Presentacion: handleOpenPDF,
     };
 
     actions[item.name]?.();
@@ -240,7 +241,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                       exit={{ opacity: 0 }}
                       transition={{
                         duration: 1,
-                        delay: mostrarAnimacion ? 1 : 0, // ? delay según si fue forzado o no
+                        delay: mostrarAnimacion ? 1 : 0, // delay segun si fue forzado o no
                       }}
                       style={{ cursor: "pointer" }}
                     >
@@ -339,7 +340,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
         </AppBar>
       </Box>
 
-      {/* Menú móvil */}
+      {/* Menu movil */}
       <Drawer
         anchor="right"
         open={open}
@@ -375,7 +376,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
         <Box sx={{ overflowY: 'auto', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
           <Box sx={{ display: "flex", justifyContent: "flex-end", p: 0.5 }}>
             <IconButton
-              aria-label="Abrir menú"
+              aria-label="Abrir menu"
               onClick={() => setOpen(false)}
               sx={{
                 animation: open ? `${rotateTwice} 1s ease-in-out` : "none",
@@ -386,7 +387,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
           </Box>
 
 
-          {/* ?? Menú navegación */}
+          {/* ?? Menu navegacion */}
           <AnimatePresence mode="wait">
             {open && (
               <motion.ul
@@ -608,8 +609,8 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                       src="/logo.png"
                       alt="Bienvenidos"
                       sx={{
-                        width: 60,
-                        height: 60,
+                        width: 44,
+                        height: 44,
                         objectFit: "contain",
                         borderRadius: 2,
                         mr: 1,
@@ -735,15 +736,22 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                     fontSize: "1rem",
                     letterSpacing: 0.5,
                     textAlign: "center",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 0.6,
                   }}
                 >
-                  ⚙️ Administration
+                  <>
+                    <SettingsSuggestRoundedIcon sx={{ fontSize: 18 }} />
+                    Administration
+                  </>
                 </Typography>
               </Box>
             </motion.div>
           )}
 
-          {/* Redes sociales al final del menú móvil */}
+          {/* Redes sociales al final del menu movil */}
           <AnimatePresence mode="wait">
             {open && (
               <>
@@ -840,7 +848,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
             color: "#1a237e",
           }}
         >
-          Presentación rosmiya - PDF
+          Presentacion rosmiya - PDF
           <IconButton aria-label="close" onClick={handleClosePDF} sx={{ position: "absolute", right: 12, top: 12, color: "#1a237e" }}>
             <CloseIcon />
           </IconButton>
@@ -849,7 +857,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
         <DialogContent sx={{ p: 0 }}>
           <Box sx={{ height: { xs: "75vh", sm: "80vh", md: "85vh" }, width: "100%", backgroundColor: "#000", }}>
 
-            <iframe src={pdfSrc} title="Presentación Plataformas web" width="100%" height="100%" style={{ border: 'none' }} />
+            <iframe src={pdfSrc} title="Presentacion Plataformas web" width="100%" height="100%" style={{ border: 'none' }} />
           </Box>
         </DialogContent>
       </Dialog>
@@ -858,6 +866,11 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
 }
 
 export default Navbar;
+
+
+
+
+
 
 
 

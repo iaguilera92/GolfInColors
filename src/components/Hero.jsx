@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./css/Hero.css";
 import CircularProgress from "@mui/material/CircularProgress";
 
-function AnimatedLine({ text, delay = 0, size, color = "#ffffff", weight = 800, stroke, isMobile }) {
+function AnimatedLine({ text, delay = 0, startDelay = 0, size, color = "#ffffff", weight = 800, stroke, isMobile }) {
   const letters = text.split("");
 
   return (
@@ -14,13 +14,14 @@ function AnimatedLine({ text, delay = 0, size, color = "#ffffff", weight = 800, 
       className="text"
       sx={{
         fontSize: size || (isMobile ? "1.1rem !important" : "2.2rem !important"),
-        whiteSpace: "pre",
+        whiteSpace: "pre-line",
         textAlign: "center",
         position: "relative",
         display: "inline-block",
         lineHeight: 1,
         marginBottom: 0,
         letterSpacing: "0.02em",
+        maxWidth: isMobile ? "92vw" : "none",
       }}
     >
       {letters.map((char, index) => (
@@ -28,7 +29,7 @@ function AnimatedLine({ text, delay = 0, size, color = "#ffffff", weight = 800, 
           key={`${char}-${index}-${text}`}
           initial={{ y: -30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.25, ease: "easeOut", delay: 2 + delay + index * 0.03 }}
+          transition={{ duration: 0.25, ease: "easeOut", delay: startDelay + delay + index * 0.03 }}
           style={{
             position: "relative",
             display: "inline-block",
@@ -45,31 +46,28 @@ function AnimatedLine({ text, delay = 0, size, color = "#ffffff", weight = 800, 
     </Typography>
   );
 }
+
 function Hero({ informationsRef, setVideoReady, onStartClick }) {
   const [openAlert, setOpenAlert] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [loadingVideo, setLoadingVideo] = useState(true);
-  const [showStars, setShowStars] = useState(false);
+  const [mostrarTransicion, setMostrarTransicion] = useState(false);
+  const [phraseIndex, setPhraseIndex] = useState(0);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const heroRef = useRef(null);
   const navigate = useNavigate();
-  const [mostrarTransicion, setMostrarTransicion] = useState(false);
+
+  const rotatingPhrases = [
+    "Together, we're shaping the future of golf.",
+    "One colorful step at the time.",
+  ];
 
   useEffect(() => {
     const timer = setTimeout(() => setShowButton(true), 1000);
     return () => clearTimeout(timer);
   }, []);
-  useEffect(() => {
-    if (loadingVideo) {
-      setShowStars(false);
-      return;
-    }
-    const timer = setTimeout(() => setShowStars(true), 2000);
-    return () => clearTimeout(timer);
-  }, [loadingVideo]);
-
 
   useEffect(() => {
     const video = document.getElementById("background-video");
@@ -88,6 +86,12 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
     return () => clearTimeout(fallback);
   }, [loadingVideo]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPhraseIndex((prev) => (prev + 1) % rotatingPhrases.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [rotatingPhrases.length]);
 
   return (
     <>
@@ -190,57 +194,44 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
                 gap: { xs: 0.35, sm: 0.45 },
               }}
             >
-              <Box sx={{ mb: { xs: 0.28, sm: 0.36 } }}>
-                <AnimatedLine
-                  text="Together, we're shaping"
-                  size={isMobile ? "1.16rem !important" : "2.1rem !important"}
-                  color="#ffffff"
-                  weight={800}
-                />
-              </Box>
-
-              <Box sx={{ mt: { xs: -0.08, sm: -0.12 } }}>
-                <AnimatedLine
-                  text="the future of golf."
-                  delay={0.08}
-                  size={isMobile ? "1.3rem !important" : "2.55rem !important"}
-                  color="#FFE8A3"
-                  weight={900}
-                />
-              </Box>
-
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                {showStars ? (
-                  <motion.span
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }}
-                    transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                    style={{ color: "#ffe27a", fontSize: isMobile ? "0.95rem" : "1.2rem" }}
-                  >
-                    {"\u2726"}
-                  </motion.span>
+              <Box
+                sx={{
+                  minHeight: { xs: 42, sm: 58 },
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {phraseIndex === 0 ? (
+                  <Box key="hero-phrase-0" sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 0.2 }}>
+                    <AnimatedLine
+                      text="Together, we're shaping"
+                      startDelay={0.2}
+                      size={isMobile ? "1.2rem !important" : "2.1rem !important"}
+                      color="#ffffff"
+                      weight={700}
+                      stroke={isMobile ? "0.4px rgba(255,255,255,0.65)" : "0.8px rgba(255,255,255,0.75)"}
+                    />
+                    <AnimatedLine
+                      text="the future of golf."
+                      startDelay={0.95}
+                      delay={0}
+                      size={isMobile ? "1.2rem !important" : "2.1rem !important"}
+                      color="#ffffff"
+                      weight={700}
+                      stroke={isMobile ? "0.4px rgba(255,255,255,0.65)" : "0.8px rgba(255,255,255,0.75)"}
+                    />
+                  </Box>
                 ) : (
-                  <Box sx={{ width: isMobile ? "0.95rem" : "1.2rem", height: isMobile ? "0.95rem" : "1.2rem" }} />
-                )}
-
-                <AnimatedLine
-                  text="One colorful step at the time"
-                  delay={0.2}
-                  size={isMobile ? "1.03rem !important" : "1.5rem !important"}
-                  color="#7FD6FF"
-                  weight={800}
-                  stroke={isMobile ? "0.4px rgba(255,255,255,0.65)" : "0.8px rgba(255,255,255,0.75)"}
-                />
-
-                {showStars ? (
-                  <motion.span
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.6, 1, 0.6] }}
-                    transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
-                    style={{ color: "#ffe27a", fontSize: isMobile ? "0.95rem" : "1.2rem" }}
-                  >
-                    {"\u2726"}
-                  </motion.span>
-                ) : (
-                  <Box sx={{ width: isMobile ? "0.95rem" : "1.2rem", height: isMobile ? "0.95rem" : "1.2rem" }} />
+                  <AnimatedLine
+                    key="hero-phrase-1"
+                    text={rotatingPhrases[phraseIndex]}
+                    startDelay={0.2}
+                    size={isMobile ? "1.2rem !important" : "2.1rem !important"}
+                    color="#ffffff"
+                    weight={700}
+                    stroke={isMobile ? "0.4px rgba(255,255,255,0.65)" : "0.8px rgba(255,255,255,0.75)"}
+                  />
                 )}
               </Box>
 
@@ -280,15 +271,6 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
 }
 
 export default Hero;
-
-
-
-
-
-
-
-
-
 
 
 
