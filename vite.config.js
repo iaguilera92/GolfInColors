@@ -4,6 +4,7 @@ import viteImagemin from 'vite-plugin-imagemin';
 import { writeFileSync } from 'fs';
 
 const isCI = process.env.CI === 'true' || process.env.NETLIFY === 'true';
+const shouldAutoWriteVersion = process.env.ENABLE_AUTO_VERSION === 'true';
 
 export default defineConfig({
   assetsInclude: ['**/*.xlsx'],
@@ -44,7 +45,7 @@ export default defineConfig({
         },
       }),
 
-    {
+    shouldAutoWriteVersion && {
       name: 'generate-version-json',
       writeBundle() {
         const version = Date.now().toString();

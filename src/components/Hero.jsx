@@ -203,25 +203,15 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
                 }}
               >
                 {phraseIndex === 0 ? (
-                  <Box key="hero-phrase-0" sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 0.2 }}>
-                    <AnimatedLine
-                      text="Together, we're shaping"
-                      startDelay={0.2}
-                      size={isMobile ? "1.2rem !important" : "2.1rem !important"}
-                      color="#ffffff"
-                      weight={700}
-                      stroke={isMobile ? "0.4px rgba(255,255,255,0.65)" : "0.8px rgba(255,255,255,0.75)"}
-                    />
-                    <AnimatedLine
-                      text="the future of golf."
-                      startDelay={0.95}
-                      delay={0}
-                      size={isMobile ? "1.2rem !important" : "2.1rem !important"}
-                      color="#ffffff"
-                      weight={700}
-                      stroke={isMobile ? "0.4px rgba(255,255,255,0.65)" : "0.8px rgba(255,255,255,0.75)"}
-                    />
-                  </Box>
+                  <AnimatedLine
+                    key="hero-phrase-0"
+                    text="Together, we're shaping the future of golf."
+                    startDelay={0.2}
+                    size={isMobile ? "0.93rem !important" : "2.1rem !important"}
+                    color="#ffffff"
+                    weight={700}
+                    stroke={isMobile ? "0.4px rgba(255,255,255,0.65)" : "0.8px rgba(255,255,255,0.75)"}
+                  />
                 ) : (
                   <AnimatedLine
                     key="hero-phrase-1"

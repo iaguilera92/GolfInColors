@@ -777,7 +777,6 @@ export default function DialogPaseMensual({ open, onClose, analyticsDisponible }
                           position: "relative",
                           overflow: "visible",
                           borderRadius: "30px",
-                          boxShadow: "0 4px 20px rgba(0,0,0,0.25)",
                           minHeight: isMobile ? 100 : 110,
                           display: "flex",
                           alignItems: "flex-end",

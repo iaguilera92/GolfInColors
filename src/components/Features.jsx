@@ -100,17 +100,17 @@ function Features() {
       id="category-features-section"
       sx={{
         background: "#ffffff",
-        pt: 0.75,
-        pb: 3,
+        pt: { xs: 0.2, sm: 0.6 },
+        pb: { xs: 1.1, sm: 2.4 },
       }}
     >
       <Container sx={{ maxWidth: "900px !important" }}>
         <Box
           sx={{
             borderRadius: 4,
-            pt: { xs: 1.2, sm: 1.6 },
+            pt: { xs: 0.5, sm: 1.2 },
             px: { xs: 2, sm: 3 },
-            pb: { xs: 2, sm: 3 },
+            pb: { xs: 0.9, sm: 2.2 },
             background: "transparent",
             boxShadow: "none",
           }}
@@ -121,7 +121,7 @@ function Features() {
               fontWeight: 900,
               fontSize: { xs: "1.18rem", sm: "1.72rem" },
               fontFamily: "'Poppins', sans-serif",
-              mb: 2.2,
+              mb: { xs: 1.2, sm: 2 },
               color: "#083c2c",
               letterSpacing: "0.03em",
               textShadow: "0 1px 0 rgba(255,255,255,0.35)",
@@ -134,7 +134,7 @@ function Features() {
             sx={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              gap: 1.6,
+              gap: { xs: 1.0, sm: 1.4 },
             }}
           >
             {options.map((option) => (
@@ -205,6 +205,8 @@ function Features() {
 }
 
 export default Features;
+
+
 
 
 

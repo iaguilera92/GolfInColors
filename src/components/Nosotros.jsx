@@ -42,7 +42,7 @@ const Nosotros = () => {
         position: 'relative',
         overflow: 'hidden',
         // ?? Fondo pasto golf
-        backgroundColor: "#8fcf5f",
+        backgroundColor: "#ffffff",
         backgroundImage: "url(/PATTERN_WITHOUTBG.png)",
         backgroundSize: "420px 420px",
         backgroundRepeat: "repeat",
@@ -59,7 +59,7 @@ const Nosotros = () => {
             position: "relative",
             display: "inline-flex",
             letterSpacing: "0.04em",
-            background: "white", // naranja m�s vivo
+            background: "#124734",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
 
@@ -72,7 +72,7 @@ const Nosotros = () => {
               width: "60%",
               height: "4px",
               borderRadius: "4px",
-              background: "white", // mismo degradado en la l�nea
+              background: "#2f9e6f",
             },
           }}
         >
@@ -428,6 +428,7 @@ const Nosotros = () => {
 };
 
 export default Nosotros;
+
 
 
 

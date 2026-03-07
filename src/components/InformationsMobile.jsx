@@ -127,7 +127,7 @@ function Informations({ informationsRef, triggerInformations }) {
       sx={{
         position: "relative",
         zIndex: 10,
-        backgroundImage: 'url(fondo-7.jpg)',
+        backgroundImage: 'url(PATTERN.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
@@ -176,7 +176,7 @@ function Informations({ informationsRef, triggerInformations }) {
                 position: "relative",
                 display: "inline-block",
 
-                zIndex: 2, // aseg�rate de que est� sobre cualquier overlay
+                zIndex: 2,
 
                 "&::after": {
                   content: '""',
@@ -272,7 +272,7 @@ function Informations({ informationsRef, triggerInformations }) {
                           boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
                           position: "relative",
                           bgcolor: "white",
-                          zIndex: 2,   // ?? card siempre sobre el badge
+                          zIndex: 2,
                         }}
                       >
 
@@ -335,7 +335,7 @@ function Informations({ informationsRef, triggerInformations }) {
                                 p: 1,
                                 lineHeight: 1.3,
                                 display: "flex",
-                                alignItems: "center",
+                                alignItems: "flex-start",
                                 minHeight: 45,
                               }}
                             >
@@ -445,7 +445,7 @@ function Informations({ informationsRef, triggerInformations }) {
                 placeItems: "center",
                 border: "1.5px solid rgba(255,255,255,0.9)", // borde blanco semitransparente
                 mx: "auto",
-                transform: "translateX(14px)",
+                transform: "translateX(30px)",
                 mb: 0.5,
                 boxShadow: "0 4px 12px rgba(0,0,0,0.35)", // halo para resaltar sobre fondo oscuro
                 position: "relative",
@@ -484,6 +484,7 @@ function Informations({ informationsRef, triggerInformations }) {
                   fontSize: { xs: "1.5rem", md: "2rem" },
                   paddingLeft: { xs: "40px", md: "30px" },
                   paddingRight: { xs: "40px", md: "30px" },
+                  transform: "translateX(25px)",
                   letterSpacing: "3px",
                   my: 0,
                   display: "inline-block",
@@ -503,36 +504,41 @@ function Informations({ informationsRef, triggerInformations }) {
                   },
                 }}
               >
-                Train today, compete tomorrow!
+                How the Journey Works
               </Typography>
             </motion.div>
-
           </Box>
           {/* Columna de los �conos */}
           <Grid item xs={12} md={6}>
             {[
               {
                 icon: <SportsGolf sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Personalized golf lessons.",
-                desc: "Training tailored to your level to refine technique and accuracy.",
+                text: "1. Discover the Game",
+                desc: "Children are introduced to the basic elements of golf in a playful, approachable way. They learn what the game is before being asked to perform it.",
                 hideLine: false,
               },
               {
                 icon: <School sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Training for children and youth.",
-                desc: "Development programs focused on fundamentals and athletic growth.",
+                text: "2. Build The Foundations",
+                desc: "Through guided activities and early skill development, they begin to understand movement, coordination, and control step by step.",
                 hideLine: false,
               },
               {
                 icon: <EmojiEvents sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Tournament preparation.",
-                desc: "Competitive training to improve performance on the course.",
+                text: "3. Experience the Game of Golf",
+                desc: "Children explore the environment of golf, learning how the course works and how to move safely and confidently within it.",
                 hideLine: false,
               },
               {
                 icon: <Groups sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Golf clinics and events.",
-                desc: "Group sessions and experiences designed to enhance your game.",
+                text: "4. Understand How to Play",
+                desc: "They are introduced to simple rules, etiquette, and structure, building awareness without pressure.",
+                hideLine: false,
+              },
+              {
+                icon: <SportsGolf sx={{ color: "white", fontSize: "2.2rem" }} />,
+                text: "5. Step into Structured Training",
+                desc: "Confident and prepared, they transition into an academy-style group learning environment.",
                 hideLine: true,
               },
             ].map((item, index) => {
@@ -552,8 +558,9 @@ function Informations({ informationsRef, triggerInformations }) {
                   <ListItem
                     sx={{
                       display: "flex",
-                      alignItems: "center",
+                      alignItems: "flex-start",
                       zIndex: 2,
+                      mb: item.hideLine ? 0 : 1.1,
                       paddingLeft: isMobile ? "0" : "16px",
                       paddingRight: isMobile ? "0" : "16px",
                     }}
@@ -563,7 +570,7 @@ function Informations({ informationsRef, triggerInformations }) {
                         sx={{
                           position: "relative",
                           width: 100,
-                          height: 85,
+                          height: 108,
                           display: "grid",
                           placeItems: "center",
                         }}
@@ -571,7 +578,7 @@ function Informations({ informationsRef, triggerInformations }) {
                         {!item.hideLine && (
                           <motion.div
                             initial={{ height: 0 }}
-                            animate={itemInView ? { height: 40 } : { height: 0 }}
+                            animate={itemInView ? { height: 96 } : { height: 0 }}
                             transition={{
                               delay: 0.2 * index,
                               duration: 1,
@@ -579,7 +586,7 @@ function Informations({ informationsRef, triggerInformations }) {
                             }}
                             style={{
                               position: "absolute",
-                              top: "80%",
+                              top: "74%",
                               left: "50%",
                               transform: "translateX(-50%)",
                               width: "2px",
@@ -588,7 +595,7 @@ function Informations({ informationsRef, triggerInformations }) {
                               backgroundSize: "2px 6px",
                               backgroundRepeat: "repeat-y",
                               zIndex: 1,
-                              opacity: 0.5,
+                              opacity: 0.72,
                             }}
                           />
                         )}
@@ -628,13 +635,23 @@ function Informations({ informationsRef, triggerInformations }) {
                     <ListItemText
                       sx={{
                         fontFamily: "'Montserrat', Helvetica, Arial, sans-serif !important",
+                        mt: 0.6,
+                        px: 1.1,
+                        py: 0.95,
+                        borderRadius: 2,
+                        backgroundColor: "rgba(255,255,255,0.08)",
+                        border: "1px solid rgba(255,255,255,0.18)",
                         "& .MuiListItemText-primary": {
-                          fontSize: isMobile ? "0.99rem" : "1.2rem",
+                          fontSize: isMobile ? "0.97rem" : "1.08rem",
                           color: "white",
-                          fontWeight: 500,
+                          fontWeight: 700,
+                          letterSpacing: "0.01em",
                         },
                         "& .MuiListItemText-secondary": {
-                          color: "rgba(255,255,255,0.8)",
+                          color: "rgba(255,255,255,0.9)",
+                          lineHeight: 1.45,
+                          fontSize: isMobile ? "0.82rem" : "0.9rem",
+                          mt: 0.4,
                         },
                       }}
                       primary={item.text}
@@ -660,6 +677,11 @@ function Informations({ informationsRef, triggerInformations }) {
 };
 
 export default Informations;
+
+
+
+
+
 
 
 
