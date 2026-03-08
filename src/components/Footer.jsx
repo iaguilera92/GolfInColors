@@ -199,14 +199,14 @@ const Footer = () => {
           </Box>
         )}
 
-        <Typography variant="body2" align="center" mt={2} sx={{ marginTop: "5vh", color: "inherit" }}>
+        <Typography variant="body2" align="center" mt={2} sx={{ marginTop: "4.2vh", color: "#213547", fontFamily: "'Poppins', sans-serif", fontWeight: 700, letterSpacing: "0.03em", fontSize: { xs: "0.88rem", md: "0.94rem" }, textShadow: "0 1px 0 rgba(255,255,255,0.65)" }}>
           @golfincolors 2026 {version && `- v${version}`}
         </Typography>
         <Typography
           variant="body2"
           align="center"
           mt={2}
-          sx={{ marginTop: "1vh", cursor: "pointer", color: "inherit" }}
+          sx={{ marginTop: "0.8vh", cursor: "pointer", color: "#2f4f4f", fontFamily: "'Poppins', sans-serif", fontWeight: 600, letterSpacing: "0.02em", fontSize: { xs: "0.74rem", md: "0.8rem" }, textDecoration: "underline", textDecorationThickness: "1px", textUnderlineOffset: "3px", opacity: 0.9 }}
           onClick={() => window.open("http://plataformas-web.cl", "_blank")}
         >
           Disenado por www.plataformas-web.cl
@@ -217,5 +217,7 @@ const Footer = () => {
 };
 
 export default Footer;
+
+
 
 

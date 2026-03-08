@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, Container, useTheme, useMediaQuery, Card, CardContent } from "@mui/material";
+﻿import { Box, Typography, Grid, Container, useTheme, useMediaQuery, Card, CardContent } from "@mui/material";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
@@ -42,15 +42,14 @@ const Nosotros = () => {
         position: 'relative',
         overflow: 'hidden',
         // ?? Fondo pasto golf
-        backgroundColor: "#ffffff",
-        backgroundImage: "url(/PATTERN_WITHOUTBG.png)",
+        backgroundColor: "#f8f6f1",
         backgroundSize: "420px 420px",
         backgroundRepeat: "repeat",
         backgroundAttachment: "scroll",
         backgroundPosition: "top left",
       }}
     >
-      {/* T�tulo */}
+      {/* Tï¿½tulo */}
       <Box textAlign="center" mb={4}>
         <Typography
           variant={isMobile ? "h5" : "h5"}
@@ -59,9 +58,7 @@ const Nosotros = () => {
             position: "relative",
             display: "inline-flex",
             letterSpacing: "0.04em",
-            background: "#124734",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
+            color: "#1f6d56",
 
             "&::after": {
               content: '""',
@@ -72,7 +69,7 @@ const Nosotros = () => {
               width: "60%",
               height: "4px",
               borderRadius: "4px",
-              background: "#2f9e6f",
+              background: "#1f6d56",
             },
           }}
         >
@@ -93,7 +90,7 @@ const Nosotros = () => {
 
 
 
-      {/* Primera fila con animaci�n */}
+      {/* Primera fila con animaciï¿½n */}
       <Box maxWidth="1200px" mx="auto">
         <Grid container spacing={3} alignItems="center">
 
@@ -107,31 +104,21 @@ const Nosotros = () => {
               >
                 <Card
                   sx={{
-                    backgroundColor: '#ffffff', borderRadius: 3,
-                    p: { xs: 2, sm: 2.5, md: 3 }, // padding responsivo m�s compacto
+                    backgroundColor: '#fffdf9', borderRadius: 3,
+                    border: '1px solid rgba(61,95,79,0.14)',
+                    borderTop: '5px solid #f0bf67',
+                    boxShadow: '0 14px 26px rgba(0,0,0,0.12)',
+                    p: { xs: 2, sm: 2.5, md: 3 }, // padding responsivo mï¿½s compacto
                   }}
                 >
                   <CardContent>
-                    {/* T�tulo */}
-                    <Typography
-                      variant="h5" // m�s peque�o que h4
-                      sx={{
-                        color: 'black',
-                        fontSize: { xs: '1.25rem', sm: '1.5rem', md: '1.75rem' }, // tama�o responsivo
-                        fontWeight: 700,
-                        mb: 1.5, // margen inferior m�s compacto
-                      }}
-                    >
-                      About Us
-                    </Typography>
-
-                    {/* P�rrafo 1 */}
+                    {/* Tï¿½tulo */}                    {/* Pï¿½rrafo 1 */}
                     <Typography
                       variant="body2"
                       sx={{
                         color: 'black',
                         textAlign: 'justify',
-                        mb: 1.5, // margen m�s peque�o
+                        mb: 1.5, // margen mï¿½s pequeï¿½o
                         fontSize: { xs: '0.875rem', sm: '0.95rem', md: '1rem' },
                         lineHeight: 1.5,
                       }}
@@ -139,7 +126,7 @@ const Nosotros = () => {
                       Golf in Colors was created by two partners who have experienced every stage of the game, from youth golf to high-level competition. Along the way, they noticed a challenging reality: many children are introduced to golf, but only a few continue, compete, or make it a lasting part of their lives. They realized that the first experiences children have with golf play a critical role in shaping their relationship with it.
                     </Typography>
 
-                    {/* P�rrafo 2 */}
+                    {/* Pï¿½rrafo 2 */}
                     <Typography
                       variant="body2"
                       sx={{
@@ -153,7 +140,7 @@ const Nosotros = () => {
                       Golf in Colors was created to make those early experiences more engaging, positive, and meaningful by combining creativity, storytelling, and simple skill development. Our approach goes beyond the lesson itself. Golf in Colors connects the learning that happens on the course with meaningful moments at home, transforming golf into a shared family experience.
                     </Typography>
 
-                    {/* P�rrafo 3 */}
+                    {/* Pï¿½rrafo 3 */}
                     <Typography
                       variant="body2"
                       sx={{
@@ -184,7 +171,7 @@ const Nosotros = () => {
                   src="/logo.png"
                   alt="Logo"
                   style={{
-                    maxWidth: isMobile ? '40%' : '58%',
+                    maxWidth: isMobile ? '48%' : '64%',
                     height: 'auto',
                   }}
                 />
@@ -201,7 +188,7 @@ const Nosotros = () => {
           position: 'relative',
           mt: 4,
           mb: 4,
-          py: 4,
+          py: { xs: 2.6, md: 3.2 },
           backgroundImage: 'url(/fondo-5.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: isMobile ? `center ${scrollY * 0.3}px` : 'center',
@@ -214,7 +201,7 @@ const Nosotros = () => {
             content: '""',
             position: 'absolute',
             inset: 0,
-            background: 'rgba(0, 0, 0, 0.4)',
+            background: 'linear-gradient(120deg, rgba(0,0,0,0.52) 0%, rgba(0,0,0,0.28) 100%)',
             zIndex: 1,
           },
         }}
@@ -232,9 +219,10 @@ const Nosotros = () => {
             variant={isMobile ? "h6" : "h4"}
             fontWeight={600}
             sx={{
-              color: '#ffffff', // letras blancas
-              textShadow: '2px 2px 8px rgba(0,0,0,0.7)',
-              textAlign: 'right',
+              color: '#ffffff',
+              textShadow: '2px 2px 8px rgba(0,0,0,0.8)',
+              textAlign: 'center',
+              letterSpacing: '0.02em',
             }}
           >
             We inspire and teach <span style={{ color: '#00c853' }}>Golf</span>
@@ -252,12 +240,15 @@ const Nosotros = () => {
           >
             <Card
               sx={{
-                backgroundColor: '#ffffff', borderRadius: 3,
+                backgroundColor: '#fffdf9', borderRadius: 3,
+                border: '1px solid rgba(61,95,79,0.14)',
+                borderTop: '5px solid #f0bf67',
+                boxShadow: '0 14px 26px rgba(0,0,0,0.12)',
                 p: 2,
               }}
             >
               <CardContent sx={{ p: 2 }}>
-                <Typography variant="h5" color="black" gutterBottom>
+                <Typography variant="h5" gutterBottom sx={{ color: '#1c5a47', fontWeight: 900, letterSpacing: '0.05em', textTransform: 'uppercase', position: 'relative', display: 'inline-block', pr: 1.4, pb: 0.45, mb: 1.6, '&::before': { content: '""', position: 'absolute', right: 0, top: '46%', width: 8, height: 8, borderRadius: '50%', transform: 'translateY(-50%)', background: '#f0bf67' }, '&::after': { content: '""', position: 'absolute', left: 0, bottom: 0, width: '100%', height: 3, borderRadius: 999, background: 'linear-gradient(90deg, #1f6d56 0%, #2b8a69 100%)' } }}>
                   PURPOSE
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify', mb: 1.5 }}>
@@ -277,10 +268,10 @@ const Nosotros = () => {
           </motion.div>
         </Box>
       </Box>
-      {/* Segunda fila con animaci�n */}
+      {/* Segunda fila con animaciï¿½n */}
       <Box maxWidth="1200px" mx="auto" mt={2}>
         <Grid container spacing={3} alignItems="flex-start">
-          {/* Imagen a la izquierda con animaci�n */}
+          {/* Imagen a la izquierda con animaciï¿½n */}
           <Grid item xs={12} md={6}>
             <motion.div
               initial={{ opacity: 0, x: -60 }}
@@ -300,13 +291,13 @@ const Nosotros = () => {
                 <img
                   src="mision-empresa.png"
                   alt="Logo React"
-                  style={{ maxWidth: isMobile ? '52%' : '58%', height: 'auto' }}
+                  style={{ maxWidth: isMobile ? '56%' : '62%', height: 'auto' }}
                 />
               </Box>
             </motion.div>
           </Grid>
 
-          {/* Mission + Vision a la derecha con animaci�n */}
+          {/* Mission + Vision a la derecha con animaciï¿½n */}
           <Grid item xs={12} md={6}>
             <Box px={{ xs: 2, sm: 0 }}>
 
@@ -318,13 +309,16 @@ const Nosotros = () => {
               >
                 <Card
                   sx={{
-                    backgroundColor: '#ffffff', borderRadius: 3,
+                    backgroundColor: '#fffdf9', borderRadius: 3,
+                    border: '1px solid rgba(61,95,79,0.14)',
+                    borderTop: '5px solid #f0bf67',
+                    boxShadow: '0 14px 26px rgba(0,0,0,0.12)',
                     p: 2, // menos padding
                   }}
                 >
                   <CardContent sx={{ p: 2 }}> {/* ajuste adicional de padding interno */}
                     {/* Mission */}
-                    <Typography variant="h5" color="black" gutterBottom>
+                    <Typography variant="h5" gutterBottom sx={{ color: '#1c5a47', fontWeight: 900, letterSpacing: '0.04em', textTransform: 'uppercase', position: 'relative', display: 'inline-block', pr: 1.35, pb: 0.42, mb: 1.45, '&::before': { content: '""', position: 'absolute', right: 0, top: '46%', width: 8, height: 8, borderRadius: '50%', transform: 'translateY(-50%)', background: '#7fc9b1' }, '&::after': { content: '""', position: 'absolute', left: 0, bottom: 0, width: '100%', height: 3, borderRadius: 999, background: 'linear-gradient(90deg, #1f6d56 0%, #56a587 100%)' } }}>
                       Mission
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify', mb: 1.5 }}>
@@ -332,7 +326,7 @@ const Nosotros = () => {
                     </Typography>
 
                     {/* Vision */}
-                    <Typography variant="h5" color="black" gutterBottom>
+                    <Typography variant="h5" gutterBottom sx={{ color: '#1c5a47', fontWeight: 900, letterSpacing: '0.04em', textTransform: 'uppercase', position: 'relative', display: 'inline-block', pr: 1.35, pb: 0.42, mb: 1.45, mt: 0.6, '&::before': { content: '""', position: 'absolute', right: 0, top: '46%', width: 8, height: 8, borderRadius: '50%', transform: 'translateY(-50%)', background: '#f0bf67' }, '&::after': { content: '""', position: 'absolute', left: 0, bottom: 0, width: '100%', height: 3, borderRadius: 999, background: 'linear-gradient(90deg, #1f6d56 0%, #56a587 100%)' } }}>
                       Vision
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify' }}>
@@ -346,14 +340,14 @@ const Nosotros = () => {
           </Grid>
         </Grid>
       </Box>
-      {/* Secci�n Entrenadores */}
+      {/* Secciï¿½n Entrenadores */}
       <Box maxWidth="1200px" mx="auto" mt={6} mb={6} textAlign="center">
         <Typography
           variant={isMobile ? "h5" : "h4"}
           fontWeight={700}
           mb={3}
           sx={{
-            color: 'white',
+            color: '#163d32',
             position: 'relative',
             display: 'inline-block',
             '&::after': {
@@ -363,7 +357,7 @@ const Nosotros = () => {
               left: 0,
               width: '100%',        // ahora cubre todo el texto
               height: '4px',
-              backgroundColor: 'white',
+              backgroundColor: '#1f6d56',
               borderRadius: 2,
             },
           }}
@@ -371,6 +365,17 @@ const Nosotros = () => {
           FOUNDERS
         </Typography>
 
+        <Typography
+          sx={{
+            mb: 2.2,
+            color: '#224d3f',
+            fontWeight: 600,
+            fontSize: { xs: '0.9rem', sm: '0.98rem' },
+            letterSpacing: '0.01em'
+          }}
+        >
+          The family-driven vision behind Golf in Colors
+        </Typography>
         <Grid container spacing={0} justifyContent="center">
           {[
             { img: "coache-1.png", name: "Sergio" },
@@ -413,8 +418,8 @@ const Nosotros = () => {
                   fontWeight: 800,
                   fontSize: { xs: '1.06rem', sm: '1.2rem' },
                   letterSpacing: '0.03em',
-                  color: '#ffffff',
-                  textShadow: '0 2px 8px rgba(0,0,0,0.45)'
+                  color: '#183f33',
+                  textShadow: '0 1px 2px rgba(255,255,255,0.45)'
                 }}
               >
                 {coach.name}
@@ -428,6 +433,23 @@ const Nosotros = () => {
 };
 
 export default Nosotros;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

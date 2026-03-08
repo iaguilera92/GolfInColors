@@ -116,6 +116,7 @@ const Areas = () => {
     <Box
       sx={{
         position: 'relative', // 👈 necesario para que el degradado se posicione correctamente
+        zIndex: 1,
         background: `
       linear-gradient(
         180deg,
@@ -129,14 +130,14 @@ const Areas = () => {
         backgroundSize: isMobile ? "100% 100%" : "100% auto",
         backgroundPosition: isMobile ? "center" : "",
         backgroundAttachment: isMobile ? "initial" : "fixed",
-        minHeight: isMobile ? "65vh" : "auto",
+        minHeight: isMobile ? "60vh" : "auto",
         paddingTop: "0px !important",
         padding: { xs: 4, md: 16 },
-        paddingBottom: { xs: 5, md: 5 },
+        paddingBottom: { xs: 1.2, md: 2 },
         marginTop: "-120px",
       }}
     >
-      <Grid container spacing={4} alignItems="center" pt={20}>
+      <Grid container spacing={4} alignItems="center" pt={{ xs: 9, md: 11 }}>
         <Grid item xs={12}>
           <Grid container spacing={4}>
             {data.map((item, index) => (
@@ -275,5 +276,9 @@ const Areas = () => {
 };
 
 export default Areas;
+
+
+
+
 
 
