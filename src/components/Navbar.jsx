@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { AppBar, Toolbar, Button, IconButton, Drawer, Typography, ListItem, ListItemButton, ListItemText, Container, Box, useTheme, useMediaQuery, Dialog, DialogTitle, DialogContent, SvgIcon } from "@mui/material";
 import { WhatsApp as WhatsAppIcon, Menu as MenuIcon, Home, Mail, Close } from "@mui/icons-material"; // Agregamos Close para la "X"
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -89,6 +89,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
   const theme = useTheme(), isMobile = useMediaQuery(theme.breakpoints.down('sm')), navigate = useNavigate();
   const pdfSrc = `/plataformasweb-pdf.pdf#zoom=${isMobile ? 100 : 60}`;
   const location = useLocation();
+  const isCatalogoRoute = location.pathname === "/catalogo";
   const mostrarAnimacion = videoReady || (location.pathname !== '/' && location.pathname !== '');
   const [animacionMostrada, setAnimacionMostrada] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -332,7 +333,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 1, ease: "easeOut" }}
                 >
-                  <MenuIcon />
+                  <MenuIcon sx={{ color: isCatalogoRoute ? "#111" : "#fff" }} />
                 </motion.div>
               </IconButton>
             </Toolbar>

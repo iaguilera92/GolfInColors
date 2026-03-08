@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Virtual } from 'swiper/modules';
+import LockRoundedIcon from '@mui/icons-material/LockRounded';
 
 const staticProducts = [
   {
@@ -30,7 +31,7 @@ const staticProducts = [
     Valor: 100,
     ConDescuento: false,
     Stock: 8,
-    ImageUrl: 'https://golfincolors.com/wp-content/uploads/2025/12/ChatGPT-Image-Dec-25-2025-at-01_34_56-PM-300x300.png',
+    ImageUrl: '/teebox-green-champion.png',
     VideoUrl: '',
     UrlCompra: 'https://golfincolors.com/product/tee-box-green-champion/',
     Nivel: 'Champion',
@@ -44,7 +45,7 @@ const staticProducts = [
     Valor: 100,
     ConDescuento: false,
     Stock: 7,
-    ImageUrl: 'https://golfincolors.com/wp-content/uploads/2025/12/ChatGPT-Image-Dec-25-2025-at-01_34_58-PM-300x300.png',
+    ImageUrl: '/tee-box-orange-competitor.png',
     VideoUrl: '',
     UrlCompra: 'https://golfincolors.com/product/tee-box-orange-competitor/',
     Nivel: 'Competitor',
@@ -58,7 +59,7 @@ const staticProducts = [
     Valor: 100,
     ConDescuento: false,
     Stock: 5,
-    ImageUrl: 'https://golfincolors.com/wp-content/uploads/2025/12/ChatGPT-Image-Dec-25-2025-at-01_35_07-PM-300x300.png',
+    ImageUrl: '/tee-box-tomato-striker.png',
     VideoUrl: '',
     UrlCompra: 'https://golfincolors.com/product/tee-box-tomato-striker/',
     Nivel: 'Striker',
@@ -138,7 +139,7 @@ const Catalogo = () => {
   }, [location.state]);
 
   const filteredSorted = useMemo(() => [...productos], [productos]);
-  const spotlight = filteredSorted[0] || null;
+  const shopHighlight = staticProducts[0];
 
   const chunkProductos = (arr, size) => {
     const chunks = [];
@@ -191,35 +192,68 @@ const Catalogo = () => {
               px: 1.2,
               position: 'relative',
               backgroundColor: '#f7f4ed',
-
               '& > *': { position: 'relative', zIndex: 1 },
             }}
           >
-            <Box sx={{ maxWidth: 1200, mx: 'auto', mb: 1.8 }}>
-              {spotlight && (
-                <Box
-                  sx={{
-                    borderRadius: 2.1,
-                    border: '1px solid rgba(176,128,32,0.38)',
-                    p: { xs: 1.05, sm: 1.25 },
-                    mb: 1.2,
-                    background: 'linear-gradient(125deg, #fff6d9 0%, #f8e0a8 40%, #efc66c 100%)',
-                    boxShadow: '0 10px 20px rgba(124,86,19,0.22), inset 0 1px 0 rgba(255,255,255,0.65)',
-                  }}
-                >
-                  <Typography sx={{ color: '#7a5200', fontWeight: 900, fontSize: { xs: '0.73rem', sm: '0.8rem' }, mb: 0.25, letterSpacing: '0.04em' }}>
-                    PRODUCT SPOTLIGHT
-                  </Typography>
-                  <Typography sx={{ color: '#2c2414', fontWeight: 900, fontSize: { xs: '0.95rem', sm: '1.06rem' }, lineHeight: 1.2 }}>
-                    {spotlight.NombreProducto}
-                  </Typography>
-                </Box>
-              )}
-            </Box>
-
             {isMobile ? (
               grupos.map((grupo, grupoIndex) => (
                 <Box key={`swiper-container-${grupoIndex}`} sx={{ position: 'relative', py: 0 }}>
+                  {grupoIndex === 1 && (
+                    <Box
+                      sx={{
+                        width: '100vw',
+                        ml: 'calc(50% - 50vw)',
+                        mr: 'calc(50% - 50vw)',
+                        mb: 1.1,
+                        mt: 0.2,
+                        borderRadius: 0,
+                        overflow: 'hidden',
+                        border: 'none',
+                        background: 'linear-gradient(130deg, #0f3a2d 0%, #1f6a55 100%)',
+                        boxShadow: 'none',
+                      }}
+                    >
+                      <Box sx={{ display: 'flex', alignItems: 'stretch', minHeight: 118 }}>
+                        <Box sx={{ flex: 1, p: 1.25, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <Box
+                            component="a"
+                            href={shopHighlight.UrlCompra}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            sx={{
+                              textDecoration: 'none',
+                              bgcolor: 'transparent',
+                              color: '#ffffff',
+                              fontWeight: 900,
+                              letterSpacing: '0.01em',
+                              fontSize: '0.95rem',
+                              px: 2.2,
+                              py: 0.95,
+                              borderRadius: 0,
+                              border: '2px solid rgba(255,255,255,0.95)',
+                              boxShadow: 'none',
+                            }}
+                          >
+                            Shop now
+                          </Box>
+                        </Box>
+                        <Box
+                          component="img"
+                          src="/tee-box-blue-starter.png"
+                          alt={shopHighlight.NombreProducto}
+                          sx={{
+                            width: '44%',
+                            maxWidth: 180,
+                            objectFit: 'contain',
+                            objectPosition: 'center',
+                            borderLeft: 'none',
+                            backgroundColor: 'transparent',
+                          }}
+                        />
+                      </Box>
+                    </Box>
+                  )}
+
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: 0, mb: 0, position: 'relative', zIndex: 20, height: 30 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, ml: 1 }}>
                       <Box component="img" loading="lazy" decoding="async" src="cine.png" alt="Reels icon" sx={{ width: 16, height: 16, alignSelf: 'center', mt: 0 }} />
@@ -261,7 +295,7 @@ const Catalogo = () => {
                     centeredSlides={false}
                     touchRatio={1.2}
                     threshold={5}
-                    style={{ padding: '16px 10px', paddingRight: '20px', overflow: 'visible' }}
+                    style={{ padding: '16px 4px', overflow: 'visible' }}
                     onSlideChange={(swiper) => setShowArrow((prev) => ({ ...prev, [grupoIndex]: !swiper.isEnd }))}
                   >
                     {grupo.map((producto, index) => {
@@ -344,7 +378,61 @@ const Catalogo = () => {
                   </Grid>
                 </Grid>
               </>
-            )}
+            )}            <Box
+              sx={{
+                width: '100vw',
+                ml: 'calc(50% - 50vw)',
+                mr: 'calc(50% - 50vw)',
+                mt: { xs: 1.6, sm: 2.4 },
+                background: '#ffffff',
+                borderTop: '1px solid rgba(31,60,51,0.18)',
+                borderBottom: '1px solid rgba(31,60,51,0.18)',
+                py: 1.1,
+                overflow: 'hidden',
+              }}
+            >
+              <Typography sx={{ color: '#183a30', fontWeight: 800, fontSize: { xs: '0.72rem', sm: '0.8rem' }, mb: 0.7, letterSpacing: '0.02em', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.5, textTransform: 'uppercase' }}>
+                <LockRoundedIcon sx={{ fontSize: { xs: 13, sm: 15 }, color: '#183a30' }} />
+                Secure Payments
+              </Typography>
+              <Box sx={{ overflow: 'hidden', px: 0.5 }}>
+                <motion.div
+                  animate={{ x: ['0%', '-50%'] }}
+                  transition={{ duration: 18, ease: 'linear', repeat: Infinity }}
+                  style={{ display: 'flex', width: 'max-content' }}
+                >
+                  {[0, 1].map((copyIndex) => (
+                    <Box key={copyIndex} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      {[
+                        { src: '/paypal.png', alt: 'PayPal' },
+                        { src: '/mastercard.webp', alt: 'MasterCard' },
+                        { src: '/visa.avif', alt: 'Visa' },
+                        { src: '/american-express.png', alt: 'American Express' },
+                        { src: '/google-pay.png', alt: 'Google Pay' },
+                        { src: '/apple-pay.png', alt: 'Apple Pay' },
+                      ].map((brand) => (
+                        <Box
+                          key={`${copyIndex}-${brand.alt}`}
+                          component="img"
+                          src={brand.src}
+                          alt={brand.alt}
+                          loading="lazy"
+                          decoding="async"
+                          sx={{
+                            width: brand.alt.includes('Google Pay') ? { xs: 50, sm: 74 } : { xs: 58, sm: 84 },
+                            height: brand.alt.includes('Google Pay') ? { xs: 31, sm: 41 } : { xs: 31, sm: 41 },
+                            objectFit: 'contain',
+                            bgcolor: 'transparent',
+                            p: 0.35,
+                            border: '1px solid rgba(31,60,51,0.14)',
+                          }}
+                        />
+                      ))}
+                    </Box>
+                  ))}
+                </motion.div>
+              </Box>
+            </Box>
 
             <Snackbar open={snackbar.open} autoHideDuration={4000} onClose={() => setSnackbar({ ...snackbar, open: false })} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
               <Alert severity={snackbar.type} onClose={() => setSnackbar({ ...snackbar, open: false })} sx={{ width: '100%', maxWidth: 360 }}>
@@ -358,8 +446,11 @@ const Catalogo = () => {
           maxWidth={false}
           disableGutters
           sx={{
-            minHeight: '100vh', pt: 10,
-            pb: 14, px: 1.2, backgroundColor: '#f7f4ed'
+            minHeight: '100vh',
+            pt: 10,
+            pb: 14,
+            px: 1.2,
+            backgroundColor: '#f7f4ed',
           }}
         >
           <Box sx={{ maxWidth: 1200, mx: 'auto' }}>
@@ -383,6 +474,12 @@ const Catalogo = () => {
 };
 
 export default Catalogo;
+
+
+
+
+
+
 
 
 
