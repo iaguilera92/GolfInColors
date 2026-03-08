@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+﻿import React, { useMemo, useState } from "react";
 import {
   Container,
   Typography,
@@ -104,7 +104,7 @@ function Features() {
         pb: { xs: 1.1, sm: 2.4 },
       }}
     >
-      <Container sx={{ maxWidth: "900px !important" }}>
+      <Container sx={{ maxWidth: { xs: "900px !important", md: "1220px !important" } }}>
         <Box
           sx={{
             borderRadius: 4,
@@ -133,7 +133,7 @@ function Features() {
           <Box
             sx={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
+              gridTemplateColumns: { xs: "1fr 1fr", md: "repeat(4, minmax(0, 1fr))" },
               gap: { xs: 1.0, sm: 1.4 },
             }}
           >
@@ -205,6 +205,7 @@ function Features() {
 }
 
 export default Features;
+
 
 
 

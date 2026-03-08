@@ -1,10 +1,10 @@
-import { Box, Typography, Container, Grid, Button, ListItem, ListItemIcon, ListItemText, useMediaQuery, useTheme, IconButton } from "@mui/material";
+﻿import { Box, Typography, Container, Grid, Button, ListItem, ListItemIcon, ListItemText, useMediaQuery, useTheme, IconButton } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useInView } from 'react-intersection-observer';
 import { useOutletContext } from "react-router-dom";
-import { SportsGolf, School, EmojiEvents, Groups } from "@mui/icons-material";
+import { EmojiEvents } from "@mui/icons-material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import "./css/Informations.css";
 import "swiper/css";
@@ -12,55 +12,87 @@ import "swiper/css";
 const promotions = [
   {
     id: 1,
-    title: "🏌️ For Kids",
+    title: "\u{1F3CC}\uFE0F For Kids",
     description: "They learn golf by playing and having fun from day one.",
     image: "/fondo-1.png",
     price: "Start Today",
     bgColor: "linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3))",
     textColor: "white",
     descriptors: [
-      "🎯 Fun challenges",
-      "🏆 Level-based progress",
-      "🎮 Interactive learning",
-      "⛳ Real fundamentals",
-      "🤝 More confidence",
-      "✨ Guaranteed fun"
+      "\u{1F3AF} Fun challenges",
+      "\u{1F3C6} Level-based progress",
+      "\u{1F3AE} Interactive learning",
+      "\u26F3 Real fundamentals",
+      "\u{1F91D} More confidence",
+      "\u2728 Guaranteed fun"
     ]
   },
   {
     id: 2,
-    title: "👨‍👩‍👧 For Parents",
+    title: "\u{1F468}\u200D\u{1F469}\u200D\u{1F467} For Parents",
     description: "Support and track your children's progress at every stage.",
     image: "/fondo-3.jpg",
     price: "Discover More",
     bgColor: "linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2))",
     textColor: "white",
     descriptors: [
-      "📊 Clear tracking",
-      "🏅 Motivational system",
-      "⏱️ Structured learning",
-      "🤝 Family involvement",
-      "🌱 Holistic development",
-      "💬 Simple communication"
+      "\u{1F4CA} Clear tracking",
+      "\u{1F3C5} Motivational system",
+      "\u23F1\uFE0F Structured learning",
+      "\u{1F91D} Family involvement",
+      "\u{1F331} Holistic development",
+      "\u{1F4AC} Simple communication"
     ]
   },
   {
     id: 3,
-    title: "🏆 For Coaches",
+    title: "\u{1F3C6} For Coaches",
     description: "Modern tools to teach golf effectively.",
     image: "/fondo-4.png",
     price: "Boost Your Teaching",
     bgColor: "linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2))",
     textColor: "white",
     descriptors: [
-      "📈 Student tracking",
-      "🎯 Structured programs",
-      "📚 Teaching resources",
-      "⚡ Easy management",
-      "🏌️ Technical evaluation",
-      "🚀 More efficient coaching"
+      "\u{1F4C8} Student tracking",
+      "\u{1F3AF} Structured programs",
+      "\u{1F4DA} Teaching resources",
+      "\u26A1 Easy management",
+      "\u{1F3CC}\uFE0F Technical evaluation",
+      "\u{1F680} More efficient coaching"
     ]
   }
+];
+const journeySteps = [
+  {
+    text: "Discover the Game",
+    desc: "Children are introduced to the basic elements of golf in a playful, approachable way.",
+    hideLine: false,
+    tone: "#4FC3F7",
+  },
+  {
+    text: "Build The Foundations",
+    desc: "Through guided activities and early skill development.",
+    hideLine: false,
+    tone: "#66BB6A",
+  },
+  {
+    text: "Experience the Game of Golf",
+    desc: "Children explore the environment of golf.",
+    hideLine: false,
+    tone: "#FFB74D",
+  },
+  {
+    text: "Understand How to Play",
+    desc: "They are introduced to simple rules and etiquette.",
+    hideLine: false,
+    tone: "#BA68C8",
+  },
+  {
+    text: "Step into Structured Training",
+    desc: "They transition into academy-style learning.",
+    hideLine: true,
+    tone: "#EF5350",
+  },
 ];
 
 
@@ -80,20 +112,20 @@ function Informations({ informationsRef, triggerInformations }) {
 
   const { ref: swiperRef, inView: swiperInView } = useInView({ threshold: 0.2, triggerOnce: true, });
 
-  //CANCELAR PRIMERA ANIMACIÓN
+  //CANCELAR PRIMERA ANIMACIÃ“N
   const [hasAnimated, setHasAnimated] = useState(false);
   const [hasAnimated2, setHasAnimated2] = useState(false);
 
   useEffect(() => {
     if (inView) {
-      setShouldAnimate(true); // 🔹 Activa la animación cuando el componente es visible
+      setShouldAnimate(true); // ðŸ”¹ Activa la animaciÃ³n cuando el componente es visible
     }
   }, [inView]);
 
-  //ANIMACIÓN DESCRIPTORES
+  //ANIMACIÃ“N DESCRIPTORES
   useEffect(() => {
     if (swiperInView && swiperInstance && !hasAnimated) {
-      swiperInstance.slideTo(0, 1500); // mueve del último al primero
+      swiperInstance.slideTo(0, 1500); // mueve del Ãºltimo al primero
       setHasAnimated(true);
     }
   }, [swiperInView, swiperInstance, hasAnimated]);
@@ -102,13 +134,13 @@ function Informations({ informationsRef, triggerInformations }) {
     if (hasAnimated) {
       const timeout = setTimeout(() => {
         setShowPopularBadge(true);
-      }, 2000); // Delay de 3 segundos después que el swiper terminó su animación
+      }, 2000); // Delay de 3 segundos despuÃ©s que el swiper terminÃ³ su animaciÃ³n
       return () => clearTimeout(timeout);
     }
   }, [hasAnimated]);
 
 
-  //EVITAR ANIMACIÓN DUPLICADA
+  //EVITAR ANIMACIÃ“N DUPLICADA
   useEffect(() => {
     if (inView && !hasAnimated2) {
       const timer = setTimeout(() => {
@@ -119,7 +151,7 @@ function Informations({ informationsRef, triggerInformations }) {
   }, [inView, hasAnimated2]);
 
   const handleContactClick = (title) => {
-    const mensaje = `¡Hola! Me interesó la promoción de ${encodeURIComponent(title)} ¿Me comentas?`;
+    const mensaje = `Â¡Hola! Me interesÃ³ la promociÃ³n de ${encodeURIComponent(title)} Â¿Me comentas?`;
     window.open(`https://api.whatsapp.com/send?phone=15617975986&text=${mensaje}`, "_blank");
   };
   return (
@@ -157,7 +189,7 @@ function Informations({ informationsRef, triggerInformations }) {
 
           <Box
             sx={{
-              width: 30,  // un poquito más grande
+              width: 30,  // un poquito mÃ¡s grande
               height: 30,
               borderRadius: "50%",
               background: "linear-gradient(135deg, #4fd1c5, #38b2ac)", // gradiente turquesa vibrante
@@ -174,10 +206,10 @@ function Informations({ informationsRef, triggerInformations }) {
           >
             <motion.div
               initial={{ rotate: 0, scale: 0.85 }}
-              animate={inView || hasAnimated2 ? { rotate: 360, scale: 1 } : { rotate: 0, scale: 0.85 }}
+              animate={inView || hasAnimated2 ? { rotate: 1080, scale: 1 } : { rotate: 0, scale: 0.85 }}
               transition={{
-                duration: 1.2,
-                repeat: 2,
+                duration: 0.8,
+                
                 ease: "easeInOut",
               }}
               style={{
@@ -192,7 +224,7 @@ function Informations({ informationsRef, triggerInformations }) {
             </motion.div>
           </Box>
           <motion.div
-            initial={{ opacity: 0, y: 80 }} // ⬇️ Aparece más abajo
+            initial={{ opacity: 0, y: 80 }} // â¬‡ï¸ Aparece mÃ¡s abajo
             animate={inView || hasAnimated2 ? { opacity: 1, y: 0 } : { opacity: 0, y: 80 }}
             transition={{ duration: 1, ease: 'easeOut' }}
           >
@@ -223,21 +255,21 @@ function Informations({ informationsRef, triggerInformations }) {
                 },
               }}
             >
-              Train today, compete tomorrow!
+              How the Journey Works
             </Typography>
           </motion.div>
 
 
-          {/* Línea debajo del título con animación (con retraso de 2 segundos) */}
+          {/* LÃ­nea debajo del tÃ­tulo con animaciÃ³n (con retraso de 2 segundos) */}
           <motion.hr
             initial={{ opacity: 0 }} // Comienza invisible
             animate={inView || hasAnimated2 ? { opacity: 1 } : {}} // Aparece completamente
-            transition={{ duration: 0.8, delay: 1 }} // Aparece después de 1s y dura 1s
+            transition={{ duration: 0.8, delay: 1 }} // Aparece despuÃ©s de 1s y dura 1s
             style={{
               position: "absolute",
-              top: isMobile ? "calc(80% - 30px)" : "calc(100% - 30px)", // Ajusta la posición
+              top: isMobile ? "calc(80% - 30px)" : "calc(100% - 30px)", // Ajusta la posiciÃ³n
               left: "5%",
-              width: "90%", // Mantiene su tamaño desde el inicio
+              width: "90%", // Mantiene su tamaÃ±o desde el inicio
               border: "1px solid white",
               zIndex: 0,
               background: "white",
@@ -248,34 +280,9 @@ function Informations({ informationsRef, triggerInformations }) {
         </Box>
         <Grid container spacing={3} sx={{ mt: 2 }}>
 
-          {/* Columna de los íconos */}
+          {/* Columna de los iconos */}
           <Grid item xs={12} md={6}>
-            {[
-              {
-                icon: <SportsGolf sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Personalized golf lessons.",
-                desc: "Training tailored to your level to refine technique and accuracy.",
-                hideLine: false,
-              },
-              {
-                icon: <School sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Training for children and youth.",
-                desc: "Development programs focused on fundamentals and athletic growth.",
-                hideLine: false,
-              },
-              {
-                icon: <EmojiEvents sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Tournament preparation.",
-                desc: "Competitive training to improve performance on the course.",
-                hideLine: false,
-              },
-              {
-                icon: <Groups sx={{ color: "white", fontSize: "2.2rem" }} />,
-                text: "Golf clinics and events.",
-                desc: "Group sessions and experiences designed to enhance your game.",
-                hideLine: true,
-              },
-            ].map((item, index) => {
+            {journeySteps.map((item, index) => {
               const { ref: itemRef, inView: itemInView } = useInView({
                 threshold: 0.43,
                 triggerOnce: true,
@@ -294,25 +301,26 @@ function Informations({ informationsRef, triggerInformations }) {
                       display: "flex",
                       alignItems: "center",
                       zIndex: 2,
+                      py: 0.2,
+                      mb: item.hideLine ? 0 : 0.2,
                       paddingLeft: isMobile ? "0" : "16px",
                       paddingRight: isMobile ? "0" : "16px",
                     }}
                   >
-                    <ListItemIcon sx={{ zIndex: 2 }}>
+                    <ListItemIcon sx={{ zIndex: 2, minWidth: { xs: 78, md: 90 } }}>
                       <Box
                         sx={{
                           position: "relative",
-                          width: 100,
-                          height: 85,
+                          width: 70,
+                          height: 92,
                           display: "flex",
-                          alignItems: "center",
                           justifyContent: "center",
                         }}
                       >
                         {!item.hideLine && (
                           <motion.div
                             initial={{ height: 0 }}
-                            animate={itemInView ? { height: 40 } : { height: 0 }}
+                            animate={itemInView ? { height: 52 } : { height: 0 }}
                             transition={{
                               delay: 0.2 * index,
                               duration: 1,
@@ -320,7 +328,7 @@ function Informations({ informationsRef, triggerInformations }) {
                             }}
                             style={{
                               position: "absolute",
-                              top: "80%",
+                              top: "58px",
                               left: "50%",
                               transform: "translateX(-50%)",
                               width: "2px",
@@ -336,33 +344,41 @@ function Informations({ informationsRef, triggerInformations }) {
 
                         <Box
                           sx={{
-                            width: 70,
-                            height: 70,
+                            width: 60,
+                            height: 60,
                             borderRadius: "50%",
-                            border: "2px solid white", // borde blanco para contraste
-                            backgroundColor: "rgba(255,255,255,0.1)", // fondo translúcido blanco
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
+                            border: "2px solid white",
+                            display: "grid",
+                            placeItems: "center",
+                            background: item.tone,
+                            boxShadow: "0 6px 14px rgba(0,0,0,0.25)",
                             position: "relative",
                             zIndex: 2,
+
                           }}
                         >
-                          {item.icon} {/* Icono en color blanco o principal */}
-
                           <motion.div
+                            animate={{ scale: [1, 1.34], opacity: [0.62, 0] }}
+                            transition={{ duration: 1.15, repeat: Infinity, ease: "easeOut", delay: index * 0.14, repeatDelay: 0.05 }}
                             style={{
                               position: "absolute",
-                              top: 0,
-                              left: 0,
-                              width: "100%",
-                              height: "100%",
+                              inset: -4,
                               borderRadius: "50%",
-                              backgroundColor: "rgba(255,255,255,0.15)", // halo sutil
-                              zIndex: 1,
-                              animation: "pulsacion 1s ease-in-out 0.1s infinite",
+                              border: "2.2px solid rgba(255,255,255,0.95)",
+                              pointerEvents: "none",
                             }}
                           />
+                          <Typography
+                            sx={{
+                              color: "white",
+                              fontWeight: 900,
+                              fontSize: isMobile ? "1.35rem" : "1.5rem",
+                              lineHeight: 1,
+                              textShadow: "0 2px 6px rgba(0,0,0,0.35)",
+                            }}
+                          >
+                            {index + 1}
+                          </Typography>
                         </Box>
                       </Box>
                     </ListItemIcon>
@@ -373,7 +389,7 @@ function Informations({ informationsRef, triggerInformations }) {
                         "& .MuiListItemText-primary": {
                           fontSize: isMobile ? "0.99rem" : "1.2rem",
                           color: "white",
-                          fontWeight: 500,
+                          fontWeight: 700,
                         },
                         "& .MuiListItemText-secondary": {
                           color: "rgba(255,255,255,0.8)",
@@ -387,9 +403,8 @@ function Informations({ informationsRef, triggerInformations }) {
               );
             })}
           </Grid>
-
           <Grid item xs={12} md={6} sx={{ mt: -4 }}>
-            {/* Título fuera del overlay */}
+            {/* TÃ­tulo fuera del overlay */}
             <Box sx={{ mb: 2, position: "relative", zIndex: 10 }}>
               <Typography
                 component={motion.h5}
@@ -410,7 +425,7 @@ function Informations({ informationsRef, triggerInformations }) {
                   display: "inline-block",
                 }}
               >
-                Nuestros Servicios
+                Our Services
               </Typography>
             </Box>
 
@@ -445,7 +460,7 @@ function Informations({ informationsRef, triggerInformations }) {
                           top: 0,
                           left: 0,
                           right: 0,
-                          zIndex: 0,      // 👈 este contexto queda detrás
+                          zIndex: 0,      // ðŸ‘ˆ este contexto queda detrÃ¡s
                           pointerEvents: "none", // evita bloquear clics de la card
                         }}
                       >
@@ -492,7 +507,7 @@ function Informations({ informationsRef, triggerInformations }) {
                           boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
                           position: "relative",
                           bgcolor: "white",
-                          zIndex: 2,   // 👈 card siempre sobre el badge
+                          zIndex: 2,   // ðŸ‘ˆ card siempre sobre el badge
                         }}
                       >
 
@@ -528,7 +543,7 @@ function Informations({ informationsRef, triggerInformations }) {
 
                           }}
                         >
-                          {/* Título y descripción */}
+                          {/* TÃ­tulo y descripciÃ³n */}
                           <Box sx={{ mb: 1 }}>
                             <Typography
                               variant="h6"
@@ -585,7 +600,7 @@ function Informations({ informationsRef, triggerInformations }) {
                               </Typography>
                             ))}
                           </Box>
-                          {/* Botón Cotizar (queda abajo gracias a mt:auto) */}
+                          {/* BotÃ³n Get Quote (queda abajo gracias a mt:auto) */}
                           <motion.button
                             onClick={() => handleContactClick(promo.title)}
                             whileHover={{ scale: 1.05 }}
@@ -611,14 +626,14 @@ function Informations({ informationsRef, triggerInformations }) {
                             <Box
                               component="img"
                               src="/clic.jpg"
-                              alt="Ícono de clic"
+                              alt="Ãcono de clic"
                               sx={{
                                 width: 20,
                                 height: 20,
                                 userSelect: "none",
                                 filter: "invert(1) brightness(2)",
                               }}
-                            />  Cotizar
+                            />  Get Quote
                           </motion.button>
                         </Box>
                       </Box>
@@ -666,3 +681,15 @@ function Informations({ informationsRef, triggerInformations }) {
 };
 
 export default Informations;
+
+
+
+
+
+
+
+
+
+
+
+

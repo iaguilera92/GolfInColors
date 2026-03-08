@@ -12,40 +12,35 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { SportsGolf, School, GolfCourse, Rule, TrackChanges } from "@mui/icons-material";
+
 
 const journeySteps = [
   {
-    icon: <SportsGolf sx={{ color: "white", fontSize: "2rem" }} />,
-    text: "1. Discover the Game",
+    text: "Discover the Game",
     desc: "Children are introduced to the basic elements of golf in a playful, approachable way.",
     hideLine: false,
     tone: "#4FC3F7",
   },
   {
-    icon: <School sx={{ color: "white", fontSize: "2rem" }} />,
-    text: "2. Build The Foundations",
+    text: "Build The Foundations",
     desc: "Through guided activities and early skill development.",
     hideLine: false,
     tone: "#66BB6A",
   },
   {
-    icon: <GolfCourse sx={{ color: "white", fontSize: "2rem" }} />,
-    text: "3. Experience the Game of Golf",
+    text: "Experience the Game of Golf",
     desc: "Children explore the environment of golf.",
     hideLine: false,
     tone: "#FFB74D",
   },
   {
-    icon: <Rule sx={{ color: "white", fontSize: "2rem" }} />,
-    text: "4. Understand How to Play",
+    text: "Understand How to Play",
     desc: "They are introduced to simple rules and etiquette.",
     hideLine: false,
     tone: "#BA68C8",
   },
   {
-    icon: <TrackChanges sx={{ color: "white", fontSize: "2rem" }} />,
-    text: "5. Step into Structured Training",
+    text: "Step into Structured Training",
     desc: "They transition into academy-style learning.",
     hideLine: true,
     tone: "#EF5350",
@@ -131,7 +126,8 @@ function Informations() {
                   sx={{
                     display: "flex",
                     alignItems: "center",
-                    mb: item.hideLine ? 0 : 0.55,
+                    py: 0.2,
+                    mb: item.hideLine ? 0 : 0.2,
                   }}
                 >
                   <ListItemIcon sx={{ minWidth: { xs: 78, md: 90 } }}>
@@ -139,7 +135,7 @@ function Informations() {
                       sx={{
                         position: "relative",
                         width: 70,
-                        height: 110,
+                        height: 92,
                         display: "flex",
                         justifyContent: "center",
                       }}
@@ -148,9 +144,9 @@ function Informations() {
                         <Box
                           sx={{
                             position: "absolute",
-                            top: 60,
+                            top: 58,
                             width: "2px",
-                            height: 70,
+                            height: 52,
                             background:
                               "repeating-linear-gradient(to bottom, white 0 4px, transparent 4px 8px)",
                             opacity: 0.8,
@@ -166,26 +162,24 @@ function Informations() {
                           border: "2px solid white",
                           display: "grid",
                           placeItems: "center",
-                          background: `linear-gradient(145deg, ${item.tone}cc, ${item.tone}99)`,
+                          background: item.tone,
                           boxShadow: "0 6px 14px rgba(0,0,0,0.25)",
                           position: "relative",
-                          animation: "softPulse 2.6s ease-in-out infinite",
-                          animationDelay: `${index * 0.2}s`,
-                          willChange: "transform",
-                          transform: "translateZ(0)",
-                          "@keyframes softPulse": {
-                            "0%, 100%": {
-                              transform: "scale(1)",
-                              boxShadow: "0 6px 14px rgba(0,0,0,0.25)",
-                            },
-                            "50%": {
-                              transform: "scale(1.05)",
-                              boxShadow: "0 9px 18px rgba(0,0,0,0.3)",
-                            },
-                          },
+
                         }}
                       >
-                        {item.icon}
+                        <motion.div
+                          animate={{ scale: [1, 1.34], opacity: [0.62, 0] }}
+                          transition={{ duration: 1.15, repeat: Infinity, ease: "easeOut", delay: index * 0.14, repeatDelay: 0.05 }}
+                          style={{
+                            position: "absolute",
+                            inset: -4,
+                            borderRadius: "50%",
+                            border: "2.2px solid rgba(255,255,255,0.95)",
+                            pointerEvents: "none",
+                          }}
+                        />
+                        <Typography sx={{ color: "white", fontWeight: 900, fontSize: isMobile ? "1.35rem" : "1.5rem", lineHeight: 1, textShadow: "0 2px 6px rgba(0,0,0,0.35)" }}>{index + 1}</Typography>
                       </Box>
                     </Box>
                   </ListItemIcon>
@@ -211,7 +205,7 @@ function Informations() {
                       },
                     }}
                     sx={{
-                      mt: -6,
+                      mt: -3,
                       px: 1.1,
                       py: 1.05,
                       borderRadius: 2.2,
@@ -231,6 +225,14 @@ function Informations() {
 }
 
 export default Informations;
+
+
+
+
+
+
+
+
 
 
 

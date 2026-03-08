@@ -19,53 +19,53 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
   const handleFullScreen = () => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    if (videoRef.current) {
-      const video = videoRef.current;
+    if (!videoRef.current) return;
+    const video = videoRef.current;
 
-      if (isMobile) {
-        if (video.webkitEnterFullscreen) {
-          video.webkitEnterFullscreen();
-          video.currentTime = 0;
-          video.play();
-        } else if (video.requestFullscreen) {
-          video.requestFullscreen();
-          video.currentTime = 0;
-          video.play();
-        }
-      } else if (containerRef.current) {
-        const container = containerRef.current;
-
-        const afterFullscreen = () => {
-          const clickEvent = new MouseEvent('click', {
-            bubbles: true,
-            cancelable: true,
-            view: window,
-          });
-          video.dispatchEvent(clickEvent);
-
-          video.currentTime = 0;
-          video.muted = true;
-          const playPromise = video.play();
-
-          if (playPromise !== undefined) {
-            playPromise.catch((error) => {
-              console.warn('No se pudo reproducir el video:', error);
-            });
-          }
-
-          document.removeEventListener('fullscreenchange', afterFullscreen);
-          document.removeEventListener('webkitfullscreenchange', afterFullscreen);
-        };
-
-        document.addEventListener('fullscreenchange', afterFullscreen);
-        document.addEventListener('webkitfullscreenchange', afterFullscreen);
-
-        container.requestFullscreen?.() ||
-          container.webkitRequestFullscreen?.() ||
-          container.mozRequestFullScreen?.() ||
-          container.msRequestFullscreen?.();
+    if (isMobile) {
+      if (video.webkitEnterFullscreen) {
+        video.webkitEnterFullscreen();
+        video.currentTime = 0;
+        video.play();
+      } else if (video.requestFullscreen) {
+        video.requestFullscreen();
+        video.currentTime = 0;
+        video.play();
       }
+      return;
     }
+
+    if (!containerRef.current) return;
+    const container = containerRef.current;
+
+    const afterFullscreen = () => {
+      const clickEvent = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window,
+      });
+      video.dispatchEvent(clickEvent);
+
+      video.currentTime = 0;
+      video.muted = true;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          console.warn('No se pudo reproducir el video:', error);
+        });
+      }
+
+      document.removeEventListener('fullscreenchange', afterFullscreen);
+      document.removeEventListener('webkitfullscreenchange', afterFullscreen);
+    };
+
+    document.addEventListener('fullscreenchange', afterFullscreen);
+    document.addEventListener('webkitfullscreenchange', afterFullscreen);
+
+    container.requestFullscreen?.() ||
+      container.webkitRequestFullscreen?.() ||
+      container.mozRequestFullScreen?.() ||
+      container.msRequestFullscreen?.();
   };
 
   useEffect(() => {
@@ -101,7 +101,6 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
 
   useEffect(() => {
     const video = videoRef.current;
-
     if (!video) return;
 
     if (girado) {
@@ -170,28 +169,6 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
               <Box
                 sx={{
                   position: 'absolute',
-                  top: 7,
-                  left: 7,
-                  zIndex: 2,
-                  px: 0.8,
-                  py: 0.18,
-                  borderRadius: 1,
-                  bgcolor: 'rgba(0,0,0,0.68)',
-                  color: '#ffd54f',
-                  fontWeight: 800,
-                  fontSize: { xs: '0.52rem', sm: '0.58rem' },
-                  letterSpacing: 0.35,
-                  textTransform: 'uppercase',
-                  pointerEvents: 'none',
-                  border: '1px solid rgba(255,255,255,0.45)',
-                }}
-              >
-                {producto.Tag || producto.Nivel || 'Tee Box'}
-              </Box>
-
-              <Box
-                sx={{
-                  position: 'absolute',
                   top: 3,
                   right: 3,
                   zIndex: 2,
@@ -232,9 +209,12 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
                   position: 'absolute',
                   top: 0,
                   left: 0,
-                  filter: producto.Stock === 0
-                    ? 'grayscale(100%) brightness(0.5)'
-                    : (isImageLoaded ? 'none' : 'blur(12px) brightness(0.7)'),
+                  filter:
+                    producto.Stock === 0
+                      ? 'grayscale(100%) brightness(0.5)'
+                      : isImageLoaded
+                        ? 'none'
+                        : 'blur(12px) brightness(0.7)',
                   transition: 'filter 0.6s ease',
                 }}
               />
@@ -287,7 +267,7 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
                     fontWeight: 800,
                     fontSize: { xs: '0.63rem', sm: '0.7rem' },
                     lineHeight: 1.1,
-                    mb: 0.35,
+                    mb: 0.45,
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
@@ -295,17 +275,6 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
                   }}
                 >
                   {producto.NombreProducto}
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: { xs: '0.56rem', sm: '0.62rem' },
-                    mb: 0.45,
-                    color: producto.Stock > 0 ? '#c8e6c9' : '#ffcdd2',
-                    fontWeight: 700,
-                    lineHeight: 1,
-                  }}
-                >
-                  {producto.Stock > 0 ? `In stock: ${producto.Stock}` : 'Out of stock'}
                 </Typography>
 
                 <Stack direction="row" alignItems="center" spacing={0.3} sx={{ width: '100%' }}>
@@ -510,4 +479,3 @@ const Productos = ({ producto, girado, onGirar, FormatearPesos, onVisualizarMobi
 };
 
 export default Productos;
-

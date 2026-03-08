@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+﻿import React, { useState, useEffect, useRef } from "react";
 import { Grid, Typography, Box, useMediaQuery, useTheme } from "@mui/material";
 import "@fontsource/poppins";
 import CountUp from "react-countup";
@@ -41,7 +41,7 @@ const Areas = () => {
   const [scrollY, setScrollY] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
 
-  //EVITAR ANIMACIÓN DUPLICADA
+  //EVITAR ANIMACIÃ“N DUPLICADA
   useEffect(() => {
     if (inView && !hasAnimated) {
       const timer = setTimeout(() => {
@@ -52,17 +52,17 @@ const Areas = () => {
   }, [inView, hasAnimated]);
 
   useEffect(() => {
-    // Solo se activa el retraso cuando el item está en vista
+    // Solo se activa el retraso cuando el item estÃ¡ en vista
     if (inView) {
       const timer = setTimeout(() => {
         setDelayed(true);
-      }, 1700); // ⏳ Ahora el contador se activa después de 1.2 segundos
+      }, 1700); // â³ Ahora el contador se activa despuÃ©s de 1.2 segundos
 
       return () => clearTimeout(timer); // Limpia el temporizador al desmontarse
     }
   }, [inView]);
 
-  // Función para dividir el texto en palabras
+  // FunciÃ³n para dividir el texto en palabras
   const splitTextIntoWords = (text) => {
     return text.split(" ").map((word, index) => (
       <motion.span
@@ -115,7 +115,7 @@ const Areas = () => {
 
     <Box
       sx={{
-        position: 'relative', // 👈 necesario para que el degradado se posicione correctamente
+        position: 'relative', // ðŸ‘ˆ necesario para que el degradado se posicione correctamente
         zIndex: 1,
         background: `
       linear-gradient(
@@ -137,18 +137,19 @@ const Areas = () => {
         marginTop: "-120px",
       }}
     >
-      <Grid container spacing={4} alignItems="center" pt={{ xs: 9, md: 11 }}>
+      <Grid container spacing={4} alignItems="center" pt={{ xs: 9, md: 15 }}>
         <Grid item xs={12}>
-          <Grid container spacing={4}>
+          <Grid container spacing={{ xs: 4, md: 1.5 }}>
             {data.map((item, index) => (
-              <Grid item xs={6} sm={6} md={6} key={index}>
+              <Grid item xs={6} sm={6} md={6} key={index} sx={{ display: "flex", justifyContent: { xs: "center", md: index % 2 === 0 ? "flex-end" : "flex-start" } }}>
                 <Box
                   sx={{
                     textAlign: "center",
                     color: "white",
                     borderRadius: 2,
-                    width: "100%",
-                    height: 150,
+                    width: { xs: "100%", md: 320 },
+                    maxWidth: "100%",
+                    height: { xs: 150, md: 130 },
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
@@ -156,10 +157,11 @@ const Areas = () => {
                     perspective: "1000px",
                     cursor: "pointer",
                     position: "relative",
+                    mx: { xs: "auto", md: 0 },
                   }}
                   ref={ref}
                 >
-                  {/* Caja para rotación 3D */}
+                  {/* Caja para rotaciÃ³n 3D */}
                   <Box
                     sx={{
                       width: "100%",
@@ -174,7 +176,7 @@ const Areas = () => {
                       position: "relative",
                     }}
                   >
-                    {/* Cara trasera: Información */}
+                    {/* Cara trasera: InformaciÃ³n */}
                     <Box
                       sx={{
                         position: "absolute",
@@ -211,7 +213,7 @@ const Areas = () => {
                             minWidth: "80px",
                             textAlign: "center",
                             marginBottom: "0.15em",
-                            fontSize: isMobile ? "2.6rem" : "2.2rem", // Aumentado el tamaño
+                            fontSize: isMobile ? "2.6rem" : "2.2rem", // Aumentado el tamaÃ±o
                           }}
                         >
                           +{delayed ? <CountUp start={0} end={item.count} duration={3.1} separator="." /> : "0"}
@@ -219,9 +221,9 @@ const Areas = () => {
                         <Box
                           sx={{
                             textAlign: "center",
-                            maxWidth: isMobile ? "100%" : "90%",
-                            fontSize: isMobile ? "0.93rem" : "1.1rem", // Reducir tamaño del texto en móviles
-                            fontFamily: "'Oswald', sans-serif", // Fuente agregada
+                            maxWidth: isMobile ? "100%" : "100%",
+                            fontSize: isMobile ? "0.93rem" : "1.1rem", // Reducir tamaÃ±o del texto en mÃ³viles
+                            fontFamily: "'Oswald', sans-serif", // Fuente agregada`r`n                            whiteSpace: { xs: "normal", md: "nowrap" },
                           }}
                         >
                           {splitTextIntoWords(item.text)}
@@ -276,6 +278,13 @@ const Areas = () => {
 };
 
 export default Areas;
+
+
+
+
+
+
+
 
 
 

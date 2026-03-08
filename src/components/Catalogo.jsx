@@ -1,17 +1,6 @@
 ﻿import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import {
-  Container,
-  Snackbar,
-  Box,
-  Alert,
-  useTheme,
-  useMediaQuery,
-  Grid,
-  IconButton,
-  Typography,
-  Skeleton,
-} from '@mui/material';
+import { Container, Snackbar, Box, Alert, useTheme, useMediaQuery, Grid, IconButton, Typography, Skeleton } from '@mui/material';
 import './css/Catalogo.css';
 import { motion } from 'framer-motion';
 import Productos from './Productos';
@@ -197,20 +186,12 @@ const Catalogo = () => {
               overflowX: 'hidden',
               minHeight: '100vh',
               width: '100%',
-              py: 14,
+              pt: 11,
+              pb: 14,
               px: 1.2,
               position: 'relative',
-              backgroundImage: isMobile ? 'url(fondo-mobile.webp)' : 'url(fondo-escritorio.webp)',
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              '&::before': {
-                content: '""',
-                position: 'absolute',
-                inset: 0,
-                backgroundColor: 'rgba(0,0,0,0.15)',
-                zIndex: 0,
-              },
+              backgroundColor: '#f7f4ed',
+
               '& > *': { position: 'relative', zIndex: 1 },
             }}
           >
@@ -218,22 +199,19 @@ const Catalogo = () => {
               {spotlight && (
                 <Box
                   sx={{
-                    borderRadius: 2.5,
-                    border: '2px solid rgba(255,214,102,0.92)',
-                    p: { xs: 1.4, sm: 1.8 },
-                    mb: 1.4,
-                    background: 'linear-gradient(145deg, rgba(255,193,7,0.18), rgba(255,152,0,0.08))',
-                    boxShadow: '0 8px 18px rgba(0,0,0,0.25)',
+                    borderRadius: 2.1,
+                    border: '1px solid rgba(176,128,32,0.38)',
+                    p: { xs: 1.05, sm: 1.25 },
+                    mb: 1.2,
+                    background: 'linear-gradient(125deg, #fff6d9 0%, #f8e0a8 40%, #efc66c 100%)',
+                    boxShadow: '0 10px 20px rgba(124,86,19,0.22), inset 0 1px 0 rgba(255,255,255,0.65)',
                   }}
                 >
-                  <Typography sx={{ color: '#ffe082', fontWeight: 900, fontSize: { xs: '0.78rem', sm: '0.85rem' }, mb: 0.5 }}>
+                  <Typography sx={{ color: '#7a5200', fontWeight: 900, fontSize: { xs: '0.73rem', sm: '0.8rem' }, mb: 0.25, letterSpacing: '0.04em' }}>
                     PRODUCT SPOTLIGHT
                   </Typography>
-                  <Typography sx={{ color: '#fff', fontWeight: 800, fontSize: { xs: '1rem', sm: '1.15rem' }, mb: 0.35 }}>
+                  <Typography sx={{ color: '#2c2414', fontWeight: 900, fontSize: { xs: '0.95rem', sm: '1.06rem' }, lineHeight: 1.2 }}>
                     {spotlight.NombreProducto}
-                  </Typography>
-                  <Typography sx={{ color: 'rgba(255,255,255,0.92)', fontSize: { xs: '0.82rem', sm: '0.9rem' } }}>
-                    Available on Amazon • Open with Details or Buy
                   </Typography>
                 </Box>
               )}
@@ -244,8 +222,8 @@ const Catalogo = () => {
                 <Box key={`swiper-container-${grupoIndex}`} sx={{ position: 'relative', py: 0 }}>
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: 0, mb: 0, position: 'relative', zIndex: 20, height: 30 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, ml: 1 }}>
-                      <Box component="img" loading="lazy" decoding="async" src="cine.png" alt="Reels icon" sx={{ width: 16, height: 16, filter: 'invert(1)', alignSelf: 'center', mt: 0 }} />
-                      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', color: 'white', fontFamily: '"Segoe UI", sans-serif', lineHeight: 1.2 }}>
+                      <Box component="img" loading="lazy" decoding="async" src="cine.png" alt="Reels icon" sx={{ width: 16, height: 16, alignSelf: 'center', mt: 0 }} />
+                      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', color: '#1f3c33', fontFamily: '"Segoe UI", sans-serif', lineHeight: 1.2 }}>
                         <Box sx={{ fontWeight: 'bold', fontSize: '0.85rem' }}>{grupoIndex === 0 ? 'Explore catalog' : 'More active products'}</Box>
                         {grupoIndex === 0 && (
                           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.4, ease: 'easeOut' }}>
@@ -261,12 +239,12 @@ const Catalogo = () => {
                       {showArrow[grupoIndex] !== false ? (
                         animarFlecha ? (
                           <motion.div animate={{ x: [0, 5, 0] }} transition={{ duration: 1.5, repeat: 1, ease: 'easeInOut' }}>
-                            <IconButton onClick={() => swiperRefs.current[grupoIndex]?.slideNext()} sx={{ color: 'white', boxShadow: 'none', padding: 0.5, '&:hover': { backgroundColor: 'rgba(0,0,0,0.4)' } }}>
+                            <IconButton onClick={() => swiperRefs.current[grupoIndex]?.slideNext()} sx={{ color: '#1f3c33', boxShadow: 'none', padding: 0.5, '&:hover': { backgroundColor: 'rgba(0,0,0,0.08)' } }}>
                               <ArrowForwardIcon fontSize="large" sx={{ fontSize: '24px' }} />
                             </IconButton>
                           </motion.div>
                         ) : (
-                          <IconButton onClick={() => swiperRefs.current[grupoIndex]?.slideNext()} sx={{ color: 'white', boxShadow: 'none', padding: 0.5, '&:hover': { backgroundColor: 'rgba(0,0,0,0.4)' } }}>
+                          <IconButton onClick={() => swiperRefs.current[grupoIndex]?.slideNext()} sx={{ color: '#1f3c33', boxShadow: 'none', padding: 0.5, '&:hover': { backgroundColor: 'rgba(0,0,0,0.08)' } }}>
                             <ArrowForwardIcon fontSize="large" sx={{ fontSize: '24px' }} />
                           </IconButton>
                         )
@@ -312,17 +290,17 @@ const Catalogo = () => {
                 <Grid container spacing={2}>
                   <Grid item xs={12} md={6}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0 }}>
-                      <Box sx={{ fontWeight: 'bold', fontSize: '1rem', color: 'white', ml: 1 }}>Product catalog</Box>
+                      <Box sx={{ fontWeight: 'bold', fontSize: '1rem', color: '#1f3c33', ml: 1 }}>Product catalog</Box>
                       <Box sx={{ width: 40, textAlign: 'right' }}>
                         {showArrow.desktop !== false ? (
                           animarFlecha ? (
                             <motion.div animate={{ x: [0, 5, 0] }} transition={{ duration: 1.5, repeat: 1, ease: 'easeInOut' }}>
-                              <IconButton onClick={() => swiperRefs.current.desktop?.slideNext()} sx={{ color: 'white', boxShadow: 'none', padding: 0.5, '&:hover': { backgroundColor: 'rgba(0,0,0,0.4)' } }}>
+                              <IconButton onClick={() => swiperRefs.current.desktop?.slideNext()} sx={{ color: '#1f3c33', boxShadow: 'none', padding: 0.5, '&:hover': { backgroundColor: 'rgba(0,0,0,0.08)' } }}>
                                 <ArrowForwardIcon fontSize="large" sx={{ fontSize: '24px' }} />
                               </IconButton>
                             </motion.div>
                           ) : (
-                            <IconButton onClick={() => swiperRefs.current.desktop?.slideNext()} sx={{ color: 'white', boxShadow: 'none', padding: 0.5, '&:hover': { backgroundColor: 'rgba(0,0,0,0.4)' } }}>
+                            <IconButton onClick={() => swiperRefs.current.desktop?.slideNext()} sx={{ color: '#1f3c33', boxShadow: 'none', padding: 0.5, '&:hover': { backgroundColor: 'rgba(0,0,0,0.08)' } }}>
                               <ArrowForwardIcon fontSize="large" sx={{ fontSize: '24px' }} />
                             </IconButton>
                           )
@@ -379,17 +357,20 @@ const Catalogo = () => {
         <Container
           maxWidth={false}
           disableGutters
-          sx={{ minHeight: '100vh', py: 14, px: 1.2, backgroundColor: '#0f2a3f' }}
+          sx={{
+            minHeight: '100vh', pt: 10,
+            pb: 14, px: 1.2, backgroundColor: '#f7f4ed'
+          }}
         >
           <Box sx={{ maxWidth: 1200, mx: 'auto' }}>
             <Grid container spacing={2}>
               {Array.from({ length: 6 }).map((_, i) => (
                 <Grid item xs={12} sm={6} md={4} key={`s-${i}`}>
-                  <Box sx={{ p: 1.2, borderRadius: 2, border: '1px solid rgba(255,255,255,0.2)' }}>
-                    <Skeleton variant="rectangular" height={170} sx={{ borderRadius: 1.5, mb: 1, bgcolor: 'rgba(255,255,255,0.15)' }} />
-                    <Skeleton variant="text" width="90%" sx={{ bgcolor: 'rgba(255,255,255,0.2)' }} />
-                    <Skeleton variant="text" width="50%" sx={{ mb: 1.2, bgcolor: 'rgba(255,255,255,0.2)' }} />
-                    <Skeleton variant="rounded" height={30} sx={{ bgcolor: 'rgba(255,255,255,0.22)' }} />
+                  <Box sx={{ p: 1.2, borderRadius: 2, border: '1px solid rgba(24,58,48,0.16)', backgroundColor: '#fffaf0' }}>
+                    <Skeleton variant="rectangular" height={170} sx={{ borderRadius: 1.5, mb: 1, bgcolor: 'rgba(24,58,48,0.08)' }} />
+                    <Skeleton variant="text" width="90%" sx={{ bgcolor: 'rgba(24,58,48,0.12)' }} />
+                    <Skeleton variant="text" width="50%" sx={{ mb: 1.2, bgcolor: 'rgba(24,58,48,0.12)' }} />
+                    <Skeleton variant="rounded" height={30} sx={{ bgcolor: 'rgba(24,58,48,0.14)' }} />
                   </Box>
                 </Grid>
               ))}
@@ -402,4 +383,10 @@ const Catalogo = () => {
 };
 
 export default Catalogo;
+
+
+
+
+
+
 
