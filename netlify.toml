@@ -1,7 +1,17 @@
-[dev]
+﻿[dev]
   framework = "vite"
   command = "npm run dev"
   targetPort = 5173
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/*"
@@ -9,6 +19,11 @@
     Access-Control-Allow-Origin = "*"
     Access-Control-Allow-Headers = "Content-Type"
     Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
 [functions]
 included_files = ["netlify/functions/Productos.xlsx"]

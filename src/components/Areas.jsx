@@ -7,23 +7,23 @@ import { motion } from "framer-motion";
 
 const data = [
   {
-    count: 12,
-    text: "Years of experience",
+    count: 45,
+    text: "Years of Combined Golf Experience",
     image: "golf-1.jpg",
   },
   {
-    count: 2500,
-    text: "Training hours",
+    count: 20,
+    text: "Years Developing Young Golfers",
     image: "golf-2.jpg",
   },
   {
-    count: 520,
-    text: "Students trained",
+    count: 500,
+    text: "Kids introduced to the Game",
     image: "golf-3.jpg",
   },
   {
-    count: 25,
-    text: "Tournaments",
+    count: 2,
+    text: "Learning environments",
     image: "golf-4.jpg",
   },
 ];
@@ -117,15 +117,7 @@ const Areas = () => {
       sx={{
         position: 'relative', // ðŸ‘ˆ necesario para que el degradado se posicione correctamente
         zIndex: 1,
-        background: `
-      linear-gradient(
-        180deg,
-        #ffffff 0%,
-        #f5fcfb 40%,
-        #eaf7f5 70%,
-        #d5ede9 100%
-      )
-    `,
+        background: `#ffffff`,
         backgroundRepeat: "no-repeat",
         backgroundSize: isMobile ? "100% 100%" : "100% auto",
         backgroundPosition: isMobile ? "center" : "",
@@ -278,6 +270,8 @@ const Areas = () => {
 };
 
 export default Areas;
+
+
 
 
 

@@ -1,4 +1,4 @@
-﻿import { Box, Typography, Grid, Container, useTheme, useMediaQuery, Card, CardContent } from "@mui/material";
+﻿import { Box, Typography, Grid, Container, useTheme, useMediaQuery, Card, CardContent, Collapse } from "@mui/material";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
@@ -6,6 +6,7 @@ const Nosotros = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [scrollY, setScrollY] = useState(0);
+  const [activeFounder, setActiveFounder] = useState(null);
 
   const letterVariants = {
     hidden: { opacity: 0, x: -20 },
@@ -168,7 +169,7 @@ const Nosotros = () => {
             >
               <Box textAlign="center">
                 <img
-                  src="/logo.png"
+                  src="/logo-golfincolors.png"
                   alt="Logo"
                   style={{
                     maxWidth: isMobile ? '48%' : '64%',
@@ -260,9 +261,6 @@ const Nosotros = () => {
                 <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify', mb: 1.5 }}>
                   These shared experiences extend what children learn in lessons, and turn every step of the journey into an opportunity to connect and enjoy the game together.
                 </Typography>
-                <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify' }}>
-                  By combining creativity with early skill development, we help children build confidence and develop a genuine love for golf-often without even realizing they're learning.
-                </Typography>
               </CardContent>
             </Card>
           </motion.div>
@@ -289,7 +287,7 @@ const Nosotros = () => {
                 }}
               >
                 <img
-                  src="mision-empresa.png"
+                  src="mision-vision.png"
                   alt="Logo React"
                   style={{ maxWidth: isMobile ? '56%' : '62%', height: 'auto' }}
                 />
@@ -340,62 +338,56 @@ const Nosotros = () => {
           </Grid>
         </Grid>
       </Box>
-      {/* Secciï¿½n Entrenadores */}
+            {/* Seccion Founders */}
       <Box maxWidth="1200px" mx="auto" mt={6} mb={6} textAlign="center">
         <Typography
           variant={isMobile ? "h5" : "h4"}
           fontWeight={700}
           mb={3}
           sx={{
-            color: '#163d32',
-            position: 'relative',
-            display: 'inline-block',
-            '&::after': {
+            color: "#163d32",
+            position: "relative",
+            display: "inline-block",
+            "&::after": {
               content: '""',
-              position: 'absolute',
+              position: "absolute",
               bottom: -4,
               left: 0,
-              width: '100%',        // ahora cubre todo el texto
-              height: '4px',
-              backgroundColor: '#1f6d56',
+              width: "100%",
+              height: "4px",
+              backgroundColor: "#1f6d56",
               borderRadius: 2,
             },
           }}
         >
-          FOUNDERS
-        </Typography>
-
-        <Typography
-          sx={{
-            mb: 2.2,
-            color: '#224d3f',
-            fontWeight: 600,
-            fontSize: { xs: '0.9rem', sm: '0.98rem' },
-            letterSpacing: '0.01em'
-          }}
-        >
-          The family-driven vision behind Golf in Colors
+          CO-FOUNDERS
         </Typography>
         <Grid container spacing={0} justifyContent="center">
           {[
-            { img: "coache-1.png", name: "Sergio" },
-            { img: "coache-2.png", name: "Anika" }
+            { key: "sergio", img: "sergio.jpeg", name: "Sergio Murtinho" },
+            { key: "anika", img: "anika.jpeg", name: "Anika Veintemilla" },
           ].map((coach, index) => (
-            <Grid item xs="auto" key={index} sx={{ mx: 2 }}>
+            <Grid
+              item
+              xs="auto"
+              key={index}
+              sx={{ mx: 2, cursor: "pointer" }}
+              onClick={() => setActiveFounder((prev) => (prev === coach.key ? null : coach.key))}
+            >
               <Box
                 sx={{
-                  width: { xs: 130, sm: 170 },
-                  height: { xs: 130, sm: 170 },
-                  borderRadius: '50%',
-                  overflow: 'hidden',
-                  transition: 'all 0.3s ease',
-                  border: '4px solid #31d0aa',
-                  background: 'linear-gradient(135deg, #FFD580 0%, #FF9E80 45%, #ff7f50 100%)',
-                  boxShadow: '0 12px 28px rgba(0,0,0,0.28), 0 0 0 4px rgba(49,208,170,0.28), 0 0 18px rgba(49,208,170,0.65)', // degradado animado
-                  '&:hover': {
-                    transform: 'scale(1.08)',
-                    borderColor: '#7ff5d7',
-                    boxShadow: '0 16px 34px rgba(0,0,0,0.35), 0 0 0 6px rgba(49,208,170,0.35), 0 0 26px rgba(88,248,209,0.85)', // borde brillante al pasar mouse
+                  width: { xs: 154, sm: 204 },
+                  height: { xs: 154, sm: 204 },
+                  borderRadius: 6,
+                  overflow: "hidden",
+                  transition: "all 0.3s ease",
+                  border: "1px solid rgba(255,255,255,0.62)",
+                  backgroundColor: "transparent",
+                  boxShadow: "0 8px 16px rgba(0,0,0,0.22)",
+                  "&:hover": {
+                    transform: "scale(1.08)",
+                    borderColor: "rgba(255,255,255,1)",
+                    boxShadow: "0 10px 20px rgba(0,0,0,0.28)",
                   },
                 }}
               >
@@ -403,36 +395,183 @@ const Nosotros = () => {
                   src={`/${coach.img}`}
                   alt={coach.name}
                   style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    objectPosition: 'center 30%',
-                    borderRadius: '50%',
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition:
+                      coach.img === "sergio.jpeg"
+                        ? "center 10%"
+                        : coach.img === "anika.jpeg"
+                          ? "center 85%"
+                          : "center 30%",
+                    borderRadius: 6,
                   }}
                 />
               </Box>
+
               <Typography
                 variant="body2"
                 sx={{
                   mt: 1.2,
                   fontWeight: 800,
-                  fontSize: { xs: '1.06rem', sm: '1.2rem' },
-                  letterSpacing: '0.03em',
-                  color: '#183f33',
-                  textShadow: '0 1px 2px rgba(255,255,255,0.45)'
+                  fontSize: { xs: "0.98rem", sm: "1.08rem" },
+                  letterSpacing: "0.03em",
+                  color: "#183f33",
+                  textShadow: "0 1px 2px rgba(255,255,255,0.45)",
                 }}
               >
                 {coach.name}
               </Typography>
+
+              {(coach.key === "anika" || coach.key === "sergio") && (
+                <Box
+                  sx={{
+                    ...(activeFounder === coach.key && {
+                      transform: "translateY(-1px)",
+                    }),
+                    mt: 0.56,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 0.58,
+                    px: 1.1,
+                    py: 0.24,
+                    borderRadius: "999px",
+                    border:
+                      activeFounder === coach.key
+                        ? "1px solid rgba(31,109,86,0.9)"
+                        : "1px solid rgba(31,109,86,0.42)",
+                    background:
+                      activeFounder === coach.key
+                        ? "linear-gradient(135deg, rgba(47,191,113,0.38), rgba(104,216,154,0.28))"
+                        : "linear-gradient(135deg, rgba(47,191,113,0.22), rgba(104,216,154,0.14))",
+                    boxShadow:
+                      activeFounder === coach.key
+                        ? "0 6px 14px rgba(31,109,86,0.24)"
+                        : "0 4px 10px rgba(31,109,86,0.12)",
+                    transition: "all 0.2s ease",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: activeFounder === coach.key ? "#0f4e3d" : "#1f6d56",
+                      fontWeight: 800,
+                      fontSize: { xs: "0.76rem", sm: "0.82rem" },
+                      lineHeight: 1.1,
+                      letterSpacing: "0.02em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    Read more
+                  </Typography>
+                  <Box
+                    component="span"
+                    sx={{
+                      color: activeFounder === coach.key ? "#0f4e3d" : "#1f6d56",
+                      fontWeight: 900,
+                      fontSize: "0.78rem",
+                      lineHeight: 1,
+                      display: "inline-flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    {activeFounder === coach.key ? "v" : ">"}
+                  </Box>
+                </Box>
+              )}
             </Grid>
           ))}
         </Grid>
-      </Box>
-    </Container>
+
+        <Collapse in={Boolean(activeFounder)} timeout={350} unmountOnExit>
+          <Box
+            sx={{
+              maxWidth: 780,
+              mx: "auto",
+              width: { xs: "calc(100% - 30px)", sm: "calc(100% - 44px)", md: "100%" },
+              mt: 2.2,
+              px: { xs: 2.1, sm: 3.4 },
+              py: { xs: 1.6, sm: 2.1 },
+              borderRadius: 2,
+              backgroundColor: "#fffdf9",
+              border: "1px solid rgba(31,109,86,0.18)",
+              textAlign: "left",
+              boxShadow: "0 8px 18px rgba(0,0,0,0.08)",
+            }}
+          >
+            {activeFounder === "anika" ? (
+              <>
+                <Typography sx={{ color: "#163d32", fontWeight: 800, mb: 0.35 }}>
+                  Anika Veintemilla
+                </Typography>
+                <Typography sx={{ color: "#224d3f", fontWeight: 700, mb: 1.2 }}>
+                  Co-Founder, Golf in Colors
+                </Typography>
+                <Typography variant="body2" sx={{ color: "#1c1c1c", mb: 1.1, textAlign: "justify" }}>
+                  Anika Veintemilla has a lifelong connection to the game of golf, built through years of competitive play and international representation. A former collegiate golfer, she competed for four years at Baylor University and one year at Florida International University (FIU) and represented the Ecuadorian Golf Federation in numerous international competitions, including South American Championships, The British Amateur, and the U.S. Mid-Amateur Championship. She also represented Ecuador at the Pan American Games (2023) and the World Amateur Team Championship (2016).
+                </Typography>
+                <Typography variant="body2" sx={{ color: "#1c1c1c", mb: 1.1, textAlign: "justify" }}>
+                  During her junior career, Anika became the first and only Ecuadorian to qualify for the U.S. Girls' Junior Championship, and later the only Ecuadorian to receive an exemption into the U.S. Mid-Amateur Championship, both prestigious amateur events.
+                </Typography>
+                <Typography variant="body2" sx={{ color: "#1c1c1c", mb: 1.1, textAlign: "justify" }}>
+                  She is currently Ecuador's top-ranked women's amateur golfer and reached a career-high world ranking of 430 in the World Amateur Golf Ranking (WAGR).
+                </Typography>
+                <Typography variant="body2" sx={{ color: "#1c1c1c", textAlign: "justify" }}>
+                  In 2024, she began volunteering at a golf academy, where she discovered her passion for inspiring the next generation to develop a love for the game. As co-founder of Golf in Colors, she is dedicated to helping children discover golf through creativity, positive learning experiences, and meaningful family moments.
+                </Typography>
+              </>
+            ) : (
+              <>
+                <Typography sx={{ color: "#163d32", fontWeight: 800, mb: 0.35 }}>
+                  Sergio Murtinho
+                </Typography>
+                <Typography sx={{ color: "#224d3f", fontWeight: 700, mb: 1.2 }}>
+                  Co-Founder, Golf in Colors
+                </Typography>
+                <Typography variant="body2" sx={{ color: "#1c1c1c", mb: 1.1, textAlign: "justify" }}>
+                  Sergio Murtinho has dedicated much of his life to the game of golf as a player, coach, and manager. Through years of competitive play and coaching experience, he has developed a deep understanding of the game and a passion for helping others improve while truly enjoying the sport.
+                </Typography>
+                <Typography variant="body2" sx={{ color: "#1c1c1c", mb: 1.1, textAlign: "justify" }}>
+                  Throughout his career, Sergio has worked extensively with junior golfers, focusing on creating positive and supportive learning environments where young players can build confidence, develop their skills, and enjoy the process of learning the game. His coaching style is enthusiastic, creative, and full of energy, driven by a genuine desire to contribute to the growth and development of golf worldwide.
+                </Typography>
+                <Typography variant="body2" sx={{ color: "#1c1c1c", mb: 1.1, textAlign: "justify" }}>
+                  As the father of young athletes, Sergio also understands firsthand the importance of creating meaningful sports experiences for children and families. This personal perspective has helped shape his approach to coaching and youth development.
+                </Typography>
+                <Typography variant="body2" sx={{ color: "#1c1c1c", mb: 1.1, textAlign: "justify" }}>
+                  Sergio's passion for golf also led him to develop a project in his home country of Ecuador, helping create greater public access to the game and encouraging many young players to take their first steps in golf.
+                </Typography>
+                <Typography variant="body2" sx={{ color: "#1c1c1c", textAlign: "justify" }}>
+                  As Co-Founder of Golf in Colors, Sergio is committed to helping children discover the game in a way that inspires curiosity, builds confidence, and fosters a lifelong love for golf.
+                </Typography>
+              </>
+            )}
+          </Box>
+        </Collapse>
+      </Box></Container>
   );
 };
 
 export default Nosotros;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -127,7 +127,7 @@ function Features() {
               textShadow: "0 1px 0 rgba(255,255,255,0.35)",
             }}
           >
-            {"Select your Category"}
+            {"Choose Your Path"}
           </Typography>
 
           <Box

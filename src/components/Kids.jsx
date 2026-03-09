@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 import { Box, Button, Collapse, Grid, Paper, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
@@ -8,6 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import NavigateBeforeRoundedIcon from "@mui/icons-material/NavigateBeforeRounded";
 import NavigateNextRoundedIcon from "@mui/icons-material/NavigateNextRounded";
+import ScreenRotationAltIcon from "@mui/icons-material/ScreenRotationAlt";
 import { motion } from "framer-motion";
 
 const menus = ["Stories", "Games", "Videos"];
@@ -83,9 +84,9 @@ const storyBookPages = [
 ];
 
 const storyPageImages = [
-  "/IMAGE_01.png",
-  "/IMAGE_02.png",
-  "/IMAGE_03.png",
+  "/IMAGE_01.webp",
+  "/IMAGE_02.webp",
+  "/IMAGE_03.webp",
   "/IMAGE_04.png",
   "/IMAGE_05.png",
   "/IMAGE_06.png",
@@ -111,11 +112,17 @@ export default function Kids() {
   const [isPageTurning, setIsPageTurning] = useState(false);
   const [turnId, setTurnId] = useState(0);
   const [bookOpen, setBookOpen] = useState(false);
+  const [isPortrait, setIsPortrait] = useState(
+    typeof window !== "undefined"
+      ? window.matchMedia("(orientation: portrait)").matches
+      : false
+  );
   const pageTurnTimersRef = useRef([]);
   const activeMenuRef = useRef("Stories");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isSectionOpen = storiesOpen || activeMenu === "Games" || activeMenu === "Videos";
+  const shouldShowRotateOverlay = bookOpen && isMobile && isPortrait;
 
   const currentRightPageImage = storyPageImages[Math.min(storyPage, storyPageImages.length - 1)];
   useEffect(() => {
@@ -170,6 +177,24 @@ export default function Kids() {
     };
   }, [bookOpen]);
 
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const mediaQuery = window.matchMedia("(orientation: portrait)");
+    const handleOrientation = () => {
+      setIsPortrait(mediaQuery.matches);
+    };
+
+    handleOrientation();
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", handleOrientation);
+      return () => mediaQuery.removeEventListener("change", handleOrientation);
+    }
+
+    mediaQuery.addListener(handleOrientation);
+    return () => mediaQuery.removeListener(handleOrientation);
+  }, [isMobile]);
 
   const handlePageTurn = (direction) => {
     if (isPageTurning) return;
@@ -568,6 +593,38 @@ export default function Kids() {
                                           </Button>
                                         )}
 
+                                        {shouldShowRotateOverlay && (
+                                          <Box
+                                            sx={{
+                                              position: "absolute",
+                                              inset: 0,
+                                              zIndex: 11,
+                                              backgroundColor: "rgba(0,0,0,0.56)",
+                                              backdropFilter: "blur(1.5px)",
+                                              display: "flex",
+                                              alignItems: "center",
+                                              justifyContent: "center",
+                                              px: 3,
+                                              textAlign: "center",
+                                            }}
+                                          >
+                                            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1.1 }}>
+                                              <Typography
+                                                sx={{
+                                                  color: "#fff",
+                                                  fontWeight: 800,
+                                                  fontSize: "1rem",
+                                                  lineHeight: 1.35,
+                                                  textShadow: "0 2px 8px rgba(0,0,0,0.5)",
+                                                }}
+                                              >
+                                                Rotate your phone to read the book
+                                              </Typography>
+                                              <ScreenRotationAltIcon sx={{ color: "#ffffff", fontSize: 34, opacity: 0.95 }} />
+                                            </Box>
+                                          </Box>
+                                        )}
+
                                         {!bookOpen && (
                                           <Box
                                             sx={{
@@ -619,6 +676,7 @@ export default function Kids() {
                                             boxSizing: "border-box",
                                             p: 1.2,
                                             overflow: "hidden",
+                                            pointerEvents: shouldShowRotateOverlay ? "none" : "auto",
                                           } : {}}
                                         >
 
@@ -641,10 +699,12 @@ export default function Kids() {
                                               <Box sx={{ position: "absolute", left: "50%", top: 0, bottom: 0, width: { xs: 10, sm: 13 }, transform: "translateX(-50%)", borderRadius: 99, background: "repeating-linear-gradient(180deg, #7d4e27 0 8px, #9e6535 8px 16px)", zIndex: 2 }} />
                                               <Grid item xs={6} sx={{ pr: { xs: 0.5, sm: 0.6 } }}>
                                                 <Box sx={{ height: bookOpen ? { xs: "56vh", sm: "70vh" } : { xs: 180, sm: 220 }, borderRadius: 2.2, p: { xs: 1.4, sm: 1.7 }, backgroundColor: "#fffdf8", border: "1px solid rgba(148,111,73,0.3)", position: "relative", overflow: "hidden" }}>
-                                                  <motion.div key={`page-content-${storyPage}`} initial={{ opacity: 0.1 }} animate={{ opacity: 1 }} transition={{ duration: 0.34, ease: "easeOut" }} style={{ position: "relative", zIndex: 2, height: "100%" }}>
-                                                    <Typography sx={{ fontWeight: 900, color: "#0f4b75", fontSize: { xs: "1rem", sm: "1.1rem" }, mb: 0.35 }}>{storyBookPages[storyPage].title}</Typography>
-                                                    <Typography sx={{ fontWeight: 800, color: "#1f4f82", fontSize: { xs: "0.86rem", sm: "0.92rem" }, mb: 0.8 }}>{storyBookPages[storyPage].subtitle}</Typography>
-                                                    <Typography sx={{ color: "#31546f", lineHeight: 1.55, fontSize: { xs: "0.82rem", sm: "0.9rem" } }}>{storyBookPages[storyPage].text}</Typography>
+                                                  <motion.div key={`page-content-${storyPage}`} initial={{ opacity: 0.1 }} animate={{ opacity: 1 }} transition={{ duration: 0.34, ease: "easeOut" }} style={{ position: "relative", zIndex: 2, height: "100%", display: "flex", flexDirection: "column", justifyContent: storyPage === 0 ? "flex-start" : "center" }}>                                                    {storyPage === 0 && (
+                                                      <>
+                                                        <Typography sx={{ fontWeight: 900, color: "#0f4b75", fontSize: bookOpen ? { xs: "1.28rem", sm: "1.44rem" } : { xs: "1rem", sm: "1.1rem" }, mb: 0.35 }}>{storyBookPages[storyPage].title}</Typography>
+                                                        <Typography sx={{ fontWeight: 800, color: "#1f4f82", fontSize: bookOpen ? { xs: "1.12rem", sm: "1.22rem" } : { xs: "0.86rem", sm: "0.92rem" }, mb: 0.8 }}>{storyBookPages[storyPage].subtitle}</Typography>
+                                                      </>
+                                                    )}<Typography sx={{ color: "#31546f", lineHeight: 1.55, fontSize: bookOpen ? { xs: "1.06rem", sm: "1.16rem" } : { xs: "0.82rem", sm: "0.9rem" } }}>{storyBookPages[storyPage].text}</Typography>
                                                   </motion.div>
                                                 </Box>
                                               </Grid>
@@ -656,6 +716,7 @@ export default function Kids() {
                                                     backgroundColor: "#fffdf8",
                                                     border: "1px solid rgba(148,111,73,0.3)",
                                                     overflow: "hidden",
+                                                    pointerEvents: shouldShowRotateOverlay ? "none" : "auto",
                                                     position: "relative",
                                                     p: { xs: 0.8, sm: 1.1 },
                                                   }}
@@ -1101,6 +1162,19 @@ export default function Kids() {
     </Box>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
