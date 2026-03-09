@@ -17,9 +17,9 @@ const staticProducts = [
     Valor: 100,
     ConDescuento: false,
     Stock: 10,
-    ImageUrl: 'https://golfincolors.com/wp-content/uploads/2025/12/TEE_BOX_SM3-300x300.png',
+    ImageUrl: 'tee-box-blue-starter.avif',
     VideoUrl: '',
-    UrlCompra: 'https://golfincolors.com/product/tee-box-blue-starter/',
+    UrlCompra: 'tee-box-blue-starter.avif',
     Nivel: 'Starter',
     Tag: 'Blue Starter',
     Popularidad: 96,
@@ -31,9 +31,9 @@ const staticProducts = [
     Valor: 100,
     ConDescuento: false,
     Stock: 8,
-    ImageUrl: '/teebox-green-champion.png',
+    ImageUrl: '/teebox-green-champion.avif',
     VideoUrl: '',
-    UrlCompra: 'https://golfincolors.com/product/tee-box-green-champion/',
+    UrlCompra: 'teebox-green-champion.avif',
     Nivel: 'Champion',
     Tag: 'Green Champion',
     Popularidad: 91,
@@ -45,9 +45,9 @@ const staticProducts = [
     Valor: 100,
     ConDescuento: false,
     Stock: 7,
-    ImageUrl: '/tee-box-orange-competitor.png',
+    ImageUrl: '/tee-box-orange-competitor.avif',
     VideoUrl: '',
-    UrlCompra: 'https://golfincolors.com/product/tee-box-orange-competitor/',
+    UrlCompra: 'tee-box-orange-competitor.avif',
     Nivel: 'Competitor',
     Tag: 'Orange Competitor',
     Popularidad: 88,
@@ -59,9 +59,9 @@ const staticProducts = [
     Valor: 100,
     ConDescuento: false,
     Stock: 5,
-    ImageUrl: '/tee-box-tomato-striker.png',
+    ImageUrl: '/tee-box-tomato-striker.avif',
     VideoUrl: '',
-    UrlCompra: 'https://golfincolors.com/product/tee-box-tomato-striker/',
+    UrlCompra: 'tee-box-tomato-striker.avif',
     Nivel: 'Striker',
     Tag: 'Tomato Striker',
     Popularidad: 84,
@@ -378,7 +378,8 @@ const Catalogo = () => {
                   </Grid>
                 </Grid>
               </>
-            )}            <Box
+            )}
+            <Box
               sx={{
                 width: '100vw',
                 ml: 'calc(50% - 50vw)',

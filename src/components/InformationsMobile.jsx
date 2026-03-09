@@ -61,7 +61,7 @@ function Informations() {
       sx={{
         position: "relative",
         zIndex: 3,
-        backgroundImage: "url(PATTERN.webp)",
+        backgroundImage: "url(PATTERN.avif)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: isMobile ? "scroll" : "fixed",

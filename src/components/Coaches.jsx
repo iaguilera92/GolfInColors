@@ -11,7 +11,7 @@ export default function Coaches() {
     <Box
       sx={{
         minHeight: "100vh",
-        pt: { xs: 13.5, sm: 15 },
+        pt: { xs: 8, sm: 15 },
         pb: 8,
         backgroundImage: "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/fondo-5.jpg')",
         backgroundSize: "cover",
@@ -29,33 +29,60 @@ export default function Coaches() {
           <Typography
             component="h1"
             sx={{
-              fontWeight: 900,
-              fontFamily: "'Poppins', sans-serif",
-              lineHeight: { xs: 1.02, sm: 1.04 },
-              letterSpacing: "0.02em",
-              fontSize: { xs: "2rem", sm: "2.8rem", md: "3.2rem" },
-              textShadow: "0 4px 14px rgba(0,0,0,0.4)",
-              mb: 1.2,
+              textAlign: "center",
+              pt: { xs: 6, sm: 8 },
+              mb: { xs: 2.5, sm: 4 },
+              lineHeight: 1.1
             }}
           >
-            <Box component="span" sx={{ display: "block", color: "#ffffff" }}>
-              CREATING
-            </Box>
-            <Box component="span" sx={{ display: "block", color: "#FFE8A3" }}>
-              A COLORFUL
-            </Box>
-            <Box component="span" sx={{ display: "block", color: "#9BE7FF" }}>
-              PATH
-            </Box>
-            <Box component="span" sx={{ display: "block", color: "#ffffff" }}>
-              FOR FUTURES
-            </Box>
             <Box
               component="span"
               sx={{
                 display: "block",
-                color: "#FFCF99",
-                WebkitTextStroke: "1.2px #ffffff",
+                color: "#ffffff",
+                fontSize: { xs: "1.3rem", sm: "1.5rem" },
+                fontWeight: 600,
+                letterSpacing: "0.03em",
+              }}
+            >
+              CREATING
+            </Box>
+
+            <Box
+              component="span"
+              sx={{
+                display: "block",
+                color: "#ffffff",
+                fontSize: { xs: "1.3rem", sm: "1.5rem" },
+                fontWeight: 600,
+                letterSpacing: "0.03em",
+              }}
+            >
+              A COLORFUL
+            </Box>
+
+            <Box
+              component="span"
+              sx={{
+                display: "block",
+                color: "#ffffff",
+                fontSize: { xs: "1.3rem", sm: "1.5rem" },
+                fontWeight: 600,
+                letterSpacing: "0.03em",
+              }}
+            >
+              PATH FOR FUTURE
+            </Box>
+
+            <Box
+              component="span"
+              sx={{
+                display: "block",
+                color: "#FFE8A3",
+                fontSize: { xs: "1.3rem", sm: "2rem", md: "2.2rem" },
+                fontWeight: 900,
+                lineHeight: 1,
+                textShadow: "0 6px 16px rgba(0,0,0,0.3)",
               }}
             >
               GOLFERS

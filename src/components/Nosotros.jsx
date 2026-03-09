@@ -249,8 +249,8 @@ const Nosotros = () => {
               }}
             >
               <CardContent sx={{ p: 2 }}>
-                <Typography variant="h5" gutterBottom sx={{ color: '#1c5a47', fontWeight: 900, letterSpacing: '0.05em', textTransform: 'uppercase', position: 'relative', display: 'inline-block', pr: 1.4, pb: 0.45, mb: 1.6, '&::before': { content: '""', position: 'absolute', right: 0, top: '46%', width: 8, height: 8, borderRadius: '50%', transform: 'translateY(-50%)', background: '#f0bf67' }, '&::after': { content: '""', position: 'absolute', left: 0, bottom: 0, width: '100%', height: 3, borderRadius: 999, background: 'linear-gradient(90deg, #1f6d56 0%, #2b8a69 100%)' } }}>
-                  PURPOSE
+                <Typography variant="h5" gutterBottom sx={{ color: '#1c5a47', fontWeight: 900, letterSpacing: '0.05em', position: 'relative', display: 'inline-block', pr: 1.4, pb: 0.45, mb: 1.6, '&::before': { content: '""', position: 'absolute', right: 0, top: '46%', width: 8, height: 8, borderRadius: '50%', transform: 'translateY(-50%)', background: '#f0bf67' }, '&::after': { content: '""', position: 'absolute', left: 0, bottom: 0, width: '100%', height: 3, borderRadius: 999, background: 'linear-gradient(90deg, #1f6d56 0%, #2b8a69 100%)' } }}>
+                  Purpose
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify', mb: 1.5 }}>
                   Golf in Colors was created with a clear purpose to help children fall in love with the game of golf from an early age in a way that feels fun, natural, and meaningful.
@@ -316,7 +316,7 @@ const Nosotros = () => {
                 >
                   <CardContent sx={{ p: 2 }}> {/* ajuste adicional de padding interno */}
                     {/* Mission */}
-                    <Typography variant="h5" gutterBottom sx={{ color: '#1c5a47', fontWeight: 900, letterSpacing: '0.04em', textTransform: 'uppercase', position: 'relative', display: 'inline-block', pr: 1.35, pb: 0.42, mb: 1.45, '&::before': { content: '""', position: 'absolute', right: 0, top: '46%', width: 8, height: 8, borderRadius: '50%', transform: 'translateY(-50%)', background: '#7fc9b1' }, '&::after': { content: '""', position: 'absolute', left: 0, bottom: 0, width: '100%', height: 3, borderRadius: 999, background: 'linear-gradient(90deg, #1f6d56 0%, #56a587 100%)' } }}>
+                    <Typography variant="h5" gutterBottom sx={{ color: '#1c5a47', fontWeight: 900, letterSpacing: '0.04em', position: 'relative', display: 'inline-block', pr: 1.35, pb: 0.42, mb: 1.45, '&::before': { content: '""', position: 'absolute', right: 0, top: '46%', width: 8, height: 8, borderRadius: '50%', transform: 'translateY(-50%)', background: '#7fc9b1' }, '&::after': { content: '""', position: 'absolute', left: 0, bottom: 0, width: '100%', height: 3, borderRadius: 999, background: 'linear-gradient(90deg, #1f6d56 0%, #56a587 100%)' } }}>
                       Mission
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify', mb: 1.5 }}>
@@ -324,7 +324,7 @@ const Nosotros = () => {
                     </Typography>
 
                     {/* Vision */}
-                    <Typography variant="h5" gutterBottom sx={{ color: '#1c5a47', fontWeight: 900, letterSpacing: '0.04em', textTransform: 'uppercase', position: 'relative', display: 'inline-block', pr: 1.35, pb: 0.42, mb: 1.45, mt: 0.6, '&::before': { content: '""', position: 'absolute', right: 0, top: '46%', width: 8, height: 8, borderRadius: '50%', transform: 'translateY(-50%)', background: '#f0bf67' }, '&::after': { content: '""', position: 'absolute', left: 0, bottom: 0, width: '100%', height: 3, borderRadius: 999, background: 'linear-gradient(90deg, #1f6d56 0%, #56a587 100%)' } }}>
+                    <Typography variant="h5" gutterBottom sx={{ color: '#1c5a47', fontWeight: 900, letterSpacing: '0.04em', position: 'relative', display: 'inline-block', pr: 1.35, pb: 0.42, mb: 1.45, mt: 0.6, '&::before': { content: '""', position: 'absolute', right: 0, top: '46%', width: 8, height: 8, borderRadius: '50%', transform: 'translateY(-50%)', background: '#f0bf67' }, '&::after': { content: '""', position: 'absolute', left: 0, bottom: 0, width: '100%', height: 3, borderRadius: 999, background: 'linear-gradient(90deg, #1f6d56 0%, #56a587 100%)' } }}>
                       Vision
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify' }}>
@@ -338,7 +338,7 @@ const Nosotros = () => {
           </Grid>
         </Grid>
       </Box>
-            {/* Seccion Founders */}
+      {/* Seccion Founders */}
       <Box maxWidth="1200px" mx="auto" mt={6} mb={6} textAlign="center">
         <Typography
           variant={isMobile ? "h5" : "h4"}
@@ -360,7 +360,7 @@ const Nosotros = () => {
             },
           }}
         >
-          CO-FOUNDERS
+          Co-Founders
         </Typography>
         <Grid container spacing={0} justifyContent="center">
           {[
@@ -504,7 +504,7 @@ const Nosotros = () => {
                   Anika Veintemilla
                 </Typography>
                 <Typography sx={{ color: "#224d3f", fontWeight: 700, mb: 1.2 }}>
-                  Co-Founder, Golf in Colors
+                  Co-Founder & CEO
                 </Typography>
                 <Typography variant="body2" sx={{ color: "#1c1c1c", mb: 1.1, textAlign: "justify" }}>
                   Anika Veintemilla has a lifelong connection to the game of golf, built through years of competitive play and international representation. A former collegiate golfer, she competed for four years at Baylor University and one year at Florida International University (FIU) and represented the Ecuadorian Golf Federation in numerous international competitions, including South American Championships, The British Amateur, and the U.S. Mid-Amateur Championship. She also represented Ecuador at the Pan American Games (2023) and the World Amateur Team Championship (2016).

@@ -275,59 +275,56 @@ export default function Kids() {
       />
 
       <Box sx={{ position: "relative", zIndex: 2, width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <Typography component="h1" sx={{ textAlign: "center", pt: { xs: 7, sm: 9 }, mb: { xs: 3, sm: 5 } }}>
+        <Typography
+          component="h1"
+          sx={{
+            textAlign: "center",
+            pt: { xs: 6, sm: 8 },
+            mb: { xs: 2.5, sm: 4 },
+            lineHeight: 1.1
+          }}
+        >
+          {/* WELCOME */}
           <Box
             component="span"
             sx={{
               display: "block",
               color: "#ffffff",
-              fontSize: { xs: "1.4rem", sm: "1.8rem" },
-              fontWeight: 700,
-              letterSpacing: "0.02em",
+              fontSize: { xs: "1.1rem", sm: "1.3rem" },
+              fontWeight: 600,
+              letterSpacing: "0.03em",
             }}
           >
-            LEARNING & TEACHING
+            Welcome, Little golfers!
           </Box>
 
+          {/* LET THE ADVENTURE (mismo estilo que welcome) */}
+          <Box
+            component="span"
+            sx={{
+              display: "block",
+              color: "#ffffff",
+              fontSize: { xs: "1.1rem", sm: "1.3rem" },
+              fontWeight: 600,
+              letterSpacing: "0.03em",
+            }}
+          >
+            Let the Adventure
+          </Box>
+
+          {/* BEGIN (más pequeño) */}
           <Box
             component="span"
             sx={{
               display: "block",
               color: "#FFE8A3",
-              fontSize: { xs: "2.1rem", sm: "3rem", md: "3.8rem" },
+              fontSize: { xs: "1.3rem", sm: "2.0rem", md: "2.2rem" },
               fontWeight: 900,
               lineHeight: 1,
+              textShadow: "0 6px 16px rgba(0,0,0,0.3)",
             }}
           >
-            GOLF
-          </Box>
-
-          <Box
-            component="span"
-            sx={{
-              display: "block",
-              color: "rgba(255,255,255,0.95)",
-              fontSize: { xs: "1.1rem", sm: "1.5rem" },
-              fontWeight: 600,
-              letterSpacing: "0.015em",
-            }}
-          >
-            HAS NEVER BEEN THIS
-          </Box>
-
-          <Box
-            component="span"
-            sx={{
-              display: "block",
-              color: "#9BE7FF",
-              fontSize: { xs: "2.8rem", sm: "4.5rem", md: "5.2rem" },
-              fontWeight: 900,
-              lineHeight: 0.95,
-              WebkitTextStroke: "2px #ffffff",
-              textShadow: "0 8px 20px rgba(0,0,0,0.35)",
-            }}
-          >
-            FUN
+            Begin!
           </Box>
         </Typography>
 
@@ -700,11 +697,11 @@ export default function Kids() {
                                               <Grid item xs={6} sx={{ pr: { xs: 0.5, sm: 0.6 } }}>
                                                 <Box sx={{ height: bookOpen ? { xs: "56vh", sm: "70vh" } : { xs: 180, sm: 220 }, borderRadius: 2.2, p: { xs: 1.4, sm: 1.7 }, backgroundColor: "#fffdf8", border: "1px solid rgba(148,111,73,0.3)", position: "relative", overflow: "hidden" }}>
                                                   <motion.div key={`page-content-${storyPage}`} initial={{ opacity: 0.1 }} animate={{ opacity: 1 }} transition={{ duration: 0.34, ease: "easeOut" }} style={{ position: "relative", zIndex: 2, height: "100%", display: "flex", flexDirection: "column", justifyContent: storyPage === 0 ? "flex-start" : "center" }}>                                                    {storyPage === 0 && (
-                                                      <>
-                                                        <Typography sx={{ fontWeight: 900, color: "#0f4b75", fontSize: bookOpen ? { xs: "1.28rem", sm: "1.44rem" } : { xs: "1rem", sm: "1.1rem" }, mb: 0.35 }}>{storyBookPages[storyPage].title}</Typography>
-                                                        <Typography sx={{ fontWeight: 800, color: "#1f4f82", fontSize: bookOpen ? { xs: "1.12rem", sm: "1.22rem" } : { xs: "0.86rem", sm: "0.92rem" }, mb: 0.8 }}>{storyBookPages[storyPage].subtitle}</Typography>
-                                                      </>
-                                                    )}<Typography sx={{ color: "#31546f", lineHeight: 1.55, fontSize: bookOpen ? { xs: "1.06rem", sm: "1.16rem" } : { xs: "0.82rem", sm: "0.9rem" } }}>{storyBookPages[storyPage].text}</Typography>
+                                                    <>
+                                                      <Typography sx={{ fontWeight: 900, color: "#0f4b75", fontSize: bookOpen ? { xs: "1.28rem", sm: "1.44rem" } : { xs: "1rem", sm: "1.1rem" }, mb: 0.35 }}>{storyBookPages[storyPage].title}</Typography>
+                                                      <Typography sx={{ fontWeight: 800, color: "#1f4f82", fontSize: bookOpen ? { xs: "1.12rem", sm: "1.22rem" } : { xs: "0.86rem", sm: "0.92rem" }, mb: 0.8 }}>{storyBookPages[storyPage].subtitle}</Typography>
+                                                    </>
+                                                  )}<Typography sx={{ color: "#31546f", lineHeight: 1.55, fontSize: bookOpen ? { xs: "1.06rem", sm: "1.16rem" } : { xs: "0.82rem", sm: "0.9rem" } }}>{storyBookPages[storyPage].text}</Typography>
                                                   </motion.div>
                                                 </Box>
                                               </Grid>
