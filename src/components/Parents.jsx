@@ -65,7 +65,7 @@ export default function Parents() {
         minHeight: "100vh",
         pt: { xs: 13.5, sm: 15 },
         pb: 8,
-        backgroundImage: "linear-gradient(rgba(0,0,0,0.26), rgba(0,0,0,0.26)), url('/fondo-4.png')",
+        backgroundColor: "#f8f6f1",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: { xs: "scroll", md: "fixed" },
@@ -81,7 +81,7 @@ export default function Parents() {
           <Box
             sx={{
               textAlign: "center",
-              color: "#fff",
+              color: "#0d2b45",
               px: { xs: 1, sm: 4 },
             }}
           >
@@ -92,30 +92,30 @@ export default function Parents() {
                 lineHeight: { xs: 1.02, sm: 1.04 },
                 letterSpacing: "0.02em",
                 fontSize: { xs: "2rem", sm: "2.8rem", md: "3.2rem" },
-                textShadow: "0 3px 14px rgba(0,0,0,0.45)",
+                textShadow: "none",
               }}
             >
-              <Box component="span" sx={{ display: "block", color: "#ffffff", fontSize: { xs: "1.6rem", sm: "2rem" }, fontWeight: 700 }}>
+              <Box component="span" sx={{ display: "block", color: "#2a4a5f", fontSize: { xs: "1.6rem", sm: "2rem" }, fontWeight: 700 }}>
                 SUPPORTING
               </Box>
-              <Box component="span" sx={{ display: "block", color: "#FFE8A3", fontSize: { xs: "2rem", sm: "2.7rem", md: "3.1rem" }, fontWeight: 900 }}>
+              <Box component="span" sx={{ display: "block", color: "#0f6fb8", fontSize: { xs: "2rem", sm: "2.7rem", md: "3.1rem" }, fontWeight: 900 }}>
                 YOUR CHILD'S
               </Box>
-              <Box component="span" sx={{ display: "block", color: "#9BE7FF", fontSize: { xs: "2rem", sm: "2.8rem", md: "3.3rem" }, fontWeight: 900 }}>
+              <Box component="span" sx={{ display: "block", color: "#0b8f63", fontSize: { xs: "2rem", sm: "2.8rem", md: "3.3rem" }, fontWeight: 900 }}>
                 GOLF JOURNEY
               </Box>
-              <Box component="span" sx={{ display: "block", color: "rgba(255,255,255,0.96)", fontSize: { xs: "1.5rem", sm: "1.9rem" }, fontWeight: 700 }}>
+              <Box component="span" sx={{ display: "block", color: "#3e556b", fontSize: { xs: "1.5rem", sm: "1.9rem" }, fontWeight: 700 }}>
                 STARTS
               </Box>
               <Box
                 component="span"
                 sx={{
                   display: "block",
-                  color: "#FFCF99",
+                  color: "#e67a1f",
                   fontSize: { xs: "2.2rem", sm: "3.1rem", md: "3.6rem" },
                   fontWeight: 900,
                   lineHeight: 0.95,
-                  WebkitTextStroke: "1.5px #ffffff",
+                  WebkitTextStroke: "0px",
                 }}
               >
                 WITH YOU
@@ -130,8 +130,8 @@ export default function Parents() {
                 fontSize: { xs: "1rem", sm: "1.15rem" },
                 fontWeight: 500,
                 lineHeight: 1.5,
-                color: "rgba(255,255,255,0.95)",
-                textShadow: "0 2px 8px rgba(0,0,0,0.35)",
+                color: "#35536a",
+                textShadow: "none",
               }}
             >
               Golf In Colors helps parents guide, support, and motivate their kids through a playful and structured learning system.
@@ -147,7 +147,7 @@ export default function Parents() {
                 mt: { xs: 2.6, sm: 3 },
                 ml: { xs: "-5%", sm: 0 },
                 borderRadius: { xs: 2, sm: 3 },
-                border: "2px solid rgba(255,255,255,0.7)",
+                border: "2px solid rgba(13,43,69,0.18)",
                 backgroundColor: "#f5e6cf",
                 p: { xs: 0.8, sm: 1 },
                 boxShadow: "0 14px 28px rgba(0,0,0,0.28)",
@@ -165,22 +165,30 @@ export default function Parents() {
         >
           <Box
             sx={{
-              mt: { xs: 5, sm: 7 },
+              mt: { xs: 3, sm: 4 },
               p: { xs: 2, sm: 3 },
               borderRadius: 3,
-              border: "1px solid rgba(255,255,255,0.36)",
-              background: "linear-gradient(145deg, rgba(0,0,0,0.32) 0%, rgba(0,0,0,0.22) 100%)",
-              boxShadow: "0 14px 26px rgba(0,0,0,0.22)",
+              border: "1px solid rgba(13,43,69,0.12)",
+              background: "linear-gradient(165deg, #ffffff 0%, #f4f9ff 100%)",
+              boxShadow: "0 14px 28px rgba(13,43,69,0.12)",
             }}
           >
-            <Grid container spacing={2.2} alignItems="center">
+            <Grid
+              container
+              spacing={2.2}
+              alignItems="center"
+              sx={{
+                borderLeft: { xs: "4px solid #1B83CC", sm: "6px solid #1B83CC" },
+                pl: { xs: 1.1, sm: 1.4 },
+              }}
+            >
               <Grid item xs={12} md={7}>
                 <Typography
                   sx={{
-                    color: "#fff",
+                    color: "#0c2a44",
                     fontFamily: "'Poppins', sans-serif",
                     fontWeight: 900,
-                    fontSize: { xs: "1.4rem", sm: "1.9rem" },
+                    fontSize: { xs: "1.35rem", sm: "1.85rem" },
                     lineHeight: 1.15,
                     mb: 1.2,
                   }}
@@ -190,7 +198,7 @@ export default function Parents() {
 
                 <Typography
                   sx={{
-                    color: "rgba(255,255,255,0.95)",
+                    color: "#27475f",
                     fontSize: { xs: "0.95rem", sm: "1rem" },
                     lineHeight: 1.6,
                   }}
@@ -201,14 +209,15 @@ export default function Parents() {
                 <Button
                   variant="contained"
                   sx={{
-                    mt: 1.6,
+                    mt: 1.7,
                     textTransform: "none",
                     fontWeight: 700,
                     borderRadius: 99,
-                    px: 2.2,
+                    px: 2.4,
                     py: 0.8,
-                    backgroundColor: "#1B83CC",
-                    "&:hover": { backgroundColor: "#156ba6" },
+                    background: "linear-gradient(135deg, #1B83CC 0%, #1169a8 100%)",
+                    boxShadow: "0 8px 16px rgba(27,131,204,0.28)",
+                    "&:hover": { background: "linear-gradient(135deg, #1679bb 0%, #0f5f96 100%)" },
                   }}
                 >
                   Read More
@@ -223,8 +232,8 @@ export default function Parents() {
                   sx={{
                     width: "100%",
                     borderRadius: 2.4,
-                    border: "2px solid rgba(255,255,255,0.72)",
-                    boxShadow: "0 10px 20px rgba(0,0,0,0.24)",
+                    border: "2px solid rgba(13,43,69,0.14)",
+                    boxShadow: "0 10px 20px rgba(13,43,69,0.16)",
                     objectFit: "cover",
                   }}
                 />
@@ -239,14 +248,112 @@ export default function Parents() {
           transition={{ duration: 0.75, ease: "easeOut" }}
           viewport={{ once: true, amount: 0.15 }}
         >
-          <Box sx={{ mt: { xs: 4.2, sm: 5.5 } }}>
+          <Box sx={{ mt: { xs: 4, sm: 5 } }}>
+            <Typography
+              sx={{
+                textAlign: "center",
+                color: "#0d2b45",
+                fontFamily: "'Poppins', sans-serif",
+                fontSize: { xs: "1.6rem", sm: "2rem" },
+                fontWeight: 900,
+                letterSpacing: "0.03em",
+                mb: 2.2,
+              }}
+            >
+              Our Programs
+            </Typography>
+
+            <Grid container spacing={isMobile ? 1.6 : 2.2} justifyContent="center">
+              {programs.map((program) => (
+                <Grid item xs={12} md={8} key={program.title}>
+                  <Box
+                    sx={{
+                      height: "100%",
+                      p: { xs: 2, sm: 2.5 },
+                      borderRadius: 3.2,
+                      color: "#fff",
+                      position: "relative",
+                      overflow: "hidden",
+                      border: "1.5px solid rgba(255,255,255,0.5)",
+                      background: `linear-gradient(150deg, ${program.colors[0]} 0%, ${program.colors[1]} 100%)`,
+                      boxShadow: "0 14px 26px rgba(0,0,0,0.24)",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: 44,
+                        height: 44,
+                        borderRadius: "50%",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "#fff",
+                        backgroundColor: "rgba(0,0,0,0.24)",
+                        border: "1px solid rgba(255,255,255,0.34)",
+                        mb: 1.3,
+                      }}
+                    >
+                      <EmojiFlagsRoundedIcon sx={{ fontSize: 24 }} />
+                    </Box>
+
+                    <Typography
+                      sx={{
+                        fontWeight: 900,
+                        fontSize: { xs: "1.2rem", sm: "1.35rem" },
+                        letterSpacing: "0.04em",
+                        lineHeight: 1.1,
+                        mb: 1.1,
+                      }}
+                    >
+                      {program.title}
+                    </Typography>
+
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "0.95rem", sm: "1rem" },
+                        lineHeight: 1.55,
+                        color: "rgba(255,255,255,0.96)",
+                        maxWidth: 600,
+                      }}
+                    >
+                      {program.description}
+                    </Typography>
+
+                    <Box sx={{ mt: 1.5, display: "flex", justifyContent: "flex-end" }}>
+                      <Button
+                        variant="contained"
+                        onClick={() => navigate("/catalogo")}
+                        sx={{
+                          textTransform: "none",
+                          fontWeight: 700,
+                          borderRadius: 99,
+                          px: 2.4,
+                          py: 0.75,
+                          backgroundColor: "rgba(255,255,255,0.22)",
+                          border: "1px solid rgba(255,255,255,0.46)",
+                          color: "#fff",
+                          "&:hover": {
+                            backgroundColor: "rgba(255,255,255,0.32)",
+                          },
+                        }}
+                      >
+                        {program.cta}
+                      </Button>
+                    </Box>
+                  </Box>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+
+          <Box sx={{ mt: { xs: 2.2, sm: 3 } }}>
             <Box
               sx={{
                 p: { xs: 2, sm: 2.4 },
                 borderRadius: 3,
                 border: "2px dashed rgba(255,255,255,0.72)",
                 background: "linear-gradient(135deg, #5f6670 0%, #434a54 100%)",
-                color: "#fff",
+                color: "#0d2b45",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
@@ -275,7 +382,7 @@ export default function Parents() {
             </Box>
           </Box>
 
-          <Box sx={{ mt: { xs: 5, sm: 7 } }}>
+          <Box sx={{ mt: { xs: 3, sm: 4 } }}>
             <Box
               role="button"
               tabIndex={0}
@@ -294,7 +401,7 @@ export default function Parents() {
                   ? "linear-gradient(145deg, rgba(7,102,153,0.95) 0%, rgba(13,79,122,0.95) 100%)"
                   : "linear-gradient(145deg, rgba(7,102,153,0.9) 0%, rgba(13,79,122,0.9) 100%)",
                 boxShadow: "0 12px 22px rgba(0,0,0,0.22)",
-                color: "#fff",
+                color: "#0d2b45",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
@@ -303,7 +410,7 @@ export default function Parents() {
             >
               <Typography
                 sx={{
-                  color: "#fff",
+                  color: "#0d2b45",
                   fontFamily: "'Poppins', sans-serif",
                   fontSize: { xs: "1.2rem", sm: "1.45rem" },
                   fontWeight: 900,
@@ -329,17 +436,17 @@ export default function Parents() {
                         border: "1.3px solid rgba(255,255,255,0.45)",
                         background: "linear-gradient(145deg, rgba(7,102,153,0.9) 0%, rgba(13,79,122,0.9) 100%)",
                         boxShadow: "0 12px 22px rgba(0,0,0,0.22)",
-                        color: "#fff",
+                        color: "#0c2a44",
                         height: "100%",
                       }}
                     >
                       <Typography sx={{ fontWeight: 900, fontSize: { xs: "1.05rem", sm: "1.14rem" }, mb: 0.45 }}>
-                        <Box component="span" sx={{ color: "#FFE8A3", mr: 0.55 }}>
+                        <Box component="span" sx={{ color: "#0f6fb8", mr: 0.55 }}>
                           {role.step}.
                         </Box>
                         {role.title}
                       </Typography>
-                      <Typography sx={{ fontWeight: 700, fontSize: { xs: "0.95rem", sm: "1rem" }, color: "#9BE7FF", mb: 0.65 }}>
+                      <Typography sx={{ fontWeight: 700, fontSize: { xs: "0.95rem", sm: "1rem" }, color: "#0b8f63", mb: 0.65 }}>
                         "{role.quote}"
                       </Typography>
                       <Typography sx={{ color: "rgba(255,255,255,0.95)", fontSize: { xs: "0.92rem", sm: "0.98rem" }, lineHeight: 1.55 }}>
