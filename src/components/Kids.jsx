@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Box, Button, Collapse, Grid, Paper, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
@@ -117,6 +117,7 @@ export default function Kids() {
       ? window.matchMedia("(orientation: portrait)").matches
       : false
   );
+  const bookFullscreenRef = useRef(null);
   const pageTurnTimersRef = useRef([]);
   const activeMenuRef = useRef("Stories");
   const theme = useTheme();
@@ -196,6 +197,64 @@ export default function Kids() {
     return () => mediaQuery.removeListener(handleOrientation);
   }, [isMobile]);
 
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      const activeFullscreenElement =
+        document.fullscreenElement || document.webkitFullscreenElement || null;
+
+      if (!activeFullscreenElement && bookOpen) {
+        setBookOpen(false);
+      }
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      document.removeEventListener("webkitfullscreenchange", handleFullscreenChange);
+    };
+  }, [bookOpen]);
+
+  useEffect(() => {
+    if (!bookOpen) return;
+
+    const fullscreenNode = bookFullscreenRef.current;
+    if (!fullscreenNode) return;
+
+    const requestFullscreen =
+      fullscreenNode.requestFullscreen || fullscreenNode.webkitRequestFullscreen;
+
+    if (!requestFullscreen) return;
+
+    requestAnimationFrame(() => {
+      requestFullscreen.call(fullscreenNode).catch?.(() => {
+        // Keep the fixed overlay fallback when native fullscreen is unavailable.
+      });
+    });
+  }, [bookOpen]);
+
+  const handleOpenBook = () => {
+    setBookOpen(true);
+  };
+
+  const handleCloseBook = async () => {
+    const exitFullscreen = document.exitFullscreen || document.webkitExitFullscreen;
+    const activeFullscreenElement =
+      document.fullscreenElement || document.webkitFullscreenElement || null;
+
+    if (activeFullscreenElement && exitFullscreen) {
+      try {
+        await exitFullscreen.call(document);
+      } catch {
+        setBookOpen(false);
+      }
+      return;
+    }
+
+    setBookOpen(false);
+  };
+
   const handlePageTurn = (direction) => {
     if (isPageTurning) return;
 
@@ -258,10 +317,12 @@ export default function Kids() {
           inset: 0,
           backgroundImage: "url(/IMAGE_02.png)",
           backgroundSize: "cover",
-          backgroundPositionX: { xs: isSectionOpen ? "60%" : "28%", sm: isSectionOpen ? "54%" : "50%" },
+          backgroundPositionX: { xs: "28%", sm: "50%" },
           backgroundPositionY: "center",
           backgroundRepeat: "no-repeat",
-          transition: "background-position-x 420ms ease",
+          transform: isSectionOpen ? "scale(1.05)" : "scale(1)",
+          transformOrigin: { xs: "28% center", sm: "50% center" },
+          transition: "transform 420ms ease",
           zIndex: 0,
         }}
       />
@@ -548,6 +609,7 @@ export default function Kids() {
                                   <Collapse in={isStageActive} timeout={650} unmountOnExit>
                                     <Box sx={{ mt: 1.1 }}>
                                       <Box
+                                        ref={bookFullscreenRef}
                                         sx={{
                                           maxWidth: bookOpen ? (isMobile ? "100dvw" : "100vw") : 560,
                                           boxSizing: "border-box",
@@ -572,7 +634,7 @@ export default function Kids() {
                                       >
                                         {bookOpen && (
                                           <Button
-                                            onClick={() => setBookOpen(false)}
+                                            onClick={handleCloseBook}
                                             sx={{
                                               position: "absolute",
                                               top: bookOpen && isMobile ? "auto" : { xs: 10, sm: 12 },
@@ -645,7 +707,7 @@ export default function Kids() {
                                               Story Book Experience
                                             </Typography>
                                             <Button
-                                              onClick={() => setBookOpen(true)}
+                                              onClick={handleOpenBook}
                                               sx={{
                                                 textTransform: "none",
                                                 fontWeight: 800,
