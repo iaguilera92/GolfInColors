@@ -6,12 +6,13 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-
+import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 export default function Parents() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
   const [rolesOpen, setRolesOpen] = useState(false);
+  const [faqOpen, setFaqOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
@@ -58,6 +59,30 @@ export default function Parents() {
       description: "Turn the activity into a meaningful moment.",
     },
   ];
+
+  const faqs = [
+    {
+      q: "What age is best to start learning golf?",
+      a: "Many kids can start as early as 3 to 5 with playful movement and simple fundamentals. The best age is when your child is curious, can follow basic instructions, and enjoys active play.",
+    },
+    {
+      q: "How often should my child practice at home?",
+      a: "Short sessions work best. Aim for 10 to 15 minutes, 2 to 4 times per week. Consistency matters more than duration, and it should always feel fun.",
+    },
+    {
+      q: "What should my child bring to a lesson?",
+      a: "Comfortable shoes, a hat, water, sunscreen, and a positive attitude. If they have clubs, bring them, but most beginner programs can provide equipment at first.",
+    },
+    {
+      q: "How do coaches keep kids engaged and safe?",
+      a: "Great coaches use games, clear routines, and kid-friendly cues. They set safe zones, manage spacing and turns, and keep the environment positive so kids stay focused without pressure.",
+    },
+    {
+      q: "How can parents and coaches work together to help my child improve?",
+      a: "Ask coaches for one simple focus to practice at home, celebrate effort over results, and keep communication open. The best progress happens when parents support the process and coaches guide the learning steps.",
+    },
+  ];
+
 
   return (
     <Box
@@ -346,40 +371,143 @@ export default function Parents() {
             </Grid>
           </Box>
 
+
           <Box sx={{ mt: { xs: 2.2, sm: 3 } }}>
             <Box
+              role="button"
+              tabIndex={0}
+              onClick={() => setFaqOpen((prev) => !prev)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setFaqOpen((prev) => !prev);
+                }
+              }}
               sx={{
-                p: { xs: 2, sm: 2.4 },
+                p: { xs: 2, sm: 2.3 },
                 borderRadius: 3,
-                border: "2px dashed rgba(255,255,255,0.72)",
-                background: "linear-gradient(135deg, #5f6670 0%, #434a54 100%)",
+                border: faqOpen ? "1.8px solid rgba(11,143,99,0.28)" : "1px solid rgba(13,43,69,0.12)",
+                background: faqOpen
+                  ? "linear-gradient(165deg, #ffffff 0%, #f3fff9 100%)"
+                  : "linear-gradient(165deg, #ffffff 0%, #f7fff9 100%)",
+                boxShadow: faqOpen
+                  ? "0 16px 30px rgba(11,143,99,0.14)"
+                  : "0 12px 24px rgba(13,43,69,0.12)",
                 color: "#0d2b45",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                boxShadow: "0 12px 22px rgba(0,0,0,0.2)",
+                cursor: "pointer",
                 position: "relative",
                 overflow: "hidden",
-                "&::after": {
-                  content: "\"\"",
+                "&::before": {
+                  content: '""',
                   position: "absolute",
-                  inset: 0,
-                  pointerEvents: "none",
-                  background:
-                    "linear-gradient(110deg, rgba(255,255,255,0) 20%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0) 80%)",
+                  top: -34,
+                  right: -34,
+                  width: 110,
+                  height: 110,
+                  borderRadius: "50%",
+                  background: faqOpen ? "rgba(11,143,99,0.14)" : "rgba(27,131,204,0.08)",
                 },
               }}
             >
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <LockRoundedIcon sx={{ fontSize: 22 }} />
-                <Typography sx={{ fontWeight: 900, fontSize: { xs: "1.08rem", sm: "1.2rem" } }}>
-                  FAQ's
-                </Typography>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1, position: "relative", zIndex: 1 }}>
+                <Box
+                  sx={{
+                    width: 34,
+                    height: 34,
+                    borderRadius: "50%",
+                    display: "grid",
+                    placeItems: "center",
+                    background: "linear-gradient(135deg, #0b8f63 0%, #087a55 100%)",
+                    color: "#fff",
+                    boxShadow: "0 8px 16px rgba(11,143,99,0.18)",
+                  }}
+                >
+                  <HelpOutlineRoundedIcon sx={{ fontSize: 20 }} />
+                </Box>
+                <Box>
+                  <Typography
+                    sx={{
+                      fontWeight: 900,
+                      fontSize: { xs: "1.15rem", sm: "1.35rem" },
+                      lineHeight: 1.05,
+                      color: "#0c2a44",
+                    }}
+                  >
+                    FAQ's
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: { xs: "0.82rem", sm: "0.9rem" },
+                      color: "#4a6478",
+                      mt: 0.25,
+                    }}
+                  >
+                    Common questions from parents
+                  </Typography>
+                </Box>
               </Box>
-              <Typography sx={{ fontWeight: 700, fontSize: { xs: "0.84rem", sm: "0.9rem" }, color: "rgba(255,255,255,0.92)" }}>
-                (Coming soon)
-              </Typography>
+
+              <Box sx={{ display: "flex", alignItems: "center", color: "#0b8f63", position: "relative", zIndex: 1 }}>
+                {faqOpen ? <CloseIcon sx={{ fontSize: 20 }} /> : <KeyboardArrowDownIcon sx={{ fontSize: 24 }} />}
+              </Box>
             </Box>
+
+            <Collapse in={faqOpen} timeout={700}>
+              <Grid container spacing={isMobile ? 1.6 : 2.2} sx={{ mt: 0.1 }}>
+                {faqs.map((item) => (
+                  <Grid item xs={12} md={6} key={item.q}>
+                    <Box
+                      sx={{
+                        p: { xs: 2, sm: 2.3 },
+                        borderRadius: 2.8,
+                        border: "1px solid rgba(13,43,69,0.12)",
+                        background: "linear-gradient(165deg, #ffffff 0%, #f8fffb 100%)",
+                        boxShadow: "0 12px 24px rgba(13,43,69,0.1)",
+                        height: "100%",
+                        position: "relative",
+                        overflow: "hidden",
+                        "&::before": {
+                          content: '""',
+                          position: "absolute",
+                          inset: 0,
+                          pointerEvents: "none",
+                          background: "linear-gradient(180deg, rgba(11,143,99,0.04) 0%, rgba(255,255,255,0) 46%)",
+                        },
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontWeight: 900,
+                          color: "#0c2a44",
+                          fontSize: { xs: "1.02rem", sm: "1.12rem" },
+                          lineHeight: 1.2,
+                          mb: 0.8,
+                          position: "relative",
+                          zIndex: 1,
+                        }}
+                      >
+                        {item.q}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          color: "#4a6478",
+                          fontSize: { xs: "0.92rem", sm: "0.98rem" },
+                          lineHeight: 1.62,
+                          position: "relative",
+                          zIndex: 1,
+                        }}
+                      >
+                        {item.a}
+                      </Typography>
+                    </Box>
+                  </Grid>
+                ))}
+              </Grid>
+            </Collapse>
           </Box>
 
           <Box sx={{ mt: { xs: 3, sm: 4 } }}>
