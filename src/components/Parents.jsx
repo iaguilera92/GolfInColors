@@ -396,31 +396,58 @@ export default function Parents() {
               sx={{
                 p: { xs: 2, sm: 2.3 },
                 borderRadius: 3,
-                border: rolesOpen ? "2px solid rgba(255,255,255,0.9)" : "1.5px solid rgba(255,255,255,0.55)",
+                border: rolesOpen ? "1.8px solid rgba(27,131,204,0.34)" : "1px solid rgba(13,43,69,0.12)",
                 background: rolesOpen
-                  ? "linear-gradient(145deg, rgba(7,102,153,0.95) 0%, rgba(13,79,122,0.95) 100%)"
-                  : "linear-gradient(145deg, rgba(7,102,153,0.9) 0%, rgba(13,79,122,0.9) 100%)",
-                boxShadow: "0 12px 22px rgba(0,0,0,0.22)",
+                  ? "linear-gradient(165deg, #ffffff 0%, #eef7ff 100%)"
+                  : "linear-gradient(165deg, #ffffff 0%, #f4f9ff 100%)",
+                boxShadow: rolesOpen
+                  ? "0 16px 30px rgba(27,131,204,0.16)"
+                  : "0 12px 24px rgba(13,43,69,0.12)",
                 color: "#0d2b45",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
                 cursor: "pointer",
+                position: "relative",
+                overflow: "hidden",
+                "&::before": {
+                  content: '""',
+                  position: "absolute",
+                  top: -34,
+                  right: -34,
+                  width: 110,
+                  height: 110,
+                  borderRadius: "50%",
+                  background: rolesOpen ? "rgba(27,131,204,0.12)" : "rgba(11,143,99,0.08)",
+                },
               }}
             >
-              <Typography
-                sx={{
-                  color: "#0d2b45",
-                  fontFamily: "'Poppins', sans-serif",
-                  fontSize: { xs: "1.2rem", sm: "1.45rem" },
-                  fontWeight: 900,
-                  letterSpacing: "0.03em",
-                }}
-              >
-                Roles
-              </Typography>
+              <Box sx={{ position: "relative", zIndex: 1 }}>
+                <Typography
+                  sx={{
+                    color: "#0c2a44",
+                    fontFamily: "'Poppins', sans-serif",
+                    fontSize: { xs: "1.22rem", sm: "1.5rem" },
+                    fontWeight: 900,
+                    letterSpacing: "0.03em",
+                    lineHeight: 1.05,
+                  }}
+                >
+                  Roles
+                </Typography>
+                <Typography
+                  sx={{
+                    mt: 0.35,
+                    color: "#4a6478",
+                    fontSize: { xs: "0.82rem", sm: "0.9rem" },
+                    fontWeight: 600,
+                  }}
+                >
+                  How parents guide every step
+                </Typography>
+              </Box>
 
-              <Box sx={{ display: "flex", alignItems: "center", color: "rgba(255,255,255,0.95)" }}>
+              <Box sx={{ display: "flex", alignItems: "center", color: "#0f6fb8", position: "relative", zIndex: 1 }}>
                 {rolesOpen ? <CloseIcon sx={{ fontSize: 20 }} /> : <KeyboardArrowDownIcon sx={{ fontSize: 24 }} />}
               </Box>
             </Box>
@@ -433,23 +460,57 @@ export default function Parents() {
                       sx={{
                         p: { xs: 2, sm: 2.3 },
                         borderRadius: 2.8,
-                        border: "1.3px solid rgba(255,255,255,0.45)",
-                        background: "linear-gradient(145deg, rgba(7,102,153,0.9) 0%, rgba(13,79,122,0.9) 100%)",
-                        boxShadow: "0 12px 22px rgba(0,0,0,0.22)",
+                        border: "1px solid rgba(13,43,69,0.12)",
+                        background: "linear-gradient(165deg, #ffffff 0%, #f7fbff 100%)",
+                        boxShadow: "0 12px 24px rgba(13,43,69,0.1)",
                         color: "#0c2a44",
                         height: "100%",
+                        position: "relative",
+                        overflow: "hidden",
+                        "&::before": {
+                          content: '""',
+                          position: "absolute",
+                          inset: 0,
+                          pointerEvents: "none",
+                          background: "linear-gradient(180deg, rgba(27,131,204,0.04) 0%, rgba(255,255,255,0) 42%)",
+                        },
                       }}
                     >
-                      <Typography sx={{ fontWeight: 900, fontSize: { xs: "1.05rem", sm: "1.14rem" }, mb: 0.45 }}>
-                        <Box component="span" sx={{ color: "#0f6fb8", mr: 0.55 }}>
-                          {role.step}.
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1,
+                          mb: 0.8,
+                          position: "relative",
+                          zIndex: 1,
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            minWidth: 34,
+                            width: 34,
+                            height: 34,
+                            borderRadius: "50%",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            background: "linear-gradient(135deg, #1B83CC 0%, #1169a8 100%)",
+                            color: "#fff",
+                            fontWeight: 900,
+                            boxShadow: "0 6px 12px rgba(27,131,204,0.22)",
+                          }}
+                        >
+                          {role.step}
                         </Box>
-                        {role.title}
-                      </Typography>
-                      <Typography sx={{ fontWeight: 700, fontSize: { xs: "0.95rem", sm: "1rem" }, color: "#0b8f63", mb: 0.65 }}>
+                        <Typography sx={{ fontWeight: 900, fontSize: { xs: "1.05rem", sm: "1.14rem" }, color: "#0c2a44", lineHeight: 1.15 }}>
+                          {role.title}
+                        </Typography>
+                      </Box>
+                      <Typography sx={{ fontWeight: 800, fontSize: { xs: "0.95rem", sm: "1rem" }, color: "#0b8f63", mb: 0.7, position: "relative", zIndex: 1 }}>
                         "{role.quote}"
                       </Typography>
-                      <Typography sx={{ color: "rgba(255,255,255,0.95)", fontSize: { xs: "0.92rem", sm: "0.98rem" }, lineHeight: 1.55 }}>
+                      <Typography sx={{ color: "#4a6478", fontSize: { xs: "0.92rem", sm: "0.98rem" }, lineHeight: 1.62, position: "relative", zIndex: 1 }}>
                         {role.description}
                       </Typography>
                     </Box>

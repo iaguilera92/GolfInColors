@@ -209,7 +209,7 @@ function Informations({ informationsRef, triggerInformations }) {
               animate={inView || hasAnimated2 ? { rotate: 1080, scale: 1 } : { rotate: 0, scale: 0.85 }}
               transition={{
                 duration: 0.8,
-                
+
                 ease: "easeInOut",
               }}
               style={{
@@ -419,10 +419,19 @@ function Informations({ informationsRef, triggerInformations }) {
                   textTransform: "uppercase",
                   letterSpacing: "2px",
                   fontSize: { xs: "1.2rem", md: "1.6rem" },
-                  color: "#ffffff",       // blanco puro
-                  textShadow: "none",
+                  color: "#ffffff",
                   position: "relative",
                   display: "inline-block",
+
+                  "&::after": {
+                    content: '""',
+                    position: "absolute",
+                    left: 0,
+                    bottom: "0px",   // más cerca del texto
+                    width: "100%",
+                    height: "2px",
+                    backgroundColor: "#ffffff",
+                  }
                 }}
               >
                 Our Services

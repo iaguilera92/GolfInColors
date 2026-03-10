@@ -291,19 +291,33 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                       disabled={item.disabled}
                       onClick={() => !item.disabled && handleClick(item)}
                       sx={{
-                        color: item.disabled ? "rgba(255,255,255,0.4)" : "white",
+                        color: "white",
                         fontFamily: "Poppins, sans-serif",
                         padding: isShop ? "10px 18px" : "10px 14px",
+
+                        textDecoration: item.disabled ? "line-through" : "none",
+
                         background: isShop
                           ? "linear-gradient(160deg, #FFE082 0%, #FFC43D 38%, #FFB300 62%, #E68A00 100%)"
                           : "transparent",
+
                         border: isShop ? "2px solid rgba(255, 230, 120, 0.95)" : "none",
                         borderRadius: isShop ? "999px" : "8px",
+
                         boxShadow: isShop
                           ? "0 0 18px rgba(255, 195, 45, 0.72), 0 8px 20px rgba(120, 72, 0, 0.42), inset 0 2px 6px rgba(255,255,255,0.35), inset 0 -7px 12px rgba(130,80,0,0.28)"
                           : "none",
+
                         textShadow: isShop ? "0 1px 2px rgba(0,0,0,0.45)" : "none",
                         cursor: item.disabled ? "not-allowed" : "pointer",
+
+                        "&.Mui-disabled": {
+                          color: "white",
+                          WebkitTextFillColor: "white", // necesario en algunos navegadores
+                          opacity: 0.7,
+                          textDecoration: "line-through",
+                        },
+
                         "&:hover": {
                           background: item.disabled
                             ? "transparent"
@@ -311,7 +325,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                               ? "linear-gradient(160deg, #FFE79A 0%, #FFC94F 35%, #FFB623 62%, #F58B00 100%)"
                               : "rgba(255, 255, 255, 0.1)",
                           transform: isShop ? "scale(1.03)" : "none",
-                        }
+                        },
                       }}
                     >
                       {item.name}
