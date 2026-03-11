@@ -37,8 +37,8 @@ export default function Coaches() {
               component="span"
               sx={{
                 display: "block",
-                color: "#2a4a5f",
-                fontSize: { xs: "1.3rem", sm: "1.5rem" },
+                color: "#2b3a45",
+                fontSize: { xs: "1.4rem", sm: "1.7rem", md: "1.9rem" },
                 fontWeight: 600,
                 letterSpacing: "0.03em",
               }}
@@ -50,8 +50,8 @@ export default function Coaches() {
               component="span"
               sx={{
                 display: "block",
-                color: "#1B83CC",
-                fontSize: { xs: "1.3rem", sm: "1.5rem" },
+                color: "#2b3a45",
+                fontSize: { xs: "1.4rem", sm: "1.7rem", md: "1.9rem" },
                 fontWeight: 600,
                 letterSpacing: "0.03em",
               }}
@@ -63,8 +63,8 @@ export default function Coaches() {
               component="span"
               sx={{
                 display: "block",
-                color: "#0b8f63",
-                fontSize: { xs: "1.3rem", sm: "1.5rem" },
+                color: "#2b3a45",
+                fontSize: { xs: "1.4rem", sm: "1.7rem", md: "1.9rem" },
                 fontWeight: 600,
                 letterSpacing: "0.03em",
               }}
@@ -76,9 +76,9 @@ export default function Coaches() {
               component="span"
               sx={{
                 display: "block",
-                color: "#e67a1f",
-                fontSize: { xs: "1.3rem", sm: "2rem", md: "2.2rem" },
-                fontWeight: 900,
+                color: "#2b3a45",
+                fontSize: { xs: "1.4rem", sm: "1.7rem", md: "1.9rem" },
+                fontWeight: 600,
                 lineHeight: 1,
                 textShadow: "none",
               }}
@@ -142,9 +142,9 @@ export default function Coaches() {
           <Typography
             sx={{
               textAlign: "center",
-              color: "#0c2a44",
-              fontSize: { xs: "1.35rem", sm: "1.7rem" },
-              fontWeight: 900,
+              color: "#2b3a45",
+              fontSize: { xs: "1.4rem", sm: "1.7rem", md: "1.9rem" },
+              fontWeight: 600,
               letterSpacing: "0.03em",
               mb: 1.6,
             }}
@@ -152,47 +152,26 @@ export default function Coaches() {
             OUR SYSTEM
           </Typography>
 
-          <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "1rem" }, lineHeight: 1.6, mb: 1.25 }}>
+          <Typography sx={{ color: "#2b3a45", fontSize: { xs: "1rem", sm: "1.15rem" }, lineHeight: 1.6, mb: 1.25 }}>
             Golf In Colors is a creative, family-centered learning system designed to motivate kids to learn golf through play, movement, and connection.
           </Typography>
 
-          <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "1rem" }, lineHeight: 1.6, mb: 1.25 }}>
+          <Typography sx={{ color: "#2b3a45", fontSize: { xs: "1rem", sm: "1.15rem" }, lineHeight: 1.6, mb: 1.25 }}>
             Our approach combines playful programs like Tee Box, where kids learn golf step by step through games and stories, and Star Path, which integrates physical activity and goal-based challenges to keep children active and motivated.
           </Typography>
 
-          <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "1rem" }, lineHeight: 1.6, mb: 1.25 }}>
-            Learning is reinforced with our Kids Kits, including coloring books, puzzles, stories, and interactive activities that extend the experience beyond the course and into the home.
+          <Typography sx={{ color: "#2b3a45", fontSize: { xs: "1rem", sm: "1.15rem" }, lineHeight: 1.6, mb: 1.25 }}>
+            Learning is reinforced with interactive activities that extend the experience beyond the course and into the home.
           </Typography>
 
-          <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "1rem" }, lineHeight: 1.6, mb: 1.25 }}>
+          <Typography sx={{ color: "#2b3a45", fontSize: { xs: "1rem", sm: "1.15rem" }, lineHeight: 1.6, mb: 1.25 }}>
             At the heart of our system are clear roles for parents, kids, and coaches, working together as a team to create a fun, supportive, and effective learning environment.
           </Typography>
 
-          <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "1rem" }, lineHeight: 1.6 }}>
-            This is more than golf lessons-it's a system that helps families grow together through the game.
+          <Typography sx={{ color: "#2b3a45", fontSize: { xs: "1rem", sm: "1.15rem" }, lineHeight: 1.6 }}>
+            This is more than golf lessons, it's a system that helps families grow together through the game.
           </Typography>
 
-          <Box sx={{ mt: 1.8, display: "flex", justifyContent: "flex-end" }}>
-            <Button
-              variant="contained"
-              sx={{
-                textTransform: "none",
-                fontWeight: 700,
-                borderRadius: 99,
-                px: 2.2,
-                py: 0.65,
-                background: "linear-gradient(135deg, #1B83CC 0%, #1169a8 100%)",
-                border: "1px solid rgba(27,131,204,0.28)",
-                color: "#fff",
-                boxShadow: "0 8px 16px rgba(27,131,204,0.22)",
-                "&:hover": {
-                  background: "linear-gradient(135deg, #1679bb 0%, #0f5f96 100%)",
-                },
-              }}
-            >
-              LEARN MORE
-            </Button>
-          </Box>
         </Box>
 
         <Box
@@ -211,7 +190,7 @@ export default function Coaches() {
               textAlign: "center",
               color: "#0c2a44",
               fontSize: { xs: "1.3rem", sm: "1.6rem" },
-              fontWeight: 900,
+              fontWeight: 600,
               letterSpacing: "0.03em",
               mb: 1.6,
             }}
