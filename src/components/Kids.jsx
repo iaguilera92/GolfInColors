@@ -9,6 +9,8 @@ import StarsIcon from "@mui/icons-material/Stars";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { motion } from "framer-motion";
 import Libro, { storyBookPagesDesktop, storyBookPagesMobile } from "./Libro";
+import Puzzle from "./Puzzle";
+import ColoringBook from "./ColoringBook";
 
 const menus = ["Stories", "Games", "Videos"];
 
@@ -35,7 +37,6 @@ const storyStages = [
   "The Day Max Discovered Golf",
 ];
 
-
 const characters = [
   { img: "max.png", name: "Max" },
   { img: "sofi.png", name: "Sofi" },
@@ -55,6 +56,10 @@ export default function Kids() {
   const [isPageTurning, setIsPageTurning] = useState(false);
   const [turnId, setTurnId] = useState(0);
   const [bookOpen, setBookOpen] = useState(false);
+  const [puzzleOpen, setPuzzleOpen] = useState(false);
+  const [coloringBookOpen, setColoringBookOpen] = useState(false);
+  const [highlightColoringBook, setHighlightColoringBook] = useState(false);
+  const coloringBookRef = useRef(null);
   const [isPortrait, setIsPortrait] = useState(
     typeof window !== "undefined"
       ? window.matchMedia("(orientation: portrait)").matches
@@ -103,11 +108,11 @@ export default function Kids() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = bookOpen ? "hidden" : "";
+    document.body.style.overflow = bookOpen || puzzleOpen || coloringBookOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [bookOpen]);
+  }, [bookOpen, puzzleOpen, coloringBookOpen]);
 
   useEffect(() => {
     window.dispatchEvent(
@@ -222,6 +227,40 @@ export default function Kids() {
 
     pageTurnTimersRef.current.push(updateTimer, endTimer);
   };
+
+  const handleOpenPuzzle = () => {
+    setPuzzleOpen(true);
+  };
+
+  const handleClosePuzzle = () => {
+    setPuzzleOpen(false);
+  };
+
+  const handleOpenColoringBook = () => {
+    setColoringBookOpen(true);
+  };
+
+  const handleCloseColoringBook = () => {
+    setColoringBookOpen(false);
+  };
+
+  const handleGoToColoringBook = () => {
+    setPuzzleOpen(false);
+    setColoringBookOpen(true);
+    setHighlightColoringBook(true);
+
+    window.setTimeout(() => {
+      coloringBookRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }, 120);
+
+    window.setTimeout(() => {
+      setHighlightColoringBook(false);
+    }, 2200);
+  };
+
   const handleSectionClick = (menu) => {
     if (menu === "Stories") {
       if (!storiesOpen) {
@@ -729,7 +768,7 @@ export default function Kids() {
                         <Box
                           sx={{
                             width: "100%",
-                            maxWidth: 640,
+                            maxWidth: 600,
                             mx: "auto",
                             p: "4px",
                             borderRadius: 3,
@@ -871,11 +910,11 @@ export default function Kids() {
                               transform: "translateY(-50%)",
                               color: "#ffffff",
                               fontWeight: 900,
-                              fontSize: { xs: "1rem", sm: "1.35rem" },
+                              fontSize: { xs: "0.92rem", sm: "1.22rem" },
                               lineHeight: 1.1,
                               textAlign: "left",
                               textShadow: "0 2px 10px rgba(0,0,0,0.6)",
-                              maxWidth: { xs: 120, sm: 170 },
+                              maxWidth: { xs: 110, sm: 155 },
                             }}
                           >
                             CHOOSE YOUR LEVEL!
@@ -884,14 +923,14 @@ export default function Kids() {
 
                         <Stack spacing={1.1} sx={{ mt: 2, mb: 1.2, maxWidth: 640, mx: "auto", width: "100%" }}>
                           <Box sx={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 1 }}>
-                            <Box sx={{ fontWeight: 900, fontSize: { xs: "0.9rem", sm: "1rem" }, letterSpacing: "0.02em", color: "#ffffff", textAlign: "center", px: 1.2, py: 0.55, borderRadius: 99, border: "2px solid #0f5ea0", backgroundColor: "#1B83CC" }}>LEVEL 1</Box>
-                            <Box sx={{ fontWeight: 900, fontSize: { xs: "0.9rem", sm: "1rem" }, letterSpacing: "0.02em", color: "#ffffff", textAlign: "center", px: 1.2, py: 0.55, borderRadius: 99, border: "2px solid #1d6f33", backgroundColor: "#2ea44f" }}>LEVEL 2</Box>
-                            <Box sx={{ fontWeight: 900, fontSize: { xs: "0.9rem", sm: "1rem" }, letterSpacing: "0.02em", color: "#ffffff", textAlign: "center", px: 1.2, py: 0.55, borderRadius: 99, border: "2px solid #8a6a00", backgroundColor: "#d9a300" }}>LEVEL 3</Box>
+                            <Box sx={{ fontWeight: 900, fontSize: { xs: "0.75rem", sm: "1rem" }, letterSpacing: "0.02em", color: "#ffffff", textAlign: "center", px: { xs: 0.8, sm: 1.2 }, py: 0.55, borderRadius: 99, border: "2px solid #0f5ea0", backgroundColor: "#1B83CC", whiteSpace: "nowrap" }}>LEVEL 1</Box>
+                            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 0.45, fontWeight: 900, fontSize: { xs: "0.75rem", sm: "1rem" }, letterSpacing: "0.02em", color: "#ffffff", textAlign: "center", px: { xs: 0.8, sm: 1.2 }, py: 0.55, borderRadius: 99, border: "2px solid #737b85", backgroundColor: "#949ca6", whiteSpace: "nowrap", flexWrap: "nowrap" }}><LockRoundedIcon sx={{ fontSize: 15, flexShrink: 0 }} />LEVEL 2</Box>
+                            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 0.45, fontWeight: 900, fontSize: { xs: "0.75rem", sm: "1rem" }, letterSpacing: "0.02em", color: "#ffffff", textAlign: "center", px: { xs: 0.8, sm: 1.2 }, py: 0.55, borderRadius: 99, border: "2px solid #737b85", backgroundColor: "#949ca6", whiteSpace: "nowrap", flexWrap: "nowrap" }}><LockRoundedIcon sx={{ fontSize: 15, flexShrink: 0 }} />LEVEL 3</Box>
                           </Box>
 
                           <Box sx={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 1, width: { xs: "100%", sm: "66.66%" }, mx: "auto" }}>
-                            <Box sx={{ fontWeight: 900, fontSize: { xs: "0.9rem", sm: "1rem" }, letterSpacing: "0.02em", color: "#ffffff", textAlign: "center", px: 1.2, py: 0.55, borderRadius: 99, border: "2px solid #5a2f8f", backgroundColor: "#8f5cc4" }}>LEVEL 4</Box>
-                            <Box sx={{ fontWeight: 900, fontSize: { xs: "0.9rem", sm: "1rem" }, letterSpacing: "0.02em", color: "#ffffff", textAlign: "center", px: 1.2, py: 0.55, borderRadius: 99, border: "2px solid #9e2a12", backgroundColor: "#d1491f" }}>LEVEL 5</Box>
+                            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 0.45, fontWeight: 900, fontSize: { xs: "0.75rem", sm: "1rem" }, letterSpacing: "0.02em", color: "#ffffff", textAlign: "center", px: { xs: 0.8, sm: 1.2 }, py: 0.55, borderRadius: 99, border: "2px solid #737b85", backgroundColor: "#949ca6", whiteSpace: "nowrap", flexWrap: "nowrap" }}><LockRoundedIcon sx={{ fontSize: 15, flexShrink: 0 }} />LEVEL 4</Box>
+                            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 0.45, fontWeight: 900, fontSize: { xs: "0.75rem", sm: "1rem" }, letterSpacing: "0.02em", color: "#ffffff", textAlign: "center", px: { xs: 0.8, sm: 1.2 }, py: 0.55, borderRadius: 99, border: "2px solid #737b85", backgroundColor: "#949ca6", whiteSpace: "nowrap", flexWrap: "nowrap" }}><LockRoundedIcon sx={{ fontSize: 15, flexShrink: 0 }} />LEVEL 5</Box>
                           </Box>
                         </Stack>
 
@@ -908,9 +947,67 @@ export default function Kids() {
                         >
                           <Box sx={{ backgroundColor: "#1B83CC", borderRadius: 2, p: "3px" }}>
                             <Stack spacing={0.5}>
-                              <Box component="img" src="/game-1.png" alt="Game 1" sx={{ width: "100%", display: "block", borderRadius: 1.2 }} />
-                              <Box component="img" src="/game-2.png" alt="Game 2" sx={{ width: "100%", display: "block", borderRadius: 1.2 }} />
-                              <Box component="img" src="/game-3.png" alt="Game 3" sx={{ width: "100%", display: "block", borderRadius: 1.2 }} />
+                              <Box
+                                sx={{
+                                  width: "100%",
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  py: 0.35,
+                                }}
+                              >
+                                <Box
+                                  component="img"
+                                  src="/game-1.png"
+                                  alt="Game 1"
+                                  sx={{
+                                    width: "44%",
+                                    display: "block",
+                                    borderRadius: 1.2,
+                                  }}
+                                />
+                              </Box>
+                              <Box
+                                component="button"
+                                type="button"
+                                onClick={handleOpenPuzzle}
+                                sx={{
+                                  p: 0,
+                                  border: "none",
+                                  borderRadius: 1.2,
+                                  background: "transparent",
+                                  cursor: "pointer",
+                                  overflow: "hidden",
+                                  boxShadow: "0 0 0 0 transparent",
+                                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                                  "&:hover": {
+                                    transform: "scale(1.01)",
+                                    boxShadow: "0 10px 18px rgba(0,0,0,0.16)",
+                                  },
+                                }}
+                              >
+                                <Box component="img" src="/game-2.png" alt="Open puzzle" sx={{ width: "100%", display: "block", borderRadius: 1.2 }} />
+                              </Box>
+                              <Box
+                                ref={coloringBookRef}
+                                component="button"
+                                type="button"
+                                onClick={handleOpenColoringBook}
+                                sx={{
+                                  p: "4px",
+                                  border: "none",
+                                  width: "100%",
+                                  borderRadius: 1.35,
+                                  background: highlightColoringBook ? "linear-gradient(135deg, #ffd76a 0%, #f4b93d 100%)" : "transparent",
+                                  boxShadow: highlightColoringBook
+                                    ? "0 0 0 3px rgba(244,185,61,0.55), 0 16px 28px rgba(244,185,61,0.28)"
+                                    : "0 0 0 0 transparent",
+                                  transform: highlightColoringBook ? "scale(1.02)" : "scale(1)",
+                                  transition: "transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease",
+                                  cursor: "pointer",
+                                }}
+                              >
+                                <Box component="img" src="/game-3.png" alt="Coloring Book" sx={{ width: "100%", display: "block", borderRadius: 1.2 }} />
+                              </Box>
                               <Box component="img" src="/game-4.png" alt="Game 4" sx={{ width: "100%", display: "block", borderRadius: 1.2 }} />
                               <Box component="img" src="/game-5.png" alt="Game 5" sx={{ width: "100%", display: "block", borderRadius: 1.2 }} />
                               <Box component="img" src="/game-6.png" alt="Game 6" sx={{ width: "100%", display: "block", borderRadius: 1.2 }} />
@@ -926,6 +1023,21 @@ export default function Kids() {
           </Stack>
         </Box>
       </Box>
+
+      <Puzzle
+        open={puzzleOpen}
+        onClose={handleClosePuzzle}
+        onNextGame={handleGoToColoringBook}
+        imageSources={["/IMAGE_07.avif", "/IMAGE_06.avif", "/IMAGE_02.avif"]}
+        title="Puzzle Challenge"
+      />
+
+      <ColoringBook
+        open={coloringBookOpen}
+        onClose={handleCloseColoringBook}
+        imageSources={["/IMAGE_09.avif", "/IMAGE_08.avif"]}
+        title="Coloring Book"
+      />
     </Box>
   );
 }
