@@ -48,9 +48,10 @@ const drawCoverageSegment = (context, fromPoint, toPoint, size) => {
 };
 
 export default function ColoringBook({ open, onClose, onNextGame, imageSrc, imageSources = [], title = "Coloring Book" }) {
+  const imageSourcesKey = imageSources.join("|");
   const availableImages = useMemo(
     () => (imageSources.length ? imageSources : [imageSrc].filter(Boolean)),
-    [imageSources, imageSrc]
+    [imageSourcesKey, imageSrc]
   );
   const [activeImage, setActiveImage] = useState(() => availableImages[0] || "");
   const [activeColor, setActiveColor] = useState(palette[0]);
@@ -227,7 +228,7 @@ export default function ColoringBook({ open, onClose, onNextGame, imageSrc, imag
   useLayoutEffect(() => {
     if (!open) return;
     resetBoard(getRandomImage(availableImages));
-  }, [open, availableImages]);
+  }, [open]);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -362,6 +363,8 @@ export default function ColoringBook({ open, onClose, onNextGame, imageSrc, imag
           position: "relative",
           width: "100%",
           maxWidth: { xs: "100%", md: 1040 },
+          minHeight: { xs: "auto", md: 700 },
+          maxHeight: { xs: "88vh", md: 700 },
           borderRadius: 4,
           overflow: "hidden",
           border: "2px solid rgba(255,255,255,0.35)",
@@ -371,8 +374,8 @@ export default function ColoringBook({ open, onClose, onNextGame, imageSrc, imag
       >
         <Box
           sx={{
-            px: { xs: 2, sm: 3 },
-            py: { xs: 1.5, sm: 2 },
+            px: { xs: 1.5, sm: 3 },
+            py: { xs: 1.1, sm: 2 },
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -392,8 +395,8 @@ export default function ColoringBook({ open, onClose, onNextGame, imageSrc, imag
                 textTransform: "none",
                 fontWeight: 800,
                 borderRadius: 99,
-                px: 2,
-                py: 0.7,
+                px: { xs: 1.5, sm: 2 },
+                py: { xs: 0.55, sm: 0.7 },
                 color: "#fff",
                 border: "1px solid rgba(255,255,255,0.5)",
                 backgroundColor: "rgba(255,255,255,0.14)",
@@ -405,8 +408,8 @@ export default function ColoringBook({ open, onClose, onNextGame, imageSrc, imag
               onClick={onClose}
               sx={{
                 minWidth: 0,
-                width: 42,
-                height: 42,
+                width: { xs: 38, sm: 42 },
+                height: { xs: 38, sm: 42 },
                 borderRadius: "50%",
                 color: "#fff",
                 border: "1px solid rgba(255,255,255,0.5)",
@@ -431,11 +434,13 @@ export default function ColoringBook({ open, onClose, onNextGame, imageSrc, imag
 
         <Box
           sx={{
-            p: { xs: 1.15, sm: 2.2, md: 3 },
+            p: { xs: 0.9, sm: 2.2, md: 3 },
             display: "grid",
             gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1.2fr) minmax(260px, 0.8fr)" },
-            gap: { xs: 1.2, sm: 2.2, md: 3 },
+            gap: { xs: 0.9, sm: 2.2, md: 3 },
             alignItems: "start",
+            alignContent: "start",
+            overflowY: "auto",
           }}
         >
           <Box
@@ -443,7 +448,7 @@ export default function ColoringBook({ open, onClose, onNextGame, imageSrc, imag
               width: "100%",
               maxWidth: { xs: "100%", md: 620 },
               mx: "auto",
-              p: "6px",
+              p: { xs: "5px", sm: "6px" },
               borderRadius: 3,
               background: "linear-gradient(180deg, rgba(151,200,255,0.98) 0%, rgba(92,153,230,0.98) 100%)",
               boxShadow: "0 12px 24px rgba(0,0,0,0.16)",
@@ -458,7 +463,7 @@ export default function ColoringBook({ open, onClose, onNextGame, imageSrc, imag
               sx={{
                 position: "relative",
                 width: "100%",
-                height: { xs: 320, sm: 420, md: 500 },
+                height: { xs: 272, sm: 420, md: 500 },
                 borderRadius: 2.5,
                 overflow: "hidden",
                 background: showColorPreview
@@ -499,20 +504,20 @@ export default function ColoringBook({ open, onClose, onNextGame, imageSrc, imag
             </Box>
           </Box>
 
-          <Stack spacing={2}>
+          <Stack spacing={{ xs: 1, sm: 2 }} sx={{ alignSelf: "start" }}>
             <Box
               sx={{
-                p: 2,
+                p: { xs: 1.1, sm: 2 },
                 borderRadius: 3,
                 backgroundColor: "#ffffff",
                 border: "1px solid rgba(13,43,69,0.12)",
                 boxShadow: "0 10px 18px rgba(13,43,69,0.08)",
               }}
             >
-              <Typography sx={{ color: "#123a57", fontWeight: 900, fontSize: { xs: "1rem", sm: "1.1rem" }, mb: 1.2 }}>
+              <Typography sx={{ color: "#123a57", fontWeight: 900, fontSize: { xs: "0.92rem", sm: "1.1rem" }, mb: 0.8 }}>
                 Choose a color
               </Typography>
-              <Box sx={{ display: "grid", gridTemplateColumns: "repeat(6, minmax(0, 1fr))", gap: { xs: 0.7, sm: 1.1 } }}>
+              <Box sx={{ display: "grid", gridTemplateColumns: "repeat(6, minmax(0, 1fr))", gap: { xs: 0.55, sm: 1.1 } }}>
                 {palette.map((color) => (
                   <Box
                     key={color}
@@ -539,8 +544,8 @@ export default function ColoringBook({ open, onClose, onNextGame, imageSrc, imag
 
             <Box
               sx={{
-                p: { xs: 1.6, sm: 1.8 },
-                minHeight: { xs: 84, sm: 90 },
+                p: { xs: 1.05, sm: 1.8 },
+                minHeight: { xs: 74, sm: 90 },
                 borderRadius: 3,
                 background: solved
                   ? "linear-gradient(180deg, rgba(218,248,223,0.95) 0%, rgba(191,240,200,0.95) 100%)"
@@ -557,19 +562,19 @@ export default function ColoringBook({ open, onClose, onNextGame, imageSrc, imag
               ) : (
                 <Box
                   sx={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-                    gap: { xs: 1, sm: 1.2 },
-                    alignItems: "start",
-                  }}
-                >
+                  display: "grid",
+                  gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+                  gap: { xs: 0.6, sm: 1.2 },
+                  alignItems: "start",
+                }}
+              >
                   {howToItems.map((item, index, items) => (
                     <Box
                       key={item.step}
                       sx={{
                         position: "relative",
                         textAlign: "center",
-                        minHeight: { xs: 94, sm: 104 },
+                        minHeight: { xs: 82, sm: 104 },
                         px: { xs: 0.3, sm: 0.5 },
                         opacity: visibleHowToSteps >= Number(item.step) ? 1 : 0,
                         transform:
@@ -582,7 +587,7 @@ export default function ColoringBook({ open, onClose, onNextGame, imageSrc, imag
                           width: { xs: 50, sm: 58 },
                           height: { xs: 50, sm: 58 },
                           mx: "auto",
-                          mb: 0.9,
+                          mb: { xs: 0.55, sm: 0.9 },
                           borderRadius: "50%",
                           display: "flex",
                           alignItems: "center",
@@ -601,7 +606,7 @@ export default function ColoringBook({ open, onClose, onNextGame, imageSrc, imag
                         sx={{
                           color: "#264b68",
                           lineHeight: 1.35,
-                          fontSize: { xs: "0.8rem", sm: "0.9rem" },
+                          fontSize: { xs: "0.72rem", sm: "0.9rem" },
                           fontWeight: 700,
                           maxWidth: 110,
                           mx: "auto",

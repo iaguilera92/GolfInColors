@@ -144,14 +144,20 @@ function Features() {
                     role="button"
                     tabIndex={0}
                     aria-label={`Select ${option.label}`}
-                    onClick={() => handleSelect(option)}
+                    onClick={() => {
+                      if (option.value === "shop") return;
+                      handleSelect(option);
+                    }}
                     onKeyDown={(e) => {
+                      if (option.value === "shop") return;
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
                         handleSelect(option);
                       }
                     }}
+                    aria-disabled={option.value === "shop"}
                     sx={{
+                      position: "relative",
                       borderRadius: 3,
                       backgroundColor: "#ffffff",
                       border:
@@ -163,8 +169,9 @@ function Features() {
                           ? `0 0 0 2px ${option.toneA}33, 0 10px 22px rgba(0,0,0,0.14)`
                           : "0 8px 18px rgba(0,0,0,0.12)",
                       overflow: "hidden",
-                      cursor: "pointer",
+                      cursor: option.value === "shop" ? "not-allowed" : "pointer",
                       transition: "all 0.2s ease",
+                      opacity: option.value === "shop" ? 0.82 : 1,
                     }}
                   >
                     <Box
@@ -179,6 +186,37 @@ function Features() {
                         background: option.value === "shop" ? "#fff" : "linear-gradient(180deg, #9fd8ff 0%, #cfeeff 45%, #eaf8ff 100%)",
                       }}
                     />
+
+                    {option.value === "shop" && (
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          inset: 0,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          p: 1,
+                          background: "linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(15,35,28,0.2) 100%)",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            px: 1.2,
+                            py: 0.45,
+                            borderRadius: 99,
+                            backgroundColor: "rgba(255,255,255,0.9)",
+                            border: "1px solid rgba(10,38,30,0.12)",
+                            color: "#4f5e58",
+                            fontWeight: 800,
+                            fontSize: { xs: "0.72rem", sm: "0.78rem" },
+                            letterSpacing: "0.04em",
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          Locked
+                        </Box>
+                      </Box>
+                    )}
                   </Box>
                 </motion.div>
 

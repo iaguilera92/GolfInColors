@@ -129,11 +129,16 @@ export default function Match({ open, onClose, title = "Match Game" }) {
       const slotId = dropTarget.getAttribute("data-match-slot");
       if (!slotId) return;
 
+      let wasPlaced = false;
       setPlacements((current) => {
         if (current[slotId]) return current;
+        wasPlaced = true;
         return { ...current, [slotId]: activeDrag.id };
       });
-      setAvailableCards((current) => current.filter((item) => item.id !== activeDrag.id));
+
+      if (wasPlaced) {
+        setAvailableCards((current) => current.filter((item) => item.id !== activeDrag.id));
+      }
     };
 
     window.addEventListener("pointermove", handlePointerMove);
@@ -183,8 +188,8 @@ export default function Match({ open, onClose, title = "Match Game" }) {
           position: "relative",
           width: "100%",
           maxWidth: { xs: "100%", md: 1040 },
-          minHeight: { xs: "min(92vh, 760px)", md: 700 },
-          maxHeight: { xs: "92vh", md: 700 },
+          minHeight: { xs: "auto", md: 700 },
+          maxHeight: { xs: "88vh", md: 700 },
           borderRadius: 4,
           overflow: "hidden",
           border: "2px solid rgba(255,255,255,0.35)",
@@ -194,8 +199,8 @@ export default function Match({ open, onClose, title = "Match Game" }) {
       >
         <Box
           sx={{
-            px: { xs: 2, sm: 3 },
-            py: { xs: 1.5, sm: 2 },
+            px: { xs: 1.5, sm: 3 },
+            py: { xs: 1.1, sm: 2 },
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -216,8 +221,8 @@ export default function Match({ open, onClose, title = "Match Game" }) {
               onPointerCancel={() => setShowHelp(false)}
               sx={{
                 minWidth: 0,
-                px: 1.6,
-                height: 42,
+                px: 1.35,
+                height: { xs: 38, sm: 42 },
                 borderRadius: 99,
                 color: "#fff",
                 fontWeight: 800,
@@ -233,8 +238,8 @@ export default function Match({ open, onClose, title = "Match Game" }) {
               onClick={onClose}
               sx={{
                 minWidth: 0,
-                width: 42,
-                height: 42,
+                width: { xs: 38, sm: 42 },
+                height: { xs: 38, sm: 42 },
                 borderRadius: "50%",
                 color: "#fff",
                 border: "1px solid rgba(255,255,255,0.5)",
@@ -259,22 +264,23 @@ export default function Match({ open, onClose, title = "Match Game" }) {
 
         <Box
           sx={{
-            p: { xs: 1.2, sm: 2.2, md: 3 },
+            p: { xs: 0.9, sm: 2.2, md: 3 },
             display: "grid",
             gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1.18fr) minmax(260px, 0.82fr)" },
-            gap: { xs: 1.2, sm: 2.2, md: 3 },
+            gap: { xs: 0.9, sm: 2.2, md: 3 },
             alignItems: "start",
             height: "100%",
+            alignContent: "start",
             overflowY: "auto",
           }}
         >
-          <Stack spacing={1.4}>
+          <Stack spacing={{ xs: 0.9, sm: 1.4 }}>
             <Box
               sx={{
                 width: "100%",
                 maxWidth: { xs: "100%", md: 620 },
                 mx: "auto",
-                p: "6px",
+                p: { xs: "5px", sm: "6px" },
                 borderRadius: 3,
                 background: "linear-gradient(180deg, rgba(151,200,255,0.98) 0%, rgba(92,153,230,0.98) 100%)",
                 boxShadow: "0 12px 24px rgba(0,0,0,0.16)",
@@ -284,10 +290,10 @@ export default function Match({ open, onClose, title = "Match Game" }) {
                 sx={{
                   backgroundColor: "#ffffff",
                   borderRadius: 2.5,
-                  p: { xs: 1.2, sm: 1.5 },
+                  p: { xs: 0.95, sm: 1.5 },
                   display: "grid",
                   gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-                  gap: 1.1,
+                  gap: { xs: 0.8, sm: 1.1 },
                 }}
               >
                 {matchItems.map((item) => {
@@ -301,15 +307,15 @@ export default function Match({ open, onClose, title = "Match Game" }) {
                       data-match-slot={item.id}
                       sx={{
                         p: { xs: 1.2, sm: 1.5 },
-                        minHeight: { xs: 118, sm: 136 },
+                        minHeight: { xs: 104, sm: 136 },
                         borderRadius: 2.2,
-                        border: isFilled ? "2px solid rgba(23,63,96,0.16)" : "2px dashed rgba(23,63,96,0.24)",
+                        border: isFilled ? "2px solid rgba(23,63,96,0.16)" : "2px dashed rgba(122,138,153,0.45)",
                         background: isFilled
                           ? "linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(240,247,252,0.98) 100%)"
-                          : "linear-gradient(180deg, rgba(248,251,255,0.98) 0%, rgba(236,244,250,0.98) 100%)",
+                          : "linear-gradient(180deg, rgba(244,246,248,0.98) 0%, rgba(229,233,237,0.98) 100%)",
                         boxShadow: isFilled
                           ? "0 10px 18px rgba(13,43,69,0.08)"
-                          : "inset 0 0 0 1px rgba(255,255,255,0.7)",
+                          : "inset 0 0 0 1px rgba(255,255,255,0.52)",
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
@@ -351,7 +357,7 @@ export default function Match({ open, onClose, title = "Match Game" }) {
                             height: { xs: 54, sm: 56 },
                             objectFit: "contain",
                             opacity: showHelp ? 0.22 : 0,
-                            filter: "grayscale(1)",
+                            filter: "grayscale(1) brightness(0.72)",
                             transition: "opacity 0.18s ease",
                           }}
                         />
@@ -359,12 +365,12 @@ export default function Match({ open, onClose, title = "Match Game" }) {
                         <item.Icon
                           sx={{
                             fontSize: { xs: 36, sm: 42 },
-                            color: showHelp ? "rgba(23,63,96,0.22)" : "transparent",
+                            color: showHelp ? "rgba(96,110,122,0.35)" : "transparent",
                             transition: "color 0.18s ease",
                           }}
                         />
                       )}
-                      <Typography sx={{ color: "#173f60", fontWeight: 800, fontSize: { xs: "0.82rem", sm: "0.92rem" } }}>
+                      <Typography sx={{ color: isFilled ? "#173f60" : "#6b7a86", fontWeight: 800, fontSize: { xs: "0.82rem", sm: "0.92rem" } }}>
                         {item.label}
                       </Typography>
                     </Box>
@@ -378,10 +384,10 @@ export default function Match({ open, onClose, title = "Match Game" }) {
                 width: "100%",
                 maxWidth: { xs: "100%", md: 620 },
                 mx: "auto",
-                p: "6px",
-                height: { xs: 272, sm: 308 },
-                minHeight: { xs: 272, sm: 308 },
-                maxHeight: { xs: 272, sm: 308 },
+                p: { xs: "5px", sm: "6px" },
+                height: { xs: 236, sm: 308 },
+                minHeight: { xs: 236, sm: 308 },
+                maxHeight: { xs: 236, sm: 308 },
                 flex: "0 0 auto",
                 borderRadius: 3,
                 background: "linear-gradient(180deg, rgba(151,200,255,0.98) 0%, rgba(92,153,230,0.98) 100%)",
@@ -392,14 +398,14 @@ export default function Match({ open, onClose, title = "Match Game" }) {
                 sx={{
                   backgroundColor: "#ffffff",
                   borderRadius: 2.5,
-                  p: { xs: 1.2, sm: 1.5 },
+                  p: { xs: 0.9, sm: 1.5 },
                   height: "100%",
                   minHeight: "100%",
                   maxHeight: "100%",
                   display: "grid",
                   gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
                   gridTemplateRows: "repeat(2, minmax(0, 1fr))",
-                  gap: 1.1,
+                  gap: { xs: 0.8, sm: 1.1 },
                 }}
               >
                 {visibleCards.map((item) => {
@@ -408,7 +414,7 @@ export default function Match({ open, onClose, title = "Match Game" }) {
                       <Box
                         key={item.id}
                         sx={{
-                          p: { xs: 1.05, sm: 1.25 },
+                          p: { xs: 0.8, sm: 1.25 },
                           height: "100%",
                           borderRadius: 2.2,
                           border: "2px dashed rgba(27,131,204,0.1)",
@@ -426,8 +432,8 @@ export default function Match({ open, onClose, title = "Match Game" }) {
                       component="button"
                       type="button"
                       onPointerDown={(event) => handleCardPointerDown(event, item)}
-                      sx={{
-                        p: { xs: 1.05, sm: 1.25 },
+                        sx={{
+                        p: { xs: 0.8, sm: 1.25 },
                         height: "100%",
                         borderRadius: 2.2,
                         border: isDragging ? `3px solid ${item.color}` : "2px solid rgba(27,131,204,0.14)",
@@ -457,6 +463,8 @@ export default function Match({ open, onClose, title = "Match Game" }) {
                           sx={{
                             width: { xs: 72, sm: 74 },
                             height: { xs: 72, sm: 74 },
+                            maxWidth: "100%",
+                            maxHeight: "100%",
                             objectFit: "contain",
                           }}
                         />
@@ -470,11 +478,11 @@ export default function Match({ open, onClose, title = "Match Game" }) {
             </Box>
           </Stack>
 
-          <Stack spacing={2}>
+          <Stack spacing={{ xs: 1.2, sm: 2 }} sx={{ alignSelf: "start", height: "auto" }}>
             <Box
               sx={{
-                p: { xs: 1.6, sm: 1.8 },
-                minHeight: { xs: 84, sm: 90 },
+                p: { xs: 1.1, sm: 1.8 },
+                minHeight: { xs: 74, sm: 90 },
                 borderRadius: 3,
                 background: "linear-gradient(180deg, rgba(232,245,255,0.96) 0%, rgba(210,235,252,0.96) 100%)",
                 border: "1px solid rgba(27,131,204,0.22)",
@@ -484,7 +492,7 @@ export default function Match({ open, onClose, title = "Match Game" }) {
                 sx={{
                   display: "grid",
                   gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-                  gap: { xs: 1, sm: 1.2 },
+                  gap: { xs: 0.6, sm: 1.2 },
                   alignItems: "start",
                 }}
               >
@@ -494,7 +502,7 @@ export default function Match({ open, onClose, title = "Match Game" }) {
                     sx={{
                       position: "relative",
                       textAlign: "center",
-                      minHeight: { xs: 94, sm: 104 },
+                      minHeight: { xs: 82, sm: 104 },
                       px: { xs: 0.3, sm: 0.5 },
                       opacity: visibleHowToSteps >= Number(item.step) ? 1 : 0,
                       transform:
@@ -507,7 +515,7 @@ export default function Match({ open, onClose, title = "Match Game" }) {
                         width: { xs: 50, sm: 58 },
                         height: { xs: 50, sm: 58 },
                         mx: "auto",
-                        mb: 0.9,
+                        mb: { xs: 0.55, sm: 0.9 },
                         borderRadius: "50%",
                         display: "flex",
                         alignItems: "center",
@@ -526,7 +534,7 @@ export default function Match({ open, onClose, title = "Match Game" }) {
                       sx={{
                         color: "#264b68",
                         lineHeight: 1.35,
-                        fontSize: { xs: "0.8rem", sm: "0.9rem" },
+                        fontSize: { xs: "0.72rem", sm: "0.9rem" },
                         fontWeight: 700,
                         maxWidth: 110,
                         mx: "auto",

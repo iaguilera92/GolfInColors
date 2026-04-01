@@ -125,8 +125,8 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
           position: "relative",
           width: "100%",
           maxWidth: { xs: "100%", md: 980 },
-          minHeight: { xs: "min(92vh, 760px)", md: 680 },
-          maxHeight: { xs: "92vh", md: 680 },
+          minHeight: { xs: "auto", md: 680 },
+          maxHeight: { xs: "88vh", md: 680 },
           borderRadius: 4,
           overflow: "hidden",
           border: "2px solid rgba(255,255,255,0.35)",
@@ -136,8 +136,8 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
       >
         <Box
           sx={{
-            px: { xs: 2, sm: 3 },
-            py: { xs: 1.5, sm: 2 },
+            px: { xs: 1.5, sm: 3 },
+            py: { xs: 1.1, sm: 2 },
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -154,8 +154,8 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
             onClick={onClose}
             sx={{
               minWidth: 0,
-              width: 42,
-              height: 42,
+              width: { xs: 38, sm: 42 },
+              height: { xs: 38, sm: 42 },
               borderRadius: "50%",
               color: "#fff",
               border: "1px solid rgba(255,255,255,0.5)",
@@ -179,12 +179,13 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
 
         <Box
           sx={{
-            p: { xs: 1.2, sm: 2.2, md: 3 },
+            p: { xs: 0.9, sm: 2.2, md: 3 },
             display: "grid",
             gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1.15fr) minmax(260px, 0.85fr)" },
-            gap: { xs: 1.2, sm: 2.2, md: 3 },
+            gap: { xs: 0.9, sm: 2.2, md: 3 },
             alignItems: "start",
             height: "100%",
+            alignContent: "start",
             overflowY: "auto",
           }}
         >
@@ -204,8 +205,8 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
               sx={{
                 backgroundColor: "#ffffff",
                 borderRadius: 2.5,
-                p: { xs: 2, sm: 2.6 },
-                minHeight: { xs: 300, sm: 360 },
+                p: { xs: 1.35, sm: 2.6 },
+                minHeight: { xs: 255, sm: 360 },
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
@@ -217,15 +218,15 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                     display: "inline-flex",
                     alignItems: "center",
                     px: 1.25,
-                    py: 0.45,
+                    py: 0.35,
                     borderRadius: 99,
                     backgroundColor: "rgba(27,131,204,0.1)",
                     color: "#1B83CC",
                     fontWeight: 900,
-                    fontSize: { xs: "0.8rem", sm: "0.86rem" },
+                    fontSize: { xs: "0.72rem", sm: "0.86rem" },
                     letterSpacing: "0.05em",
                     textTransform: "uppercase",
-                    mb: 1.5,
+                    mb: 1,
                   }}
                 >
                   Question {currentQuestion + 1} of {questions.length}
@@ -235,9 +236,9 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                   sx={{
                     color: "#173f60",
                     fontWeight: 900,
-                    fontSize: { xs: "1.2rem", sm: "1.55rem" },
+                    fontSize: { xs: "1.02rem", sm: "1.55rem" },
                     lineHeight: 1.22,
-                    mb: 2,
+                    mb: 1.25,
                   }}
                 >
                   {activeQuestion.question}
@@ -248,7 +249,7 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                 sx={{
                   display: "grid",
                   gridTemplateColumns: { xs: "repeat(2, minmax(0, 1fr))", sm: "1fr" },
-                  gap: 1.1,
+                  gap: { xs: 0.8, sm: 1.1 },
                 }}
               >
                 {activeQuestion.answers.map((answer, answerIndex) => {
@@ -266,9 +267,9 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                         justifyContent: "flex-start",
                         textTransform: "none",
                         textAlign: "left",
-                        px: { xs: 1.4, sm: 1.8 },
-                        py: { xs: 1.25, sm: 1.15 },
-                        minHeight: { xs: 72, sm: "auto" },
+                        px: { xs: 1.05, sm: 1.8 },
+                        py: { xs: 0.9, sm: 1.15 },
+                        minHeight: { xs: 58, sm: "auto" },
                         alignItems: "flex-start",
                         borderRadius: 2.2,
                         color: isCorrectSelected || isWrongSelected ? "#ffffff" : "#173f60",
@@ -288,8 +289,8 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                             ? "0 10px 18px rgba(217,76,63,0.18)"
                           : "0 6px 14px rgba(13,43,69,0.06)",
                         fontWeight: 800,
-                        fontSize: { xs: "0.92rem", sm: "1rem" },
-                        lineHeight: 1.35,
+                        fontSize: { xs: "0.8rem", sm: "1rem" },
+                        lineHeight: 1.24,
                         "&:hover": {
                           background: isCorrectSelected
                             ? "linear-gradient(135deg, #289445 0%, #1f7938 100%)"
@@ -380,10 +381,10 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
             )}
           </Box>
 
-          <Stack spacing={2}>
+          <Stack spacing={{ xs: 1.1, sm: 2 }} sx={{ alignSelf: "start" }}>
             <Box
               sx={{
-                p: 2,
+                p: { xs: 1.1, sm: 2 },
                 borderRadius: 3.2,
                 background:
                   "linear-gradient(180deg, rgba(240,248,255,0.98) 0%, rgba(224,241,252,0.98) 100%)",
@@ -391,10 +392,10 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                 boxShadow: "0 12px 20px rgba(13,43,69,0.08)",
               }}
             >
-              <Typography sx={{ color: "#123a57", fontWeight: 900, fontSize: { xs: "1rem", sm: "1.1rem" }, mb: 0.7 }}>
+              <Typography sx={{ color: "#123a57", fontWeight: 900, fontSize: { xs: "0.92rem", sm: "1.1rem" }, mb: 0.5 }}>
                 Progress
               </Typography>
-              <Typography sx={{ color: "#4b6780", fontWeight: 700, fontSize: { xs: "0.82rem", sm: "0.88rem" }, mb: 1.4 }}>
+              <Typography sx={{ color: "#4b6780", fontWeight: 700, fontSize: { xs: "0.72rem", sm: "0.88rem" }, mb: 0.8 }}>
                 Keep going, one question at a time.
               </Typography>
 
@@ -402,7 +403,7 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                 sx={{
                   display: "grid",
                   gridTemplateColumns: { xs: "1fr", md: "repeat(4, minmax(0, 1fr))" },
-                  gap: 1,
+                  gap: { xs: 0.75, sm: 1 },
                 }}
               >
                 {questions.map((item, index) => {
@@ -415,7 +416,7 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                     <Box
                       key={item.question}
                       sx={{
-                        p: { xs: 0.65, sm: 1.1 },
+                        p: { xs: 0.55, sm: 1.1 },
                         borderRadius: 2.2,
                         border: isCurrent
                           ? `2px solid ${theme.activeBorder}`
@@ -441,19 +442,19 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                         alignItems: "center",
                         justifyContent: "space-between",
                         gap: 0.75,
-                        minHeight: { xs: 52, sm: "auto" },
+                        minHeight: { xs: 44, sm: "auto" },
                       }}
                     >
                       <Box
                         sx={{
-                          width: { xs: 24, sm: 32 },
-                          height: { xs: 24, sm: 32 },
+                          width: { xs: 22, sm: 32 },
+                          height: { xs: 22, sm: 32 },
                           borderRadius: "50%",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
                           fontWeight: 900,
-                          fontSize: { xs: "0.68rem", sm: "0.86rem" },
+                          fontSize: { xs: "0.62rem", sm: "0.86rem" },
                           flexShrink: 0,
                           color: isCorrect || isWrong ? "#ffffff" : !answered && !isCurrent ? "#5d7284" : "#173f60",
                           backgroundColor: isCorrect
@@ -490,7 +491,7 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                           sx={{
                             color: !answered && !isCurrent ? "#5d7284" : "#173f60",
                             fontWeight: 800,
-                            fontSize: { xs: "0.66rem", sm: "0.86rem" },
+                            fontSize: { xs: "0.58rem", sm: "0.86rem" },
                             lineHeight: 1.1,
                           }}
                         >
