@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Box, Button, Paper, Stack, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -27,19 +27,45 @@ const getRandomImage = (imageSources) => {
   return imageSources[randomIndex];
 };
 
+const howToItems = [
+  {
+    step: "1",
+    text: "Pick\na piece",
+    circleBg: "linear-gradient(135deg, #1B83CC 0%, #0f6dae 100%)",
+    shadow: "0 12px 20px rgba(27,131,204,0.24)",
+  },
+  {
+    step: "2",
+    text: "Drop on\nanother",
+    circleBg: "linear-gradient(135deg, #2ea44f 0%, #24883f 100%)",
+    shadow: "0 12px 20px rgba(46,164,79,0.24)",
+  },
+  {
+    step: "3",
+    text: "Match the\nimage",
+    circleBg: "linear-gradient(135deg, #f28b30 0%, #e07215 100%)",
+    shadow: "0 12px 20px rgba(242,139,48,0.24)",
+  },
+];
+
 export default function Puzzle({ open, onClose, onNextGame, imageSrc, imageSources = [], title = "Puzzle Challenge" }) {
-  const availableImages = imageSources.length ? imageSources : [imageSrc].filter(Boolean);
+  const availableImages = useMemo(
+    () => (imageSources.length ? imageSources : [imageSrc].filter(Boolean)),
+    [imageSources, imageSrc]
+  );
   const [tiles, setTiles] = useState(() => shuffleTiles());
   const [solved, setSolved] = useState(false);
   const [draggingIndex, setDraggingIndex] = useState(null);
   const [dragPointer, setDragPointer] = useState(null);
   const [referenceOpen, setReferenceOpen] = useState(false);
-  const [activeImage, setActiveImage] = useState(() => getRandomImage(availableImages));
+  const [activeImage, setActiveImage] = useState(() => availableImages[0] || "");
   const [visibleHowToSteps, setVisibleHowToSteps] = useState(0);
   const dragStateRef = useRef(null);
   const howToTimersRef = useRef([]);
+  const dragFrameRef = useRef(null);
+  const latestDragPointerRef = useRef(null);
 
-  const startHowToSequence = () => {
+  const startHowToSequence = useCallback(() => {
     howToTimersRef.current.forEach((timer) => window.clearTimeout(timer));
     howToTimersRef.current = [];
     setVisibleHowToSteps(0);
@@ -50,11 +76,9 @@ export default function Puzzle({ open, onClose, onNextGame, imageSrc, imageSourc
       }, 180 + index * 260);
       howToTimersRef.current.push(timer);
     });
-  };
+  }, []);
 
-  useEffect(() => {
-    if (!open) return;
-
+  const resetPuzzle = useCallback(() => {
     setTiles(shuffleTiles());
     setSolved(false);
     setDraggingIndex(null);
@@ -63,19 +87,39 @@ export default function Puzzle({ open, onClose, onNextGame, imageSrc, imageSourc
     setActiveImage(getRandomImage(availableImages));
     startHowToSequence();
     dragStateRef.current = null;
-  }, [open, availableImages]);
+    latestDragPointerRef.current = null;
+    if (dragFrameRef.current) {
+      window.cancelAnimationFrame(dragFrameRef.current);
+      dragFrameRef.current = null;
+    }
+  }, [availableImages, startHowToSequence]);
+
+  useLayoutEffect(() => {
+    if (!open) return;
+    resetPuzzle();
+  }, [open, resetPuzzle]);
 
   useEffect(() => () => {
     howToTimersRef.current.forEach((timer) => window.clearTimeout(timer));
+    if (dragFrameRef.current) {
+      window.cancelAnimationFrame(dragFrameRef.current);
+    }
   }, []);
 
   useEffect(() => {
     if (draggingIndex === null) return;
 
     const handlePointerMove = (event) => {
-      setDragPointer({
+      latestDragPointerRef.current = {
         x: event.clientX,
         y: event.clientY,
+      };
+
+      if (dragFrameRef.current) return;
+
+      dragFrameRef.current = window.requestAnimationFrame(() => {
+        setDragPointer(latestDragPointerRef.current);
+        dragFrameRef.current = null;
       });
     };
 
@@ -84,6 +128,12 @@ export default function Puzzle({ open, onClose, onNextGame, imageSrc, imageSourc
       dragStateRef.current = null;
       setDragPointer(null);
       setDraggingIndex(null);
+      latestDragPointerRef.current = null;
+
+      if (dragFrameRef.current) {
+        window.cancelAnimationFrame(dragFrameRef.current);
+        dragFrameRef.current = null;
+      }
 
       if (!activeDrag || solved) return;
 
@@ -114,14 +164,7 @@ export default function Puzzle({ open, onClose, onNextGame, imageSrc, imageSourc
   if (!open) return null;
 
   const handleShuffle = () => {
-    setTiles(shuffleTiles());
-    setSolved(false);
-    setDraggingIndex(null);
-    setDragPointer(null);
-    setReferenceOpen(false);
-    setActiveImage(getRandomImage(availableImages));
-    startHowToSequence();
-    dragStateRef.current = null;
+    resetPuzzle();
   };
 
   const handleTilePointerDown = (event, tileIndex) => {
@@ -162,6 +205,8 @@ export default function Puzzle({ open, onClose, onNextGame, imageSrc, imageSourc
           position: "relative",
           width: "100%",
           maxWidth: { xs: "100%", md: 1040 },
+          minHeight: { xs: "min(92vh, 760px)", md: 720 },
+          maxHeight: { xs: "92vh", md: 720 },
           borderRadius: 4,
           overflow: "hidden",
           border: "2px solid rgba(255,255,255,0.35)",
@@ -238,6 +283,8 @@ export default function Puzzle({ open, onClose, onNextGame, imageSrc, imageSourc
             gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1.2fr) minmax(260px, 0.8fr)" },
             gap: { xs: 1.2, sm: 2.2, md: 3 },
             alignItems: "start",
+            height: "100%",
+            overflowY: "auto",
           }}
         >
           <Box
@@ -345,12 +392,14 @@ export default function Puzzle({ open, onClose, onNextGame, imageSrc, imageSourc
                   component="img"
                   src={activeImage}
                   alt="Puzzle reference"
-                  sx={{
-                    mt: 0.4,
-                    width: "100%",
-                    display: "block",
-                    borderRadius: 2,
-                    border: "2px solid rgba(17,81,138,0.14)",
+                    sx={{
+                      mt: 0.4,
+                      width: "100%",
+                    maxHeight: { xs: 190, sm: 250 },
+                      display: "block",
+                      borderRadius: 2,
+                      border: "2px solid rgba(17,81,138,0.14)",
+                    objectFit: "contain",
                   }}
                 />
               )}
@@ -363,10 +412,10 @@ export default function Puzzle({ open, onClose, onNextGame, imageSrc, imageSourc
                 borderRadius: 3,
                 background: solved
                   ? "linear-gradient(180deg, rgba(218,248,223,0.95) 0%, rgba(191,240,200,0.95) 100%)"
-                  : "linear-gradient(180deg, rgba(255,245,214,0.95) 0%, rgba(255,233,171,0.95) 100%)",
+                  : "linear-gradient(180deg, rgba(232,245,255,0.96) 0%, rgba(210,235,252,0.96) 100%)",
                 border: solved
                   ? "1px solid rgba(46,164,79,0.32)"
-                  : "1px solid rgba(242,139,48,0.3)",
+                  : "1px solid rgba(27,131,204,0.22)",
               }}
             >
               {solved ? (
@@ -382,26 +431,7 @@ export default function Puzzle({ open, onClose, onNextGame, imageSrc, imageSourc
                     alignItems: "start",
                   }}
                 >
-                  {[
-                    {
-                      step: "1",
-                      text: "Pick\na piece",
-                      circleBg: "linear-gradient(135deg, #1B83CC 0%, #0f6dae 100%)",
-                      shadow: "0 12px 20px rgba(27,131,204,0.24)",
-                    },
-                    {
-                      step: "2",
-                      text: "Drop on\nanother",
-                      circleBg: "linear-gradient(135deg, #2ea44f 0%, #24883f 100%)",
-                      shadow: "0 12px 20px rgba(46,164,79,0.24)",
-                    },
-                    {
-                      step: "3",
-                      text: "Match the\nimage",
-                      circleBg: "linear-gradient(135deg, #f28b30 0%, #e07215 100%)",
-                      shadow: "0 12px 20px rgba(242,139,48,0.24)",
-                    },
-                  ].map((item, index, items) => (
+                  {howToItems.map((item, index, items) => (
                     <Box
                       key={item.step}
                       sx={{

@@ -61,6 +61,71 @@ function App() {
     window.addEventListener("kids-book-fullscreen", handleKidsBookFullscreen);
     return () => window.removeEventListener("kids-book-fullscreen", handleKidsBookFullscreen);
   }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const clearClientCaches = async () => {
+      try {
+        if ("caches" in window) {
+          const cacheNames = await caches.keys();
+          await Promise.all(cacheNames.map((name) => caches.delete(name)));
+        }
+
+        if ("serviceWorker" in navigator) {
+          const registrations = await navigator.serviceWorker.getRegistrations();
+          await Promise.all(registrations.map((registration) => registration.unregister()));
+        }
+      } catch (error) {
+        console.warn("Error clearing client cache:", error);
+      }
+    };
+
+    const checkVersion = async () => {
+      try {
+        const response = await fetch(`/version.json?t=${Date.now()}`, {
+          cache: "no-store",
+          headers: {
+            "Cache-Control": "no-cache",
+            Pragma: "no-cache",
+          },
+        });
+
+        if (!response.ok) return;
+
+        const data = await response.json();
+        const nextVersion = data?.version;
+        if (!nextVersion || cancelled) return;
+
+        const currentVersion = localStorage.getItem("app-version");
+
+        if (!currentVersion) {
+          localStorage.setItem("app-version", nextVersion);
+          return;
+        }
+
+        if (currentVersion !== nextVersion) {
+          setSnackbarVersion({ open: true, version: nextVersion });
+          await clearClientCaches();
+          localStorage.setItem("app-version", nextVersion);
+
+          window.setTimeout(() => {
+            window.location.replace(`/?v=${encodeURIComponent(nextVersion)}`);
+          }, 900);
+        }
+      } catch (error) {
+        console.warn("Error checking app version:", error);
+      }
+    };
+
+    checkVersion();
+    const intervalId = window.setInterval(checkVersion, 60000);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(intervalId);
+    };
+  }, []);
   //GOOGLE ANALYTICS
   useEffect(() => {
     initGoogleAnalytics(); // solo una vez

@@ -1,4 +1,5 @@
-﻿import { Box, Typography, Grid, Container, useTheme, useMediaQuery, Card, CardContent, Collapse } from "@mui/material";
+import { Box, Typography, Grid, Container, useTheme, useMediaQuery, Card, CardContent, Collapse } from "@mui/material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
@@ -50,7 +51,7 @@ const Nosotros = () => {
         backgroundPosition: "top left",
       }}
     >
-      {/* Tï¿½tulo */}
+      {/* T�tulo */}
       <Box textAlign="center" mb={4}>
         <Typography
           variant={isMobile ? "h5" : "h5"}
@@ -91,7 +92,7 @@ const Nosotros = () => {
 
 
 
-      {/* Primera fila con animaciï¿½n */}
+      {/* Primera fila con animaci�n */}
       <Box maxWidth="1200px" mx="auto">
         <Grid container spacing={3} alignItems="center">
 
@@ -109,17 +110,17 @@ const Nosotros = () => {
                     border: '1px solid rgba(61,95,79,0.14)',
                     borderTop: '5px solid #f0bf67',
                     boxShadow: '0 14px 26px rgba(0,0,0,0.12)',
-                    p: { xs: 2, sm: 2.5, md: 3 }, // padding responsivo mï¿½s compacto
+                    p: { xs: 2, sm: 2.5, md: 3 }, // padding responsivo m�s compacto
                   }}
                 >
                   <CardContent>
-                    {/* Tï¿½tulo */}                    {/* Pï¿½rrafo 1 */}
+                    {/* T�tulo */}                    {/* P�rrafo 1 */}
                     <Typography
                       variant="body2"
                       sx={{
                         color: 'black',
                         textAlign: 'justify',
-                        mb: 1.5, // margen mï¿½s pequeï¿½o
+                        mb: 1.5, // margen m�s peque�o
                         fontSize: { xs: '0.875rem', sm: '0.95rem', md: '1rem' },
                         lineHeight: 1.5,
                       }}
@@ -127,7 +128,7 @@ const Nosotros = () => {
                       Golf in Colors was created by two partners who have experienced every stage of the game, from youth golf to high-level competition. Along the way, they noticed a challenging reality: many children are introduced to golf, but only a few continue, compete, or make it a lasting part of their lives. They realized that the first experiences children have with golf play a critical role in shaping their relationship with it.
                     </Typography>
 
-                    {/* Pï¿½rrafo 2 */}
+                    {/* P�rrafo 2 */}
                     <Typography
                       variant="body2"
                       sx={{
@@ -141,7 +142,7 @@ const Nosotros = () => {
                       Golf in Colors was created to make those early experiences more engaging, positive, and meaningful by combining creativity, storytelling, and simple skill development. Our approach goes beyond the lesson itself. Golf in Colors connects the learning that happens on the course with meaningful moments at home, transforming golf into a shared family experience.
                     </Typography>
 
-                    {/* Pï¿½rrafo 3 */}
+                    {/* P�rrafo 3 */}
                     <Typography
                       variant="body2"
                       sx={{
@@ -266,10 +267,10 @@ const Nosotros = () => {
           </motion.div>
         </Box>
       </Box>
-      {/* Segunda fila con animaciï¿½n */}
+      {/* Segunda fila con animaci�n */}
       <Box maxWidth="1200px" mx="auto" mt={2}>
         <Grid container spacing={3} alignItems="flex-start">
-          {/* Imagen a la izquierda con animaciï¿½n */}
+          {/* Imagen a la izquierda con animaci�n */}
           <Grid item xs={12} md={6}>
             <motion.div
               initial={{ opacity: 0, x: -60 }}
@@ -295,7 +296,7 @@ const Nosotros = () => {
             </motion.div>
           </Grid>
 
-          {/* Mission + Vision a la derecha con animaciï¿½n */}
+          {/* Mission + Vision a la derecha con animaci�n */}
           <Grid item xs={12} md={6}>
             <Box px={{ xs: 2, sm: 0 }}>
 
@@ -364,8 +365,8 @@ const Nosotros = () => {
         </Typography>
         <Grid container spacing={0} justifyContent="center">
           {[
-            { key: "sergio", img: "sergio.jpeg", name: "Sergio Murtinho" },
             { key: "anika", img: "anika.jpeg", name: "Anika Veintemilla" },
+            { key: "sergio", img: "sergio.jpeg", name: "Sergio Murtinho" },
           ].map((coach, index) => (
             <Grid
               item
@@ -381,9 +382,29 @@ const Nosotros = () => {
                   borderRadius: 6,
                   overflow: "hidden",
                   transition: "all 0.3s ease",
-                  border: "1px solid rgba(255,255,255,0.62)",
+                  border: activeFounder === coach.key
+                    ? "1px solid rgba(255,255,255,0.95)"
+                    : "1px solid rgba(255,255,255,0.62)",
                   backgroundColor: "transparent",
-                  boxShadow: "0 8px 16px rgba(0,0,0,0.22)",
+                  boxShadow: activeFounder === coach.key
+                    ? "0 0 0 3px rgba(217,164,65,0.72), 0 0 0 6px rgba(247,228,164,0.42), 0 12px 24px rgba(122,84,15,0.28)"
+                    : "0 8px 16px rgba(0,0,0,0.22)",
+                  position: "relative",
+                  "&::before": activeFounder === coach.key
+                    ? {
+                        content: '""',
+                        position: "absolute",
+                        inset: -3,
+                        borderRadius: "inherit",
+                        padding: "3px",
+                        background: "linear-gradient(135deg, #f8d778 0%, #d9a441 45%, #f7e4a4 100%)",
+                        WebkitMask:
+                          "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                        WebkitMaskComposite: "xor",
+                        maskComposite: "exclude",
+                        pointerEvents: "none",
+                      }
+                    : {},
                   "&:hover": {
                     transform: "scale(1.08)",
                     borderColor: "rgba(255,255,255,1)",
@@ -426,39 +447,38 @@ const Nosotros = () => {
               {(coach.key === "anika" || coach.key === "sergio") && (
                 <Box
                   sx={{
-                    ...(activeFounder === coach.key && {
-                      transform: "translateY(-1px)",
-                    }),
-                    mt: 0.56,
+                    mt: 0.7,
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: 0.58,
-                    px: 1.1,
-                    py: 0.24,
+                    gap: 0.6,
+                    px: 1,
+                    py: 0.3,
                     borderRadius: "999px",
-                    border:
-                      activeFounder === coach.key
-                        ? "1px solid rgba(31,109,86,0.9)"
-                        : "1px solid rgba(31,109,86,0.42)",
-                    background:
-                      activeFounder === coach.key
-                        ? "linear-gradient(135deg, rgba(47,191,113,0.38), rgba(104,216,154,0.28))"
-                        : "linear-gradient(135deg, rgba(47,191,113,0.22), rgba(104,216,154,0.14))",
-                    boxShadow:
-                      activeFounder === coach.key
-                        ? "0 6px 14px rgba(31,109,86,0.24)"
-                        : "0 4px 10px rgba(31,109,86,0.12)",
+                    border: activeFounder === coach.key
+                      ? "1px solid rgba(31,109,86,0.55)"
+                      : "1px solid rgba(31,109,86,0.3)",
+                    backgroundColor: activeFounder === coach.key
+                      ? "rgba(31,109,86,0.12)"
+                      : "rgba(255,255,255,0.72)",
+                    boxShadow: activeFounder === coach.key
+                      ? "0 6px 14px rgba(31,109,86,0.12)"
+                      : "0 4px 10px rgba(31,109,86,0.06)",
                     transition: "all 0.2s ease",
+                    "&:hover": {
+                      border: "1px solid rgba(31,109,86,0.45)",
+                      backgroundColor: activeFounder === coach.key
+                        ? "rgba(31,109,86,0.14)"
+                        : "rgba(240,249,245,0.95)",
+                    },
                   }}
                 >
                   <Typography
                     sx={{
                       color: activeFounder === coach.key ? "#0f4e3d" : "#1f6d56",
-                      fontWeight: 800,
-                      fontSize: { xs: "0.76rem", sm: "0.82rem" },
+                      fontWeight: 700,
+                      fontSize: { xs: "0.82rem", sm: "0.9rem" },
                       lineHeight: 1.1,
-                      letterSpacing: "0.02em",
-                      textTransform: "uppercase",
+                      letterSpacing: "0.01em",
                     }}
                   >
                     Read more
@@ -466,15 +486,16 @@ const Nosotros = () => {
                   <Box
                     component="span"
                     sx={{
-                      color: activeFounder === coach.key ? "#0f4e3d" : "#1f6d56",
-                      fontWeight: 900,
-                      fontSize: "0.78rem",
-                      lineHeight: 1,
                       display: "inline-flex",
                       alignItems: "center",
+                      justifyContent: "center",
+                      color: activeFounder === coach.key ? "#0f4e3d" : "#1f6d56",
+                      lineHeight: 1,
+                      transform: activeFounder === coach.key ? "translateY(-0.5px) rotate(180deg)" : "translateY(0) rotate(0deg)",
+                      transition: "transform 0.22s ease, color 0.2s ease",
                     }}
                   >
-                    {activeFounder === coach.key ? "v" : ">"}
+                    <KeyboardArrowDownIcon sx={{ fontSize: 18 }} />
                   </Box>
                 </Box>
               )}
@@ -503,8 +524,35 @@ const Nosotros = () => {
                 <Typography sx={{ color: "#163d32", fontWeight: 800, mb: 0.35 }}>
                   Anika Veintemilla
                 </Typography>
-                <Typography sx={{ color: "#224d3f", fontWeight: 700, mb: 1.2 }}>
-                  Co-Founder & CEO
+                <Typography
+                  component="div"
+                  sx={{
+                    color: "#224d3f",
+                    fontWeight: 700,
+                    mb: 1.2,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 0.9,
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <Box component="span">Co-Founder &amp; CEO</Box>
+                  <Box
+                    component="span"
+                    sx={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      px: 0.85,
+                      py: 0.14,
+                      borderRadius: "999px",
+                      border: "1px solid rgba(31,109,86,0.28)",
+                      backgroundColor: "rgba(31,109,86,0.08)",
+                      color: "#1f6d56",
+                      fontSize: "0.92em",
+                    }}
+                  >
+                    Golf in Colors
+                  </Box>
                 </Typography>
                 <Typography variant="body2" sx={{ color: "#1c1c1c", mb: 1.1, textAlign: "justify" }}>
                   Anika Veintemilla has a lifelong connection to the game of golf, built through years of competitive play and international representation. A former collegiate golfer, she competed for four years at Baylor University and one year at Florida International University (FIU) and represented the Ecuadorian Golf Federation in numerous international competitions, including South American Championships, The British Amateur, and the U.S. Mid-Amateur Championship. She also represented Ecuador at the Pan American Games (2023) and the World Amateur Team Championship (2016).
@@ -524,8 +572,35 @@ const Nosotros = () => {
                 <Typography sx={{ color: "#163d32", fontWeight: 800, mb: 0.35 }}>
                   Sergio Murtinho
                 </Typography>
-                <Typography sx={{ color: "#224d3f", fontWeight: 700, mb: 1.2 }}>
-                  Co-Founder, Golf in Colors
+                <Typography
+                  component="div"
+                  sx={{
+                    color: "#224d3f",
+                    fontWeight: 700,
+                    mb: 1.2,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 0.9,
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <Box component="span">Co-Founder &amp; CEO</Box>
+                  <Box
+                    component="span"
+                    sx={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      px: 0.85,
+                      py: 0.14,
+                      borderRadius: "999px",
+                      border: "1px solid rgba(31,109,86,0.28)",
+                      backgroundColor: "rgba(31,109,86,0.08)",
+                      color: "#1f6d56",
+                      fontSize: "0.92em",
+                    }}
+                  >
+                    Golf in Colors
+                  </Box>
                 </Typography>
                 <Typography variant="body2" sx={{ color: "#1c1c1c", mb: 1.1, textAlign: "justify" }}>
                   Sergio Murtinho has dedicated much of his life to the game of golf as a player, coach, and manager. Through years of competitive play and coaching experience, he has developed a deep understanding of the game and a passion for helping others improve while truly enjoying the sport.
@@ -551,6 +626,8 @@ const Nosotros = () => {
 };
 
 export default Nosotros;
+
+
 
 
 

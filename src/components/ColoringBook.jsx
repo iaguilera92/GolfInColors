@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Box, Button, Paper, Stack, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -48,8 +48,11 @@ const drawCoverageSegment = (context, fromPoint, toPoint, size) => {
 };
 
 export default function ColoringBook({ open, onClose, onNextGame, imageSrc, imageSources = [], title = "Coloring Book" }) {
-  const availableImages = imageSources.length ? imageSources : [imageSrc].filter(Boolean);
-  const [activeImage, setActiveImage] = useState(() => getRandomImage(availableImages));
+  const availableImages = useMemo(
+    () => (imageSources.length ? imageSources : [imageSrc].filter(Boolean)),
+    [imageSources, imageSrc]
+  );
+  const [activeImage, setActiveImage] = useState(() => availableImages[0] || "");
   const [activeColor, setActiveColor] = useState(palette[0]);
   const [visibleHowToSteps, setVisibleHowToSteps] = useState(0);
   const [solved, setSolved] = useState(false);
@@ -221,7 +224,7 @@ export default function ColoringBook({ open, onClose, onNextGame, imageSrc, imag
     }, 30);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!open) return;
     resetBoard(getRandomImage(availableImages));
   }, [open, availableImages]);
@@ -541,10 +544,10 @@ export default function ColoringBook({ open, onClose, onNextGame, imageSrc, imag
                 borderRadius: 3,
                 background: solved
                   ? "linear-gradient(180deg, rgba(218,248,223,0.95) 0%, rgba(191,240,200,0.95) 100%)"
-                  : "linear-gradient(180deg, rgba(255,245,214,0.95) 0%, rgba(255,233,171,0.95) 100%)",
+                  : "linear-gradient(180deg, rgba(232,245,255,0.96) 0%, rgba(210,235,252,0.96) 100%)",
                 border: solved
                   ? "1px solid rgba(46,164,79,0.32)"
-                  : "1px solid rgba(242,139,48,0.3)",
+                  : "1px solid rgba(27,131,204,0.22)",
               }}
             >
               {solved ? (

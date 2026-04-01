@@ -80,8 +80,8 @@ const menuItems = [
   { name: "Home", icon: <Home /> }, //{ name: "Catalog", icon: <ViewCarouselIcon /> },
   { name: "About Us", icon: <GroupsIcon /> },
   { name: "Contact", icon: <Mail /> },
-  { name: "Games", icon: <SchoolIcon />, disabled: true },
-  { name: "Shop", icon: <StorefrontRoundedIcon />, highlight: true },
+  { name: "Games", icon: <SchoolIcon /> },
+  { name: "Shop", icon: <StorefrontRoundedIcon />, highlight: true, disabled: true },
 ];
 
 function Navbar({ contactoRef, informationsRef, videoReady }) {
@@ -148,6 +148,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
         location.pathname !== "/" ? navigate("/") : scrollToTop(),
       Home: () =>
         location.pathname !== "/" ? navigate("/") : scrollToTop(),
+      Games: () => navigate("/kids", { state: { initialMenu: "Games" } }),
       Shop: goToCatalogo,
 
       Servicios: () => navigate("/servicios"),
