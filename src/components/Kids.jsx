@@ -62,6 +62,7 @@ export default function Kids() {
   const [pageContentVisible, setPageContentVisible] = useState(true);
   const [turnId, setTurnId] = useState(0);
   const [bookOpen, setBookOpen] = useState(false);
+  const [bookNativeFullscreen, setBookNativeFullscreen] = useState(false);
   const [puzzleOpen, setPuzzleOpen] = useState(false);
   const [coloringBookOpen, setColoringBookOpen] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
@@ -175,8 +176,15 @@ export default function Kids() {
     const handleFullscreenChange = () => {
       const activeFullscreenElement =
         document.fullscreenElement || document.webkitFullscreenElement || null;
+      const fullscreenNode = bookFullscreenRef.current;
 
-      if (!activeFullscreenElement && bookOpen) {
+      if (activeFullscreenElement && fullscreenNode && activeFullscreenElement === fullscreenNode) {
+        setBookNativeFullscreen(true);
+        return;
+      }
+
+      if (!activeFullscreenElement && bookOpen && bookNativeFullscreen) {
+        setBookNativeFullscreen(false);
         setBookOpen(false);
       }
     };
@@ -188,7 +196,7 @@ export default function Kids() {
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
       document.removeEventListener("webkitfullscreenchange", handleFullscreenChange);
     };
-  }, [bookOpen]);
+  }, [bookOpen, bookNativeFullscreen]);
 
   useEffect(() => {
     if (!bookOpen) return;
@@ -203,12 +211,14 @@ export default function Kids() {
 
     requestAnimationFrame(() => {
       requestFullscreen.call(fullscreenNode).catch?.(() => {
+        setBookNativeFullscreen(false);
         // Keep the fixed overlay fallback when native fullscreen is unavailable.
       });
     });
   }, [bookOpen]);
 
   const handleOpenBook = () => {
+    setBookNativeFullscreen(false);
     setBookOpen(true);
   };
 
@@ -221,11 +231,13 @@ export default function Kids() {
       try {
         await exitFullscreen.call(document);
       } catch {
+        setBookNativeFullscreen(false);
         setBookOpen(false);
       }
       return;
     }
 
+    setBookNativeFullscreen(false);
     setBookOpen(false);
   };
 
