@@ -181,11 +181,11 @@ export const storyBookPagesDesktop = [
 const storyPageImages = [
   "/IMAGE_01.webp",
   "/IMAGE_02.webp",
-  "/IMAGE_03.webp",
-  "/IMAGE_04.png",
-  "/IMAGE_05.png",
-  "/IMAGE_06.png",
-  "/IMAGE_07.png",
+  "/IMAGE_03.avif",
+  "/IMAGE_04.avif",
+  "/IMAGE_05.avif",
+  "/IMAGE_06.avif",
+  "/IMAGE_07.avif",
 ];
 
 import LibroFull from "./LibroFull";
@@ -207,6 +207,7 @@ export default function Libro({
   handlePageTurn,
 }) {
   const currentRightPageImage = storyPageImages[Math.min(storyPage, storyPageImages.length - 1)];
+  const nextRightPageImage = storyPageImages[Math.min(storyPage + 1, storyPageImages.length - 1)];
   const showVerticalBook = shouldShowRotateOverlay;
 
   return (
@@ -435,6 +436,7 @@ export default function Libro({
             storyPage={storyPage}
             storyBookPages={storyBookPages}
             currentRightPageImage={currentRightPageImage}
+            nextRightPageImage={nextRightPageImage}
             isPageTurning={isPageTurning}
             pageContentVisible={pageContentVisible}
             turnId={turnId}

@@ -11,6 +11,7 @@ export default function LibroFull({
   storyPage,
   storyBookPages,
   currentRightPageImage,
+  nextRightPageImage,
   isPageTurning,
   pageContentVisible,
   turnId,
@@ -20,6 +21,7 @@ export default function LibroFull({
   const mobileTurnDuration = 1.35;
   const desktopTurnDuration = 2;
   const turnDuration = isMobile ? mobileTurnDuration : desktopTurnDuration;
+  const useLiteMobileBook = isMobile;
 
   return (
     <>
@@ -47,6 +49,13 @@ export default function LibroFull({
         </Box>
       )}
 
+      {isMobile && (
+        <Box sx={{ display: "none" }}>
+          <Box component="img" src={currentRightPageImage} alt="" />
+          {nextRightPageImage && <Box component="img" src={nextRightPageImage} alt="" />}
+        </Box>
+      )}
+
       <Box
         sx={{
           width: "100%",
@@ -56,12 +65,12 @@ export default function LibroFull({
           background: "linear-gradient(180deg, #f7d99a 0%, #d89e56 52%, #b66b32 100%)",
           boxShadow: bookOpen
             ? isMobile
-              ? "0 12px 22px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.34)"
+              ? "0 8px 14px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.28)"
               : "0 22px 38px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -10px 18px rgba(110,62,22,0.24)"
             : "0 14px 24px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.35)",
           position: "relative",
           overflow: "visible",
-          transformStyle: "preserve-3d",
+          transformStyle: useLiteMobileBook ? "flat" : "preserve-3d",
           transform: isMobile
             ? "none"
             : bookOpen
@@ -77,7 +86,7 @@ export default function LibroFull({
             borderRadius: 24,
             background:
               "linear-gradient(180deg, rgba(243,232,214,0.92) 0%, rgba(229,210,184,0.92) 100%)",
-            boxShadow: "0 16px 26px rgba(51,28,10,0.16)",
+            boxShadow: isMobile ? "0 8px 12px rgba(51,28,10,0.08)" : "0 16px 26px rgba(51,28,10,0.16)",
             transform: "translateY(6px)",
             zIndex: -2,
             pointerEvents: "none",
@@ -117,6 +126,7 @@ export default function LibroFull({
               boxShadow:
                 "inset 2px 0 4px rgba(255,255,255,0.1), inset -2px 0 5px rgba(0,0,0,0.24), 0 0 12px rgba(42,17,5,0.18)",
               zIndex: 4,
+              display: useLiteMobileBook ? "none" : "block",
               "&::before": {
                 content: '""',
                 position: "absolute",
@@ -149,7 +159,7 @@ export default function LibroFull({
                 overflow: "hidden",
                 boxShadow:
                   isMobile
-                    ? "inset 0 0 0 1px rgba(255,255,255,0.34), 0 6px 12px rgba(45,26,11,0.1)"
+                    ? "inset 0 0 0 1px rgba(255,255,255,0.28), 0 4px 8px rgba(45,26,11,0.07)"
                     : "inset 0 0 0 1px rgba(255,255,255,0.42), inset -10px 0 12px rgba(177,137,94,0.08), 0 10px 18px rgba(45,26,11,0.12)",
                 transform: isMobile ? "none" : "perspective(1200px) rotateY(14deg) skewY(-1deg)",
                 transformOrigin: "right center",
@@ -163,6 +173,7 @@ export default function LibroFull({
                   background:
                     "repeating-linear-gradient(180deg, rgba(255,251,244,0.98) 0 2px, rgba(234,220,196,0.96) 2px 4px, rgba(196,165,126,0.42) 4px 5px)",
                   pointerEvents: "none",
+                  display: useLiteMobileBook ? "none" : "block",
                 },
                 "&::after": {
                   content: '""',
@@ -261,7 +272,7 @@ export default function LibroFull({
                 p: { xs: 1.15, sm: 1.35 },
                 boxShadow:
                   isMobile
-                    ? "inset 0 0 0 1px rgba(255,255,255,0.34), 0 6px 12px rgba(45,26,11,0.1)"
+                    ? "inset 0 0 0 1px rgba(255,255,255,0.28), 0 4px 8px rgba(45,26,11,0.07)"
                     : "inset 0 0 0 1px rgba(255,255,255,0.42), inset 10px 0 12px rgba(177,137,94,0.08), 0 10px 18px rgba(45,26,11,0.12)",
                 transform: isMobile ? "none" : "perspective(1200px) rotateY(-14deg) skewY(1deg)",
                 transformOrigin: "left center",
@@ -275,6 +286,7 @@ export default function LibroFull({
                   background:
                     "repeating-linear-gradient(180deg, rgba(255,251,244,0.98) 0 2px, rgba(234,220,196,0.96) 2px 4px, rgba(196,165,126,0.42) 4px 5px)",
                   pointerEvents: "none",
+                  display: useLiteMobileBook ? "none" : "block",
                 },
                 "&::after": {
                   content: '""',
@@ -317,7 +329,7 @@ export default function LibroFull({
               </Box>
             </Box>
           </Grid>
-          {isPageTurning && (
+          {isPageTurning && !useLiteMobileBook && (
             <>
               <motion.div
                 key={`page-shadow-${turnId}`}
@@ -374,6 +386,25 @@ export default function LibroFull({
           )}
         </Grid>
       </Box>
+
+      {isPageTurning && useLiteMobileBook && (
+        <Box
+          sx={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 7,
+            pointerEvents: "none",
+            background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.08) 48%, rgba(0,0,0,0.06) 100%)",
+            animation: "mobilePageSweep 1.35s ease-in-out 1",
+            "@keyframes mobilePageSweep": {
+              "0%": { opacity: 0, transform: "translateX(-4%)" },
+              "20%": { opacity: 0.22 },
+              "70%": { opacity: 0.14 },
+              "100%": { opacity: 0, transform: "translateX(4%)" },
+            },
+          }}
+        />
+      )}
 
       {bookOpen && (
         <Box

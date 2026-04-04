@@ -274,11 +274,11 @@ export default function Kids() {
     const updateTimer = setTimeout(() => {
       setStoryPage(targetPage);
       setPageContentVisible(true);
-    }, 1000);
+    }, isMobile ? 700 : 1000);
 
     const endTimer = setTimeout(() => {
       setIsPageTurning(false);
-    }, 2000);
+    }, isMobile ? 1350 : 2000);
 
     pageTurnTimersRef.current.push(fadeOutTimer, updateTimer, endTimer);
   };
