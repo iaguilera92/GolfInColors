@@ -200,6 +200,10 @@ export default function Kids() {
 
   useEffect(() => {
     if (!bookOpen) return;
+    if (isMobile) {
+      setBookNativeFullscreen(false);
+      return;
+    }
 
     const fullscreenNode = bookFullscreenRef.current;
     if (!fullscreenNode) return;
@@ -215,7 +219,7 @@ export default function Kids() {
         // Keep the fixed overlay fallback when native fullscreen is unavailable.
       });
     });
-  }, [bookOpen]);
+  }, [bookOpen, isMobile]);
 
   const handleOpenBook = () => {
     setBookNativeFullscreen(false);

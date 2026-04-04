@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, lazy, Suspense } from "react";
+﻿import React, { useEffect, useState, useRef, lazy, Suspense } from "react";
 import { CssBaseline, Box, IconButton, useMediaQuery, Snackbar, Alert } from "@mui/material";
 import theme from "./theme";
 import { ThemeProvider } from "@mui/material/styles";
@@ -175,7 +175,7 @@ function App() {
   //location.pathname
   useEffect(() => {
     if (location.pathname === "/") {
-      // Ejecutar lÃƒÂ³gica cuando se vuelva a la ruta de inicio
+      // Ejecutar lÃƒÆ’Ã‚Â³gica cuando se vuelva a la ruta de inicio
     }
   }, [location.pathname]);
 
@@ -196,11 +196,11 @@ function App() {
       if (!requiereVideo || videoReady) {
         setShowApp(true);
       }
-    }, 2500); // mÃƒÂ­nimo visible
+    }, 2500); // mÃƒÆ’Ã‚Â­nimo visible
 
     const maxTimeout = setTimeout(() => {
       setShowApp(true); // fuerza mostrar app
-    }, 4000); // mÃƒÂ¡ximo espera
+    }, 4000); // mÃƒÆ’Ã‚Â¡ximo espera
 
     return () => {
       clearTimeout(minTimeout);
@@ -262,9 +262,9 @@ function App() {
                 }}
               >
                 <Box>
-                  ? Nueva versiÃƒÂ³n disponible: {snackbarVersion.version}
+                  🚀 Nueva versión disponible: {snackbarVersion.version}
                   <br />
-                  ?? Actualizando...
+                  🔄 Actualizando...
                 </Box>
               </Alert>
             </Snackbar>
@@ -275,7 +275,7 @@ function App() {
 
       {/* Contenido principal, oculto mientras se carga */}
       <Box sx={{ visibility: showApp ? "visible" : "hidden", pointerEvents: showApp ? "auto" : "none", overflowX: 'hidden' }}>
-        {/* Navbar solo si no estÃƒÂ¡s en /administracion */}
+        {/* Navbar solo si no estÃƒÆ’Ã‚Â¡s en /administracion */}
         {location.pathname !== "/administracion" && !isKidsBookFullscreen && (
           <div className="app-chrome">
             <Suspense fallback={null}>
@@ -284,10 +284,10 @@ function App() {
           </div>
         )}
 
-        {/* TransiciÃƒÂ³n entre pÃƒÂ¡ginas */}
+        {/* TransiciÃƒÆ’Ã‚Â³n entre pÃƒÆ’Ã‚Â¡ginas */}
         <Box sx={{ position: "relative" }}>
           <Outlet context={{ showApp, informationsRef, openDialogInicio: openCategoryFeatures }} />        </Box>
-        {/* Secciones visibles solo en la pÃƒÂ¡gina de inicio */}
+        {/* Secciones visibles solo en la pÃƒÆ’Ã‚Â¡gina de inicio */}
         {["/", ""].includes(location.pathname) && (
           <>
             <Suspense fallback={null}>
@@ -322,13 +322,13 @@ function App() {
           </>
         )}
 
-        {/* Footer (excepto en administraciÃƒÂ³n) */}
+        {/* Footer (excepto en administraciÃƒÆ’Ã‚Â³n) */}
         {!isRouteFallbackVisible && !isKidsBookFullscreen && location.pathname !== "/administracion" && location.pathname !== "/dashboard" && location.pathname !== "/configurar-productos" && location.pathname !== "/configurar-trabajos" && (
           <div className="app-chrome">
             <Footer />
           </div>
         )}
-        {/* BotÃƒÂ³n WhatsApp */}
+        {/* BotÃƒÆ’Ã‚Â³n WhatsApp */}
         {!isRouteFallbackVisible && !isKidsBookFullscreen && location.pathname !== "/administracion" && location.pathname !== "/dashboard" && location.pathname !== "/configurar-productos" && location.pathname !== "/configurar-trabajos" && (
           <Box sx={{ position: "fixed", bottom: "20px", right: "20px", zIndex: 100, transition: "bottom 0.3s ease", }}>
             <IconButton onClick={() => { window.open("https://api.whatsapp.com/send?phone=15617975986", "_blank"); setHasInteracted(true); }} sx={{
@@ -363,7 +363,7 @@ function App() {
           </Box>
         )}
 
-        {/* BotÃƒÂ³n scroll arriba */}
+        {/* BotÃƒÆ’Ã‚Â³n scroll arriba */}
         {showArrow && !isKidsBookFullscreen && (
           <IconButton onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             sx={{
@@ -398,6 +398,7 @@ function App() {
 }
 
 export default App;
+
 
 
 

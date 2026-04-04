@@ -17,6 +17,10 @@ export default function LibroFull({
   flipDirection,
   handlePageTurn,
 }) {
+  const mobileTurnDuration = 1.35;
+  const desktopTurnDuration = 2;
+  const turnDuration = isMobile ? mobileTurnDuration : desktopTurnDuration;
+
   return (
     <>
       {bookOpen && (
@@ -51,14 +55,18 @@ export default function LibroFull({
           border: "1px solid rgba(111,68,31,0.45)",
           background: "linear-gradient(180deg, #f7d99a 0%, #d89e56 52%, #b66b32 100%)",
           boxShadow: bookOpen
-            ? "0 22px 38px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -10px 18px rgba(110,62,22,0.24)"
+            ? isMobile
+              ? "0 12px 22px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.34)"
+              : "0 22px 38px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -10px 18px rgba(110,62,22,0.24)"
             : "0 14px 24px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.35)",
           position: "relative",
           overflow: "visible",
           transformStyle: "preserve-3d",
-          transform: bookOpen
-            ? "perspective(1800px) rotateX(8deg) rotateY(-2deg)"
-            : "perspective(1200px) rotateX(4deg)",
+          transform: isMobile
+            ? "none"
+            : bookOpen
+              ? "perspective(1800px) rotateX(8deg) rotateY(-2deg)"
+              : "perspective(1200px) rotateX(4deg)",
           "&::before": {
             content: '""',
             position: "absolute",
@@ -140,8 +148,10 @@ export default function LibroFull({
                 position: "relative",
                 overflow: "hidden",
                 boxShadow:
-                  "inset 0 0 0 1px rgba(255,255,255,0.42), inset -10px 0 12px rgba(177,137,94,0.08), 0 10px 18px rgba(45,26,11,0.12)",
-                transform: "perspective(1200px) rotateY(14deg) skewY(-1deg)",
+                  isMobile
+                    ? "inset 0 0 0 1px rgba(255,255,255,0.34), 0 6px 12px rgba(45,26,11,0.1)"
+                    : "inset 0 0 0 1px rgba(255,255,255,0.42), inset -10px 0 12px rgba(177,137,94,0.08), 0 10px 18px rgba(45,26,11,0.12)",
+                transform: isMobile ? "none" : "perspective(1200px) rotateY(14deg) skewY(-1deg)",
                 transformOrigin: "right center",
                 "&::before": {
                   content: '""',
@@ -250,8 +260,10 @@ export default function LibroFull({
                 position: "relative",
                 p: { xs: 1.15, sm: 1.35 },
                 boxShadow:
-                  "inset 0 0 0 1px rgba(255,255,255,0.42), inset 10px 0 12px rgba(177,137,94,0.08), 0 10px 18px rgba(45,26,11,0.12)",
-                transform: "perspective(1200px) rotateY(-14deg) skewY(1deg)",
+                  isMobile
+                    ? "inset 0 0 0 1px rgba(255,255,255,0.34), 0 6px 12px rgba(45,26,11,0.1)"
+                    : "inset 0 0 0 1px rgba(255,255,255,0.42), inset 10px 0 12px rgba(177,137,94,0.08), 0 10px 18px rgba(45,26,11,0.12)",
+                transform: isMobile ? "none" : "perspective(1200px) rotateY(-14deg) skewY(1deg)",
                 transformOrigin: "left center",
                 "&::before": {
                   content: '""',
@@ -310,8 +322,8 @@ export default function LibroFull({
               <motion.div
                 key={`page-shadow-${turnId}`}
                 initial={{ opacity: 0 }}
-                animate={{ opacity: [0, 0.06, 0.16, 0.24, 0.14, 0] }}
-                transition={{ duration: 2, ease: [0.18, 0.72, 0.22, 1] }}
+                animate={{ opacity: isMobile ? [0, 0.05, 0.12, 0.05, 0] : [0, 0.06, 0.16, 0.24, 0.14, 0] }}
+                transition={{ duration: turnDuration, ease: [0.18, 0.72, 0.22, 1] }}
                 style={{
                   position: "absolute",
                   inset: 0,
@@ -328,10 +340,10 @@ export default function LibroFull({
                 animate={{
                   rotateY: flipDirection > 0 ? -180 : 180,
                   x: flipDirection > 0 ? "-100%" : "100%",
-                  opacity: [0.985, 0.995, 0.98, 0.92, 0.84],
-                  scaleX: [1, 0.992, 0.985, 1.015, 1],
+                  opacity: isMobile ? [0.985, 0.99, 0.94, 0.86] : [0.985, 0.995, 0.98, 0.92, 0.84],
+                  scaleX: isMobile ? [1, 0.994, 1.006, 1] : [1, 0.992, 0.985, 1.015, 1],
                 }}
-                transition={{ duration: 2, ease: [0.18, 0.72, 0.22, 1] }}
+                transition={{ duration: turnDuration, ease: [0.18, 0.72, 0.22, 1] }}
                 style={{
                   position: "absolute",
                   top: 0,
@@ -347,8 +359,15 @@ export default function LibroFull({
                     flipDirection > 0
                       ? "linear-gradient(90deg, rgba(255,251,245,0.99) 0%, rgba(247,232,206,0.96) 32%, rgba(232,201,160,0.92) 68%, rgba(206,168,122,0.86) 100%)"
                       : "linear-gradient(270deg, rgba(255,251,245,0.99) 0%, rgba(247,232,206,0.96) 32%, rgba(232,201,160,0.92) 68%, rgba(206,168,122,0.86) 100%)",
-                  boxShadow: flipDirection > 0 ? "-28px 0 40px rgba(0,0,0,0.28)" : "28px 0 40px rgba(0,0,0,0.28)",
+                  boxShadow: isMobile
+                    ? flipDirection > 0
+                      ? "-14px 0 20px rgba(0,0,0,0.16)"
+                      : "14px 0 20px rgba(0,0,0,0.16)"
+                    : flipDirection > 0
+                      ? "-28px 0 40px rgba(0,0,0,0.28)"
+                      : "28px 0 40px rgba(0,0,0,0.28)",
                   borderRadius: flipDirection > 0 ? "0 12px 12px 0" : "12px 0 0 12px",
+                  willChange: "transform, opacity",
                 }}
               />
             </>
