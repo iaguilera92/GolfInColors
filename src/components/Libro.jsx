@@ -201,6 +201,7 @@ export default function Libro({
   storyPage,
   storyBookPages,
   isPageTurning,
+  pageContentVisible,
   turnId,
   flipDirection,
   handlePageTurn,
@@ -435,6 +436,7 @@ export default function Libro({
             storyBookPages={storyBookPages}
             currentRightPageImage={currentRightPageImage}
             isPageTurning={isPageTurning}
+            pageContentVisible={pageContentVisible}
             turnId={turnId}
             flipDirection={flipDirection}
             handlePageTurn={handlePageTurn}

@@ -12,6 +12,7 @@ export default function LibroFull({
   storyBookPages,
   currentRightPageImage,
   isPageTurning,
+  pageContentVisible,
   turnId,
   flipDirection,
   handlePageTurn,
@@ -133,7 +134,7 @@ export default function LibroFull({
                 height: bookOpen ? { xs: isPortrait ? "56vh" : "48vh", sm: "70vh" } : { xs: 180, sm: 220 },
                 borderRadius: 2.2,
                 py: { xs: 1.9, sm: 2.1 },
-                px: { xs: 1.9, sm: 3.5 },
+                px: { xs: 1.9, sm: 4.9, md: 5.4 },
                 background: "linear-gradient(180deg, #fffdf8 0%, #fbf4e8 100%)",
                 border: "1px solid rgba(148,111,73,0.3)",
                 position: "relative",
@@ -169,9 +170,13 @@ export default function LibroFull({
             >
               <motion.div
                 key={`page-content-${storyPage}`}
-                initial={{ opacity: 0.1 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.34, ease: "easeOut" }}
+                initial={{ opacity: 0, y: 10, scale: 0.992 }}
+                animate={{
+                  opacity: pageContentVisible ? 1 : 0,
+                  y: pageContentVisible ? 0 : 8,
+                  scale: pageContentVisible ? 1 : 0.992,
+                }}
+                transition={{ duration: pageContentVisible ? 0.5 : 1, ease: [0.2, 0.72, 0.18, 1], delay: 0 }}
                 style={{
                   position: "relative",
                   zIndex: 2,
@@ -223,6 +228,8 @@ export default function LibroFull({
                       ? { xs: isPortrait ? "0.82rem" : "0.7rem", sm: "1.08rem" }
                       : { xs: "0.82rem", sm: "0.9rem" },
                     width: "100%",
+                    maxWidth: { xs: "100%", sm: "88%", md: "86%" },
+                    mx: "auto",
                     textAlign: "center",
                   }}
                 >
@@ -272,16 +279,30 @@ export default function LibroFull({
               }}
             >
               <Box
-                component="img"
-                src={currentRightPageImage}
-                alt={`Story illustration ${storyPage + 1}`}
                 sx={{
                   width: "100%",
                   height: "100%",
-                  objectFit: "contain",
-                  objectPosition: "center",
                 }}
-              />
+              >
+                <motion.img
+                  key={`page-image-${storyPage}`}
+                  src={currentRightPageImage}
+                  alt={`Story illustration ${storyPage + 1}`}
+                  initial={{ opacity: 0, scale: 0.992 }}
+                  animate={{
+                    opacity: pageContentVisible ? 1 : 0,
+                    scale: pageContentVisible ? 1 : 0.992,
+                  }}
+                  transition={{ duration: pageContentVisible ? 0.5 : 1, ease: [0.2, 0.72, 0.18, 1], delay: 0 }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                    objectPosition: "center",
+                    display: "block",
+                  }}
+                />
+              </Box>
             </Box>
           </Grid>
           {isPageTurning && (
@@ -289,8 +310,8 @@ export default function LibroFull({
               <motion.div
                 key={`page-shadow-${turnId}`}
                 initial={{ opacity: 0 }}
-                animate={{ opacity: [0, 0.2, 0] }}
-                transition={{ duration: 0.62, ease: [0.25, 0.8, 0.25, 1] }}
+                animate={{ opacity: [0, 0.06, 0.16, 0.24, 0.14, 0] }}
+                transition={{ duration: 2, ease: [0.18, 0.72, 0.22, 1] }}
                 style={{
                   position: "absolute",
                   inset: 0,
@@ -303,13 +324,14 @@ export default function LibroFull({
 
               <motion.div
                 key={`page-flip-${turnId}`}
-                initial={{ rotateY: 0, x: "0%", opacity: 0.98 }}
+                initial={{ rotateY: 0, x: "0%", opacity: 0.985, scaleX: 1 }}
                 animate={{
                   rotateY: flipDirection > 0 ? -180 : 180,
                   x: flipDirection > 0 ? "-100%" : "100%",
-                  opacity: [0.98, 0.98, 0.85],
+                  opacity: [0.985, 0.995, 0.98, 0.92, 0.84],
+                  scaleX: [1, 0.992, 0.985, 1.015, 1],
                 }}
-                transition={{ duration: 0.62, ease: [0.25, 0.8, 0.25, 1] }}
+                transition={{ duration: 2, ease: [0.18, 0.72, 0.22, 1] }}
                 style={{
                   position: "absolute",
                   top: 0,
@@ -323,9 +345,9 @@ export default function LibroFull({
                   zIndex: 6,
                   background:
                     flipDirection > 0
-                      ? "linear-gradient(90deg, rgba(255,251,245,0.99) 0%, rgba(241,214,175,0.9) 70%, rgba(222,190,148,0.85) 100%)"
-                      : "linear-gradient(270deg, rgba(255,251,245,0.99) 0%, rgba(241,214,175,0.9) 70%, rgba(222,190,148,0.85) 100%)",
-                  boxShadow: flipDirection > 0 ? "-24px 0 34px rgba(0,0,0,0.26)" : "24px 0 34px rgba(0,0,0,0.26)",
+                      ? "linear-gradient(90deg, rgba(255,251,245,0.99) 0%, rgba(247,232,206,0.96) 32%, rgba(232,201,160,0.92) 68%, rgba(206,168,122,0.86) 100%)"
+                      : "linear-gradient(270deg, rgba(255,251,245,0.99) 0%, rgba(247,232,206,0.96) 32%, rgba(232,201,160,0.92) 68%, rgba(206,168,122,0.86) 100%)",
+                  boxShadow: flipDirection > 0 ? "-28px 0 40px rgba(0,0,0,0.28)" : "28px 0 40px rgba(0,0,0,0.28)",
                   borderRadius: flipDirection > 0 ? "0 12px 12px 0" : "12px 0 0 12px",
                 }}
               />

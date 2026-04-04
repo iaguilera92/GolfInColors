@@ -59,6 +59,7 @@ export default function Kids() {
   const [activeStoryStage, setActiveStoryStage] = useState(0);
   const [flipDirection, setFlipDirection] = useState(1);
   const [isPageTurning, setIsPageTurning] = useState(false);
+  const [pageContentVisible, setPageContentVisible] = useState(true);
   const [turnId, setTurnId] = useState(0);
   const [bookOpen, setBookOpen] = useState(false);
   const [puzzleOpen, setPuzzleOpen] = useState(false);
@@ -74,6 +75,7 @@ export default function Kids() {
   );
   const bookFullscreenRef = useRef(null);
   const pageTurnTimersRef = useRef([]);
+  const pageTurnAudioRef = useRef(null);
   const activeMenuRef = useRef("Stories");
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -110,6 +112,20 @@ export default function Kids() {
   useEffect(() => {
     return () => {
       pageTurnTimersRef.current.forEach((timer) => clearTimeout(timer));
+    };
+  }, []);
+
+  useEffect(() => {
+    const audio = new Audio("/pagina.mp3");
+    audio.preload = "auto";
+    audio.volume = 0.3;
+    pageTurnAudioRef.current = audio;
+
+    return () => {
+      if (pageTurnAudioRef.current) {
+        pageTurnAudioRef.current.pause();
+        pageTurnAudioRef.current = null;
+      }
     };
   }, []);
 
@@ -219,19 +235,36 @@ export default function Kids() {
     const targetPage = Math.max(0, Math.min(storyPage + direction, storyBookPages.length - 1));
     if (targetPage === storyPage) return;
 
+    try {
+      const audio = pageTurnAudioRef.current;
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+        void audio.play().catch(() => {});
+      }
+    } catch {
+      // ignore audio errors silently
+    }
+
     setFlipDirection(direction);
     setTurnId((prev) => prev + 1);
     setIsPageTurning(true);
+    setPageContentVisible(true);
+
+    const fadeOutTimer = setTimeout(() => {
+      setPageContentVisible(false);
+    }, 0);
 
     const updateTimer = setTimeout(() => {
       setStoryPage(targetPage);
-    }, 290);
+      setPageContentVisible(true);
+    }, 1000);
 
     const endTimer = setTimeout(() => {
       setIsPageTurning(false);
-    }, 620);
+    }, 2000);
 
-    pageTurnTimersRef.current.push(updateTimer, endTimer);
+    pageTurnTimersRef.current.push(fadeOutTimer, updateTimer, endTimer);
   };
 
   const handleOpenPuzzle = () => {
@@ -639,6 +672,7 @@ export default function Kids() {
                                         storyPage={storyPage}
                                         storyBookPages={storyBookPages}
                                         isPageTurning={isPageTurning}
+                                        pageContentVisible={pageContentVisible}
                                         turnId={turnId}
                                         flipDirection={flipDirection}
                                         handlePageTurn={handlePageTurn}

@@ -57,28 +57,8 @@ function Features() {
     shop: "/catalogo",
   };
 
-  const playClick = () => {
-    try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = "triangle";
-      osc.frequency.value = 620;
-      gain.gain.setValueAtTime(0.001, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.05, ctx.currentTime + 0.01);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.09);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start();
-      osc.stop(ctx.currentTime + 0.1);
-    } catch {
-      // ignore audio failures silently
-    }
-  };
-
   const handleSelect = (option) => {
     if (isSelecting) return;
-    playClick();
     setSelected(option.value);
     setIsSelecting(true);
 
@@ -145,17 +125,17 @@ function Features() {
                     tabIndex={0}
                     aria-label={`Select ${option.label}`}
                     onClick={() => {
-                      if (option.value === "shop") return;
+                      if (option.value === "shop" || option.value === "coaches") return;
                       handleSelect(option);
                     }}
                     onKeyDown={(e) => {
-                      if (option.value === "shop") return;
+                      if (option.value === "shop" || option.value === "coaches") return;
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
                         handleSelect(option);
                       }
                     }}
-                    aria-disabled={option.value === "shop"}
+                    aria-disabled={option.value === "shop" || option.value === "coaches"}
                     sx={{
                       position: "relative",
                       borderRadius: 3,
@@ -169,9 +149,9 @@ function Features() {
                           ? `0 0 0 2px ${option.toneA}33, 0 10px 22px rgba(0,0,0,0.14)`
                           : "0 8px 18px rgba(0,0,0,0.12)",
                       overflow: "hidden",
-                      cursor: option.value === "shop" ? "not-allowed" : "pointer",
+                      cursor: option.value === "shop" || option.value === "coaches" ? "not-allowed" : "pointer",
                       transition: "all 0.2s ease",
-                      opacity: option.value === "shop" ? 0.82 : 1,
+                      opacity: option.value === "shop" || option.value === "coaches" ? 0.82 : 1,
                     }}
                   >
                     <Box
@@ -187,7 +167,7 @@ function Features() {
                       }}
                     />
 
-                    {option.value === "shop" && (
+                    {(option.value === "shop" || option.value === "coaches") && (
                       <Box
                         sx={{
                           position: "absolute",
@@ -213,7 +193,7 @@ function Features() {
                             textTransform: "uppercase",
                           }}
                         >
-                          Locked
+                          Coming soon
                         </Box>
                       </Box>
                     )}
