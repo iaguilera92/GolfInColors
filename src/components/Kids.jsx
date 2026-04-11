@@ -681,6 +681,7 @@ export default function Kids() {
                                         bookFullscreenRef={bookFullscreenRef}
                                         bookOpen={bookOpen}
                                         isMobile={isMobile}
+                                        useMobileBookLayout={useMobileBookPages}
                                         isPortrait={isPortrait}
                                         shouldShowRotateOverlay={shouldShowRotateOverlay}
                                         handleCloseBook={handleCloseBook}
@@ -969,7 +970,7 @@ export default function Kids() {
                         <Box
                           sx={{
                             width: "100%",
-                            maxWidth: 640,
+                            maxWidth: { xs: 640, md: 520 },
                             mx: "auto",
                             p: "4px",
                             borderRadius: 3,
@@ -997,11 +998,11 @@ export default function Kids() {
                               transform: "translateY(-50%)",
                               color: "#ffffff",
                               fontWeight: 900,
-                              fontSize: { xs: "0.92rem", sm: "1.22rem" },
+                              fontSize: { xs: "0.92rem", sm: "1.22rem", md: "1.05rem" },
                               lineHeight: 1.1,
                               textAlign: "left",
                               textShadow: "0 2px 10px rgba(0,0,0,0.6)",
-                              maxWidth: { xs: 110, sm: 155 },
+                              maxWidth: { xs: 110, sm: 155, md: 140 },
                             }}
                           >
                             CHOOSE YOUR LEVEL!
@@ -1023,7 +1024,7 @@ export default function Kids() {
 
                         <Box
                           sx={{
-                            maxWidth: 640,
+                            maxWidth: { xs: 640, md: 560 },
                             mx: "auto",
                             borderRadius: 2.5,
                             overflow: "hidden",
@@ -1033,13 +1034,14 @@ export default function Kids() {
                           }}
                         >
                           <Box sx={{ backgroundColor: "#1B83CC", borderRadius: 2, p: "3px" }}>
-                            <Stack spacing={0.5}>
+                            <Stack spacing={0}>
                               <Box
                                 sx={{
                                   width: "100%",
                                   display: "flex",
                                   justifyContent: "center",
-                                  py: 0.35,
+                                  pt: 0.15,
+                                  pb: 0,
                                 }}
                               >
                                 <Box
@@ -1054,89 +1056,104 @@ export default function Kids() {
                                 />
                               </Box>
                               <Box
-                                component="button"
-                                type="button"
-                                onClick={handleOpenPuzzle}
                                 sx={{
-                                  p: 0,
-                                  border: "none",
-                                  borderRadius: 1.2,
-                                  background: "transparent",
-                                  cursor: "pointer",
-                                  overflow: "hidden",
-                                  boxShadow: "0 0 0 0 transparent",
-                                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
-                                  "&:hover": {
-                                    transform: "scale(1.01)",
-                                    boxShadow: "0 10px 18px rgba(0,0,0,0.16)",
-                                  },
+                                  display: "grid",
+                                  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                                  gap: 0.65,
+                                  pt: 0,
+                                  mt: 0,
                                 }}
                               >
-                                <Box component="img" src="/game-2.png" alt="Open puzzle" sx={{ width: "100%", display: "block", borderRadius: 1.2 }} />
-                              </Box>
-                              <Box
-                                ref={coloringBookRef}
-                                component="button"
-                                type="button"
-                                onClick={handleOpenColoringBook}
-                                sx={{
-                                  p: "4px",
-                                  border: "none",
-                                  width: "100%",
-                                  borderRadius: 1.35,
-                                  background: highlightColoringBook ? "linear-gradient(135deg, #ffd76a 0%, #f4b93d 100%)" : "transparent",
-                                  boxShadow: highlightColoringBook
-                                    ? "0 0 0 3px rgba(244,185,61,0.55), 0 16px 28px rgba(244,185,61,0.28)"
-                                    : "0 0 0 0 transparent",
-                                  transform: highlightColoringBook ? "scale(1.02)" : "scale(1)",
-                                  transition: "transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease",
-                                  cursor: "pointer",
-                                }}
-                              >
-                                <Box component="img" src="/game-3.png" alt="Coloring Book" sx={{ width: "100%", display: "block", borderRadius: 1.2 }} />
-                              </Box>
-                              <Box component="img" src="/game-4.png" alt="Game 4" sx={{ width: "100%", display: "block", borderRadius: 1.2 }} />
-                              <Box
-                                component="button"
-                                type="button"
-                                onClick={handleOpenQuiz}
-                                sx={{
-                                  p: 0,
-                                  border: "none",
-                                  borderRadius: 1.2,
-                                  background: "transparent",
-                                  cursor: "pointer",
-                                  overflow: "hidden",
-                                  boxShadow: "0 0 0 0 transparent",
-                                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
-                                  "&:hover": {
-                                    transform: "scale(1.01)",
-                                    boxShadow: "0 10px 18px rgba(0,0,0,0.16)",
-                                  },
-                                }}
-                              >
-                                <Box component="img" src="/game-5.png" alt="Golf Quiz" sx={{ width: "100%", display: "block", borderRadius: 1.2 }} />
-                              </Box>
-                              <Box
-                                component="button"
-                                type="button"
-                                onClick={handleOpenMatch}
-                                sx={{
-                                  p: 0,
-                                  border: "none",
-                                  borderRadius: 1.2,
-                                  background: "transparent",
-                                  cursor: "pointer",
-                                  overflow: "hidden",
-                                  boxShadow: "0 0 0 0 transparent",
-                                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
-                                  "&:hover": {
-                                    transform: "scale(1.01)",
-                                    boxShadow: "0 10px 18px rgba(0,0,0,0.16)",
-                                  },
-                                }}
-                              >
-                                <Box component="img" src="/game-6.png" alt="Match Game" sx={{ width: "100%", display: "block", borderRadius: 1.2 }} />
+                                <Box
+                                  component="button"
+                                  type="button"
+                                  onClick={handleOpenPuzzle}
+                                  sx={{
+                                    p: 0,
+                                    border: "none",
+                                    borderRadius: 1.2,
+                                    background: "transparent",
+                                    cursor: "pointer",
+                                    overflow: "hidden",
+                                    boxShadow: "0 0 0 0 transparent",
+                                    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                                    "&:hover": {
+                                      transform: "scale(1.01)",
+                                      boxShadow: "0 10px 18px rgba(0,0,0,0.16)",
+                                    },
+                                  }}
+                                >
+                                  <Box component="img" src="/game-2.png" alt="Open puzzle" sx={{ width: "100%", display: "block", borderRadius: 1.2 }} />
+                                </Box>
+                                <Box
+                                  ref={coloringBookRef}
+                                  component="button"
+                                  type="button"
+                                  onClick={handleOpenColoringBook}
+                                  sx={{
+                                    p: "4px",
+                                    border: "none",
+                                    width: "100%",
+                                    borderRadius: 1.35,
+                                    background: highlightColoringBook ? "linear-gradient(135deg, #ffd76a 0%, #f4b93d 100%)" : "transparent",
+                                    boxShadow: highlightColoringBook
+                                      ? "0 0 0 3px rgba(244,185,61,0.55), 0 16px 28px rgba(244,185,61,0.28)"
+                                      : "0 0 0 0 transparent",
+                                    transform: highlightColoringBook ? "scale(1.02)" : "scale(1)",
+                                    transition: "transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease",
+                                    cursor: "pointer",
+                                    "&:hover": {
+                                      transform: highlightColoringBook ? "scale(1.03)" : "scale(1.01)",
+                                      boxShadow: highlightColoringBook
+                                        ? "0 0 0 3px rgba(244,185,61,0.55), 0 18px 30px rgba(244,185,61,0.32)"
+                                        : "0 10px 18px rgba(0,0,0,0.16)",
+                                    },
+                                  }}
+                                >
+                                  <Box component="img" src="/game-3.png" alt="Coloring Book" sx={{ width: "100%", display: "block", borderRadius: 1.2 }} />
+                                </Box>
+                                <Box
+                                  component="button"
+                                  type="button"
+                                  onClick={handleOpenQuiz}
+                                  sx={{
+                                    p: 0,
+                                    border: "none",
+                                    borderRadius: 1.2,
+                                    background: "transparent",
+                                    cursor: "pointer",
+                                    overflow: "hidden",
+                                    boxShadow: "0 0 0 0 transparent",
+                                    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                                    "&:hover": {
+                                      transform: "scale(1.01)",
+                                      boxShadow: "0 10px 18px rgba(0,0,0,0.16)",
+                                    },
+                                  }}
+                                >
+                                  <Box component="img" src="/game-5.png" alt="Golf Quiz" sx={{ width: "100%", display: "block", borderRadius: 1.2 }} />
+                                </Box>
+                                <Box
+                                  component="button"
+                                  type="button"
+                                  onClick={handleOpenMatch}
+                                  sx={{
+                                    p: 0,
+                                    border: "none",
+                                    borderRadius: 1.2,
+                                    background: "transparent",
+                                    cursor: "pointer",
+                                    overflow: "hidden",
+                                    boxShadow: "0 0 0 0 transparent",
+                                    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                                    "&:hover": {
+                                      transform: "scale(1.01)",
+                                      boxShadow: "0 10px 18px rgba(0,0,0,0.16)",
+                                    },
+                                  }}
+                                >
+                                  <Box component="img" src="/game-6.png" alt="Match Game" sx={{ width: "100%", display: "block", borderRadius: 1.2 }} />
+                                </Box>
                               </Box>
                             </Stack>
                           </Box>

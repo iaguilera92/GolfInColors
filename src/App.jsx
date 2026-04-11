@@ -11,7 +11,6 @@ import "./components/css/App.css";
 import { initGoogleAnalytics, trackPageView } from "./helpers/HelperAnalytics.js"; //GOOGLE ANALYTICS
 import DialogInicio from "./components/DialogInicio";
 
-const Areas = lazy(() => import("./components/Areas"));
 const Informations = lazy(() => import("./components/Informations"));
 const InformationsMobile = lazy(() => import("./components/InformationsMobile"));
 const Contacto = lazy(() => import("./components/Contacto"));
@@ -304,12 +303,6 @@ function App() {
                   />
                 }
               </div>
-            </Suspense>
-
-            <Suspense fallback={null}>
-              <Box id="areas-section">
-                <Areas />
-              </Box>
             </Suspense>
 
 

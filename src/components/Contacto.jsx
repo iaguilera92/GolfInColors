@@ -149,64 +149,82 @@ function Contacto() {
           < Box sx={{ position: "relative", zIndex: 2, paddingTop: "20px", display: "flex", flexDirection: "column", height: "100%" }}>
 
             {!formSubmitted && (
-              <Typography
-                variant="h4"
-                align="left"
-                gutterBottom
+              <Box
                 sx={{
-                  color: "#355f5b", // 👈 CAMBIO CLAVE
-                  display: "flex",
-                  alignItems: "center",
-                  fontFamily: "'Montserrat', Helvetica, Arial, sans-serif !important",
-                  lineHeight: 1.2,
+                  width: "100%",
+                  maxWidth: { xs: "100%", md: 1120 },
+                  mx: "auto",
+                  mb: 0.5,
                 }}
               >
-                {/* Barra | de acento */}
-                <motion.span
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                  transition={{ delay: 0.3 }}
-                  style={{
-                    color: "#5fb3a2", // 👈 turquesa más vivo
-                    fontWeight: "bold",
-                    fontSize: "1.3rem",
-                    display: "inline-block",
-                    verticalAlign: "middle",
-                    marginRight: "6px",
+                <Typography
+                  variant="h4"
+                  align="left"
+                  gutterBottom
+                  sx={{
+                    color: "#355f5b",
+                    display: "flex",
+                    alignItems: "center",
+                    fontFamily: "'Montserrat', Helvetica, Arial, sans-serif !important",
+                    lineHeight: 1.2,
+                    pl: { xs: 0, md: 3 },
+                    pt: { xs: 0, md: 0.6 },
                   }}
                 >
-                  |
-                </motion.span>
-
-                {"Contact Us".split("").map((char, index) => (
                   <motion.span
-                    key={index}
-                    custom={index}
-                    variants={letterVariants}
-                    initial="hidden"
-                    animate={inView ? "visible" : "hidden"}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                    transition={{ delay: 0.3 }}
                     style={{
+                      color: "#5fb3a2",
+                      fontWeight: "bold",
+                      fontSize: "1.3rem",
                       display: "inline-block",
-                      whiteSpace: "pre",
+                      verticalAlign: "middle",
+                      marginRight: "6px",
                     }}
                   >
-                    {char}
+                    |
                   </motion.span>
-                ))}
-              </Typography>
 
+                  {"Contact Us".split("").map((char, index) => (
+                    <motion.span
+                      key={index}
+                      custom={index}
+                      variants={letterVariants}
+                      initial="hidden"
+                      animate={inView ? "visible" : "hidden"}
+                      style={{
+                        display: "inline-block",
+                        whiteSpace: "pre",
+                      }}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </Typography>
+              </Box>
             )}
 
             {!formSubmitted ? (
-              <Grid container spacing={4} sx={{ height: "auto" }}>
+              <Grid
+                container
+                spacing={4}
+                justifyContent="center"
+                alignItems="stretch"
+                sx={{ height: "auto" }}
+              >
                 {/* Mapa */}
-                <Grid item xs={12} md={6} sx={{ height: "auto" }}>
+                <Grid item xs={12} md={5} sx={{ display: "flex" }}>
                   <Box
                     sx={{
                       position: "relative",
                       width: "100%",
                       minHeight: "40vh",
+                      maxWidth: { xs: "100%", md: 500 },
+                      mx: "auto",
                       height: isMobile ? "40vh" : "100%",
+                      display: "flex",
                     }}
                   >
                     <Box
@@ -217,11 +235,13 @@ function Contacto() {
                         width: "100%",
                         height: "100%",
                         backgroundColor: "#fff",
-                        borderRadius: 5,
-                        border: "1px solid #30363D",
-                        boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)",
-                        overflow: "hidden",
-                      }}
+                          borderRadius: 5,
+                          border: "1px solid #30363D",
+                          boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.2)",
+                          overflow: "hidden",
+                          display: "flex",
+                          minHeight: { xs: "40vh", md: 395 },
+                        }}
                     >
                       <Box sx={{ flexGrow: 1, height: "100%" }}>
                         <Box sx={{ width: "100%", height: isMobile ? "40vh" : "100%", overflow: "hidden" }}>
@@ -296,8 +316,10 @@ function Contacto() {
                   </Box>
                 </Grid>
 
-                <Grid item xs={12} md={6}>
-                  <ContactoForm setSnackbar={setSnackbar} />
+                <Grid item xs={12} md={5} sx={{ display: "flex" }}>
+                  <Box sx={{ width: "100%", maxWidth: { xs: "100%", md: 500 }, mx: "auto", display: "flex" }}>
+                    <ContactoForm setSnackbar={setSnackbar} fullHeight={!isMobile} />
+                  </Box>
 
                 </Grid>
 

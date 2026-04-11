@@ -1,67 +1,18 @@
-﻿import { Box, Typography, Container, Grid, Button, ListItem, ListItemIcon, ListItemText, useMediaQuery, useTheme, IconButton } from "@mui/material";
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { useInView } from 'react-intersection-observer';
-import { useOutletContext } from "react-router-dom";
+import { Box, Typography, Container, Grid, ListItem, ListItemIcon, ListItemText, useMediaQuery, useTheme } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import { EmojiEvents } from "@mui/icons-material";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import CountUp from "react-countup";
 import "./css/Informations.css";
-import "swiper/css";
 
-const promotions = [
-  {
-    id: 1,
-    title: "\u{1F3CC}\uFE0F For Kids",
-    description: "They learn golf by playing and having fun from day one.",
-    image: "/fondo-1.png",
-    price: "Start Today",
-    bgColor: "linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3))",
-    textColor: "white",
-    descriptors: [
-      "\u{1F3AF} Fun challenges",
-      "\u{1F3C6} Level-based progress",
-      "\u{1F3AE} Interactive learning",
-      "\u26F3 Real fundamentals",
-      "\u{1F91D} More confidence",
-      "\u2728 Guaranteed fun"
-    ]
-  },
-  {
-    id: 2,
-    title: "\u{1F468}\u200D\u{1F469}\u200D\u{1F467} For Parents",
-    description: "Support and track your children's progress at every stage.",
-    image: "/fondo-3.jpg",
-    price: "Discover More",
-    bgColor: "linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2))",
-    textColor: "white",
-    descriptors: [
-      "\u{1F4CA} Clear tracking",
-      "\u{1F3C5} Motivational system",
-      "\u23F1\uFE0F Structured learning",
-      "\u{1F91D} Family involvement",
-      "\u{1F331} Holistic development",
-      "\u{1F4AC} Simple communication"
-    ]
-  },
-  {
-    id: 3,
-    title: "\u{1F3C6} For Coaches",
-    description: "Modern tools to teach golf effectively.",
-    image: "/fondo-4.png",
-    price: "Boost Your Teaching",
-    bgColor: "linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2))",
-    textColor: "white",
-    descriptors: [
-      "\u{1F4C8} Student tracking",
-      "\u{1F3AF} Structured programs",
-      "\u{1F4DA} Teaching resources",
-      "\u26A1 Easy management",
-      "\u{1F3CC}\uFE0F Technical evaluation",
-      "\u{1F680} More efficient coaching"
-    ]
-  }
+const stats = [
+  { count: 45, text: "Years of Combined Golf Experience", tone: "#4FC3F7", image: "/golf-1.jpg" },
+  { count: 20, text: "Years Developing Young Golfers", tone: "#66BB6A", image: "/golf-2.jpg" },
+  { count: 500, text: "Kids introduced to the Game", tone: "#FFB74D", image: "/golf-3.jpg" },
+  { count: 2, text: "Learning environments", tone: "#BA68C8", image: "/golf-4.jpg" },
 ];
+
 const journeySteps = [
   {
     text: "Discover the Game",
@@ -95,138 +46,209 @@ const journeySteps = [
   },
 ];
 
+function splitTextIntoWords(text, active) {
+  return text.split(" ").map((word, index) => (
+    <motion.span
+      key={`${word}-${index}`}
+      initial={{ opacity: 0, x: "100%" }}
+      animate={{ opacity: active ? 1 : 0, x: active ? 0 : "100%" }}
+      transition={{ delay: 0.2 + index * 0.14, duration: 0.8, ease: "easeOut" }}
+      style={{ display: "inline-block", marginRight: "5px" }}
+    >
+      {word}
+    </motion.span>
+  ));
+}
 
-function Informations({ informationsRef, triggerInformations }) {
+function StatFlipCard({ item, index, inView, isMobile, hasAnimated, delayed }) {
+  return (
+    <Grid item xs={6} key={item.text}>
+      <Box
+        sx={{
+          textAlign: "center",
+          color: "white",
+          borderRadius: 2,
+          width: "100%",
+          height: { xs: 150, md: 170 },
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          fontFamily: "'Poppins', sans-serif",
+          perspective: "1000px",
+          position: "relative",
+          mx: "auto",
+        }}
+      >
+        <Box
+          sx={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            transformStyle: "preserve-3d",
+            transition: "transform 2.4s",
+            transitionDelay: inView ? `${0.25 + index * 0.12}s` : "0s",
+            transform: inView || hasAnimated ? "rotateY(180deg)" : "rotateY(0deg)",
+            position: "relative",
+          }}
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              inset: 0,
+              backfaceVisibility: "hidden",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              borderRadius: "22px",
+              backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.5)), url(${item.image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.24)",
+              overflow: "hidden",
+            }}
+          />
 
-  // Controla la vista del componente
-  const [isGrabbing, setIsGrabbing] = useState(false);
-  const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: false, });
+          <Box
+            sx={{
+              position: "absolute",
+              inset: 0,
+              backfaceVisibility: "hidden",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              backgroundColor: "rgba(24, 26, 27, 0.9)",
+              borderRadius: "22px",
+              boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.24)",
+              transform: "rotateY(180deg)",
+              px: { xs: 1.25, md: 2 },
+            }}
+          >
+            <Box sx={{ minWidth: "100px", display: "flex", flexDirection: "column", alignItems: "center" }}>
+              <Typography
+                sx={{
+                  fontFamily: "'Saira', sans-serif",
+                  fontWeight: 700,
+                  minWidth: "80px",
+                  textAlign: "center",
+                  marginBottom: "0.15em",
+                  fontSize: { xs: "2.3rem", md: "2.4rem" },
+                  color: "white",
+                }}
+              >
+                +{delayed ? <CountUp start={0} end={item.count} duration={3.1} separator="." /> : "0"}
+              </Typography>
+              <Box sx={{ textAlign: "center", maxWidth: "100%", fontSize: { xs: "0.8rem", md: "0.98rem" }, fontFamily: "'Oswald', sans-serif", lineHeight: 1.3 }}>
+                {splitTextIntoWords(item.text, delayed)}
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Grid>
+  );
+}
 
-  const [shouldAnimate, setShouldAnimate] = useState(false);
+function Informations() {
+  const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: false });
+  const { ref: impactRef, inView: impactInView } = useInView({ threshold: 0.45, triggerOnce: true });
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [showArrow, setShowArrow] = useState(true);
-  const [animationKey, setAnimationKey] = useState(0);
-  const [swiperInstance, setSwiperInstance] = useState(null);
-  const [showPopularBadge, setShowPopularBadge] = useState(false);
-
-  const { ref: swiperRef, inView: swiperInView } = useInView({ threshold: 0.2, triggerOnce: true, });
-
-  //CANCELAR PRIMERA ANIMACIÃ“N
   const [hasAnimated, setHasAnimated] = useState(false);
-  const [hasAnimated2, setHasAnimated2] = useState(false);
+  const [delayed, setDelayed] = useState(false);
 
   useEffect(() => {
-    if (inView) {
-      setShouldAnimate(true); // ðŸ”¹ Activa la animaciÃ³n cuando el componente es visible
-    }
-  }, [inView]);
-
-  //ANIMACIÃ“N DESCRIPTORES
-  useEffect(() => {
-    if (swiperInView && swiperInstance && !hasAnimated) {
-      swiperInstance.slideTo(0, 1500); // mueve del Ãºltimo al primero
-      setHasAnimated(true);
-    }
-  }, [swiperInView, swiperInstance, hasAnimated]);
-
-  useEffect(() => {
-    if (hasAnimated) {
-      const timeout = setTimeout(() => {
-        setShowPopularBadge(true);
-      }, 2000); // Delay de 3 segundos despuÃ©s que el swiper terminÃ³ su animaciÃ³n
-      return () => clearTimeout(timeout);
-    }
-  }, [hasAnimated]);
-
-
-  //EVITAR ANIMACIÃ“N DUPLICADA
-  useEffect(() => {
-    if (inView && !hasAnimated2) {
+    if (impactInView && !hasAnimated) {
       const timer = setTimeout(() => {
-        setHasAnimated2(true);
+        setHasAnimated(true);
       }, 1500);
       return () => clearTimeout(timer);
     }
-  }, [inView, hasAnimated2]);
+  }, [impactInView, hasAnimated]);
 
-  const handleContactClick = (title) => {
-    const mensaje = `Â¡Hola! Me interesÃ³ la promociÃ³n de ${encodeURIComponent(title)} Â¿Me comentas?`;
-    window.open(`https://api.whatsapp.com/send?phone=15617975986&text=${mensaje}`, "_blank");
-  };
+  useEffect(() => {
+    if (impactInView) {
+      const timer = setTimeout(() => {
+        setDelayed(true);
+      }, 1700);
+      return () => clearTimeout(timer);
+    }
+  }, [impactInView]);
+
   return (
     <Box
       sx={{
         position: "relative",
         zIndex: 10,
-        backgroundImage: 'url(fondo-7.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
+        backgroundImage: "url(fondo-7.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
         py: isMobile ? 8 : 3,
         pt: 1,
         marginTop: "0",
         marginBottom: "-10px",
         color: "white",
-        overflow: 'hidden',
-        borderBottomLeftRadius: isMobile ? '90px' : '120px',
-        borderBottomRightRadius: isMobile ? '90px' : '120px',
+        overflow: "hidden",
+        borderBottomLeftRadius: isMobile ? "90px" : "120px",
+        borderBottomRightRadius: isMobile ? "90px" : "120px",
         "&::before": {
           content: '""',
-          position: 'absolute',
+          position: "absolute",
           inset: 0,
-          bgcolor: 'rgba(0,0,0,0.5)', // overlay oscuro
+          bgcolor: "rgba(0,0,0,0.5)",
           zIndex: 1,
-          borderBottomLeftRadius: isMobile ? '90px' : '120px',
-          borderBottomRightRadius: isMobile ? '90px' : '120px',
+          borderBottomLeftRadius: isMobile ? "90px" : "120px",
+          borderBottomRightRadius: isMobile ? "90px" : "120px",
         },
       }}
     >
-
-      <Container sx={{ textAlign: "center", color: "white", maxWidth: "1400px !important", paddingLeft: isMobile ? "0" : "24px", paddingRight: isMobile ? "0" : "24px" }}>
-
+      <Container
+        sx={{
+          textAlign: "center",
+          color: "white",
+          maxWidth: "1400px !important",
+          paddingLeft: isMobile ? "0" : "24px",
+          paddingRight: isMobile ? "0" : "24px",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
         <Box sx={{ position: "relative", textAlign: "center", mb: 2 }} ref={ref}>
-
           <Box
             sx={{
-              width: 30,  // un poquito mÃ¡s grande
+              width: 30,
               height: 30,
               borderRadius: "50%",
-              background: "linear-gradient(135deg, #4fd1c5, #38b2ac)", // gradiente turquesa vibrante
+              background: "linear-gradient(135deg, #4fd1c5, #38b2ac)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              border: "1.5px solid rgba(255,255,255,0.9)", // borde blanco semitransparente
+              border: "1.5px solid rgba(255,255,255,0.9)",
               mx: "auto",
               mb: 0.5,
-              boxShadow: "0 4px 12px rgba(0,0,0,0.35)", // halo para resaltar sobre fondo oscuro
+              boxShadow: "0 4px 12px rgba(0,0,0,0.35)",
               position: "relative",
               zIndex: 2,
             }}
           >
             <motion.div
               initial={{ rotate: 0, scale: 0.85 }}
-              animate={inView || hasAnimated2 ? { rotate: 1080, scale: 1 } : { rotate: 0, scale: 0.85 }}
-              transition={{
-                duration: 0.8,
-
-                ease: "easeInOut",
-              }}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-                height: "100%",
-              }}
+              animate={inView || hasAnimated ? { rotate: 1080, scale: 1 } : { rotate: 0, scale: 0.85 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+              style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }}
             >
               <EmojiEvents sx={{ fontSize: 18, color: "white" }} />
             </motion.div>
           </Box>
+
           <motion.div
-            initial={{ opacity: 0, y: 80 }} // â¬‡ï¸ Aparece mÃ¡s abajo
-            animate={inView || hasAnimated2 ? { opacity: 1, y: 0 } : { opacity: 0, y: 80 }}
-            transition={{ duration: 1, ease: 'easeOut' }}
+            initial={{ opacity: 0, y: 80 }}
+            animate={inView || hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 80 }}
+            transition={{ duration: 1, ease: "easeOut" }}
           >
             <Typography
               variant="h3"
@@ -241,56 +263,38 @@ function Informations({ informationsRef, triggerInformations }) {
                 display: "inline-block",
                 position: "relative",
                 zIndex: 1,
-                backgroundColor: "transparent",
                 color: "white",
-                "::after": {
-                  content: '""',
-                  position: "absolute",
-                  left: 0,
-                  right: 0,
-                  bottom: "-5px",
-                  height: "10px",
-                  backgroundColor: "transparent",
-                  zIndex: 2,
-                },
               }}
             >
               How the Journey Works
             </Typography>
           </motion.div>
 
-
-          {/* LÃ­nea debajo del tÃ­tulo con animaciÃ³n (con retraso de 2 segundos) */}
           <motion.hr
-            initial={{ opacity: 0 }} // Comienza invisible
-            animate={inView || hasAnimated2 ? { opacity: 1 } : {}} // Aparece completamente
-            transition={{ duration: 0.8, delay: 1 }} // Aparece despuÃ©s de 1s y dura 1s
+            initial={{ opacity: 0 }}
+            animate={inView || hasAnimated ? { opacity: 1 } : {}}
+            transition={{ duration: 0.8, delay: 1 }}
             style={{
               position: "absolute",
-              top: isMobile ? "calc(80% - 30px)" : "calc(100% - 30px)", // Ajusta la posiciÃ³n
+              top: isMobile ? "calc(80% - 30px)" : "calc(100% - 30px)",
               left: "5%",
-              width: "90%", // Mantiene su tamaÃ±o desde el inicio
+              width: "90%",
               border: "1px solid white",
               zIndex: 0,
               background: "white",
               clipPath: "polygon(0% 0%, 0% 0%, 15% 100%, 0% 100%, 0% 0%, 100% 0%, 85% 100%, 100% 100%, 100% 0%)",
             }}
           />
-
         </Box>
-        <Grid container spacing={3} sx={{ mt: 2 }}>
 
-          {/* Columna de los iconos */}
+        <Grid container spacing={3} sx={{ mt: 2 }}>
           <Grid item xs={12} md={6}>
             {journeySteps.map((item, index) => {
-              const { ref: itemRef, inView: itemInView } = useInView({
-                threshold: 0.43,
-                triggerOnce: true,
-              });
+              const { ref: itemRef, inView: itemInView } = useInView({ threshold: 0.43, triggerOnce: true });
 
               return (
                 <motion.div
-                  key={`animated-${index}-${animationKey}`}
+                  key={`animated-${index}`}
                   ref={itemRef}
                   initial={{ opacity: 0, y: 20 }}
                   animate={itemInView ? { opacity: 1, y: 0 } : {}}
@@ -308,24 +312,12 @@ function Informations({ informationsRef, triggerInformations }) {
                     }}
                   >
                     <ListItemIcon sx={{ zIndex: 2, minWidth: { xs: 78, md: 90 } }}>
-                      <Box
-                        sx={{
-                          position: "relative",
-                          width: 70,
-                          height: 92,
-                          display: "flex",
-                          justifyContent: "center",
-                        }}
-                      >
+                      <Box sx={{ position: "relative", width: 70, height: 92, display: "flex", justifyContent: "center" }}>
                         {!item.hideLine && (
                           <motion.div
                             initial={{ height: 0 }}
                             animate={itemInView ? { height: 52 } : { height: 0 }}
-                            transition={{
-                              delay: 0.2 * index,
-                              duration: 1,
-                              ease: "easeInOut",
-                            }}
+                            transition={{ delay: 0.2 * index, duration: 1, ease: "easeInOut" }}
                             style={{
                               position: "absolute",
                               top: "58px",
@@ -354,7 +346,6 @@ function Informations({ informationsRef, triggerInformations }) {
                             boxShadow: "0 6px 14px rgba(0,0,0,0.25)",
                             position: "relative",
                             zIndex: 2,
-
                           }}
                         >
                           <motion.div
@@ -403,14 +394,14 @@ function Informations({ informationsRef, triggerInformations }) {
               );
             })}
           </Grid>
-          <Grid item xs={12} md={6} sx={{ mt: -4 }}>
-            {/* TÃ­tulo fuera del overlay */}
+
+          <Grid item xs={12} md={6} sx={{ mt: { xs: 2, md: -1 } }} ref={impactRef}>
             <Box sx={{ mb: 2, position: "relative", zIndex: 10 }}>
               <Typography
                 component={motion.h5}
                 initial={{ opacity: 0, y: 20 }}
-                animate={showPopularBadge ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
+                animate={inView || hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: 0.25 }}
                 sx={{
                   fontFamily: "'Poppins', sans-serif",
                   fontWeight: 800,
@@ -422,283 +413,39 @@ function Informations({ informationsRef, triggerInformations }) {
                   color: "#ffffff",
                   position: "relative",
                   display: "inline-block",
-
                   "&::after": {
                     content: '""',
                     position: "absolute",
                     left: 0,
-                    bottom: "0px",   // más cerca del texto
+                    bottom: "0px",
                     width: "100%",
                     height: "2px",
                     backgroundColor: "#ffffff",
-                  }
+                  },
                 }}
               >
-                Our Services
+                Our Impact
               </Typography>
             </Box>
 
-            <Box ref={swiperRef} sx={{ display: isMobile ? "block" : "block", position: "relative", px: 1, pt: 2, pb: 1, overflow: "hidden" }}>
-              <Swiper
-                style={{ overflow: "visible" }}
-                spaceBetween={isMobile ? 15 : 15}
-                slidesPerView={isMobile ? 1.07 : 1.5}
-                onSwiper={setSwiperInstance}
-                initialSlide={promotions.length - 1}
-                centeredSlides={false}
-                pagination={{ clickable: true }}
-                onSlideChange={(swiper) => setShowArrow(swiper.activeIndex !== 2)}
-              >
-                {promotions.map((promo, index) => (
-                  <SwiperSlide key={index}>
-                    <Box
-                      sx={{
-                        cursor: "grab",
-                        "&:active": { cursor: "grabbing" },
-                        height: "420px",
-                        position: "relative",
-                        width: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "flex-start",
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          position: "absolute",
-                          top: 0,
-                          left: 0,
-                          right: 0,
-                          zIndex: 0,      // ðŸ‘ˆ este contexto queda detrÃ¡s
-                          pointerEvents: "none", // evita bloquear clics de la card
-                        }}
-                      >
-                        {promo.id === 1 && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 60 }}
-                            animate={showPopularBadge ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
-                            style={{
-                              position: "absolute",
-                              top: "-16px",
-                              left: 8,
-                              background: "linear-gradient(#f14c2e, #d8452e)",
-                              color: "white",
-                              borderTopLeftRadius: "8px",
-                              borderTopRightRadius: "8px",
-                              padding: "6px 16px",
-                              fontSize: "0.75rem",
-                              fontWeight: 600,
-                              height: "22px",
-                              minWidth: "110px",
-                              textAlign: "center",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              gap: 6,
-                              boxShadow: "0 0 12px 2px rgba(255, 105, 0, 0.6)",
-                              border: "2px solid #ff6a00",
-                            }}
-                          >
-                            Popular
-                          </motion.div>
-                        )}
-                      </Box>
-
-                      {/* Card Principal (encima) */}
-                      <Box
-                        sx={{
-                          width: "100%",
-                          height: "100%",
-                          mt: 2,
-                          borderRadius: "16px",
-                          overflow: "hidden",
-                          boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
-                          position: "relative",
-                          bgcolor: "white",
-                          zIndex: 2,   // ðŸ‘ˆ card siempre sobre el badge
-                        }}
-                      >
-
-                        {/* Imagen de fondo con overlay */}
-                        <Box
-                          sx={{
-                            position: "absolute",
-                            inset: 0,
-                            backgroundImage: `url(${promo.image})`,
-                            backgroundSize: "cover",
-                            backgroundPosition: "center",
-                            "&::after": {
-                              content: '""',
-                              position: "absolute",
-                              inset: 0,
-                              background:
-                                promo.bgColor ||
-                                "linear-gradient(180deg, rgba(0,0,0,0.75), rgba(0,0,0,0.3))",
-                            },
-                            zIndex: 0,
-                          }}
-                        />
-
-                        {/* Contenido */}
-                        <Box
-                          sx={{
-                            position: "relative",
-                            zIndex: 2,
-                            p: 3,
-                            display: "flex",
-                            flexDirection: "column",
-                            height: "100%",
-
-                          }}
-                        >
-                          {/* TÃ­tulo y descripciÃ³n */}
-                          <Box sx={{ mb: 1 }}>
-                            <Typography
-                              variant="h6"
-                              sx={{
-                                fontFamily: "'Poppins', sans-serif",
-                                fontWeight: 800,
-                                fontSize: isMobile ? "1.05rem" : "1.15rem",
-                                textAlign: "left",
-                                color: promo.textColor || "white",
-                                mb: 2,
-                                textShadow: "0 2px 6px rgba(0,0,0,0.5)",
-                              }}
-                            >
-                              {promo.title}
-                            </Typography>
-                            <Typography
-                              variant="body2"
-                              sx={{
-                                textAlign: "left",
-                                fontSize: "0.73rem",
-                                color: "#f5f5f5",
-                                background: "rgba(0,0,0,0.4)",
-                                borderRadius: "6px",
-                                p: 1,
-                                lineHeight: 1.3,
-                                display: "flex",
-                                alignItems: "center",
-                                minHeight: 45,
-                              }}
-                            >
-                              {promo.description}
-                            </Typography>
-
-                          </Box>
-                          {/* Lista de descriptores */}
-                          <Box component="ul" sx={{ pl: 2, mb: 5 }}>
-                            {promo.descriptors?.map((desc, i) => (
-                              <Typography
-                                key={i}
-                                component="li"
-                                variant="body2"
-                                sx={{
-                                  color: "#eee",
-                                  fontSize: "0.85rem",
-                                  lineHeight: 1.5,
-                                  mb: 0.5,
-                                  listStyle: "none",
-                                  display: "flex",
-                                  alignItems: "flex-start",
-                                  gap: "8px",
-                                }}
-                              >
-                                {desc}
-                              </Typography>
-                            ))}
-                          </Box>
-                          {/* BotÃ³n Get Quote (queda abajo gracias a mt:auto) */}
-                          <motion.button
-                            onClick={() => handleContactClick(promo.title)}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.97 }}
-                            style={{
-                              background: "linear-gradient(90deg, #FF9800, #F57C00)",
-                              color: "white",
-                              border: "none",
-                              borderRadius: "8px",
-                              width: "90%",
-                              padding: "10px 20px",
-                              mt: "auto",
-                              fontWeight: 700,
-                              fontSize: "0.95rem",
-                              cursor: "pointer",
-                              boxShadow: "0 6px 18px rgba(0,0,0,0.3)",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              gap: "8px",
-                            }}
-                          >
-                            <Box
-                              component="img"
-                              src="/clic.jpg"
-                              alt="Ãcono de clic"
-                              sx={{
-                                width: 20,
-                                height: 20,
-                                userSelect: "none",
-                                filter: "invert(1) brightness(2)",
-                              }}
-                            />  Get Quote
-                          </motion.button>
-                        </Box>
-                      </Box>
-                    </Box>
-                  </SwiperSlide>
-                ))}
-
-              </Swiper>
-
-              {
-                showArrow && swiperInstance && (
-                  <motion.div
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                    style={{ position: "absolute", top: -4, right: 10, zIndex: 10 }}
-                  >
-                    <IconButton
-                      onClick={() => swiperInstance.slideNext()}
-                      sx={{
-                        color: "white",
-                        transition: "opacity 0.3s ease-in-out",
-                        backgroundColor: "transparent",
-                        boxShadow: "none",
-                        padding: 0,
-                        "&:hover": { backgroundColor: "transparent" },
-                      }}
-                    >
-                      <ArrowForwardIcon fontSize="large" sx={{ fontSize: "23px" }} />
-                    </IconButton>
-                  </motion.div>
-                )
-              }
-            </Box>
+            <Grid container spacing={{ xs: 1.5, md: 2 }}>
+              {stats.map((item, index) => (
+                <StatFlipCard
+                  key={item.text}
+                  item={item}
+                  index={index}
+                  inView={impactInView}
+                  isMobile={isMobile}
+                  hasAnimated={hasAnimated}
+                  delayed={delayed}
+                />
+              ))}
+            </Grid>
           </Grid>
-
-
-
         </Grid>
-
-
-
       </Container>
     </Box>
   );
-};
+}
 
 export default Informations;
-
-
-
-
-
-
-
-
-
-
-
-

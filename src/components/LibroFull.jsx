@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography, useMediaQuery } from "@mui/material";
 import NavigateBeforeRoundedIcon from "@mui/icons-material/NavigateBeforeRounded";
 import NavigateNextRoundedIcon from "@mui/icons-material/NavigateNextRounded";
 import { motion } from "framer-motion";
@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 export default function LibroFull({
   bookOpen,
   isMobile,
+  useMobileBookLayout,
   isPortrait,
   shouldShowRotateOverlay,
   storyPage,
@@ -18,10 +19,32 @@ export default function LibroFull({
   flipDirection,
   handlePageTurn,
 }) {
+  const isIphoneSELike = useMediaQuery(
+    "((max-width: 430px) and (max-height: 760px)) or ((max-width: 760px) and (max-height: 430px))"
+  );
   const mobileTurnDuration = 1.35;
   const desktopTurnDuration = 2;
   const turnDuration = isMobile ? mobileTurnDuration : desktopTurnDuration;
   const useLiteMobileBook = isMobile;
+  const activePage = storyBookPages[storyPage] || {};
+  const showMobileRightText = useMobileBookLayout && Boolean(activePage.imageText);
+  const leftPageFontSize = isIphoneSELike
+    ? "0.8rem"
+    : isPortrait
+      ? "1rem"
+      : "0.86rem";
+  const leftPageLineHeight = !isMobile ? 1.72 : isIphoneSELike ? 1.48 : 1.6;
+  const isFirstMobileSpread = showMobileRightText && storyPage === 0;
+  const isSecondMobileSpread = showMobileRightText && storyPage === 1;
+  const isThirdMobileSpread = showMobileRightText && storyPage === 2;
+  const isFourthMobileSpread = showMobileRightText && storyPage === 3;
+  const isFifthMobileSpread = showMobileRightText && storyPage === 4;
+  const isSixthMobileSpread = showMobileRightText && storyPage === 5;
+  const isSeventhMobileSpread = showMobileRightText && storyPage === 6;
+  const isEighthMobileSpread = showMobileRightText && storyPage === 7;
+  const isNinthMobileSpread = showMobileRightText && storyPage === 8;
+  const isTenthMobileSpread = showMobileRightText && storyPage === 9;
+  const isEleventhMobileSpread = showMobileRightText && storyPage === 10;
 
   return (
     <>
@@ -152,7 +175,7 @@ export default function LibroFull({
                 height: bookOpen ? { xs: isPortrait ? "56vh" : "48vh", sm: "70vh" } : { xs: 180, sm: 220 },
                 borderRadius: 2.2,
                 py: { xs: 1.9, sm: 2.1 },
-                px: { xs: 1.9, sm: 4.9, md: 5.4 },
+                px: { xs: 1.15, sm: 4.9, md: 5.4 },
                 background: "linear-gradient(180deg, #fffdf8 0%, #fbf4e8 100%)",
                 border: "1px solid rgba(148,111,73,0.3)",
                 position: "relative",
@@ -216,45 +239,61 @@ export default function LibroFull({
                         fontWeight: 900,
                         color: "#0f4b75",
                         fontSize: bookOpen
-                          ? { xs: isPortrait ? "1.02rem" : "0.88rem", sm: "1.42rem" }
+                          ? {
+                              xs: isIphoneSELike
+                                ? isPortrait
+                                  ? "0.8rem"
+                                  : "0.76rem"
+                                : isPortrait
+                                  ? "1.02rem"
+                                  : "0.88rem",
+                              sm: "1.42rem",
+                            }
                           : { xs: "1rem", sm: "1.1rem" },
                         mb: 0.35,
                         width: "100%",
                         textAlign: "center",
                       }}
                     >
-                      {storyBookPages[storyPage].title}
+                      {activePage.title}
                     </Typography>
                     <Typography
                       sx={{
                         fontWeight: 800,
                         color: "#1f4f82",
                         fontSize: bookOpen
-                          ? { xs: isPortrait ? "0.9rem" : "0.78rem", sm: "1.18rem" }
+                          ? {
+                              xs: isIphoneSELike
+                                ? isPortrait
+                                  ? "0.7rem"
+                                  : "0.7rem"
+                                : isPortrait
+                                  ? "0.9rem"
+                                  : "0.78rem",
+                              sm: "1.18rem",
+                            }
                           : { xs: "0.86rem", sm: "0.92rem" },
                         mb: 0.8,
                         width: "100%",
                         textAlign: "center",
                       }}
                     >
-                      {storyBookPages[storyPage].subtitle}
+                      {activePage.subtitle}
                     </Typography>
                   </>
                 )}
                 <Typography
                   sx={{
                     color: "#31546f",
-                    lineHeight: bookOpen && !isMobile ? 1.7 : 1.62,
-                    fontSize: bookOpen
-                      ? { xs: isPortrait ? "0.82rem" : "0.7rem", sm: "1.08rem" }
-                      : { xs: "0.82rem", sm: "0.9rem" },
+                    lineHeight: bookOpen ? leftPageLineHeight : 1.55,
+                    fontSize: bookOpen ? leftPageFontSize : "0.82rem",
                     width: "100%",
-                    maxWidth: { xs: "100%", sm: "88%", md: "86%" },
+                    maxWidth: bookOpen ? { xs: "100%", sm: !useMobileBookLayout ? "90%" : "100%", md: "88%" } : "100%",
                     mx: "auto",
                     textAlign: "center",
                   }}
                 >
-                  {storyBookPages[storyPage].text}
+                  {activePage.text}
                 </Typography>
               </motion.div>
             </Box>
@@ -269,7 +308,7 @@ export default function LibroFull({
                 overflow: "hidden",
                 pointerEvents: shouldShowRotateOverlay ? "none" : "auto",
                 position: "relative",
-                p: { xs: 1.15, sm: 1.35 },
+                p: { xs: 0.25, sm: 1.35 },
                 boxShadow:
                   isMobile
                     ? "inset 0 0 0 1px rgba(255,255,255,0.28), 0 4px 8px rgba(45,26,11,0.07)"
@@ -302,31 +341,225 @@ export default function LibroFull({
                 },
               }}
             >
-              <Box
-                sx={{
-                  width: "100%",
-                  height: "100%",
-                }}
-              >
-                <motion.img
-                  key={`page-image-${storyPage}`}
-                  src={currentRightPageImage}
-                  alt={`Story illustration ${storyPage + 1}`}
-                  initial={{ opacity: 0, scale: 0.992 }}
-                  animate={{
-                    opacity: pageContentVisible ? 1 : 0,
-                    scale: pageContentVisible ? 1 : 0.992,
-                  }}
-                  transition={{ duration: pageContentVisible ? 0.5 : 1, ease: [0.2, 0.72, 0.18, 1], delay: 0 }}
-                  style={{
+              {showMobileRightText ? (
+                <Box
+                  sx={{
                     width: "100%",
                     height: "100%",
-                    objectFit: "contain",
-                    objectPosition: "center",
-                    display: "block",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 0.1,
                   }}
-                />
-              </Box>
+                >
+                  <motion.div
+                    key={`page-right-text-${storyPage}`}
+                    initial={{ opacity: 0, y: 8, scale: 0.992 }}
+                    animate={{
+                      opacity: pageContentVisible ? 1 : 0,
+                      y: pageContentVisible ? 0 : 8,
+                      scale: pageContentVisible ? 1 : 0.992,
+                    }}
+                    transition={{ duration: pageContentVisible ? 0.5 : 1, ease: [0.2, 0.72, 0.18, 1], delay: 0 }}
+                    style={{
+                      minHeight: 0,
+                      flex: isFirstMobileSpread
+                        ? isIphoneSELike ? "0 0 40%" : "0 0 34%"
+                        : isSecondMobileSpread
+                          ? isIphoneSELike ? "0 0 44%" : "0 0 36%"
+                          : isThirdMobileSpread
+                            ? isIphoneSELike ? "0 0 44%" : "0 0 36%"
+                            : isFourthMobileSpread
+                              ? isIphoneSELike ? "0 0 38%" : "0 0 32%"
+                              : isFifthMobileSpread
+                                ? isIphoneSELike ? "0 0 48%" : "0 0 48%"
+                                : isSixthMobileSpread
+                                  ? isIphoneSELike ? "0 0 44%" : "0 0 40%"
+                                  : isEighthMobileSpread
+                                    ? isIphoneSELike ? "0 0 44%" : "0 0 40%"
+                                    : isSeventhMobileSpread
+                                      ? isIphoneSELike ? "0 0 44%" : "0 0 40%"
+                                      : isNinthMobileSpread || isTenthMobileSpread || isEleventhMobileSpread
+                                        ? isIphoneSELike ? "0 0 44%" : "0 0 40%"
+                              : isIphoneSELike ? "0 0 72%" : "0 0 66%",
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "flex-start",
+                      position: "relative",
+                      zIndex: 2,
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        color: "#31546f",
+                        lineHeight: isIphoneSELike ? 1.38 : 1.52,
+                        fontSize: isFirstMobileSpread
+                          ? isIphoneSELike
+                            ? isPortrait
+                              ? "0.76rem"
+                              : "0.76rem"
+                            : isPortrait
+                              ? "1.08rem"
+                              : "0.94rem"
+                          : isIphoneSELike
+                            ? isPortrait
+                              ? "0.7rem"
+                              : "0.7rem"
+                          : isPortrait
+                            ? "1.02rem"
+                            : "0.9rem",
+                        width: "100%",
+                        textAlign: "center",
+                        pt: isFirstMobileSpread
+                          ? isIphoneSELike ? 0.75 : 1.22
+                          : isSecondMobileSpread || isThirdMobileSpread
+                            ? isIphoneSELike ? 0.78 : 1.05
+                            : isFourthMobileSpread
+                                ? isIphoneSELike ? 0.72 : 0.82
+                                : isFifthMobileSpread
+                                  ? isIphoneSELike ? 0.98 : 1.14
+                                  : isSixthMobileSpread
+                                    ? isIphoneSELike ? 0.88 : 1
+                                    : isEighthMobileSpread
+                                      ? isIphoneSELike ? 0.88 : 1
+                                      : isSeventhMobileSpread
+                                        ? isIphoneSELike ? 0.88 : 1
+                                        : isNinthMobileSpread || isTenthMobileSpread || isEleventhMobileSpread
+                                          ? isIphoneSELike ? 0.88 : 1
+                                : isIphoneSELike ? 0.82 : 1.24,
+                        px: isFirstMobileSpread
+                          ? isIphoneSELike ? 0.8 : 0.8
+                          : isSecondMobileSpread || isThirdMobileSpread
+                            ? isIphoneSELike ? 0.48 : 0.75
+                            : isFourthMobileSpread
+                                ? isIphoneSELike ? 0.52 : 0.72
+                                : isFifthMobileSpread
+                                  ? isIphoneSELike ? 0.56 : 0.68
+                                  : isSixthMobileSpread
+                                    ? isIphoneSELike ? 0.56 : 0.7
+                                    : isEighthMobileSpread
+                                      ? isIphoneSELike ? 0.56 : 0.7
+                                      : isSeventhMobileSpread
+                                        ? isIphoneSELike ? 0.56 : 0.7
+                                        : isNinthMobileSpread || isTenthMobileSpread || isEleventhMobileSpread
+                                          ? isIphoneSELike ? 0.56 : 0.7
+                                : isIphoneSELike ? 0.45 : 0.65,
+                      }}
+                    >
+                      {activePage.imageText}
+                    </Typography>
+                  </motion.div>
+
+                  <Box
+                    sx={{
+                      minHeight: 0,
+                      flex: isFirstMobileSpread
+                        ? isIphoneSELike ? "1 1 60%" : "1 1 70%"
+                        : isSecondMobileSpread
+                          ? isIphoneSELike ? "1 1 36%" : "1 1 56%"
+                          : isThirdMobileSpread
+                            ? isIphoneSELike ? "1 1 56%" : "1 1 64%"
+                          : isFourthMobileSpread
+                              ? isIphoneSELike ? "1 1 62%" : "1 1 68%"
+                            : isFifthMobileSpread
+                              ? isIphoneSELike ? "1 1 52%" : "1 1 52%"
+                            : isSixthMobileSpread
+                              ? isIphoneSELike ? "1 1 56%" : "1 1 60%"
+                            : isEighthMobileSpread
+                              ? isIphoneSELike ? "1 1 56%" : "1 1 60%"
+                            : isSeventhMobileSpread
+                              ? isIphoneSELike ? "1 1 56%" : "1 1 60%"
+                            : isNinthMobileSpread || isTenthMobileSpread || isEleventhMobileSpread
+                              ? isIphoneSELike ? "1 1 56%" : "1 1 60%"
+                            : isIphoneSELike ? "1 1 28%" : "1 1 34%",
+                      pt: isFirstMobileSpread
+                        ? 0
+                        : isSecondMobileSpread
+                          ? isIphoneSELike ? 0.34 : 0.12
+                          : isThirdMobileSpread
+                            ? isIphoneSELike ? 0.1 : 0.02
+                          : isFourthMobileSpread
+                              ? 0
+                            : isFifthMobileSpread
+                              ? isIphoneSELike ? 0.22 : 0.18
+                            : isSixthMobileSpread
+                              ? isIphoneSELike ? 0.12 : 0.08
+                            : isEighthMobileSpread
+                              ? isIphoneSELike ? 0.12 : 0.08
+                            : isSeventhMobileSpread
+                              ? isIphoneSELike ? 0.12 : 0.08
+                            : isNinthMobileSpread || isTenthMobileSpread || isEleventhMobileSpread
+                              ? isIphoneSELike ? 0.12 : 0.08
+                              : isIphoneSELike ? 0.1 : 0.2,
+                    }}
+                  >
+                    <motion.img
+                      key={`page-image-${storyPage}`}
+                      src={currentRightPageImage}
+                      alt={`Story illustration ${storyPage + 1}`}
+                      initial={{ opacity: 0, scale: 0.992 }}
+                      animate={{
+                        opacity: pageContentVisible ? 1 : 0,
+                        scale: pageContentVisible ? 1 : 0.992,
+                      }}
+                      transition={{ duration: pageContentVisible ? 0.5 : 1, ease: [0.2, 0.72, 0.18, 1], delay: 0 }}
+                      style={{
+                        width:
+                          isSecondMobileSpread && !isIphoneSELike
+                            ? "88%"
+                            : "100%",
+                        height:
+                          isSecondMobileSpread && !isIphoneSELike
+                            ? "88%"
+                            : "100%",
+                        objectFit: "contain",
+                        objectPosition:
+                          isFirstMobileSpread || isSecondMobileSpread || isThirdMobileSpread
+                            || isFourthMobileSpread
+                            || isFifthMobileSpread
+                            || isSixthMobileSpread
+                            || isSeventhMobileSpread
+                            || isEighthMobileSpread
+                            || isNinthMobileSpread
+                            || isTenthMobileSpread
+                            || isEleventhMobileSpread
+                            ? "center center"
+                            : "center bottom",
+                        display: "block",
+                        margin:
+                          isSecondMobileSpread && !isIphoneSELike
+                            ? "10px auto 0"
+                            : "0",
+                      }}
+                    />
+                  </Box>
+                </Box>
+              ) : (
+                <Box
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
+                  <motion.img
+                    key={`page-image-${storyPage}`}
+                    src={currentRightPageImage}
+                    alt={`Story illustration ${storyPage + 1}`}
+                    initial={{ opacity: 0, scale: 0.992 }}
+                    animate={{
+                      opacity: pageContentVisible ? 1 : 0,
+                      scale: pageContentVisible ? 1 : 0.992,
+                    }}
+                    transition={{ duration: pageContentVisible ? 0.5 : 1, ease: [0.2, 0.72, 0.18, 1], delay: 0 }}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                      objectPosition: "center",
+                      display: "block",
+                    }}
+                  />
+                </Box>
+              )}
             </Box>
           </Grid>
           {isPageTurning && !useLiteMobileBook && (

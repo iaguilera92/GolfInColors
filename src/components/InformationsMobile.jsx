@@ -1,4 +1,4 @@
-﻿import {
+import {
   Box,
   Typography,
   Container,
@@ -9,10 +9,17 @@
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import CountUp from "react-countup";
 
+const stats = [
+  { count: 45, text: "Years of Combined Golf Experience", tone: "#4FC3F7", image: "/golf-1.jpg" },
+  { count: 20, text: "Years Developing Young Golfers", tone: "#66BB6A", image: "/golf-2.jpg" },
+  { count: 500, text: "Kids introduced to the Game", tone: "#FFB74D", image: "/golf-3.jpg" },
+  { count: 2, text: "Learning environments", tone: "#BA68C8", image: "/golf-4.jpg" },
+];
 
 const journeySteps = [
   {
@@ -47,6 +54,90 @@ const journeySteps = [
   },
 ];
 
+function splitTextIntoWords(text, active) {
+  return text.split(" ").map((word, index) => (
+    <motion.span
+      key={`${word}-${index}`}
+      initial={{ opacity: 0, x: "100%" }}
+      animate={{ opacity: active ? 1 : 0, x: active ? 0 : "100%" }}
+      transition={{ delay: 0.15 + index * 0.12, duration: 0.7, ease: "easeOut" }}
+      style={{ display: "inline-block", marginRight: "4px" }}
+    >
+      {word}
+    </motion.span>
+  ));
+}
+
+function StatFlipCard({ item, index, inView, delayed }) {
+  return (
+    <Grid item xs={6} key={item.text}>
+      <Box
+        sx={{
+          width: "100%",
+          height: 145,
+          perspective: "1000px",
+        }}
+      >
+        <Box
+          sx={{
+            width: "100%",
+            height: "100%",
+            position: "relative",
+            transformStyle: "preserve-3d",
+            transition: "transform 2.2s",
+            transitionDelay: inView ? `${0.2 + index * 0.1}s` : "0s",
+            transform: inView ? "rotateY(180deg)" : "rotateY(0deg)",
+          }}
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              inset: 0,
+              backfaceVisibility: "hidden",
+              borderRadius: "20px",
+              backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.5)), url(${item.image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              boxShadow: "0 8px 20px rgba(0,0,0,0.22)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              px: 1.4,
+              textAlign: "center",
+            }}
+          />
+
+          <Box
+            sx={{
+              position: "absolute",
+              inset: 0,
+              backfaceVisibility: "hidden",
+              transform: "rotateY(180deg)",
+              borderRadius: "20px",
+              backgroundColor: "rgba(24, 26, 27, 0.92)",
+              boxShadow: "0 8px 20px rgba(0,0,0,0.22)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              px: 1.2,
+              textAlign: "center",
+            }}
+          >
+            <Typography sx={{ fontFamily: "'Saira', sans-serif", fontWeight: 700, fontSize: "2.05rem", lineHeight: 1, mb: 0.65 }}>
+              +{delayed ? <CountUp start={0} end={item.count} duration={3} separator="." /> : "0"}
+            </Typography>
+            <Box sx={{ fontSize: "0.76rem", lineHeight: 1.3, fontFamily: "'Oswald', sans-serif" }}>
+              {splitTextIntoWords(item.text, delayed)}
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Grid>
+  );
+}
+
 function Informations() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -55,6 +146,20 @@ function Informations() {
     threshold: 0.25,
     triggerOnce: true,
   });
+  const { ref: impactRef, inView: impactInView } = useInView({
+    threshold: 0.45,
+    triggerOnce: true,
+  });
+  const [delayed, setDelayed] = useState(false);
+
+  useEffect(() => {
+    if (impactInView) {
+      const timer = setTimeout(() => {
+        setDelayed(true);
+      }, 1600);
+      return () => clearTimeout(timer);
+    }
+  }, [impactInView]);
 
   return (
     <Box
@@ -114,7 +219,7 @@ function Informations() {
         </motion.div>
 
         <Grid container spacing={4} justifyContent="center">
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12}>
             {journeySteps.map((item, index) => (
               <motion.div
                 key={index}
@@ -147,8 +252,7 @@ function Informations() {
                             top: 58,
                             width: "2px",
                             height: 52,
-                            background:
-                              "repeating-linear-gradient(to bottom, white 0 4px, transparent 4px 8px)",
+                            background: "repeating-linear-gradient(to bottom, white 0 4px, transparent 4px 8px)",
                             opacity: 0.8,
                           }}
                         />
@@ -165,7 +269,6 @@ function Informations() {
                           background: item.tone,
                           boxShadow: "0 6px 14px rgba(0,0,0,0.25)",
                           position: "relative",
-
                         }}
                       >
                         <motion.div
@@ -219,26 +322,30 @@ function Informations() {
             ))}
           </Grid>
         </Grid>
+
+        <Box sx={{ mt: 4.5 }} ref={impactRef}>
+          <Typography
+            sx={{
+              textAlign: "center",
+              fontWeight: 800,
+              mb: 2,
+              fontSize: "1.15rem",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+            }}
+          >
+            Our Impact
+          </Typography>
+
+          <Grid container spacing={1.5}>
+            {stats.map((item, index) => (
+              <StatFlipCard key={item.text} item={item} index={index} inView={impactInView} delayed={delayed} />
+            ))}
+          </Grid>
+        </Box>
       </Container>
     </Box>
   );
 }
 
 export default Informations;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

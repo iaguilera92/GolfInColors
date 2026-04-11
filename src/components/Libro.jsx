@@ -1,186 +1,100 @@
-﻿import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import ScreenRotationAltIcon from "@mui/icons-material/ScreenRotationAlt";
 
-export const storyBookPagesMobile = [
+const storyBookPageSpread = [
   {
     title: "",
     subtitle: "Why Golf?",
     text: "Hugo and Lisa had a love story that felt like it came straight from a fairy tale. They were high school sweethearts, voted prom king and queen, and always dreamed of building a happy life together.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "They got married when they were young, and ten years later, their family expanded with the birth of two wonderful children, Max and Sophie.",
+    imageText:
+      "They got married when they were young, and ten years later, their family expanded with the birth of two wonderful children, Max and Sophie.",
   },
   {
     title: "",
     subtitle: "",
     text: "Hugo moved to the United States from Colombia when he was a boy. He loved his family deeply and worked tirelessly in the construction business.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "Day after day, he poured his energy into building houses and buildings, determined to make them strong and safe. Lisa, who grew up in Virginia, worked from home, caring for Max and Sophie and filling the house with warmth and love.",
+    imageText:
+      "Day after day, he poured his energy into building houses and buildings, determined to make them strong and safe. Lisa, who grew up in Virginia, worked from home, caring for Max and Sophie and filling the house with warmth and love.",
   },
   {
     title: "",
     subtitle: "",
     text: "Hugo wanted to teach his children that working hard for something you love helps you grow. He believed that if they discovered a true passion, it would make them both happy and stronger as individuals.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "At the age of six, Max was a curious child. He loved learning new things and could spend hours reading books and asking big questions about the world.",
+    imageText:
+      "At the age of six, Max was a curious child. He loved learning new things and could spend hours reading books and asking big questions about the world.",
   },
   {
     title: "",
     subtitle: "",
     text: "In school, he was one of the top students, consistently earning good grades and winning several academic awards for his outstanding performance. His teachers and parents were very proud of him.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "However, despite Max's brilliance, he struggled to make friends. He often felt shy around other kids and did not always know how to start a conversation or join in during recess.",
+    imageText:
+      "However, despite Max's brilliance, he struggled to make friends. He often felt shy around other kids and did not always know how to start a conversation or join in during recess.",
   },
   {
     title: "",
     subtitle: "",
     text: "While he enjoyed learning, he sometimes wished he could play and have fun with other children, just like his little sister, Sophie.",
+    imageText:
+      "His parents tried to help him find a sport he liked. Soccer, baseball, swimming, nothing seemed quite right. On the other hand, Sophie was full of energy and joy, thriving in tennis, running, and every other sport she tried. She even played soccer with Max's friends, her bright smile lighting up every game she joined.",
   },
   {
     title: "",
     subtitle: "",
-    text: "His parents tried to help him find a sport he liked. Soccer, baseball, swimming, nothing seemed quite right. On the other hand, Sophie was full of energy and joy, thriving in tennis, running, and every other sport she tried.",
+    text: "Then, one day, Hugo took Max to 'Take Your Kid to Work Day.' Max was thrilled to see what his dad did every day.",
+    imageText:
+      "Hugo was working on a new house, but as they arrived, Max's eyes drifted past the wooden frames and stacks of bricks. Just beyond the site stretched a wide, green golf course. Max watched in awe as players swung their clubs, sending tiny white balls soaring through the sky.",
   },
   {
     title: "",
     subtitle: "",
-    text: "She even played soccer with Max's friends, her bright smile lighting up every game she joined.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "Then, one day, Hugo took Max to 'Take Your Kid to Work Day.' Max was thrilled to see what his dad did every day. Hugo was working on a new house, but as they arrived, Max's eyes drifted past the wooden frames and stacks of bricks.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "Just beyond the site stretched a wide, green golf course. Max watched in awe as players swung their clubs, sending tiny white balls soaring through the sky.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "He noticed how carefully they lined up their shots, how focused they looked, and how they cheered when the ball connected perfectly. He had never seen a sport like this before. 'Dad, what are they playing?' Max asked, his eyes wide. Hugo smiled. 'That's golf, buddy.'",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "Max tilted his head, intrigued, not just by the game, but by how the players carried themselves: their focus, their clothes, and the way they launched the ball with what seemed like just a stick.",
+    text: "He noticed how carefully they lined up their shots, how focused they looked, and how they cheered when the ball connected perfectly. He had never seen a sport like this before.",
+    imageText:
+      "'Dad, what are they playing?' Max asked, his eyes wide. Hugo smiled. 'That's golf, buddy.' Max tilted his head, intrigued, not just by the game, but by how the players carried themselves: their focus, their clothes, and the way they launched the ball with what seemed like just a stick.",
   },
   {
     title: "",
     subtitle: "",
     text: "Then, Max noticed something even more captivating: a colorful area filled with games and targets. Children laughed and competed under the guidance of two energetic coaches.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "Max was hypnotized by the scene. He only snapped out of it when his dad returned with some tools and a pair of helmets in his hand.",
+    imageText:
+      "Max was hypnotized by the scene. He only snapped out of it when his dad returned with some tools and a pair of helmets in his hand.",
   },
   {
     title: "",
     subtitle: "",
     text: "Max couldn't hold his curiosity and asked, 'Dad, what are they doing over there?' 'I think that's a golf academy, Max.' 'What's that?' 'It's a place where you learn golf, a sport where you hit a ball with a club toward a small hole.'",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "'And the colorful area? Can we go there?' Before Hugo could answer, his boss, Felix, overheard the conversation. He noticed Max's curious face and smiled.",
+    imageText:
+      "'And the colorful area? Can we go there?' Before Hugo could answer, his boss, Felix, overheard the conversation. He noticed Max's curious face and smiled.",
   },
   {
     title: "",
     subtitle: "",
     text: "'What you're looking at is Golf in Colors, a new academy for kids ages three to eight. My son Matt is there right now, and he loves it! You should give it a try.'",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "'Wow,' Hugo said. 'At that age, and they're already taking classes?' 'Absolutely,' Felix replied. 'They learn the fundamentals and build their motor skills so in the future it will be easier for them to swing properly.'",
+    imageText:
+      "'Wow,' Hugo said. 'At that age, and they're already taking classes?' 'Absolutely,' Felix replied. 'They learn the fundamentals and build their motor skills so in the future it will be easier for them to swing properly.'",
   },
   {
     title: "",
     subtitle: "",
     text: "'You should talk to Coach Sergio and Coach Anika, I think they still have spots on Mondays and Wednesdays.'",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "Hugo turned to his son. 'So, Max, want to give it a try?' 'YES! YES! YES!' Max shouted, bouncing with excitement. Seeing the joy in his son's eyes, Hugo knew they had discovered something special.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "That evening, Max couldn't stop talking about the golf course. Instead of describing the construction site, he filled the dinner table with stories of the colorful academy. Hugo and Lisa exchanged a knowing look, they needed to go back and learn more.",
+    imageText:
+      "Hugo turned to his son. 'So, Max, want to give it a try?' 'YES! YES! YES!' Max shouted, bouncing with excitement. Seeing the joy in his son's eyes, Hugo knew they had discovered something special. That evening, Max couldn't stop talking about the golf course. Instead of describing the construction site, he filled the dinner table with stories of the colorful academy. Hugo and Lisa exchanged a knowing look, they needed to go back and learn more.",
   },
 ];
 
-export const storyBookPagesDesktop = [
-  {
-    title: "",
-    subtitle: "Why Golf?",
-    text: "Hugo and Lisa had a love story that felt like it came straight from a fairy tale. They were high school sweethearts, voted prom king and queen, and always dreamed of building a happy life together. They got married when they were young, and ten years later, their family expanded with the birth of two wonderful children, Max and Sophie.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "Hugo moved to the United States from Colombia when he was a boy. He loved his family deeply and worked tirelessly in the construction business. Day after day, he poured his energy into building houses and buildings, determined to make them strong and safe. Lisa, who grew up in Virginia, worked from home, caring for Max and Sophie and filling the house with warmth and love.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "Hugo wanted to teach his children that working hard for something you love helps you grow. He believed that if they discovered a true passion, it would make them both happy and stronger as individuals. At the age of six, Max was a curious child. He loved learning new things and could spend hours reading books and asking big questions about the world.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "In school, he was one of the top students, consistently earning good grades and winning several academic awards for his outstanding performance. His teachers and parents were very proud of him. However, despite Max's brilliance, he struggled to make friends. He often felt shy around other kids and did not always know how to start a conversation or join in during recess.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "While he enjoyed learning, he sometimes wished he could play and have fun with other children, just like his little sister, Sophie. His parents tried to help him find a sport he liked. Soccer, baseball, swimming, nothing seemed quite right. On the other hand, Sophie was full of energy and joy, thriving in tennis, running, and every other sport she tried. She even played soccer with Max's friends, her bright smile lighting up every game she joined.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "Then, one day, Hugo took Max to 'Take Your Kid to Work Day.' Max was thrilled to see what his dad did every day. Hugo was working on a new house, but as they arrived, Max's eyes drifted past the wooden frames and stacks of bricks. Just beyond the site stretched a wide, green golf course. Max watched in awe as players swung their clubs, sending tiny white balls soaring through the sky.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "He noticed how carefully they lined up their shots, how focused they looked, and how they cheered when the ball connected perfectly. He had never seen a sport like this before. 'Dad, what are they playing?' Max asked, his eyes wide. Hugo smiled. 'That's golf, buddy.' Max tilted his head, intrigued, not just by the game, but by how the players carried themselves: their focus, their clothes, and the way they launched the ball with what seemed like just a stick.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "Then, Max noticed something even more captivating: a colorful area filled with games and targets. Children laughed and competed under the guidance of two energetic coaches. Max was hypnotized by the scene. He only snapped out of it when his dad returned with some tools and a pair of helmets in his hand.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "Max couldn't hold his curiosity and asked, 'Dad, what are they doing over there?' 'I think that's a golf academy, Max.' 'What's that?' 'It's a place where you learn golf, a sport where you hit a ball with a club toward a small hole.' 'And the colorful area? Can we go there?' Before Hugo could answer, his boss, Felix, overheard the conversation. He noticed Max's curious face and smiled.",
-  },
-  {
-    title: "",
-    subtitle: "",
-    text: "'What you're looking at is Golf in Colors, a new academy for kids ages three to eight. My son Matt is there right now, and he loves it! You should give it a try.' 'Wow,' Hugo said. 'At that age, and they're already taking classes?' 'Absolutely,' Felix replied. 'They learn the fundamentals and build their motor skills so in the future it will be easier for them to swing properly. You should talk to Coach Sergio and Coach Anika, I think they still have spots on Mondays and Wednesdays.' Hugo turned to his son. 'So, Max, want to give it a try?' 'YES! YES! YES!' Max shouted, bouncing with excitement. Seeing the joy in his son's eyes, Hugo knew they had discovered something special. That evening, Max couldn't stop talking about the golf course. Instead of describing the construction site, he filled the dinner table with stories of the colorful academy. Hugo and Lisa exchanged a knowing look, they needed to go back and learn more.",
-  },
-];
+export const storyBookPagesMobile = storyBookPageSpread.map((page) => ({
+  ...page,
+}));
+
+export const storyBookPagesDesktop = storyBookPageSpread.map((page) => ({
+  title: page.title,
+  subtitle: page.subtitle,
+  text: [page.text, page.imageText].filter(Boolean).join(" "),
+}));
 
 const storyPageImages = [
-  "/IMAGE_01.webp",
-  "/IMAGE_02.webp",
+  "/IMAGE_01.avif",
+  "/IMAGE_02.avif",
   "/IMAGE_03.avif",
   "/IMAGE_04.avif",
   "/IMAGE_05.avif",
@@ -205,6 +119,7 @@ export default function Libro({
   turnId,
   flipDirection,
   handlePageTurn,
+  useMobileBookLayout,
 }) {
   const currentRightPageImage = storyPageImages[Math.min(storyPage, storyPageImages.length - 1)];
   const nextRightPageImage = storyPageImages[Math.min(storyPage + 1, storyPageImages.length - 1)];
@@ -431,6 +346,7 @@ export default function Libro({
           <LibroFull
             bookOpen={bookOpen}
             isMobile={isMobile}
+            useMobileBookLayout={useMobileBookLayout}
             isPortrait={isPortrait}
             shouldShowRotateOverlay={shouldShowRotateOverlay}
             storyPage={storyPage}

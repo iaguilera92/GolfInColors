@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import {
     TextField,
     Button,
@@ -17,10 +17,9 @@ import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
-
 const MotionBox = motion.create(Box);
 
-const ContactoForm = ({ setSnackbar }) => {
+const ContactoForm = ({ setSnackbar, fullHeight = false }) => {
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [message, setMessage] = useState("");
@@ -73,7 +72,7 @@ const ContactoForm = ({ setSnackbar }) => {
             .then(() => {
                 setSnackbar({
                     open: true,
-                    message: "¡Mensaje enviado con éxito a rosmiya.cl! 📬",
+                    message: "Message sent successfully!",
                     type: "success"
                 });
                 setName("");
@@ -83,27 +82,25 @@ const ContactoForm = ({ setSnackbar }) => {
                 setIsSubmitting(false);
             })
             .catch((error) => {
-                console.error("Error al enviar el correo:", error);
+                console.error("Error sending email:", error);
                 setSnackbar({
                     open: true,
-                    message: "Ocurrió un error al enviar el mensaje 😥",
+                    message: "There was an error sending the message.",
                     type: "error"
                 });
                 setIsSubmitting(false);
             });
     };
 
-
-
     const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
-
     const [startAnimation, setStartAnimation] = useState(false);
 
     useEffect(() => {
         if (inView) {
-            setTimeout(() => {
+            const timer = setTimeout(() => {
                 setStartAnimation(true);
             }, 500);
+            return () => clearTimeout(timer);
         }
     }, [inView]);
 
@@ -123,16 +120,17 @@ const ContactoForm = ({ setSnackbar }) => {
                     borderRadius: 5,
                     boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.18)",
                     border: "1px solid #1F6F7A",
-                    height: "auto",
+                    height: fullHeight ? "100%" : "auto",
+                    minHeight: fullHeight ? 395 : "auto",
+                    justifyContent: "center",
                     transition: "all 0.3s ease-in-out",
                     "&:hover": {
                         boxShadow: "0px 12px 22px rgba(0, 0, 0, 0.28)"
                     }
                 }}
             >
-
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12}>
                         <TextField
                             label="First / Last Name"
                             variant="outlined"
@@ -157,19 +155,21 @@ const ContactoForm = ({ setSnackbar }) => {
                                 },
                                 "&.Mui-focused fieldset": {
                                     borderColor: errors.name ? "#ff4d4f" : "#58A6FF"
-                                }, opacity: isSubmitting ? 0.6 : 1,
+                                },
+                                opacity: isSubmitting ? 0.6 : 1,
                                 pointerEvents: isSubmitting ? "none" : "auto"
                             }}
                         />
-
                     </Grid>
 
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12}>
                         <Box
                             sx={{
                                 display: "flex",
                                 alignItems: "center",
-                                gap: 1.5
+                                gap: 1.5,
+                                width: "100%",
+                                flexWrap: { xs: "wrap", md: "nowrap" }
                             }}
                         >
                             <TextField
@@ -179,7 +179,7 @@ const ContactoForm = ({ setSnackbar }) => {
                                 disabled={isSubmitting}
                                 InputProps={{
                                     style: {
-                                        color: "#888", // texto más apagado
+                                        color: "#888",
                                         cursor: "not-allowed"
                                     }
                                 }}
@@ -245,7 +245,7 @@ const ContactoForm = ({ setSnackbar }) => {
                                     disabled={isSubmitting}
                                     InputProps={{
                                         style: {
-                                            color: "#888", // texto más apagado
+                                            color: "#888",
                                             cursor: "not-allowed"
                                         }
                                     }}
@@ -254,10 +254,9 @@ const ContactoForm = ({ setSnackbar }) => {
                                     onChange={(e) => setEmailCopia(e.target.value)}
                                     error={Boolean(!emailCopia.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) && emailCopia.length > 0}
                                     sx={{
-                                        width: "200px",
+                                        width: { xs: "100%", md: "220px" },
                                         backgroundColor: "#123F4A",
                                         borderRadius: 2,
-
                                         input: {
                                             color: "#E6EDF3",
                                             fontSize: "0.9rem",
@@ -288,13 +287,12 @@ const ContactoForm = ({ setSnackbar }) => {
                                                 !emailCopia.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) && emailCopia.length > 0
                                                     ? "#ff4d4f"
                                                     : "#58A6FF"
-                                        }, opacity: isSubmitting ? 0.6 : 1,
+                                        },
+                                        opacity: isSubmitting ? 0.6 : 1,
                                         pointerEvents: isSubmitting ? "none" : "auto"
                                     }}
                                 />
-
                             )}
-
                         </Box>
                     </Grid>
 
@@ -306,7 +304,7 @@ const ContactoForm = ({ setSnackbar }) => {
                             disabled={isSubmitting}
                             InputProps={{
                                 style: {
-                                    color: "#888", // texto más apagado
+                                    color: "#888",
                                     cursor: "not-allowed"
                                 }
                             }}
@@ -329,12 +327,11 @@ const ContactoForm = ({ setSnackbar }) => {
                                 },
                                 "&.Mui-focused fieldset": {
                                     borderColor: errors.message ? "#ff4d4f" : "#58A6FF"
-                                }, opacity: isSubmitting ? 0.6 : 1,
+                                },
+                                opacity: isSubmitting ? 0.6 : 1,
                                 pointerEvents: isSubmitting ? "none" : "auto"
                             }}
                         />
-                    </Grid>
-
                     <Grid item xs={12}>
                         <Button
                             type="submit"
@@ -342,6 +339,7 @@ const ContactoForm = ({ setSnackbar }) => {
                             fullWidth
                             disabled={isSubmitting}
                             sx={{
+                                mt: 2,
                                 fontSize: "1rem",
                                 fontWeight: "bold",
                                 padding: "10px",
@@ -352,6 +350,7 @@ const ContactoForm = ({ setSnackbar }) => {
                                 opacity: isSubmitting ? 0.6 : 1,
                                 cursor: isSubmitting ? "not-allowed" : "pointer",
                                 boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.3)",
+                                minHeight: 48,
                                 "&:hover": {
                                     backgroundColor: "var(--darkreader-background-b62821, #92201a)",
                                     boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.4)"
@@ -360,8 +359,7 @@ const ContactoForm = ({ setSnackbar }) => {
                         >
                             {isSubmitting ? "Sending..." : "Contact"}
                         </Button>
-
-                    </Grid>
+                    </Grid>                    </Grid>
                 </Grid>
             </Box>
 
@@ -399,9 +397,7 @@ const ContactoForm = ({ setSnackbar }) => {
                                     textAlign: "left"
                                 }}
                             >
-
                                 <Box sx={{ display: "flex", alignItems: "center" }}>
-                                    {/* Imagen */}
                                     <img
                                         src="soporte-tecnico-1.png"
                                         alt="Customer Service"
@@ -411,11 +407,10 @@ const ContactoForm = ({ setSnackbar }) => {
                                             width: "30px",
                                             objectFit: "contain",
                                             borderRadius: 0,
-                                            alignSelf: "center", // 👈 Asegura que se centre como el texto
+                                            alignSelf: "center",
                                         }}
                                     />
 
-                                    {/* Texto al lado */}
                                     <Typography
                                         sx={{
                                             fontFamily: "'Poppins', 'Roboto', 'Segoe UI', sans-serif",
@@ -425,7 +420,7 @@ const ContactoForm = ({ setSnackbar }) => {
                                             textShadow: "0px 0px 2px rgba(0,0,0,0.3)",
                                             letterSpacing: "1px",
                                             ml: 0.5,
-                                            lineHeight: 1.2, // 👈 Ajusta el centro del texto para que no se despegue
+                                            lineHeight: 1.2,
                                         }}
                                     >
                                         Customer Service
@@ -482,7 +477,6 @@ const ContactoForm = ({ setSnackbar }) => {
                                 }}
                             >
                                 <Box sx={{ display: "flex", alignItems: "center" }}>
-                                    {/* Imagen */}
                                     <img
                                         src="whatsapp-logo-icon.webp"
                                         alt="whatsapp"
@@ -492,11 +486,10 @@ const ContactoForm = ({ setSnackbar }) => {
                                             width: "30px",
                                             objectFit: "contain",
                                             borderRadius: 0,
-                                            alignSelf: "center", // 👈 Asegura que se centre como el texto
+                                            alignSelf: "center",
                                         }}
                                     />
 
-                                    {/* Texto al lado */}
                                     <Typography
                                         sx={{
                                             fontFamily: "'Poppins', 'Roboto', 'Segoe UI', sans-serif",
@@ -506,7 +499,7 @@ const ContactoForm = ({ setSnackbar }) => {
                                             textShadow: "0px 0px 2px rgba(0,0,0,0.3)",
                                             letterSpacing: "1px",
                                             ml: 0.5,
-                                            lineHeight: 1.2, // 👈 Ajusta el centro del texto para que no se despegue
+                                            lineHeight: 1.2,
                                         }}
                                     >
                                         WhatsApp
@@ -554,8 +547,4 @@ const ContactoForm = ({ setSnackbar }) => {
 };
 
 export default ContactoForm;
-
-
-
-
 
