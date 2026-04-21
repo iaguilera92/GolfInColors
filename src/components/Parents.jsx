@@ -1,64 +1,17 @@
 import { Box, Button, Collapse, Container, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
-import EmojiFlagsRoundedIcon from "@mui/icons-material/EmojiFlagsRounded";
-import LockRoundedIcon from "@mui/icons-material/LockRounded";
 import CloseIcon from "@mui/icons-material/Close";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 export default function Parents() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const navigate = useNavigate();
-  const [rolesOpen, setRolesOpen] = useState(false);
   const [faqOpen, setFaqOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
-
-  const programs = [
-    {
-      title: "TEE BOX",
-      description:
-        "Tee Box is a 5-level at-home golf program designed to help kids learn while parents stay connected and involved",
-      colors: ["#0a6abf", "#1B83CC"],
-      cta: "Explore",
-    },
-  ];
-  const roles = [
-    {
-      step: "1",
-      title: "Initial Guidance",
-      quote: "We show the way",
-      description: "Show the path with clear steps to begin.",
-    },
-    {
-      step: "2",
-      title: "Practical Orientation",
-      quote: "Simple, practical guidance",
-      description: "Easy instructions to learn and practice.",
-    },
-    {
-      step: "3",
-      title: "Learning Together",
-      quote: "Learn together",
-      description: "Understand the fundamentals while learning as a team.",
-    },
-    {
-      step: "4",
-      title: "Progress and Growth",
-      quote: "Progress that shines",
-      description: "Reach goals and move forward with confidence.",
-    },
-    {
-      step: "5",
-      title: "Quality Experience",
-      quote: "Quality family time",
-      description: "Turn the activity into a meaningful moment.",
-    },
-  ];
 
   const faqs = [
     {
@@ -147,20 +100,7 @@ export default function Parents() {
               </Box>
             </Typography>
 
-            <Typography
-              sx={{
-                mt: 2.2,
-                maxWidth: 860,
-                mx: "auto",
-                fontSize: { xs: "1rem", sm: "1.15rem" },
-                fontWeight: 500,
-                lineHeight: 1.5,
-                color: "#35536a",
-                textShadow: "none",
-              }}
-            >
-              Golf In Colors helps parents guide, support, and motivate their kids through a playful and structured learning system.
-            </Typography>
+            {/* Descriptor moved into the new block above FAQ's */}
 </Box>
         </motion.div>
 
@@ -170,243 +110,100 @@ export default function Parents() {
           transition={{ duration: 0.75, ease: "easeOut" }}
           viewport={{ once: true, amount: 0.15 }}
         >
-          <Box sx={{ mt: { xs: 3, sm: 4 } }}>
+<Box sx={{ mt: { xs: 3, sm: 4 } }}>
             <Box
-              role="button"
-              tabIndex={0}
-              onClick={() => setRolesOpen((prev) => !prev)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  setRolesOpen((prev) => !prev);
-                }
-              }}
               sx={{
-                p: { xs: 2, sm: 2.3 },
+                p: { xs: 2, sm: 2.6 },
                 borderRadius: 3,
-                border: rolesOpen ? "1.8px solid rgba(27,131,204,0.34)" : "1px solid rgba(13,43,69,0.12)",
-                background: rolesOpen
-                  ? "linear-gradient(165deg, #ffffff 0%, #eef7ff 100%)"
-                  : "linear-gradient(165deg, #ffffff 0%, #f4f9ff 100%)",
-                boxShadow: rolesOpen
-                  ? "0 16px 30px rgba(27,131,204,0.16)"
-                  : "0 12px 24px rgba(13,43,69,0.12)",
-                color: "#0d2b45",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                cursor: "pointer",
-                position: "relative",
-                overflow: "hidden",
-                "&::before": {
-                  content: '""',
-                  position: "absolute",
-                  top: -34,
-                  right: -34,
-                  width: 110,
-                  height: 110,
-                  borderRadius: "50%",
-                  background: rolesOpen ? "rgba(27,131,204,0.12)" : "rgba(11,143,99,0.08)",
-                },
+                border: "1px solid rgba(13,43,69,0.12)",
+                background: "linear-gradient(165deg, #ffffff 0%, #f4f9ff 100%)",
+                boxShadow: "0 14px 28px rgba(13,43,69,0.10)",
+                mb: { xs: 2.2, sm: 2.6 },
               }}
             >
-              <Box sx={{ position: "relative", zIndex: 1 }}>
-                <Typography
-                  sx={{
-                    color: "#0c2a44",
-                    fontFamily: "'Poppins', sans-serif",
-                    fontSize: { xs: "1.22rem", sm: "1.5rem" },
-                    fontWeight: 900,
-                    letterSpacing: "0.03em",
-                    lineHeight: 1.05,
-                  }}
-                >
-                  Roles
-                </Typography>
-                <Typography
-                  sx={{
-                    mt: 0.35,
-                    color: "#4a6478",
-                    fontSize: { xs: "0.82rem", sm: "0.9rem" },
-                    fontWeight: 600,
-                  }}
-                >
-                  How parents guide every step
-                </Typography>
-              </Box>
+              <Typography
+                sx={{
+                  color: "#0c2a44",
+                  fontFamily: "'Poppins', sans-serif",
+                  fontWeight: 900,
+                  fontSize: { xs: "1.35rem", sm: "1.75rem" },
+                  lineHeight: 1.15,
+                  textAlign: "center",
+                  mb: 0.6,
+                }}
+              >
+                Your Child’s Golf Journey Starts With You
+              </Typography>
 
-              <Box sx={{ display: "flex", alignItems: "center", color: "#2b3a45", position: "relative", zIndex: 1 }}>
-                {rolesOpen ? <CloseIcon sx={{ fontSize: 20 }} /> : <KeyboardArrowDownIcon sx={{ fontSize: 24 }} />}
+              <Typography
+                sx={{
+                  color: "#35536a",
+                  fontWeight: 700,
+                  fontSize: { xs: "1rem", sm: "1.12rem" },
+                  lineHeight: 1.35,
+                  textAlign: "center",
+                  mb: 1.6,
+                }}
+              >
+                Let Us Show You the Way
+              </Typography>
+
+              <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "1rem" }, lineHeight: 1.65, mb: 1.2 }}>
+                As a parent, it can be difficult to balance wanting what’s best for your child with actually doing what’s best for them. Your role is to be their biggest supporter and cheerleader while helping them find the right environment to grow as a golfer.
+              </Typography>
+              <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "1rem" }, lineHeight: 1.65 }}>
+                Finding the right coach is essential to creating engagement with the sport. Not every coach is skilled at working with kids, and not everyone has the patience it requires. That’s why feedback from both your child and the coach is key to making sure the experience is positive and productive.
+              </Typography>
+
+              <Box sx={{ mt: 2.2, display: "grid", gridTemplateColumns: { xs: "1fr", md: "repeat(2, minmax(0, 1fr))" }, gap: { xs: 1.4, sm: 1.8 } }}>
+                <Box
+                  sx={{
+                    p: { xs: 1.8, sm: 2.1 },
+                    borderRadius: 2.6,
+                    border: "1px solid rgba(13,43,69,0.10)",
+                    background: "linear-gradient(165deg, #ffffff 0%, #f8fffb 100%)",
+                    boxShadow: "0 10px 20px rgba(13,43,69,0.08)",
+                  }}
+                >
+                  <Typography sx={{ color: "#0c2a44", fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: { xs: "1.15rem", sm: "1.25rem" }, mb: 0.8, lineHeight: 1.1 }}>
+                    Guidance
+                  </Typography>
+                  <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "0.98rem" }, lineHeight: 1.65, mb: 1 }}>
+                    We support you by giving you clear, simple guidance so you know what to practice and how to keep it fun. Especially during parent-child golf time.
+                  </Typography>
+                  <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "0.98rem" }, lineHeight: 1.65, mb: 1 }}>
+                    Games with small challenges are ideal for kids. At this stage, the focus shouldn’t be on perfect technique, but on allowing your child to explore the game in a natural, enjoyable way.
+                  </Typography>
+                  <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "0.98rem" }, lineHeight: 1.65 }}>
+                    If you’re not ready to enroll your child in a golf camp, start with the basics: fundamental skills and proper golf etiquette. These early building blocks will set the foundation for future growth.
+                  </Typography>
+                </Box>
+
+                <Box
+                  sx={{
+                    p: { xs: 1.8, sm: 2.1 },
+                    borderRadius: 2.6,
+                    border: "1px solid rgba(13,43,69,0.10)",
+                    background: "linear-gradient(165deg, #ffffff 0%, #f7fbff 100%)",
+                    boxShadow: "0 10px 20px rgba(13,43,69,0.08)",
+                  }}
+                >
+                  <Typography sx={{ color: "#0c2a44", fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: { xs: "1.15rem", sm: "1.25rem" }, mb: 0.8, lineHeight: 1.1 }}>
+                    Learn Together
+                  </Typography>
+                  <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "0.98rem" }, lineHeight: 1.65, mb: 1 }}>
+                    Understanding the basics of golf and how kids learn, creates an opportunity for both parent and child to grow together.
+                  </Typography>
+                  <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "0.98rem" }, lineHeight: 1.65, mb: 1 }}>
+                    Some parents already have golf experience, while others are completely new to the game. In both cases, golf can become a shared journey of discovery and improvement.
+                  </Typography>
+                  <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "0.98rem" }, lineHeight: 1.65 }}>
+                    Because golf is a sport for all ages, it can easily become a lifelong family activity. When you learn together, you nurture curiosity—and that’s where a genuine love for the game begins.
+                  </Typography>
+                </Box>
               </Box>
             </Box>
 
-            <Collapse in={rolesOpen} timeout={700}>
-              <Grid container spacing={isMobile ? 1.6 : 2.2} sx={{ mt: 0.1 }}>
-                {roles.map((role) => (
-                  <Grid item xs={12} md={6} key={role.step}>
-                    <Box
-                      sx={{
-                        p: { xs: 2, sm: 2.3 },
-                        borderRadius: 2.8,
-                        border: "1px solid rgba(13,43,69,0.12)",
-                        background: "linear-gradient(165deg, #ffffff 0%, #f7fbff 100%)",
-                        boxShadow: "0 12px 24px rgba(13,43,69,0.1)",
-                        color: "#0c2a44",
-                        height: "100%",
-                        position: "relative",
-                        overflow: "hidden",
-                        "&::before": {
-                          content: '""',
-                          position: "absolute",
-                          inset: 0,
-                          pointerEvents: "none",
-                          background: "linear-gradient(180deg, rgba(27,131,204,0.04) 0%, rgba(255,255,255,0) 42%)",
-                        },
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 1,
-                          mb: 0.8,
-                          position: "relative",
-                          zIndex: 1,
-                        }}
-                      >
-                        <Box
-                          sx={{
-                            minWidth: 34,
-                            width: 34,
-                            height: 34,
-                            borderRadius: "50%",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            background: "linear-gradient(135deg, #1B83CC 0%, #1169a8 100%)",
-                            color: "#fff",
-                            fontWeight: 900,
-                            boxShadow: "0 6px 12px rgba(27,131,204,0.22)",
-                          }}
-                        >
-                          {role.step}
-                        </Box>
-                        <Typography sx={{ fontWeight: 900, fontSize: { xs: "1.05rem", sm: "1.14rem" }, color: "#0c2a44", lineHeight: 1.15 }}>
-                          {role.title}
-                        </Typography>
-                      </Box>
-                      <Typography sx={{ fontWeight: 800, fontSize: { xs: "0.95rem", sm: "1rem" }, color: "#2b3a45", mb: 0.7, position: "relative", zIndex: 1 }}>
-                        "{role.quote}"
-                      </Typography>
-                      <Typography sx={{ color: "#4a6478", fontSize: { xs: "0.92rem", sm: "0.98rem" }, lineHeight: 1.62, position: "relative", zIndex: 1 }}>
-                        {role.description}
-                      </Typography>
-                    </Box>
-                  </Grid>
-                ))}
-              </Grid>
-            </Collapse>
-          </Box>
-
-<Box sx={{ mt: { xs: 2, sm: 2.5 } }}>
-            <Typography
-              sx={{
-                textAlign: "center",
-                color: "#0d2b45",
-                fontFamily: "'Poppins', sans-serif",
-                fontSize: { xs: "1.4rem", sm: "1.7rem" },
-                fontWeight: 900,
-                letterSpacing: "0.03em",
-                mb: 2.2,
-              }}
-            >
-              Our Programs
-            </Typography>
-
-            <Grid container spacing={isMobile ? 1.6 : 2.2} justifyContent="center">
-              {programs.map((program) => (
-                <Grid item xs={12} md={8} key={program.title}>
-                  <Box
-                    sx={{
-                      height: "100%",
-                      p: { xs: 2, sm: 2.5 },
-                      borderRadius: 3.2,
-                      color: "#fff",
-                      position: "relative",
-                      overflow: "hidden",
-                      border: "1.5px solid rgba(255,255,255,0.5)",
-                      background: `linear-gradient(150deg, ${program.colors[0]} 0%, ${program.colors[1]} 100%)`,
-                      boxShadow: "0 14px 26px rgba(0,0,0,0.24)",
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        width: 44,
-                        height: 44,
-                        borderRadius: "50%",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "#fff",
-                        backgroundColor: "rgba(0,0,0,0.24)",
-                        border: "1px solid rgba(255,255,255,0.34)",
-                        mb: 1.3,
-                      }}
-                    >
-                      <EmojiFlagsRoundedIcon sx={{ fontSize: 24 }} />
-                    </Box>
-
-                    <Typography
-                      sx={{
-                        fontWeight: 900,
-                        fontSize: { xs: "1.2rem", sm: "1.35rem" },
-                        letterSpacing: "0.04em",
-                        lineHeight: 1.1,
-                        mb: 1.1,
-                      }}
-                    >
-                      {program.title}
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        fontSize: { xs: "0.95rem", sm: "1rem" },
-                        lineHeight: 1.55,
-                        color: "rgba(255,255,255,0.96)",
-                        maxWidth: 600,
-                      }}
-                    >
-                      {program.description}
-                    </Typography>
-
-                    <Box sx={{ mt: 1.5, display: "flex", justifyContent: "flex-end" }}>
-                      <Button
-                        variant="contained"
-                        onClick={() => navigate("/catalogo")}
-                        sx={{
-                          textTransform: "none",
-                          fontWeight: 700,
-                          borderRadius: 99,
-                          px: 2.4,
-                          py: 0.75,
-                          backgroundColor: "rgba(255,255,255,0.22)",
-                          border: "1px solid rgba(255,255,255,0.46)",
-                          color: "#fff",
-                          "&:hover": {
-                            backgroundColor: "rgba(255,255,255,0.32)",
-                          },
-                        }}
-                      >
-                        {program.cta}
-                      </Button>
-                    </Box>
-                  </Box>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-
-<Box sx={{ mt: { xs: 2.2, sm: 3 } }}>
             <Box
               role="button"
               tabIndex={0}

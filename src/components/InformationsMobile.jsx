@@ -12,14 +12,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import CountUp from "react-countup";
-
-const stats = [
-  { count: 45, text: "Years of Combined Golf Experience", tone: "#4FC3F7", image: "/golf-1.jpg" },
-  { count: 20, text: "Years Developing Young Golfers", tone: "#66BB6A", image: "/golf-2.jpg" },
-  { count: 500, text: "Kids introduced to the Game", tone: "#FFB74D", image: "/golf-3.jpg" },
-  { count: 2, text: "Learning environments", tone: "#BA68C8", image: "/golf-4.jpg" },
-];
+// Our Impact section hidden for now.
 
 const journeySteps = [
   {
@@ -68,76 +61,6 @@ function splitTextIntoWords(text, active) {
   ));
 }
 
-function StatFlipCard({ item, index, inView, delayed }) {
-  return (
-    <Grid item xs={6} key={item.text}>
-      <Box
-        sx={{
-          width: "100%",
-          height: 145,
-          perspective: "1000px",
-        }}
-      >
-        <Box
-          sx={{
-            width: "100%",
-            height: "100%",
-            position: "relative",
-            transformStyle: "preserve-3d",
-            transition: "transform 2.2s",
-            transitionDelay: inView ? `${0.2 + index * 0.1}s` : "0s",
-            transform: inView ? "rotateY(180deg)" : "rotateY(0deg)",
-          }}
-        >
-          <Box
-            sx={{
-              position: "absolute",
-              inset: 0,
-              backfaceVisibility: "hidden",
-              borderRadius: "20px",
-              backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.5)), url(${item.image})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              boxShadow: "0 8px 20px rgba(0,0,0,0.22)",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              px: 1.4,
-              textAlign: "center",
-            }}
-          />
-
-          <Box
-            sx={{
-              position: "absolute",
-              inset: 0,
-              backfaceVisibility: "hidden",
-              transform: "rotateY(180deg)",
-              borderRadius: "20px",
-              backgroundColor: "rgba(24, 26, 27, 0.92)",
-              boxShadow: "0 8px 20px rgba(0,0,0,0.22)",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              px: 1.2,
-              textAlign: "center",
-            }}
-          >
-            <Typography sx={{ fontFamily: "'Saira', sans-serif", fontWeight: 700, fontSize: "2.05rem", lineHeight: 1, mb: 0.65 }}>
-              +{delayed ? <CountUp start={0} end={item.count} duration={3} separator="." /> : "0"}
-            </Typography>
-            <Box sx={{ fontSize: "0.76rem", lineHeight: 1.3, fontFamily: "'Oswald', sans-serif" }}>
-              {splitTextIntoWords(item.text, delayed)}
-            </Box>
-          </Box>
-        </Box>
-      </Box>
-    </Grid>
-  );
-}
-
 function Informations() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -146,20 +69,6 @@ function Informations() {
     threshold: 0.25,
     triggerOnce: true,
   });
-  const { ref: impactRef, inView: impactInView } = useInView({
-    threshold: 0.45,
-    triggerOnce: true,
-  });
-  const [delayed, setDelayed] = useState(false);
-
-  useEffect(() => {
-    if (impactInView) {
-      const timer = setTimeout(() => {
-        setDelayed(true);
-      }, 1600);
-      return () => clearTimeout(timer);
-    }
-  }, [impactInView]);
 
   return (
     <Box
@@ -323,26 +232,7 @@ function Informations() {
           </Grid>
         </Grid>
 
-        <Box sx={{ mt: 4.5 }} ref={impactRef}>
-          <Typography
-            sx={{
-              textAlign: "center",
-              fontWeight: 800,
-              mb: 2,
-              fontSize: "1.15rem",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-            }}
-          >
-            Our Impact
-          </Typography>
-
-          <Grid container spacing={1.5}>
-            {stats.map((item, index) => (
-              <StatFlipCard key={item.text} item={item} index={index} inView={impactInView} delayed={delayed} />
-            ))}
-          </Grid>
-        </Box>
+        {/* Our Impact section hidden for now */}
       </Container>
     </Box>
   );
