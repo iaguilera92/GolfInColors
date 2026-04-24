@@ -48,12 +48,10 @@ function Features() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 18, scale: 0.965 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { type: "spring", stiffness: 260, damping: 22, mass: 0.7 },
+      transition: { duration: 0.35, ease: "easeOut" },
     },
   };
 

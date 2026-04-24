@@ -56,7 +56,7 @@ const ContactoForm = ({ setSnackbar, fullHeight = false, variant = "nav", title,
             nombre: name,
             telefono: phone,
             mensaje: message,
-            email: "anikaveintemilla@gmail.com",
+            email: "aguileraignacio1992@gmail.com",
         };
 
         if (enviarCopia && emailCopia.trim()) {
@@ -65,10 +65,10 @@ const ContactoForm = ({ setSnackbar, fullHeight = false, variant = "nav", title,
 
         emailjs
             .send(
-                "service_7a5xgkb",
-                "template_mvg1hfp",
+                "service_m14zwjc",
+                "template_btvbspa",
                 templateParams,
-                "6nFXuROT7jYSo5u3V"
+                "JyLlgoS1y1Jk2BQRN"
             )
             .then(() => {
                 setSnackbar({
@@ -357,6 +357,7 @@ const ContactoForm = ({ setSnackbar, fullHeight = false, variant = "nav", title,
                                 pointerEvents: isSubmitting ? "none" : "auto"
                             }}
                         />
+                    </Grid>
                     <Grid item xs={12}>
                         <Button
                             type="submit"
@@ -395,7 +396,7 @@ const ContactoForm = ({ setSnackbar, fullHeight = false, variant = "nav", title,
                         >
                             {isSubmitting ? "Sending..." : "Contact"}
                         </Button>
-                    </Grid>                    </Grid>
+                    </Grid>
                 </Grid>
             </Box>
 
