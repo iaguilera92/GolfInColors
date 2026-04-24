@@ -4,6 +4,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
+import TeamSection from "./TeamSection";
 export default function Parents() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -15,24 +16,12 @@ export default function Parents() {
 
   const faqs = [
     {
-      q: "What age is best to start learning golf?",
-      a: "Many kids can start as early as 3 to 5 with playful movement and simple fundamentals. The best age is when your child is curious, can follow basic instructions, and enjoys active play.",
+      q: "What benefits does golf offer my child?",
+      a: "Golf helps develop coordination, balance, and focus. It also teaches discipline, respect, and how to follow rules, while supporting cognitive growth and building confidence.",
     },
     {
-      q: "How often should my child practice at home?",
-      a: "Short sessions work best. Aim for 10 to 15 minutes, 2 to 4 times per week. Consistency matters more than duration, and it should always feel fun.",
-    },
-    {
-      q: "What should my child bring to a lesson?",
-      a: "Comfortable shoes, a hat, water, sunscreen, and a positive attitude. If they have clubs, bring them, but most beginner programs can provide equipment at first.",
-    },
-    {
-      q: "How do coaches keep kids engaged and safe?",
-      a: "Great coaches use games, clear routines, and kid-friendly cues. They set safe zones, manage spacing and turns, and keep the environment positive so kids stay focused without pressure.",
-    },
-    {
-      q: "How can parents and coaches work together to help my child improve?",
-      a: "Ask coaches for one simple focus to practice at home, celebrate effort over results, and keep communication open. The best progress happens when parents support the process and coaches guide the learning steps.",
+      q: "What should my role be during lessons?",
+      a: "Support and observe. Let the coach guide the session while you encourage your child and reinforce a positive experience.",
     },
   ];
 
@@ -43,14 +32,17 @@ export default function Parents() {
         minHeight: "100vh",
         pt: { xs: 13.5, sm: 15 },
         pb: 8,
-        backgroundColor: "#f8f6f1",
+        backgroundColor: "rgb(248 246 241)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: { xs: "scroll", md: "fixed" },
       }}
     >
       <Container maxWidth="lg">
-<motion.div
+        <Box sx={{ mt: { xs: -3.2, sm: -4.0 }, mb: { xs: 2.4, sm: 3.2 } }}>
+          <TeamSection />
+        </Box>
+        <motion.div
           initial={{ opacity: 0, x: 90 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.75, ease: "easeOut" }}
@@ -67,33 +59,82 @@ export default function Parents() {
               sx={{
                 fontWeight: 900,
                 fontFamily: "'Poppins', sans-serif",
-                lineHeight: { xs: 1.02, sm: 1.04 },
-                letterSpacing: "0.02em",
+                lineHeight: { xs: 0.98, sm: 1.0 },
+                letterSpacing: "0.015em",
                 fontSize: { xs: "1.6rem", sm: "2.2rem", md: "2.6rem" },
                 textShadow: "none",
               }}
             >
-              <Box component="span" sx={{ display: "block", color: "#2b3a45", fontSize: { xs: "1.6rem", sm: "2.0rem", md: "2.2rem" }, fontWeight: 700 }}>
+              <Box
+                component="span"
+                sx={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 1.2,
+                  color: "#0b8f63",
+                  fontSize: { xs: "0.96rem", sm: "1.08rem", md: "1.15rem" },
+                  fontWeight: 950,
+                  letterSpacing: "0.28em",
+                  textTransform: "uppercase",
+                  mb: { xs: 0.6, sm: 0.8 },
+                  "&::before, &::after": {
+                    content: '""',
+                    height: "2px",
+                    width: { xs: 34, sm: 44, md: 56 },
+                    borderRadius: 2,
+                    background: "rgba(11,143,99,0.55)",
+                  },
+                }}
+              >
                 SUPPORT
               </Box>
-              <Box component="span" sx={{ display: "block", color: "#2b3a45", fontSize: { xs: "1.6rem", sm: "2.0rem", md: "2.2rem" }, fontWeight: 900 }}>
+              <Box
+                component="span"
+                sx={{
+                  display: "block",
+                  color: "#0d2b45",
+                  fontSize: { xs: "1.65rem", sm: "2.05rem", md: "2.25rem" },
+                  fontWeight: 950,
+                  textShadow: "0 2px 10px rgba(0,0,0,0.08)",
+                }}
+              >
                 YOUR CHILD'S
               </Box>
-              <Box component="span" sx={{ display: "block", color: "#2b3a45", fontSize: { xs: "1.6rem", sm: "2.0rem", md: "2.2rem" }, fontWeight: 900 }}>
+              <Box
+                component="span"
+                sx={{
+                  display: "block",
+                  color: "#0d2b45",
+                  fontSize: { xs: "1.65rem", sm: "2.05rem", md: "2.25rem" },
+                  fontWeight: 950,
+                  textShadow: "0 2px 10px rgba(0,0,0,0.08)",
+                }}
+              >
                 GOLF JOURNEY
               </Box>
-              <Box component="span" sx={{ display: "block", color: "#2b3a45", fontSize: { xs: "1.6rem", sm: "2.0rem", md: "2.2rem" }, fontWeight: 700 }}>
+              <Box
+                component="span"
+                sx={{
+                  display: "block",
+                  color: "#35536a",
+                  fontSize: { xs: "1.55rem", sm: "1.95rem", md: "2.1rem" },
+                  fontWeight: 800,
+                  mt: { xs: 0.2, sm: 0.25 },
+                }}
+              >
                 STARTS
               </Box>
               <Box
                 component="span"
                 sx={{
                   display: "block",
-                  color: "#2b3a45",
-                  fontSize: { xs: "1.6rem", sm: "2.0rem", md: "2.2rem" },
-                  fontWeight: 900,
+                  fontSize: { xs: "1.7rem", sm: "2.1rem", md: "2.35rem" },
+                  fontWeight: 950,
                   lineHeight: 0.95,
-                  WebkitTextStroke: "0px",
+                  background: "linear-gradient(90deg, #1B83CC 0%, #0b8f63 55%, #1aa97a 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
                 }}
               >
                 WITH YOU
@@ -101,16 +142,16 @@ export default function Parents() {
             </Typography>
 
             {/* Descriptor moved into the new block above FAQ's */}
-</Box>
+          </Box>
         </motion.div>
 
-<motion.div
+        <motion.div
           initial={{ opacity: 0, x: 90 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.75, ease: "easeOut" }}
           viewport={{ once: true, amount: 0.15 }}
         >
-<Box sx={{ mt: { xs: 3, sm: 4 } }}>
+          <Box sx={{ mt: { xs: 3, sm: 4 } }}>
             <Box
               sx={{
                 p: { xs: 2, sm: 2.6 },
@@ -132,7 +173,7 @@ export default function Parents() {
                   mb: 0.6,
                 }}
               >
-                Your Child’s Golf Journey Starts With You
+                Your Child's Golf Journey Starts With You
               </Typography>
 
               <Typography
@@ -160,9 +201,30 @@ export default function Parents() {
                   sx={{
                     p: { xs: 1.8, sm: 2.1 },
                     borderRadius: 2.6,
-                    border: "1px solid rgba(13,43,69,0.10)",
-                    background: "linear-gradient(165deg, #ffffff 0%, #f8fffb 100%)",
-                    boxShadow: "0 10px 20px rgba(13,43,69,0.08)",
+                    border: "1px solid rgba(13,43,69,0.12)",
+                    background: "linear-gradient(165deg, #ffffff 0%, #f2fff8 100%)",
+                    boxShadow: "0 14px 28px rgba(13,43,69,0.10)",
+                    position: "relative",
+                    overflow: "hidden",
+                    "&::before": {
+                      content: '""',
+                      position: "absolute",
+                      top: -34,
+                      right: -34,
+                      width: 120,
+                      height: 120,
+                      borderRadius: "50%",
+                      background: "rgba(11,143,99,0.12)",
+                    },
+                    "&::after": {
+                      content: '""',
+                      position: "absolute",
+                      inset: 0,
+                      pointerEvents: "none",
+                      background:
+                        "linear-gradient(110deg, rgba(255,255,255,0) 18%, rgba(255,255,255,0.22) 50%, rgba(255,255,255,0) 82%)",
+                      opacity: 0.35,
+                    },
                   }}
                 >
                   <Typography sx={{ color: "#0c2a44", fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: { xs: "1.15rem", sm: "1.25rem" }, mb: 0.8, lineHeight: 1.1 }}>
@@ -183,9 +245,30 @@ export default function Parents() {
                   sx={{
                     p: { xs: 1.8, sm: 2.1 },
                     borderRadius: 2.6,
-                    border: "1px solid rgba(13,43,69,0.10)",
-                    background: "linear-gradient(165deg, #ffffff 0%, #f7fbff 100%)",
-                    boxShadow: "0 10px 20px rgba(13,43,69,0.08)",
+                    border: "1px solid rgba(13,43,69,0.12)",
+                    background: "linear-gradient(165deg, #ffffff 0%, #f2f9ff 100%)",
+                    boxShadow: "0 14px 28px rgba(13,43,69,0.10)",
+                    position: "relative",
+                    overflow: "hidden",
+                    "&::before": {
+                      content: '""',
+                      position: "absolute",
+                      top: -34,
+                      right: -34,
+                      width: 120,
+                      height: 120,
+                      borderRadius: "50%",
+                      background: "rgba(27,131,204,0.10)",
+                    },
+                    "&::after": {
+                      content: '""',
+                      position: "absolute",
+                      inset: 0,
+                      pointerEvents: "none",
+                      background:
+                        "linear-gradient(110deg, rgba(255,255,255,0) 18%, rgba(255,255,255,0.22) 50%, rgba(255,255,255,0) 82%)",
+                      opacity: 0.32,
+                    },
                   }}
                 >
                   <Typography sx={{ color: "#0c2a44", fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: { xs: "1.15rem", sm: "1.25rem" }, mb: 0.8, lineHeight: 1.1 }}>
@@ -342,7 +425,7 @@ export default function Parents() {
           </Box>
         </motion.div>
 
-<motion.div
+        <motion.div
           initial={{ opacity: 0, x: -90 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.75, ease: "easeOut" }}
@@ -427,7 +510,7 @@ export default function Parents() {
           </Box>
         </motion.div>
 
-    </Container>
+      </Container>
     </Box>
   );
 }

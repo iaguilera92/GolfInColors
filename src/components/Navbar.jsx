@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { AppBar, Toolbar, Button, IconButton, Drawer, Typography, ListItem, ListItemButton, ListItemText, Container, Box, useTheme, useMediaQuery, Dialog, DialogTitle, DialogContent, SvgIcon } from "@mui/material";
-import { WhatsApp as WhatsAppIcon, Menu as MenuIcon, Home, Mail, Close } from "@mui/icons-material"; // Agregamos Close para la "X"
+import { WhatsApp as WhatsAppIcon, Home, Mail, Close } from "@mui/icons-material"; // Agregamos Close para la "X"
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { motion, AnimatePresence } from "framer-motion";
 import SchoolIcon from "@mui/icons-material/School";
@@ -89,8 +89,8 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
   const theme = useTheme(), isMobile = useMediaQuery(theme.breakpoints.down('sm')), navigate = useNavigate();
   const pdfSrc = `/plataformasweb-pdf.pdf#zoom=${isMobile ? 100 : 60}`;
   const location = useLocation();
-  const darkHamburgerRoutes = ["/catalogo", "/nosotros", "/parents"];
-  const isDarkHamburgerRoute = darkHamburgerRoutes.includes(location.pathname);
+  const isHome = location.pathname === "/" || location.pathname === "";
+  const navActive = !isHome || isScrolled;
   const mostrarAnimacion = videoReady || (location.pathname !== '/' && location.pathname !== '');
   const [animacionMostrada, setAnimacionMostrada] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -196,6 +196,40 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
     ...menuItems.filter((item) => item.name === "Shop"),
   ];
 
+  const Hamburger = ({ color, active }) => (
+    <Box
+      sx={{
+        width: 50,
+        height: 50,
+        borderRadius: "16px",
+        border: active ? "1px solid rgba(255,255,255,0.16)" : "1px solid rgba(255,255,255,0.0)",
+        background: active ? "linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 100%)" : "transparent",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "6px",
+        cursor: "pointer",
+        transition: "all 0.3s ease",
+        boxShadow: active ? "0 10px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.18)" : "none",
+        "&:hover": {
+          background: active ? "linear-gradient(180deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.06) 100%)" : "transparent",
+        },
+        "& span": {
+          width: 22,
+          height: 2,
+          background: color,
+          display: "block",
+          borderRadius: 2,
+        },
+      }}
+    >
+      <Box component="span" />
+      <Box component="span" />
+      <Box component="span" />
+    </Box>
+  );
+
   return (
     <>
 
@@ -204,28 +238,37 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
           position: "fixed",
           left: "50%",
           transform: "translateX(-50%)",
-          width: "96%",
+          width: "90%",
+          maxWidth: "900px",
           zIndex: 1100,
-          borderRadius: "50px",
+          borderRadius: "40px",
           overflow: "hidden",
           transition: 'margin-top 0.2s ease',
-          marginTop: 1,
+          marginTop: "20px",
 
         }}
       >
         <AppBar
           position="relative"
           sx={{
-            backgroundColor: isScrolled ? "rgba(0,0,0,0.8)" : "transparent",
-            backdropFilter: isScrolled ? "blur(10px)" : "none",
-            boxShadow: "none",
+            height: "70px",
+            justifyContent: "center",
+            backgroundImage: navActive
+              ? "linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 40%, rgba(0,0,0,0) 100%), linear-gradient(135deg, #0b111a 0%, #0c1a2a 45%, #0a2239 100%)"
+              : "none",
+            backgroundColor: navActive ? "transparent" : "transparent",
+            backdropFilter: navActive ? "blur(14px)" : "none",
+            boxShadow: navActive
+              ? "0 18px 40px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.16), inset 0 -10px 30px rgba(0,0,0,0.35)"
+              : "none",
+            border: navActive ? "1px solid rgba(255,255,255,0.12)" : "1px solid rgba(255,255,255,0)",
             transition: "all 0.3s ease",
-            borderRadius: "50px",
+            borderRadius: "40px",
             overflow: "hidden",
           }}
         >
           <Container>
-            <Toolbar>
+            <Toolbar sx={{ minHeight: "70px !important", px: { xs: 1, sm: 2 } }}>
               <Box
                 sx={{
                   position: "absolute",
@@ -292,7 +335,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                       disabled={item.disabled}
                       onClick={() => !item.disabled && handleClick(item)}
                       sx={{
-                        color: "white",
+                        color: isShop ? "black" : "white",
                         fontFamily: "Poppins, sans-serif",
                         padding: isShop ? "10px 18px" : "10px 14px",
 
@@ -349,7 +392,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 1, ease: "easeOut" }}
                 >
-                  <MenuIcon sx={{ color: isDarkHamburgerRoute ? "#111" : "#fff" }} />
+                  <Hamburger color="#fff" active={navActive} />
                 </motion.div>
               </IconButton>
             </Toolbar>

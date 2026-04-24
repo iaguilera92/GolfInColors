@@ -232,6 +232,13 @@ function App() {
     };
   }, [showApp]);
 
+  // Notify components when the initial loader is gone.
+  useEffect(() => {
+    if (!showApp) return;
+    document.documentElement.dataset.appReady = "1";
+    window.dispatchEvent(new Event("app:ready"));
+  }, [showApp]);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

@@ -19,7 +19,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 const MotionBox = motion.create(Box);
 
-const ContactoForm = ({ setSnackbar, fullHeight = false }) => {
+const ContactoForm = ({ setSnackbar, fullHeight = false, variant = "nav", title, messageRows = 3 }) => {
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [message, setMessage] = useState("");
@@ -29,6 +29,7 @@ const ContactoForm = ({ setSnackbar, fullHeight = false }) => {
     const [enviarCopia, setEnviarCopia] = useState(false);
     const [emailCopia, setEmailCopia] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const isNav = variant === "nav";
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -105,7 +106,7 @@ const ContactoForm = ({ setSnackbar, fullHeight = false }) => {
     }, [inView]);
 
     return (
-        <Box>
+        <Box sx={{ height: fullHeight ? "100%" : "auto" }}>
             <Box
                 ref={ref}
                 component="form"
@@ -115,20 +116,44 @@ const ContactoForm = ({ setSnackbar, fullHeight = false }) => {
                     flexDirection: "column",
                     gap: 3,
                     mt: 0,
-                    backgroundColor: "#0F4C5C",
+                    backgroundColor: isNav ? "transparent" : "#0F4C5C",
+                    backgroundImage: isNav
+                        ? "linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 40%, rgba(0,0,0,0) 100%), linear-gradient(135deg, #0b111a 0%, #0c1a2a 45%, #0a2239 100%)"
+                        : "none",
                     padding: "20px",
                     borderRadius: 5,
-                    boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.18)",
-                    border: "1px solid #1F6F7A",
+                    boxShadow: isNav
+                        ? "0 18px 40px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.16), inset 0 -10px 30px rgba(0,0,0,0.35)"
+                        : "0px 8px 16px rgba(0, 0, 0, 0.18)",
+                    border: isNav ? "1px solid rgba(255,255,255,0.12)" : "1px solid #1F6F7A",
+                    backdropFilter: isNav ? "blur(14px)" : "none",
                     height: fullHeight ? "100%" : "auto",
                     minHeight: fullHeight ? 395 : "auto",
                     justifyContent: "center",
                     transition: "all 0.3s ease-in-out",
                     "&:hover": {
-                        boxShadow: "0px 12px 22px rgba(0, 0, 0, 0.28)"
+                        boxShadow: isNav
+                            ? "0 22px 46px rgba(0,0,0,0.62), inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -10px 30px rgba(0,0,0,0.35)"
+                            : "0px 12px 22px rgba(0, 0, 0, 0.28)"
                     }
                 }}
             >
+                {title ? (
+                    <Typography
+                        sx={{
+                            fontWeight: 900,
+                            fontSize: "1.05rem",
+                            letterSpacing: "0.06em",
+                            textTransform: "uppercase",
+                            color: "rgba(255,255,255,0.92)",
+                            textAlign: "left",
+                            mb: -0.5,
+                            textShadow: "0 2px 8px rgba(0,0,0,0.55)",
+                        }}
+                    >
+                        {title}
+                    </Typography>
+                ) : null}
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <TextField
@@ -143,18 +168,18 @@ const ContactoForm = ({ setSnackbar, fullHeight = false }) => {
                             }}
                             error={Boolean(errors.name)}
                             sx={{
-                                backgroundColor: "#123F4A",
+                                backgroundColor: isNav ? "rgba(255,255,255,0.06)" : "#123F4A",
                                 borderRadius: 2,
                                 input: { color: "#E6EDF3", fontSize: "0.9rem" },
                                 label: { color: errors.name ? "#ff4d4f" : "#E6EDF3" },
                                 fieldset: {
-                                    borderColor: errors.name ? "#ff4d4f" : "#30363D"
+                                    borderColor: errors.name ? "#ff4d4f" : (isNav ? "rgba(255,255,255,0.18)" : "#30363D")
                                 },
                                 "&:hover fieldset": {
-                                    borderColor: errors.name ? "#ff4d4f" : "#58A6FF"
+                                    borderColor: errors.name ? "#ff4d4f" : (isNav ? "rgba(255,255,255,0.35)" : "#58A6FF")
                                 },
                                 "&.Mui-focused fieldset": {
-                                    borderColor: errors.name ? "#ff4d4f" : "#58A6FF"
+                                    borderColor: errors.name ? "#ff4d4f" : (isNav ? "#7FD6FF" : "#58A6FF")
                                 },
                                 opacity: isSubmitting ? 0.6 : 1,
                                 pointerEvents: isSubmitting ? "none" : "auto"
@@ -195,18 +220,18 @@ const ContactoForm = ({ setSnackbar, fullHeight = false }) => {
                                 sx={{
                                     opacity: isSubmitting ? 0.6 : 1,
                                     pointerEvents: isSubmitting ? "none" : "auto",
-                                    backgroundColor: "#123F4A",
+                                    backgroundColor: isNav ? "rgba(255,255,255,0.06)" : "#123F4A",
                                     borderRadius: 2,
                                     input: { color: "#E6EDF3", fontSize: "0.9rem" },
                                     label: { color: errors.phone ? "#ff4d4f" : "#E6EDF3" },
                                     fieldset: {
-                                        borderColor: errors.phone ? "#ff4d4f" : "#30363D"
+                                        borderColor: errors.phone ? "#ff4d4f" : (isNav ? "rgba(255,255,255,0.18)" : "#30363D")
                                     },
                                     "&:hover fieldset": {
-                                        borderColor: errors.phone ? "#ff4d4f" : "#58A6FF"
+                                        borderColor: errors.phone ? "#ff4d4f" : (isNav ? "rgba(255,255,255,0.35)" : "#58A6FF")
                                     },
                                     "&.Mui-focused fieldset": {
-                                        borderColor: errors.phone ? "#ff4d4f" : "#58A6FF"
+                                        borderColor: errors.phone ? "#ff4d4f" : (isNav ? "#7FD6FF" : "#58A6FF")
                                     },
                                     flex: 1
                                 }}
@@ -255,7 +280,7 @@ const ContactoForm = ({ setSnackbar, fullHeight = false }) => {
                                     error={Boolean(!emailCopia.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) && emailCopia.length > 0}
                                     sx={{
                                         width: { xs: "100%", md: "220px" },
-                                        backgroundColor: "#123F4A",
+                                        backgroundColor: isNav ? "rgba(255,255,255,0.06)" : "#123F4A",
                                         borderRadius: 2,
                                         input: {
                                             color: "#E6EDF3",
@@ -274,19 +299,19 @@ const ContactoForm = ({ setSnackbar, fullHeight = false }) => {
                                             borderColor:
                                                 !emailCopia.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) && emailCopia.length > 0
                                                     ? "#ff4d4f"
-                                                    : "#30363D"
+                                                    : (isNav ? "rgba(255,255,255,0.18)" : "#30363D")
                                         },
                                         "&:hover fieldset": {
                                             borderColor:
                                                 !emailCopia.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) && emailCopia.length > 0
                                                     ? "#ff4d4f"
-                                                    : "#58A6FF"
+                                                    : (isNav ? "rgba(255,255,255,0.35)" : "#58A6FF")
                                         },
                                         "&.Mui-focused fieldset": {
                                             borderColor:
                                                 !emailCopia.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) && emailCopia.length > 0
                                                     ? "#ff4d4f"
-                                                    : "#58A6FF"
+                                                    : (isNav ? "#7FD6FF" : "#58A6FF")
                                         },
                                         opacity: isSubmitting ? 0.6 : 1,
                                         pointerEvents: isSubmitting ? "none" : "auto"
@@ -310,23 +335,23 @@ const ContactoForm = ({ setSnackbar, fullHeight = false }) => {
                             }}
                             fullWidth
                             multiline
-                            rows={3}
+                            rows={messageRows}
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
                             error={Boolean(errors.message)}
                             sx={{
-                                backgroundColor: "#123F4A",
+                                backgroundColor: isNav ? "rgba(255,255,255,0.06)" : "#123F4A",
                                 borderRadius: 2,
                                 textarea: { color: "#E6EDF3", fontSize: "0.9rem" },
                                 label: { color: errors.message ? "#ff4d4f" : "#E6EDF3" },
                                 fieldset: {
-                                    borderColor: errors.message ? "#ff4d4f" : "#30363D"
+                                    borderColor: errors.message ? "#ff4d4f" : (isNav ? "rgba(255,255,255,0.18)" : "#30363D")
                                 },
                                 "&:hover fieldset": {
-                                    borderColor: errors.message ? "#ff4d4f" : "#58A6FF"
+                                    borderColor: errors.message ? "#ff4d4f" : (isNav ? "rgba(255,255,255,0.35)" : "#58A6FF")
                                 },
                                 "&.Mui-focused fieldset": {
-                                    borderColor: errors.message ? "#ff4d4f" : "#58A6FF"
+                                    borderColor: errors.message ? "#ff4d4f" : (isNav ? "#7FD6FF" : "#58A6FF")
                                 },
                                 opacity: isSubmitting ? 0.6 : 1,
                                 pointerEvents: isSubmitting ? "none" : "auto"
@@ -345,15 +370,26 @@ const ContactoForm = ({ setSnackbar, fullHeight = false }) => {
                                 padding: "10px",
                                 borderRadius: 3,
                                 textTransform: "none",
-                                backgroundColor: "var(--darkreader-background-c4211a, #9d1a15)",
+                                backgroundColor: isNav ? "transparent" : "var(--darkreader-background-c4211a, #9d1a15)",
+                                backgroundImage: isNav
+                                    ? "linear-gradient(135deg, rgba(127,214,255,0.95) 0%, rgba(44,149,227,0.95) 48%, rgba(26,169,122,0.95) 100%)"
+                                    : "none",
                                 color: "#fff",
                                 opacity: isSubmitting ? 0.6 : 1,
                                 cursor: isSubmitting ? "not-allowed" : "pointer",
-                                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.3)",
+                                border: isNav ? "1px solid rgba(255,255,255,0.22)" : "none",
+                                boxShadow: isNav
+                                    ? "0 14px 28px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.22)"
+                                    : "0px 4px 8px rgba(0, 0, 0, 0.3)",
                                 minHeight: 48,
                                 "&:hover": {
-                                    backgroundColor: "var(--darkreader-background-b62821, #92201a)",
-                                    boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.4)"
+                                    backgroundColor: isNav ? "transparent" : "var(--darkreader-background-b62821, #92201a)",
+                                    backgroundImage: isNav
+                                        ? "linear-gradient(135deg, rgba(140,224,255,0.98) 0%, rgba(55,165,245,0.98) 48%, rgba(30,190,140,0.98) 100%)"
+                                        : "none",
+                                    boxShadow: isNav
+                                        ? "0 18px 34px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.24)"
+                                        : "0px 6px 12px rgba(0, 0, 0, 0.4)"
                                 }
                             }}
                         >

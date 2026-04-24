@@ -162,7 +162,7 @@ function Informations() {
           />
         </Box>
 
-        <Grid container spacing={3} sx={{ mt: 2 }} alignItems="flex-start">
+        <Grid container spacing={3} sx={{ mt: 2 }} alignItems={isDesktop ? "stretch" : "flex-start"}>
           <Grid item xs={12} md={7}>
             {journeySteps.map((item, index) => {
               const { ref: itemRef, inView: itemInView } = useInView({ threshold: 0.43, triggerOnce: true });
@@ -272,25 +272,11 @@ function Informations() {
 
           {/* Desktop-only: Contact form lives here */}
           {isDesktop && (
-            <Grid item xs={12} md={5} sx={{ display: "flex", justifyContent: "center" }}>
-              <Box sx={{ width: "100%", maxWidth: 520, mx: "auto" }}>
-                <Typography
-                  sx={{
-                    fontFamily: "'Montserrat', Helvetica, Arial, sans-serif !important",
-                    fontWeight: 800,
-                    fontSize: "1.05rem",
-                    letterSpacing: "0.06em",
-                    textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.92)",
-                    textAlign: "left",
-                    mb: 1.2,
-                    px: 1,
-                  }}
-                >
-                  Contact Us
-                </Typography>
-
-                <ContactoForm setSnackbar={setSnackbar} fullHeight={false} />
+            <Grid item xs={12} md={5} sx={{ display: "flex", justifyContent: "center", alignItems: "stretch" }}>
+              <Box sx={{ width: "100%", maxWidth: 520, mx: "auto", height: "100%", display: "flex", flexDirection: "column" }}>
+                <Box sx={{ flex: 1, display: "flex" }}>
+                  <ContactoForm setSnackbar={setSnackbar} fullHeight={true} variant="nav" title="Contact Us" messageRows={6} />
+                </Box>
               </Box>
             </Grid>
           )}

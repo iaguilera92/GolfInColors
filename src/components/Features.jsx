@@ -1,4 +1,4 @@
-﻿import React, { useMemo, useState } from "react";
+﻿import React, { useEffect, useMemo, useState } from "react";
 import {
   Container,
   Typography,
@@ -15,6 +15,47 @@ function Features() {
   const navigate = useNavigate();
   const [selected, setSelected] = useState(null);
   const [isSelecting, setIsSelecting] = useState(false);
+  const [reveal, setReveal] = useState(false);
+
+  useEffect(() => {
+    let done = false;
+    const forceReveal = () => {
+      if (done) return;
+      done = true;
+      setReveal(true);
+    };
+
+    const onReady = () => forceReveal();
+    window.addEventListener("app:ready", onReady);
+
+    if (document.documentElement.dataset.appReady === "1") {
+      forceReveal();
+    }
+
+    const fallback = setTimeout(forceReveal, 5000);
+    return () => {
+      window.removeEventListener("app:ready", onReady);
+      clearTimeout(fallback);
+    };
+  }, []);
+
+  const gridVariants = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.12, delayChildren: 0.22 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 18, scale: 0.965 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { type: "spring", stiffness: 260, damping: 22, mass: 0.7 },
+    },
+  };
 
   const options = useMemo(
     () => [
@@ -116,9 +157,18 @@ function Features() {
               gridTemplateColumns: { xs: "1fr 1fr", md: "repeat(4, minmax(0, 1fr))" },
               gap: { xs: 1.0, sm: 1.4 },
             }}
+            component={motion.div}
+            variants={gridVariants}
+            initial="hidden"
+            animate={reveal ? "visible" : "hidden"}
           >
-            {options.map((option) => (
-              <Box key={option.value}>
+            {options.map((option, index) => (
+              <motion.div
+                key={option.value}
+                variants={itemVariants}
+                style={{ pointerEvents: reveal ? "auto" : "none" }}
+              >
+                <Box>
                 <motion.div whileTap={{ scale: 0.985 }} whileHover={{ scale: 1.01 }}>
                   <Box
                     role="button"
@@ -214,6 +264,7 @@ function Features() {
                   {option.label}
                 </Typography>
               </Box>
+              </motion.div>
             ))}
           </Box>
         </Box>
