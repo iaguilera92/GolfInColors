@@ -68,30 +68,6 @@ export default function Parents() {
               <Box
                 component="span"
                 sx={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: 1.2,
-                  color: "#0b8f63",
-                  fontSize: { xs: "0.96rem", sm: "1.08rem", md: "1.15rem" },
-                  fontWeight: 950,
-                  letterSpacing: "0.28em",
-                  textTransform: "uppercase",
-                  mb: { xs: 0.6, sm: 0.8 },
-                  "&::before, &::after": {
-                    content: '""',
-                    height: "2px",
-                    width: { xs: 34, sm: 44, md: 56 },
-                    borderRadius: 2,
-                    background: "rgba(11,143,99,0.55)",
-                  },
-                }}
-              >
-                SUPPORT
-              </Box>
-              <Box
-                component="span"
-                sx={{
                   display: "block",
                   color: "#0d2b45",
                   fontSize: { xs: "1.65rem", sm: "2.05rem", md: "2.25rem" },
@@ -164,20 +140,6 @@ export default function Parents() {
             >
               <Typography
                 sx={{
-                  color: "#0c2a44",
-                  fontFamily: "'Poppins', sans-serif",
-                  fontWeight: 900,
-                  fontSize: { xs: "1.35rem", sm: "1.75rem" },
-                  lineHeight: 1.15,
-                  textAlign: "center",
-                  mb: 0.6,
-                }}
-              >
-                Your Child's Golf Journey Starts With You
-              </Typography>
-
-              <Typography
-                sx={{
                   color: "#35536a",
                   fontWeight: 700,
                   fontSize: { xs: "1rem", sm: "1.12rem" },
@@ -190,7 +152,10 @@ export default function Parents() {
               </Typography>
 
               <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "1rem" }, lineHeight: 1.65, mb: 1.2 }}>
-                As a parent, it can be difficult to balance wanting what’s best for your child with actually doing what’s best for them. Your role is to be their biggest supporter and cheerleader while helping them find the right environment to grow as a golfer.
+                As a parent, it can be difficult to balance wanting what’s best for your child with actually doing what’s best for them.
+                <Box component="span" sx={{ display: { xs: "block", sm: "inline" } }}>
+                  Your role is to be their biggest supporter and cheerleader while helping them find the right environment to grow as a golfer.
+                </Box>
               </Typography>
               <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "1rem" }, lineHeight: 1.65 }}>
                 Finding the right coach is essential to creating engagement with the sport. Not every coach is skilled at working with kids, and not everyone has the patience it requires. That’s why feedback from both your child and the coach is key to making sure the experience is positive and productive.
@@ -430,6 +395,7 @@ export default function Parents() {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.75, ease: "easeOut" }}
           viewport={{ once: true, amount: 0.2 }}
+          style={{ display: "none" }}
         >
           <Box
             sx={{
@@ -514,10 +480,6 @@ export default function Parents() {
     </Box>
   );
 }
-
-
-
-
 
 
 

@@ -121,35 +121,6 @@ export default function TeamSection() {
           />
         </div>
 
-        <div className="ts-footer">
-          <div className="ts-footerBadge" aria-hidden="true">
-            <svg viewBox="0 0 24 24" className="ts-trophySvg">
-              <path
-                d="M7 4h10v3c0 3-2.7 5-5 5s-5-2-5-5V4z"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinejoin="round"
-              />
-              <path d="M9 12v2c0 1 1 2 3 2s3-1 3-2v-2" fill="none" stroke="currentColor" strokeWidth="2" />
-              <path d="M10 18h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              <path d="M6 6H4c0 3 2 5 5 5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              <path d="M18 6h2c0 3-2 5-5 5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-        </div>
-          <p className="ts-footerText">
-            <span className="ts-footerDesktop">
-              When the parent leads, the coach guides,
-              <br />
-              and the child enjoys the process, real growth happens.
-            </span>
-          <span className="ts-footerMobile">
-            <span className="ts-footerLine">When the parent leads, the coach guides,</span>
-            <br />
-            <span className="ts-footerLine">the child enjoys the process, real growth happens.</span>
-          </span>
-        </p>
-      </div>
       </motion.div>
     </section>
   );
