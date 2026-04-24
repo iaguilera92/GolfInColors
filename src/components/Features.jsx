@@ -210,6 +210,7 @@ function Features() {
                         width: "100%",
                         height: { xs: 128, sm: 145 },
                         objectFit: "cover",
+                        objectPosition: option.value === "coaches" ? "center 0%" : "center center",
                         display: "block",
                         background: option.value === "shop" ? "#fff" : "linear-gradient(180deg, #9fd8ff 0%, #cfeeff 45%, #eaf8ff 100%)",
                       }}

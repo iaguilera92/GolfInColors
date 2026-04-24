@@ -28,7 +28,7 @@ const Administracion = () => {
   const [showCursor, setShowCursor] = useState(true);
   const emailRef = useRef();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const textToType = useRef("Iniciar sesión");
+  const textToType = useRef("Sign in");
   const [logoAnimacion, setLogoAnimacion] = useState("idle"); // idle | pendulo | error
   const logoTimeoutRef = useRef(null);
   const [estadoMensaje, setEstadoMensaje] = useState("idle");
@@ -65,7 +65,7 @@ const Administracion = () => {
       sessionStorage.setItem("snackbar", JSON.stringify({
         open: true,
         type: "success",
-        message: `Bienvenido ${usuarioValido.nombre} 😎`
+        message: `Welcome ${usuarioValido.nombre} 😎`
       }));
       sessionStorage.setItem("usuario", JSON.stringify(usuarioValido));
 
@@ -80,7 +80,7 @@ const Administracion = () => {
         setIsSubmitting(false);
       }, 800);
 
-      showSnackbar("error", "Usuario o contraseña incorrectos");
+      showSnackbar("error", "Incorrect username or password");
     }
   };
 
@@ -112,11 +112,11 @@ const Administracion = () => {
 
   useEffect(() => {
     let i = 0;
-    const text = textToType.current; // "Iniciar sesión"
+    const text = textToType.current; // "Sign in"
 
     const typeNext = () => {
       if (i < text.length) {
-        setTypedText(text.slice(0, i + 1)); // 👈 escribe hasta la posición actual
+        setTypedText(text.slice(0, i + 1)); // 👈 type up to the current position
         i++;
         setTimeout(typeNext, 100);
       } else {
@@ -288,7 +288,7 @@ const Administracion = () => {
             >
               <motion.img
                 src={getLogoAnimado()}
-                alt="Usuario"
+                alt="User"
                 style={{
                   width: "100%",
                   height: "100%",
@@ -326,7 +326,7 @@ const Administracion = () => {
           {estadoMensaje === "cargando" ? (
             <DotsAnimation />
           ) : estadoMensaje === "error" ? (
-            "Usuario incorrecto"
+            "Incorrect user"
           ) : (
             <>
               {typedText}
@@ -351,7 +351,7 @@ const Administracion = () => {
             inputRef={emailRef}
             fullWidth
             variant="filled"
-            label="Usuario o correo"
+            label="Username or email"
             margin="dense"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -370,7 +370,7 @@ const Administracion = () => {
             fullWidth
             type={showPassword ? "text" : "password"}
             variant="filled"
-            label="Contraseña"
+            label="Password"
             margin="dense"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -398,7 +398,7 @@ const Administracion = () => {
 
           <FormControlLabel
             control={<Checkbox checked={recordarme} onChange={(e) => setRecordarme(e.target.checked)} sx={{ color: "white" }} />}
-            label="Recordarme" sx={{ color: "#bbb", mt: 0, fontSize: "0.8rem" }}
+            label="Remember me" sx={{ color: "#bbb", mt: 0, fontSize: "0.8rem" }}
           />
           <motion.div
             initial={false}
@@ -431,7 +431,7 @@ const Administracion = () => {
               {isSubmitting ? (
                 <CircularProgress size={22} sx={{ color: "#fff" }} />
               ) : (
-                "Entrar"
+                "Sign in"
               )}
             </Button>
 
@@ -449,7 +449,7 @@ const Administracion = () => {
               underline="hover"
               sx={{ color: "#bbb", fontSize: "0.9rem", "&:hover": { color: "#E95420" } }}
             >
-              ← Volver al inicio
+              Back to home
             </Link>
           </Box>
         </Box>
@@ -478,7 +478,7 @@ const DotsAnimation = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return <span style={{ fontWeight: "bold" }}>Cargando{dots}</span>;
+  return <span style={{ fontWeight: "bold" }}>Loading{dots}</span>;
 };
 
 export default Administracion;
