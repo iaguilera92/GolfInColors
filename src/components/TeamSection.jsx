@@ -144,9 +144,9 @@ export default function TeamSection() {
               and the child enjoys the process, real growth happens.
             </span>
           <span className="ts-footerMobile">
-            <span className="ts-footerLine">When the parent leads, the coach guides, and the child</span>
+            <span className="ts-footerLine">When the parent leads, the coach guides,</span>
             <br />
-            <span className="ts-footerLine">enjoys the process, real growth happens.</span>
+            <span className="ts-footerLine">the child enjoys the process, real growth happens.</span>
           </span>
         </p>
       </div>
