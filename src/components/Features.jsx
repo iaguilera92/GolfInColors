@@ -83,7 +83,7 @@ function Features() {
         value: "shop",
         toneA: "#ffcf4d",
         toneB: "#e69a00",
-        image: "/shop.avif",
+        image: "/tienda-2.avif",
       },
     ],
     []
@@ -210,7 +210,12 @@ function Features() {
                         width: "100%",
                         height: { xs: 128, sm: 145 },
                         objectFit: "cover",
-                        objectPosition: option.value === "coaches" ? "center 0%" : "center center",
+                          objectPosition:
+                            option.value === "coaches"
+                            ? "center 0%"
+                            : option.value === "shop"
+                              ? "center 37%"
+                                : "center center",
                         display: "block",
                         background: option.value === "shop" ? "#fff" : "linear-gradient(180deg, #9fd8ff 0%, #cfeeff 45%, #eaf8ff 100%)",
                       }}
@@ -265,6 +270,73 @@ function Features() {
               </Box>
               </motion.div>
             ))}
+          </Box>
+
+          <Box
+            sx={{
+              position: "relative",
+              mt: { xs: 2.4, sm: 3.2 },
+              minHeight: { xs: 170, sm: 210, md: 220 },
+              borderRadius: { xs: 3, sm: 4 },
+              overflow: "hidden",
+              boxShadow: "0 12px 28px rgba(0,0,0,0.12)",
+            }}
+          >
+            <Box
+              component="video"
+              src="/video-golf-2.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              sx={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center center",
+                filter: "saturate(1.05) contrast(1.02)",
+              }}
+            />
+
+            <Box
+              sx={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(180deg, rgba(2,14,10,0.18) 0%, rgba(2,14,10,0.52) 100%)",
+              }}
+            />
+
+            <Box
+              sx={{
+                position: "relative",
+                zIndex: 1,
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                px: { xs: 2.2, sm: 4 },
+                py: { xs: 4.2, sm: 5 },
+                textAlign: "center",
+              }}
+            >
+              <Typography
+                sx={{
+                  color: "#ffffff",
+                  fontWeight: 900,
+                  fontFamily: "'Poppins', sans-serif",
+                  fontSize: { xs: "1.22rem", sm: "1.7rem", md: "2rem" },
+                  lineHeight: 1.08,
+                  letterSpacing: "0.02em",
+                  textShadow: "0 6px 18px rgba(0,0,0,0.35)",
+                  maxWidth: "12ch",
+                }}
+              >
+                {"Together We’re Shaping the Future of Golf"}
+              </Typography>
+            </Box>
           </Box>
         </Box>
       </Container>

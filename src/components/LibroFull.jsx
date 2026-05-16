@@ -27,24 +27,23 @@ export default function LibroFull({
   const turnDuration = isMobile ? mobileTurnDuration : desktopTurnDuration;
   const useLiteMobileBook = isMobile;
   const activePage = storyBookPages[storyPage] || {};
-  const showMobileRightText = useMobileBookLayout && Boolean(activePage.imageText);
+  const showRightText = useMobileBookLayout && Boolean(activePage.imageText);
   const leftPageFontSize = isIphoneSELike
     ? "0.8rem"
     : isPortrait
-      ? "1rem"
-      : "0.86rem";
-  const leftPageLineHeight = !isMobile ? 1.72 : isIphoneSELike ? 1.48 : 1.6;
-  const isFirstMobileSpread = showMobileRightText && storyPage === 0;
-  const isSecondMobileSpread = showMobileRightText && storyPage === 1;
-  const isThirdMobileSpread = showMobileRightText && storyPage === 2;
-  const isFourthMobileSpread = showMobileRightText && storyPage === 3;
-  const isFifthMobileSpread = showMobileRightText && storyPage === 4;
-  const isSixthMobileSpread = showMobileRightText && storyPage === 5;
-  const isSeventhMobileSpread = showMobileRightText && storyPage === 6;
-  const isEighthMobileSpread = showMobileRightText && storyPage === 7;
-  const isNinthMobileSpread = showMobileRightText && storyPage === 8;
-  const isTenthMobileSpread = showMobileRightText && storyPage === 9;
-  const isEleventhMobileSpread = showMobileRightText && storyPage === 10;
+      ? "1.08rem"
+      : "1.02rem";
+  const leftPageLineHeight = !isMobile ? 1.78 : isIphoneSELike ? 1.48 : 1.6;
+  const isFirstMobileSpread = showRightText && storyPage === 0;
+  const isSecondMobileSpread = showRightText && storyPage === 1;
+  const isThirdMobileSpread = showRightText && storyPage === 2;
+  const isFourthMobileSpread = showRightText && storyPage === 3;
+  const isFifthMobileSpread = showRightText && storyPage === 4;
+  const isSixthMobileSpread = showRightText && storyPage === 5;
+  const isSeventhMobileSpread = showRightText && storyPage === 6;
+  const isEighthMobileSpread = showRightText && storyPage === 7;
+  const isNinthMobileSpread = showRightText && storyPage === 8;
+  const isTenthMobileSpread = showRightText && storyPage === 9;
 
   return (
     <>
@@ -242,17 +241,20 @@ export default function LibroFull({
                           ? {
                               xs: isIphoneSELike
                                 ? isPortrait
-                                  ? "0.8rem"
-                                  : "0.76rem"
+                                  ? "0.82rem"
+                                  : "0.78rem"
                                 : isPortrait
-                                  ? "1.02rem"
-                                  : "0.88rem",
-                              sm: "1.42rem",
+                                  ? "0.9rem"
+                                  : "0.86rem",
+                              sm: "1.5rem",
                             }
                           : { xs: "1rem", sm: "1.1rem" },
                         mb: 0.35,
                         width: "100%",
                         textAlign: "center",
+                        maxWidth: { sm: "72%" },
+                        mx: "auto",
+                        lineHeight: { sm: 1.12 },
                       }}
                     >
                       {activePage.title}
@@ -266,11 +268,11 @@ export default function LibroFull({
                               xs: isIphoneSELike
                                 ? isPortrait
                                   ? "0.7rem"
-                                  : "0.7rem"
+                                  : "0.68rem"
                                 : isPortrait
-                                  ? "0.9rem"
-                                  : "0.78rem",
-                              sm: "1.18rem",
+                                  ? "0.76rem"
+                                  : "0.72rem",
+                              sm: "1.88rem",
                             }
                           : { xs: "0.86rem", sm: "0.92rem" },
                         mb: 0.8,
@@ -288,7 +290,7 @@ export default function LibroFull({
                     lineHeight: bookOpen ? leftPageLineHeight : 1.55,
                     fontSize: bookOpen ? leftPageFontSize : "0.82rem",
                     width: "100%",
-                    maxWidth: bookOpen ? { xs: "100%", sm: !useMobileBookLayout ? "90%" : "100%", md: "88%" } : "100%",
+                    maxWidth: bookOpen ? { xs: "100%", sm: !useMobileBookLayout ? "78%" : "100%", md: "78%" } : "100%",
                     mx: "auto",
                     textAlign: "center",
                   }}
@@ -341,7 +343,7 @@ export default function LibroFull({
                 },
               }}
             >
-              {showMobileRightText ? (
+              {showRightText ? (
                 <Box
                   sx={{
                     width: "100%",
@@ -378,7 +380,7 @@ export default function LibroFull({
                                     ? isIphoneSELike ? "0 0 44%" : "0 0 40%"
                                     : isSeventhMobileSpread
                                       ? isIphoneSELike ? "0 0 44%" : "0 0 40%"
-                                      : isNinthMobileSpread || isTenthMobileSpread || isEleventhMobileSpread
+                                      : isNinthMobileSpread || isTenthMobileSpread
                                         ? isIphoneSELike ? "0 0 44%" : "0 0 40%"
                               : isIphoneSELike ? "0 0 72%" : "0 0 66%",
                       display: "flex",
@@ -395,11 +397,35 @@ export default function LibroFull({
                         fontSize: isFirstMobileSpread
                           ? isIphoneSELike
                             ? isPortrait
-                              ? "0.76rem"
-                              : "0.76rem"
+                              ? "0.7rem"
+                              : "0.7rem"
                             : isPortrait
-                              ? "1.08rem"
-                              : "0.94rem"
+                              ? "0.98rem"
+                              : "0.88rem"
+                          : isThirdMobileSpread
+                            ? isIphoneSELike
+                              ? isPortrait
+                                ? "0.64rem"
+                                : "0.64rem"
+                              : isPortrait
+                                ? "0.92rem"
+                                : "0.82rem"
+                          : isEighthMobileSpread
+                            ? isIphoneSELike
+                              ? isPortrait
+                                ? "0.58rem"
+                                : "0.58rem"
+                              : isPortrait
+                                ? "0.84rem"
+                                : "0.76rem"
+                          : isNinthMobileSpread
+                            ? isIphoneSELike
+                              ? isPortrait
+                                ? "0.62rem"
+                                : "0.62rem"
+                              : isPortrait
+                                ? "0.88rem"
+                                : "0.8rem"
                           : isIphoneSELike
                             ? isPortrait
                               ? "0.7rem"
@@ -420,10 +446,10 @@ export default function LibroFull({
                                   : isSixthMobileSpread
                                     ? isIphoneSELike ? 0.88 : 1
                                     : isEighthMobileSpread
-                                      ? isIphoneSELike ? 0.88 : 1
+                                      ? isIphoneSELike ? 1 : 1.12
                                       : isSeventhMobileSpread
                                         ? isIphoneSELike ? 0.88 : 1
-                                        : isNinthMobileSpread || isTenthMobileSpread || isEleventhMobileSpread
+                                        : isNinthMobileSpread || isTenthMobileSpread
                                           ? isIphoneSELike ? 0.88 : 1
                                 : isIphoneSELike ? 0.82 : 1.24,
                         px: isFirstMobileSpread
@@ -437,10 +463,10 @@ export default function LibroFull({
                                   : isSixthMobileSpread
                                     ? isIphoneSELike ? 0.56 : 0.7
                                     : isEighthMobileSpread
-                                      ? isIphoneSELike ? 0.56 : 0.7
+                                      ? isIphoneSELike ? 0.64 : 0.78
                                       : isSeventhMobileSpread
                                         ? isIphoneSELike ? 0.56 : 0.7
-                                        : isNinthMobileSpread || isTenthMobileSpread || isEleventhMobileSpread
+                                        : isNinthMobileSpread || isTenthMobileSpread
                                           ? isIphoneSELike ? 0.56 : 0.7
                                 : isIphoneSELike ? 0.45 : 0.65,
                       }}
@@ -468,15 +494,15 @@ export default function LibroFull({
                               ? isIphoneSELike ? "1 1 56%" : "1 1 60%"
                             : isSeventhMobileSpread
                               ? isIphoneSELike ? "1 1 56%" : "1 1 60%"
-                            : isNinthMobileSpread || isTenthMobileSpread || isEleventhMobileSpread
+                            : isNinthMobileSpread || isTenthMobileSpread
                               ? isIphoneSELike ? "1 1 56%" : "1 1 60%"
                             : isIphoneSELike ? "1 1 28%" : "1 1 34%",
                       pt: isFirstMobileSpread
-                        ? 0
+                        ? (isIphoneSELike ? 0.12 : 0.22)
                         : isSecondMobileSpread
                           ? isIphoneSELike ? 0.34 : 0.12
                           : isThirdMobileSpread
-                            ? isIphoneSELike ? 0.1 : 0.02
+                            ? isIphoneSELike ? 0.18 : 0.1
                           : isFourthMobileSpread
                               ? 0
                             : isFifthMobileSpread
@@ -484,11 +510,11 @@ export default function LibroFull({
                             : isSixthMobileSpread
                               ? isIphoneSELike ? 0.12 : 0.08
                             : isEighthMobileSpread
-                              ? isIphoneSELike ? 0.12 : 0.08
+                              ? isIphoneSELike ? 0.2 : 0.14
                             : isSeventhMobileSpread
                               ? isIphoneSELike ? 0.12 : 0.08
-                            : isNinthMobileSpread || isTenthMobileSpread || isEleventhMobileSpread
-                              ? isIphoneSELike ? 0.12 : 0.08
+                            : isNinthMobileSpread || isTenthMobileSpread
+                              ? isIphoneSELike ? 0.18 : 0.12
                               : isIphoneSELike ? 0.1 : 0.2,
                     }}
                   >
@@ -517,13 +543,12 @@ export default function LibroFull({
                             || isFourthMobileSpread
                             || isFifthMobileSpread
                             || isSixthMobileSpread
-                            || isSeventhMobileSpread
-                            || isEighthMobileSpread
-                            || isNinthMobileSpread
-                            || isTenthMobileSpread
-                            || isEleventhMobileSpread
-                            ? "center center"
-                            : "center bottom",
+                          || isSeventhMobileSpread
+                          || isEighthMobileSpread
+                          || isNinthMobileSpread
+                          || isTenthMobileSpread
+                          ? "center center"
+                          : "center bottom",
                         display: "block",
                         margin:
                           isSecondMobileSpread && !isIphoneSELike

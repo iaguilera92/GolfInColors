@@ -297,7 +297,7 @@ function App() {
         {["/", ""].includes(location.pathname) && (
           <>
             <Suspense fallback={null}>
-              <div ref={informationsRef}>
+              <div ref={informationsRef} style={{ backgroundColor: "#f7f4ee" }}>
                 {isMobile ?
                   < InformationsMobile
                     informationsRef={informationsRef}

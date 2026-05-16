@@ -3,6 +3,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import Hero from "./Hero";
 import Features from "./Features";
+import Areas from "./Areas";
 import { useOutletContext } from "react-router-dom";
 
 function Home({ informationsRef, setVideoReady }) {
@@ -23,10 +24,13 @@ function Home({ informationsRef, setVideoReady }) {
     return (
         <Box>
             <Hero informationsRef={informationsRef} setVideoReady={setVideoReady} onStartClick={handleStartClick} />
-            <Box>
-                <Features videoReady={showApp} informationsRef={informationsRef} />
-            </Box>
+        <Box>
+            <Features videoReady={showApp} informationsRef={informationsRef} />
         </Box>
+        <Box>
+            <Areas />
+        </Box>
+    </Box>
     );
 }
 

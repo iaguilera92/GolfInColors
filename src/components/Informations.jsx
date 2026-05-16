@@ -55,6 +55,7 @@ function Informations() {
 
   return (
     <Box
+      className="informations-section"
       sx={{
         position: "relative",
         zIndex: 10,
@@ -63,9 +64,9 @@ function Informations() {
         backgroundPosition: "center",
         backgroundAttachment: "fixed",
         py: isMobile ? 8 : 3,
-        pt: 1,
+        pt: { xs: 3, md: 2 },
         marginTop: "0",
-        marginBottom: "-10px",
+        marginBottom: "-20px",
         color: "white",
         overflow: "hidden",
         borderBottomLeftRadius: isMobile ? "90px" : "120px",
@@ -275,7 +276,7 @@ function Informations() {
             <Grid item xs={12} md={5} sx={{ display: "flex", justifyContent: "center", alignItems: "stretch" }}>
               <Box sx={{ width: "100%", maxWidth: 520, mx: "auto", height: "100%", display: "flex", flexDirection: "column" }}>
                 <Box sx={{ flex: 1, display: "flex" }}>
-                  <ContactoForm setSnackbar={setSnackbar} fullHeight={true} variant="nav" title="Contact Us" messageRows={6} />
+                  <ContactoForm setSnackbar={setSnackbar} fullHeight={true} variant="nav" title="Contact Us" messageRows={5} />
                 </Box>
               </Box>
             </Grid>

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 import TeamSection from "./TeamSection";
+
 export default function Parents() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -25,7 +26,6 @@ export default function Parents() {
     },
   ];
 
-
   return (
     <Box
       sx={{
@@ -42,6 +42,166 @@ export default function Parents() {
         <Box sx={{ mt: { xs: -3.2, sm: -4.0 }, mb: { xs: 2.4, sm: 3.2 } }}>
           <TeamSection />
         </Box>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <Box
+            sx={{
+              mb: { xs: 3.4, sm: 4.4 },
+              p: { xs: 2.2, sm: 3, md: 3.4 },
+              borderRadius: 4,
+              border: "1px solid rgba(13,43,69,0.10)",
+              background: "linear-gradient(165deg, #ffffff 0%, #f4f9ff 100%)",
+              boxShadow: "0 16px 30px rgba(13,43,69,0.10)",
+              overflow: "hidden",
+              position: "relative",
+              "&::before": {
+                content: '""',
+                position: "absolute",
+                inset: 0,
+                pointerEvents: "none",
+                background: "radial-gradient(circle at top right, rgba(27,131,204,0.08) 0, rgba(27,131,204,0) 38%)",
+              },
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: 1.2,
+                mb: 1.15,
+                position: "relative",
+                zIndex: 1,
+              }}
+            >
+              <Box
+                sx={{
+                  width: 42,
+                  height: 42,
+                  borderRadius: "50%",
+                  display: "grid",
+                  placeItems: "center",
+                  background: "linear-gradient(135deg, #1B83CC 0%, #0b8f63 100%)",
+                  color: "#fff",
+                  boxShadow: "0 10px 18px rgba(27,131,204,0.18)",
+                  flexShrink: 0,
+                }}
+              >
+                <HelpOutlineRoundedIcon sx={{ fontSize: 24 }} />
+              </Box>
+
+              <Box>
+                <Typography
+                  sx={{
+                    fontFamily: "'Poppins', sans-serif",
+                    fontWeight: 900,
+                    color: "#0c2a44",
+                    fontSize: { xs: "1.1rem", sm: "1.18rem" },
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    lineHeight: 1.05,
+                  }}
+                >
+                  ROLES
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#35536a",
+                    fontWeight: 700,
+                    fontSize: { xs: "0.9rem", sm: "0.98rem" },
+                    lineHeight: 1.3,
+                    mt: 0.25,
+                  }}
+                >
+                  How the Journey Works at Home
+                </Typography>
+              </Box>
+            </Box>
+
+            <Typography
+              sx={{
+                position: "relative",
+                zIndex: 1,
+                color: "#27475f",
+                fontSize: { xs: "0.94rem", sm: "1rem" },
+                lineHeight: 1.72,
+                maxWidth: "72ch",
+              }}
+            >
+              Reinforcing what children learn at the academy while creating meaningful parent-child connection through golf.
+            </Typography>
+
+            <Box
+              sx={{
+                mt: 0,
+                display: "grid",
+                gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))", md: "repeat(5, minmax(0, 1fr))" },
+                gap: 1.1,
+                position: "relative",
+                zIndex: 1,
+              }}
+            >
+              {[
+                "Discover the game",
+                "Build the foundation",
+                "Experience the Game of Golf",
+                "Understand How to Play",
+                "Step into structured training",
+              ].map((step, index) => (
+                <Box
+                  key={step}
+                  sx={{
+                    p: 1.45,
+                    borderRadius: 3,
+                    border: "1px solid rgba(13,43,69,0.10)",
+                    background:
+                      index % 2 === 0
+                        ? "linear-gradient(180deg, rgba(27,131,204,0.08) 0%, rgba(27,131,204,0.03) 100%)"
+                        : "linear-gradient(180deg, rgba(11,143,99,0.08) 0%, rgba(11,143,99,0.03) 100%)",
+                    minHeight: 92,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1.1,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: 30,
+                      height: 30,
+                      borderRadius: "50%",
+                      flexShrink: 0,
+                      display: "grid",
+                      placeItems: "center",
+                      background: "linear-gradient(135deg, #0d2b45 0%, #1B83CC 100%)",
+                      color: "#fff",
+                      fontWeight: 900,
+                      fontFamily: "'Poppins', sans-serif",
+                      boxShadow: "0 8px 14px rgba(13,43,69,0.18)",
+                    }}
+                  >
+                    {index + 1}
+                  </Box>
+                  <Typography
+                    sx={{
+                      color: "#0c2a44",
+                      fontFamily: "'Poppins', sans-serif",
+                      fontWeight: 800,
+                      fontSize: { xs: "0.92rem", sm: "0.98rem" },
+                      lineHeight: 1.25,
+                    }}
+                  >
+                    {step}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, x: 90 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -53,6 +213,7 @@ export default function Parents() {
               textAlign: "center",
               color: "#0d2b45",
               px: { xs: 1, sm: 4 },
+              mt: { xs: -1.2, sm: -1.8 },
             }}
           >
             <Typography
@@ -116,8 +277,6 @@ export default function Parents() {
                 WITH YOU
               </Box>
             </Typography>
-
-            {/* Descriptor moved into the new block above FAQ's */}
           </Box>
         </motion.div>
 
@@ -148,108 +307,40 @@ export default function Parents() {
                   mb: 1.6,
                 }}
               >
-                Let Us Show You the Way
+                FIRST AT HOME
               </Typography>
 
-              <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "1rem" }, lineHeight: 1.65, mb: 1.2 }}>
-                As a parent, it can be difficult to balance wanting what’s best for your child with actually doing what’s best for them.
-                <Box component="span" sx={{ display: { xs: "block", sm: "inline" } }}>
-                  Your role is to be their biggest supporter and cheerleader while helping them find the right environment to grow as a golfer.
-                </Box>
-              </Typography>
-              <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "1rem" }, lineHeight: 1.65 }}>
-                Finding the right coach is essential to creating engagement with the sport. Not every coach is skilled at working with kids, and not everyone has the patience it requires. That’s why feedback from both your child and the coach is key to making sure the experience is positive and productive.
+              <Typography
+                sx={{
+                  color: "#27475f",
+                  fontSize: { xs: "0.95rem", sm: "1rem" },
+                  lineHeight: 1.75,
+                  mb: 1.2,
+                }}
+              >
+                As a parent, you play one of the most important roles in your child&apos;s journey. Your support, encouragement, and presence help create a positive environment where they can grow, explore, and truly enjoy the game. Being there for them, celebrating their progress and guiding them toward the right opportunities, makes all the difference.
               </Typography>
 
-              <Box sx={{ mt: 2.2, display: "grid", gridTemplateColumns: { xs: "1fr", md: "repeat(2, minmax(0, 1fr))" }, gap: { xs: 1.4, sm: 1.8 } }}>
-                <Box
-                  sx={{
-                    p: { xs: 1.8, sm: 2.1 },
-                    borderRadius: 2.6,
-                    border: "1px solid rgba(13,43,69,0.12)",
-                    background: "linear-gradient(165deg, #ffffff 0%, #f2fff8 100%)",
-                    boxShadow: "0 14px 28px rgba(13,43,69,0.10)",
-                    position: "relative",
-                    overflow: "hidden",
-                    "&::before": {
-                      content: '""',
-                      position: "absolute",
-                      top: -34,
-                      right: -34,
-                      width: 120,
-                      height: 120,
-                      borderRadius: "50%",
-                      background: "rgba(11,143,99,0.12)",
-                    },
-                    "&::after": {
-                      content: '""',
-                      position: "absolute",
-                      inset: 0,
-                      pointerEvents: "none",
-                      background:
-                        "linear-gradient(110deg, rgba(255,255,255,0) 18%, rgba(255,255,255,0.22) 50%, rgba(255,255,255,0) 82%)",
-                      opacity: 0.35,
-                    },
-                  }}
-                >
-                  <Typography sx={{ color: "#0c2a44", fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: { xs: "1.15rem", sm: "1.25rem" }, mb: 0.8, lineHeight: 1.1 }}>
-                    Guidance
-                  </Typography>
-                  <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "0.98rem" }, lineHeight: 1.65, mb: 1 }}>
-                    We support you by giving you clear, simple guidance so you know what to practice and how to keep it fun. Especially during parent-child golf time.
-                  </Typography>
-                  <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "0.98rem" }, lineHeight: 1.65, mb: 1 }}>
-                    Games with small challenges are ideal for kids. At this stage, the focus shouldn’t be on perfect technique, but on allowing your child to explore the game in a natural, enjoyable way.
-                  </Typography>
-                  <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "0.98rem" }, lineHeight: 1.65 }}>
-                    If you’re not ready to enroll your child in a golf camp, start with the basics: fundamental skills and proper golf etiquette. These early building blocks will set the foundation for future growth.
-                  </Typography>
-                </Box>
+              <Typography
+                sx={{
+                  color: "#27475f",
+                  fontSize: { xs: "0.95rem", sm: "1rem" },
+                  lineHeight: 1.75,
+                  mb: 1.2,
+                }}
+              >
+                Choosing the right coach is a key part of this experience. A great coach helps create connection, confidence, and excitement for learning, allowing your child to feel motivated and engaged.
+              </Typography>
 
-                <Box
-                  sx={{
-                    p: { xs: 1.8, sm: 2.1 },
-                    borderRadius: 2.6,
-                    border: "1px solid rgba(13,43,69,0.12)",
-                    background: "linear-gradient(165deg, #ffffff 0%, #f2f9ff 100%)",
-                    boxShadow: "0 14px 28px rgba(13,43,69,0.10)",
-                    position: "relative",
-                    overflow: "hidden",
-                    "&::before": {
-                      content: '""',
-                      position: "absolute",
-                      top: -34,
-                      right: -34,
-                      width: 120,
-                      height: 120,
-                      borderRadius: "50%",
-                      background: "rgba(27,131,204,0.10)",
-                    },
-                    "&::after": {
-                      content: '""',
-                      position: "absolute",
-                      inset: 0,
-                      pointerEvents: "none",
-                      background:
-                        "linear-gradient(110deg, rgba(255,255,255,0) 18%, rgba(255,255,255,0.22) 50%, rgba(255,255,255,0) 82%)",
-                      opacity: 0.32,
-                    },
-                  }}
-                >
-                  <Typography sx={{ color: "#0c2a44", fontFamily: "'Poppins', sans-serif", fontWeight: 900, fontSize: { xs: "1.15rem", sm: "1.25rem" }, mb: 0.8, lineHeight: 1.1 }}>
-                    Learn Together
-                  </Typography>
-                  <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "0.98rem" }, lineHeight: 1.65, mb: 1 }}>
-                    Understanding the basics of golf and how kids learn, creates an opportunity for both parent and child to grow together.
-                  </Typography>
-                  <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "0.98rem" }, lineHeight: 1.65, mb: 1 }}>
-                    Some parents already have golf experience, while others are completely new to the game. In both cases, golf can become a shared journey of discovery and improvement.
-                  </Typography>
-                  <Typography sx={{ color: "#27475f", fontSize: { xs: "0.95rem", sm: "0.98rem" }, lineHeight: 1.65 }}>
-                    Because golf is a sport for all ages, it can easily become a lifelong family activity. When you learn together, you nurture curiosity—and that’s where a genuine love for the game begins.
-                  </Typography>
-                </Box>
-              </Box>
+              <Typography
+                sx={{
+                  color: "#27475f",
+                  fontSize: { xs: "0.95rem", sm: "1rem" },
+                  lineHeight: 1.75,
+                }}
+              >
+                When there is open communication between you, your child, and the coach, the experience becomes even more meaningful, creating a strong foundation for growth, enjoyment, and long-term development in the game.
+              </Typography>
             </Box>
 
             <Box
@@ -475,17 +566,7 @@ export default function Parents() {
             </Grid>
           </Box>
         </motion.div>
-
       </Container>
     </Box>
   );
 }
-
-
-
-
-
-
-
-
-

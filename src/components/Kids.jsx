@@ -377,9 +377,6 @@ export default function Kids() {
           backgroundPositionX: { xs: "28%", sm: "50%" },
           backgroundPositionY: "center",
           backgroundRepeat: "no-repeat",
-          transform: isSectionOpen ? "scale(1.05)" : "scale(1)",
-          transformOrigin: { xs: "28% center", sm: "50% center" },
-          transition: "transform 420ms ease",
           zIndex: 0,
         }}
       />

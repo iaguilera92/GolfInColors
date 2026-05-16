@@ -60,6 +60,7 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
   const navigate = useNavigate();
 
   const rotatingPhrases = [
+    "Welcome Golf In Colors",
     "Together, we're shaping the future of golf.",
     "One colorful step at the time.",
   ];
@@ -87,11 +88,12 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
   }, [loadingVideo]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const delay = phraseIndex === 0 ? 7000 : 5000;
+    const timeout = setTimeout(() => {
       setPhraseIndex((prev) => (prev + 1) % rotatingPhrases.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [rotatingPhrases.length]);
+    }, delay);
+    return () => clearTimeout(timeout);
+  }, [phraseIndex, rotatingPhrases.length]);
 
   return (
     <>
@@ -202,27 +204,19 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
                   justifyContent: "center",
                 }}
               >
-                {phraseIndex === 0 ? (
-                  <AnimatedLine
-                    key="hero-phrase-0"
-                    text="Together, we're shaping the future of golf."
-                    startDelay={0.2}
-                    size={isMobile ? "0.93rem !important" : "2.1rem !important"}
-                    color="#ffffff"
-                    weight={700}
-                    stroke={isMobile ? "0.4px rgba(255,255,255,0.65)" : "0.8px rgba(255,255,255,0.75)"}
-                  />
-                ) : (
-                  <AnimatedLine
-                    key="hero-phrase-1"
-                    text={rotatingPhrases[phraseIndex]}
-                    startDelay={0.2}
-                    size={isMobile ? "1.2rem !important" : "2.1rem !important"}
-                    color="#ffffff"
-                    weight={700}
-                    stroke={isMobile ? "0.4px rgba(255,255,255,0.65)" : "0.8px rgba(255,255,255,0.75)"}
-                  />
-                )}
+                <AnimatedLine
+                  key={`hero-phrase-${phraseIndex}`}
+                  text={rotatingPhrases[phraseIndex]}
+                  startDelay={0.2}
+                  size={
+                    phraseIndex === 0
+                      ? (isMobile ? "1.0rem !important" : "2rem !important")
+                      : (isMobile ? "1.2rem !important" : "2.1rem !important")
+                  }
+                  color="#ffffff"
+                  weight={700}
+                  stroke={isMobile ? "0.4px rgba(255,255,255,0.65)" : "0.8px rgba(255,255,255,0.75)"}
+                />
               </Box>
 
               {showButton && (
@@ -231,7 +225,7 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, ease: "easeOut" }}
                 >
-                  <Box sx={{ mt: isMobile ? 4 : 1 }}>
+                  <Box sx={{ mt: isMobile ? 6 : 4 }}>
                     <button
                       className="btn-3"
                       onClick={() => navigate("/nosotros")}
@@ -261,9 +255,3 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
 }
 
 export default Hero;
-
-
-
-
-
-

@@ -124,9 +124,9 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
         sx={{
           position: "relative",
           width: "100%",
-          maxWidth: { xs: "100%", md: 980 },
+          maxWidth: { xs: "100%", md: 1120 },
           minHeight: { xs: "auto", md: 680 },
-          maxHeight: { xs: "88vh", md: 680 },
+          maxHeight: { xs: "88vh", md: 740 },
           borderRadius: 4,
           overflow: "hidden",
           border: "2px solid rgba(255,255,255,0.35)",
@@ -137,7 +137,7 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
         <Box
           sx={{
             px: { xs: 1.5, sm: 3 },
-            py: { xs: 1.1, sm: 2 },
+            py: { xs: 1.1, sm: 2, md: 2.25 },
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -146,7 +146,7 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
             color: "#fff",
           }}
         >
-          <Typography sx={{ fontWeight: 900, fontSize: { xs: "1.15rem", sm: "1.4rem" } }}>
+          <Typography sx={{ fontWeight: 900, fontSize: { xs: "1.15rem", sm: "1.4rem", md: "1.65rem" } }}>
             {title}
           </Typography>
 
@@ -181,8 +181,8 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
           sx={{
             p: { xs: 0.9, sm: 2.2, md: 3 },
             display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1.15fr) minmax(260px, 0.85fr)" },
-            gap: { xs: 0.9, sm: 2.2, md: 3 },
+            gridTemplateColumns: { xs: "1fr", md: "minmax(0, 1.22fr) minmax(300px, 0.78fr)" },
+            gap: { xs: 0.9, sm: 2.2, md: 3.5 },
             alignItems: "start",
             height: "100%",
             alignContent: "start",
@@ -190,9 +190,9 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
           }}
         >
           <Box
-            sx={{
-              width: "100%",
-              maxWidth: { xs: "100%", md: 620 },
+              sx={{
+                width: "100%",
+              maxWidth: { xs: "100%", md: 700 },
               mx: "auto",
               p: "6px",
               borderRadius: 3,
@@ -203,9 +203,9 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
           >
             <Box
               sx={{
-                backgroundColor: "#ffffff",
-                borderRadius: 2.5,
-                p: { xs: 1.35, sm: 2.6 },
+              backgroundColor: "#ffffff",
+              borderRadius: 2.5,
+                p: { xs: 1.35, sm: 2.6, md: 3.1 },
                 minHeight: { xs: 255, sm: 360 },
                 display: "flex",
                 flexDirection: "column",
@@ -223,7 +223,7 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                     backgroundColor: "rgba(27,131,204,0.1)",
                     color: "#1B83CC",
                     fontWeight: 900,
-                    fontSize: { xs: "0.72rem", sm: "0.86rem" },
+                    fontSize: { xs: "0.72rem", sm: "0.86rem", md: "0.92rem" },
                     letterSpacing: "0.05em",
                     textTransform: "uppercase",
                     mb: 1,
@@ -236,9 +236,9 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                   sx={{
                     color: "#173f60",
                     fontWeight: 900,
-                    fontSize: { xs: "1.02rem", sm: "1.55rem" },
-                    lineHeight: 1.22,
-                    mb: 1.25,
+                    fontSize: { xs: "1.02rem", sm: "1.55rem", md: "1.8rem" },
+                    lineHeight: { xs: 1.22, md: 1.18 },
+                    mb: 1.35,
                   }}
                 >
                   {activeQuestion.question}
@@ -268,8 +268,8 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                         textTransform: "none",
                         textAlign: "left",
                         px: { xs: 1.05, sm: 1.8 },
-                        py: { xs: 0.9, sm: 1.15 },
-                        minHeight: { xs: 58, sm: "auto" },
+                        py: { xs: 0.9, sm: 1.15, md: 1.25 },
+                        minHeight: { xs: 58, sm: "auto", md: 72 },
                         alignItems: "flex-start",
                         borderRadius: 2.2,
                         color: isCorrectSelected || isWrongSelected ? "#ffffff" : "#173f60",
@@ -289,8 +289,8 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                             ? "0 10px 18px rgba(217,76,63,0.18)"
                           : "0 6px 14px rgba(13,43,69,0.06)",
                         fontWeight: 800,
-                        fontSize: { xs: "0.8rem", sm: "1rem" },
-                        lineHeight: 1.24,
+                        fontSize: { xs: "0.8rem", sm: "1rem", md: "1.08rem" },
+                        lineHeight: { xs: 1.24, md: 1.28 },
                         "&:hover": {
                           background: isCorrectSelected
                             ? "linear-gradient(135deg, #289445 0%, #1f7938 100%)"
@@ -381,10 +381,10 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
             )}
           </Box>
 
-          <Stack spacing={{ xs: 1.1, sm: 2 }} sx={{ alignSelf: "start" }}>
-            <Box
-              sx={{
-                p: { xs: 1.1, sm: 2 },
+            <Stack spacing={{ xs: 1.1, sm: 2 }} sx={{ alignSelf: "start" }}>
+              <Box
+                sx={{
+                  p: { xs: 1.1, sm: 2 },
                 borderRadius: 3.2,
                 background:
                   "linear-gradient(180deg, rgba(240,248,255,0.98) 0%, rgba(224,241,252,0.98) 100%)",
@@ -392,17 +392,17 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                 boxShadow: "0 12px 20px rgba(13,43,69,0.08)",
               }}
             >
-              <Typography sx={{ color: "#123a57", fontWeight: 900, fontSize: { xs: "0.92rem", sm: "1.1rem" }, mb: 0.5 }}>
+              <Typography sx={{ color: "#123a57", fontWeight: 900, fontSize: { xs: "0.92rem", sm: "1.1rem", md: "1.2rem" }, mb: 0.5 }}>
                 Progress
               </Typography>
-              <Typography sx={{ color: "#4b6780", fontWeight: 700, fontSize: { xs: "0.72rem", sm: "0.88rem" }, mb: 0.8 }}>
+              <Typography sx={{ color: "#4b6780", fontWeight: 700, fontSize: { xs: "0.72rem", sm: "0.88rem", md: "0.95rem" }, mb: 0.8 }}>
                 Keep going, one question at a time.
               </Typography>
 
               <Box
                 sx={{
                   display: "grid",
-                  gridTemplateColumns: { xs: "1fr", md: "repeat(4, minmax(0, 1fr))" },
+                  gridTemplateColumns: { xs: "1fr", md: "1fr" },
                   gap: { xs: 0.75, sm: 1 },
                 }}
               >
@@ -442,7 +442,7 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                         alignItems: "center",
                         justifyContent: "space-between",
                         gap: 0.75,
-                        minHeight: { xs: 44, sm: "auto" },
+                        minHeight: { xs: 44, sm: "auto", md: 74 },
                       }}
                     >
                       <Box
@@ -454,7 +454,7 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                           alignItems: "center",
                           justifyContent: "center",
                           fontWeight: 900,
-                          fontSize: { xs: "0.62rem", sm: "0.86rem" },
+                          fontSize: { xs: "0.62rem", sm: "0.86rem", md: "0.92rem" },
                           flexShrink: 0,
                           color: isCorrect || isWrong ? "#ffffff" : !answered && !isCurrent ? "#5d7284" : "#173f60",
                           backgroundColor: isCorrect
@@ -489,9 +489,9 @@ export default function Quiz({ open, onClose, title = "Golf Quiz" }) {
                       <Box sx={{ minWidth: 0, flex: 1 }}>
                         <Typography
                           sx={{
-                            color: !answered && !isCurrent ? "#5d7284" : "#173f60",
-                            fontWeight: 800,
-                            fontSize: { xs: "0.58rem", sm: "0.86rem" },
+                          color: !answered && !isCurrent ? "#5d7284" : "#173f60",
+                          fontWeight: 800,
+                            fontSize: { xs: "0.58rem", sm: "0.86rem", md: "0.95rem" },
                             lineHeight: 1.1,
                           }}
                         >

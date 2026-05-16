@@ -1,287 +1,628 @@
-﻿import React, { useState, useEffect, useRef } from "react";
-import { Grid, Typography, Box, useMediaQuery, useTheme } from "@mui/material";
-import "@fontsource/poppins";
-import CountUp from "react-countup";
-import { useInView } from "react-intersection-observer";
-import { motion } from "framer-motion";
+import React from "react";
+import { Box, Container, Typography } from "@mui/material";
+import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
+import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
+import SportsGolfRoundedIcon from "@mui/icons-material/SportsGolfRounded";
+import PsychologyAltRoundedIcon from "@mui/icons-material/PsychologyAltRounded";
+import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 
-const data = [
+const colorCards = [
   {
-    count: 45,
-    text: "Years of Combined Golf Experience",
-    image: "golf-1.jpg",
+    title: "Blue Starter",
+    description:
+      "First introduction to golf through fun, creativity, motor skills, and basic safety around golf equipment.",
+    icon: AutoAwesomeRoundedIcon,
+    swatch: "linear-gradient(135deg, #8ec5ff 0%, #3f82e6 100%)",
+    glow: "rgba(63,130,230,0.18)",
   },
   {
-    count: 20,
-    text: "Years Developing Young Golfers",
-    image: "golf-2.jpg",
+    title: "Yellow Builder",
+    description:
+      "Building golf fundamentals, confidence, coordination, and learning different areas of the game.",
+    icon: GroupsRoundedIcon,
+    swatch: "linear-gradient(135deg, #ffe98d 0%, #f0bf2f 100%)",
+    glow: "rgba(240,191,47,0.18)",
   },
   {
-    count: 500,
-    text: "Kids introduced to the Game",
-    image: "golf-3.jpg",
+    title: "Red Explorer",
+    description:
+      "Learning golf terms, understanding the golf course, and experiencing the game in a deeper way.",
+    icon: SportsGolfRoundedIcon,
+    swatch: "linear-gradient(135deg, #ff9a9a 0%, #e54848 100%)",
+    glow: "rgba(229,72,72,0.18)",
   },
   {
-    count: 2,
-    text: "Learning environments",
-    image: "golf-4.jpg",
+    title: "Orange Player",
+    description:
+      "Learning how to play through rules, etiquette, structure, and on-course awareness.",
+    icon: PsychologyAltRoundedIcon,
+    swatch: "linear-gradient(135deg, #ffc58a 0%, #f48a2f 100%)",
+    glow: "rgba(244,138,47,0.18)",
+  },
+  {
+    title: "Green Champion",
+    description:
+      "Preparing children with the confidence, habits, and knowledge needed to join a more structured training environment.",
+    icon: FavoriteRoundedIcon,
+    swatch: "linear-gradient(135deg, #9be8b2 0%, #34a96f 100%)",
+    glow: "rgba(52,169,111,0.18)",
   },
 ];
 
-const images = ["servicios.png", "maquina-coser.webp"];
-
-const Areas = () => {
-  const [currentImage, setCurrentImage] = useState(0);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [delayed, setDelayed] = useState(false);
-  const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: false, });
-  const [rotationActive, setRotationActive] = useState(false);
-  const [currentRotation, setCurrentRotation] = useState(0);
-  const [scrollY, setScrollY] = useState(0);
-  const [hasAnimated, setHasAnimated] = useState(false);
-
-  //EVITAR ANIMACIÃ“N DUPLICADA
-  useEffect(() => {
-    if (inView && !hasAnimated) {
-      const timer = setTimeout(() => {
-        setHasAnimated(true); //
-      }, 2600);
-      return () => clearTimeout(timer);
-    }
-  }, [inView, hasAnimated]);
-
-  useEffect(() => {
-    // Solo se activa el retraso cuando el item estÃ¡ en vista
-    if (inView) {
-      const timer = setTimeout(() => {
-        setDelayed(true);
-      }, 1700); // â³ Ahora el contador se activa despuÃ©s de 1.2 segundos
-
-      return () => clearTimeout(timer); // Limpia el temporizador al desmontarse
-    }
-  }, [inView]);
-
-  // FunciÃ³n para dividir el texto en palabras
-  const splitTextIntoWords = (text) => {
-    return text.split(" ").map((word, index) => (
-      <motion.span
-        key={index}
-        initial={{ opacity: 0, x: "100%" }} // Empieza invisible y desde la derecha
-        animate={{
-          opacity: delayed ? 1 : 0,
-          x: delayed ? 0 : "100%", // Aparece palabra por palabra
-        }}
-        transition={{
-          delay: 0.2 + index * 0.2, // Retraso escalonado para cada palabra
-          duration: 1,
-          ease: "easeOut",
-        }}
-        style={{ display: "inline-block", marginRight: "5px" }} // Espaciado entre palabras
-      >
-        {word}
-      </motion.span>
-    ));
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prevImage) => (prevImage + 1) % images.length); // Cambia la imagen cada vez
-    }, 5000); // Cambia cada 5 segundos
-
-    return () => clearInterval(interval); // Limpia el intervalo cuando el componente se desmonta
-  }, []);
-
-  useEffect(() => {
-    if (isMobile) {
-      const handleScroll = () => {
-        setScrollY(window.scrollY);
-      };
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
-    }
-  }, [isMobile]);
-
-
-  const videosRef = useRef([]);
-  useEffect(() => {
-    data.forEach((_, index) => {
-      if (inView && videosRef.current[index]) {
-        videosRef.current[index].play().catch(() => { });
-      }
-    });
-  }, [inView]);
+function Areas() {
   return (
-
     <Box
       sx={{
-        position: 'relative', // ðŸ‘ˆ necesario para que el degradado se posicione correctamente
-        zIndex: 1,
-        background: `#ffffff`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: isMobile ? "100% 100%" : "100% auto",
-        backgroundPosition: isMobile ? "center" : "",
-        backgroundAttachment: isMobile ? "initial" : "fixed",
-        minHeight: isMobile ? "60vh" : "auto",
-        paddingTop: "0px !important",
-        padding: { xs: 4, md: 16 },
-        paddingBottom: { xs: 1.2, md: 2 },
-        marginTop: "-120px",
+        position: "relative",
+        zIndex: 0,
+        background:
+          "linear-gradient(180deg, #ffffff 0%, #f6faf7 38%, #f5f7fb 100%)",
+        pt: { xs: 1.8, sm: 2.4 },
+        pb: { xs: 2.5, sm: 3.5 },
       }}
     >
-      <Grid container spacing={4} alignItems="center" pt={{ xs: 9, md: 15 }}>
-        <Grid item xs={12}>
-          <Grid container spacing={{ xs: 4, md: 1.5 }}>
-            {data.map((item, index) => (
-              <Grid item xs={6} sm={6} md={6} key={index} sx={{ display: "flex", justifyContent: { xs: "center", md: index % 2 === 0 ? "flex-end" : "flex-start" } }}>
+      <Container sx={{ maxWidth: { xs: "980px !important", md: "1180px !important" } }}>
+        <Box
+          sx={{
+            borderRadius: { xs: 4, sm: 5 },
+            border: "1px solid rgba(10,38,30,0.08)",
+            background:
+              "linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(245,250,247,0.96) 100%)",
+            boxShadow: "0 14px 34px rgba(0,0,0,0.08)",
+            px: { xs: 2.2, sm: 4 },
+            py: { xs: 1.7, sm: 3.1 },
+          }}
+        >
+          <Box
+            sx={{
+              display: "grid",
+              placeItems: "center",
+              color: "rgba(46, 125, 50, 0.92)",
+              mb: 0.4,
+            }}
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 24 24" style={{ width: 28, height: 28 }}>
+              <path d="M6 3v18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              <path d="M7 4c6 2 8-1 11 1-3 4-5 2-11 4z" fill="currentColor" opacity="0.9" />
+              <circle cx="6" cy="3" r="1" fill="currentColor" />
+            </svg>
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: { xs: 1, sm: 1.4 },
+              mt: { xs: -0.35, sm: -0.5 },
+              mb: 1,
+            }}
+          >
+            <Box
+              sx={{
+                width: { xs: 34, sm: 58 },
+                height: 2,
+                borderRadius: 999,
+                background: "rgba(46, 125, 50, 0.75)",
+                flexShrink: 0,
+              }}
+            />
+            <Typography
+              sx={{
+                textAlign: "center",
+              fontFamily: "'Poppins', sans-serif",
+              fontWeight: 900,
+              color: "rgba(46, 125, 50, 0.92)",
+              fontSize: { xs: "0.92rem", sm: "1.15rem", md: "1.48rem" },
+              lineHeight: 1.1,
+              letterSpacing: { xs: "0.14em", sm: "0.16em", md: "0.18em" },
+              textTransform: "uppercase",
+              whiteSpace: "nowrap",
+            }}
+          >
+              {"THE 5 COLORS OF OUR SYSTEM"}
+            </Typography>
+            <Box
+              sx={{
+                width: { xs: 34, sm: 58 },
+                height: 2,
+                borderRadius: 999,
+                background: "rgba(46, 125, 50, 0.75)",
+                flexShrink: 0,
+              }}
+            />
+          </Box>
+
+          <Typography
+            sx={{
+              mt: 0.35,
+              textAlign: "center",
+              color: "#4f6760",
+              fontSize: { xs: "0.98rem", sm: "1.06rem" },
+              lineHeight: 1.7,
+              maxWidth: "780px",
+              mx: "auto",
+            }}
+          >
+            {
+              "A simple framework built around fun, progression, understanding, structure, and confidence. The final palette will be updated once the official brand colors are approved."
+            }
+          </Typography>
+
+          <Box
+            sx={{
+              mt: { xs: 3, sm: 4 },
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr",
+                sm: "repeat(2, minmax(0, 1fr))",
+                md: "repeat(5, minmax(0, 1fr))",
+              },
+              gap: { xs: 1.2, sm: 1.4 },
+            }}
+          >
+            {colorCards.map((item) => {
+              const Icon = item.icon;
+
+              return (
                 <Box
+                  key={item.title}
                   sx={{
-                    textAlign: "center",
-                    color: "white",
-                    borderRadius: 2,
-                    width: { xs: "100%", md: 320 },
-                    maxWidth: "100%",
-                    height: { xs: 150, md: 130 },
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontFamily: "'Poppins', sans-serif",
-                    perspective: "1000px",
-                    cursor: "pointer",
                     position: "relative",
-                    mx: { xs: "auto", md: 0 },
+                    borderRadius: 3,
+                    border: "1px solid rgba(10,38,30,0.08)",
+                    background:
+                      "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(250,252,251,0.98) 100%)",
+                    boxShadow: "0 12px 24px rgba(13,43,69,0.08)",
+                    overflow: "hidden",
+                    px: 1.8,
+                    py: 2.1,
+                    minHeight: { xs: 180, sm: 210, md: 238 },
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-start",
+                    gap: 1.15,
+                    "&::before": {
+                      content: '""',
+                      position: "absolute",
+                      inset: "auto auto -24px -24px",
+                      width: 110,
+                      height: 110,
+                      borderRadius: "50%",
+                      background: item.glow,
+                      pointerEvents: "none",
+                    },
                   }}
-                  ref={ref}
                 >
-                  {/* Caja para rotaciÃ³n 3D */}
                   <Box
                     sx={{
-                      width: "100%",
-                      height: "100%",
+                      width: 54,
+                      height: 54,
+                      borderRadius: "50%",
+                      background: item.swatch,
                       display: "flex",
-                      justifyContent: "center",
                       alignItems: "center",
-                      transformStyle: "preserve-3d",
-                      transition: "transform 2.6s",
-                      transitionDelay: inView ? "0.8s" : "0s",
-                      transform: inView || hasAnimated ? "rotateY(180deg)" : "rotateY(0deg)",
-                      position: "relative",
+                      justifyContent: "center",
+                      color: "#ffffff",
+                      boxShadow: "0 10px 20px rgba(0,0,0,0.12)",
+                      flexShrink: 0,
                     }}
                   >
-                    {/* Cara trasera: InformaciÃ³n */}
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        backfaceVisibility: "hidden",
-                        width: isMobile ? "115%" : "100%",
-                        height: "100%",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        flexDirection: "column",
-                        backgroundColor: "rgba(24, 26, 27, 0.9)",
-                        borderRadius: 2,
-                        boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
-                        zIndex: 2,
-                        transform: "rotateY(180deg)",
-                      }}
-                    >
-                      {/* Contenedor fijo para evitar que se mueva el contador */}
-                      <Box
+                    <Icon sx={{ fontSize: 28 }} />
+                  </Box>
+
+                  <Typography
+                    sx={{
+                      fontFamily: "'Poppins', sans-serif",
+                      fontWeight: 900,
+                      fontSize: { xs: "1.08rem", sm: "1.14rem" },
+                      color: "#0c2a44",
+                      lineHeight: 1.1,
+                    }}
+                  >
+                    {item.title}
+                  </Typography>
+
+                  <Typography
+                    sx={{
+                      color: "#35536a",
+                      fontSize: { xs: "0.94rem", sm: "0.98rem" },
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {item.description}
+                  </Typography>
+                </Box>
+              );
+            })}
+          </Box>
+        </Box>
+
+        <Box
+          sx={{
+            mt: { xs: 2.2, sm: 3.2 },
+            borderRadius: { xs: 4, sm: 5 },
+            border: "1px solid rgba(10,38,30,0.08)",
+            background:
+              "linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(244,249,251,0.98) 100%)",
+            boxShadow: "0 14px 34px rgba(0,0,0,0.08)",
+            overflow: "hidden",
+          }}
+        >
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+            }}
+          >
+            <Box
+              sx={{
+                px: { xs: 2.2, sm: 3.8 },
+                py: { xs: 3, sm: 4.2 },
+              }}
+            >
+              <Typography
+                sx={{
+                  fontFamily: "'Poppins', sans-serif",
+                  fontWeight: 900,
+                  color: "#083c2c",
+                  fontSize: { xs: "1.36rem", sm: "1.72rem", md: "1.95rem" },
+                  lineHeight: 1.12,
+                  mb: 0.9,
+                }}
+              >
+                {"Let Us Show You the Way"}
+              </Typography>
+
+              <Typography
+                sx={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  px: 1.1,
+                  py: 0.45,
+                  borderRadius: 99,
+                  background: "rgba(27,131,204,0.10)",
+                  color: "#1B83CC",
+                  fontWeight: 800,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  fontSize: "0.72rem",
+                  mb: 1.4,
+                }}
+              >
+                {"Parent framework"}
+              </Typography>
+
+              <Typography
+                sx={{
+                  color: "#35536a",
+                  fontSize: { xs: "0.96rem", sm: "1.02rem" },
+                  lineHeight: 1.75,
+                  maxWidth: "62ch",
+                  mb: 2,
+                }}
+              >
+                {"Golf in Colors provides parents with a clear framework to understand their role in their child’s development, allowing them to support without creating pressure or confusion. It offers a structured environment where progress is visible and consistent, giving parents confidence in the process and in the decisions they are making. By connecting what happens at the academy with experiences at home, it turns golf into a shared activity, creating meaningful moments between children and their families. This approach brings clarity, trust, and involvement to each stage of the journey, while allowing parents to feel part of a positive and guided experience."}
+              </Typography>
+
+              <Box
+                sx={{
+                  mt: 0.5,
+                  display: "grid",
+                  gridTemplateColumns: { xs: "1fr", sm: "repeat(3, minmax(0, 1fr))" },
+                  gap: 1.2,
+                }}
+              >
+                {[
+                  "Clear guidance",
+                  "Visible progress",
+                  "Shared family growth",
+                ].map((item, index) => (
+                  <Box
+                    key={item}
+                    sx={{
+                      borderRadius: 3,
+                      px: 1.5,
+                      py: 1.45,
+                      background:
+                        index === 0
+                          ? "linear-gradient(180deg, rgba(77,211,192,0.10) 0%, rgba(77,211,192,0.04) 100%)"
+                          : index === 1
+                            ? "linear-gradient(180deg, rgba(27,131,204,0.10) 0%, rgba(27,131,204,0.04) 100%)"
+                            : "linear-gradient(180deg, rgba(52,169,111,0.10) 0%, rgba(52,169,111,0.04) 100%)",
+                      border: "1px solid rgba(10,38,30,0.08)",
+                      minHeight: 74,
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Box>
+                      <Typography
                         sx={{
-                          minWidth: "100px", // Asegura que el ancho no cambie
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
+                          fontWeight: 900,
+                          fontFamily: "'Poppins', sans-serif",
+                          color: "#0c2a44",
+                          fontSize: { xs: "0.9rem", sm: "0.96rem" },
+                          lineHeight: 1.2,
                         }}
                       >
-                        {/* Contador con retraso de 0.8 segundos */}
-                        <Typography
-                          variant="h3"
-                          gutterBottom
-                          sx={{
-                            fontFamily: "'Saira', Sans-serif",
-                            fontWeight: "700",
-                            minWidth: "80px",
-                            textAlign: "center",
-                            marginBottom: "0.15em",
-                            fontSize: isMobile ? "2.6rem" : "2.2rem", // Aumentado el tamaÃ±o
-                          }}
-                        >
-                          +{delayed ? <CountUp start={0} end={item.count} duration={3.1} separator="." /> : "0"}
-                        </Typography>
-                        <Box
-                          sx={{
-                            textAlign: "center",
-                            maxWidth: isMobile ? "100%" : "100%",
-                            fontSize: isMobile ? "0.93rem" : "1.1rem", // Reducir tamaÃ±o del texto en mÃ³viles
-                            fontFamily: "'Oswald', sans-serif", // Fuente agregada`r`n                            whiteSpace: { xs: "normal", md: "nowrap" },
-                          }}
-                        >
-                          {splitTextIntoWords(item.text)}
-                        </Box>
-                      </Box>
+                        {item}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          mt: 0.35,
+                          color: "#5d7582",
+                          fontSize: "0.76rem",
+                          lineHeight: 1.35,
+                        }}
+                      >
+                        {index === 0
+                          ? "Simple direction that removes uncertainty."
+                          : index === 1
+                            ? "Steady progress you can see and trust."
+                            : "Home and academy working as one."}
+                      </Typography>
                     </Box>
-
-                    {/* Cara delantera: Imagen */}
-                    {item.image.endsWith(".mp4") ? (
-                      <video
-                        ref={(el) => (videosRef.current[index] = el)}
-                        src={item.image}
-                        muted
-                        playsInline
-                        style={{
-                          position: "absolute",
-                          backfaceVisibility: "hidden",
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                          borderRadius: 8,
-                          boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
-                        }}
-                      />
-                    ) : (
-                      <img
-                        src={item.image}
-                        alt="imagen"
-                        style={{
-                          position: "absolute",
-                          backfaceVisibility: "hidden",
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                          borderRadius: 8,
-                          boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
-                        }}
-                      />
-                    )}
-
-
                   </Box>
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
-        </Grid>
-      </Grid>
-    </Box >
+                ))}
+              </Box>
+            </Box>
 
+            <Box
+              sx={{
+                position: "relative",
+                minHeight: { xs: 210, sm: 260, md: "100%" },
+                background:
+                  "linear-gradient(135deg, rgba(245,248,243,0.98) 0%, rgba(232,240,248,0.98) 52%, rgba(226,237,232,0.98) 100%)",
+                overflow: "hidden",
+              }}
+            >
+              <Box
+                sx={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.65) 0, rgba(255,255,255,0) 26%), radial-gradient(circle at 80% 30%, rgba(255,255,255,0.4) 0, rgba(255,255,255,0) 28%), radial-gradient(circle at 50% 80%, rgba(255,255,255,0.22) 0, rgba(255,255,255,0) 24%)",
+                }}
+              />
+              <Box
+                sx={{
+                  position: "relative",
+                  zIndex: 1,
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  textAlign: "center",
+                  px: 3,
+                  py: 4,
+                  color: "#0c2a44",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontFamily: "'Poppins', sans-serif",
+                    fontWeight: 900,
+                    fontSize: { xs: "1.18rem", sm: "1.5rem", md: "1.68rem" },
+                    letterSpacing: "0.02em",
+                    textTransform: "uppercase",
+                    mb: 0.9,
+                    color: "#083c2c",
+                  }}
+                >
+                  {"Family clarity"}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: { xs: "0.95rem", sm: "1rem" },
+                    lineHeight: 1.7,
+                    maxWidth: "29ch",
+                    color: "#4f6760",
+                  }}
+                >
+                  {"Support becomes easier when everyone knows the role they play in the journey."}
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+
+        <Box
+          sx={{
+            mt: { xs: 2.2, sm: 3.2 },
+            borderRadius: { xs: 4, sm: 5 },
+            border: "1px solid rgba(10,38,30,0.08)",
+            background:
+              "linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(243,248,250,0.98) 100%)",
+            boxShadow: "0 14px 34px rgba(0,0,0,0.08)",
+            overflow: "hidden",
+          }}
+        >
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+            }}
+          >
+            <Box
+              sx={{
+                px: { xs: 2.2, sm: 3.8 },
+                py: { xs: 3, sm: 4.2 },
+                order: { xs: 1, md: 2 },
+              }}
+            >
+              <Typography
+                sx={{
+                  fontFamily: "'Poppins', sans-serif",
+                  fontWeight: 900,
+                  color: "#083c2c",
+                  fontSize: { xs: "1.34rem", sm: "1.7rem", md: "1.9rem" },
+                  lineHeight: 1.12,
+                  mb: 1.2,
+                }}
+              >
+                {"Understanding the Roles"}
+              </Typography>
+
+              <Typography
+                sx={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  px: 1.1,
+                  py: 0.45,
+                  borderRadius: 99,
+                  background: "rgba(11,143,99,0.10)",
+                  color: "#087a55",
+                  fontWeight: 800,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  fontSize: "0.72rem",
+                  mb: 1.4,
+                }}
+              >
+                {"Roles in sync"}
+              </Typography>
+
+              <Typography
+                sx={{
+                  color: "#35536a",
+                  fontSize: { xs: "0.96rem", sm: "1.02rem" },
+                  lineHeight: 1.75,
+                  maxWidth: "62ch",
+                  mb: 2,
+                }}
+              >
+                {"Clear roles are essential because they create structure, consistency, and trust throughout a child’s learning experience. When each person understands their responsibility - the parent providing emotional support, the coach guiding the learning process, and the child exploring and growing - everything becomes more aligned and effective. This clarity eliminates confusion, reduces unnecessary pressure, and creates a positive environment where the child feels safe, motivated, and confident. With everyone working in the same direction, the learning process becomes more natural, progress becomes consistent, and the overall experience becomes something both the child and the family can truly enjoy."}
+              </Typography>
+
+              <Box
+                sx={{
+                  mt: 0.5,
+                  display: "grid",
+                  gridTemplateColumns: { xs: "1fr", sm: "repeat(3, minmax(0, 1fr))" },
+                  gap: 1.2,
+                }}
+              >
+                {[
+                  "Parent support",
+                  "Coach guidance",
+                  "Child growth",
+                ].map((item, index) => (
+                  <Box
+                    key={item}
+                    sx={{
+                      borderRadius: 3,
+                      px: 1.6,
+                      py: 1.5,
+                      background:
+                        index === 0
+                          ? "linear-gradient(180deg, rgba(27,131,204,0.14) 0%, rgba(27,131,204,0.06) 100%)"
+                          : index === 1
+                            ? "linear-gradient(180deg, rgba(11,143,99,0.14) 0%, rgba(11,143,99,0.06) 100%)"
+                            : "linear-gradient(180deg, rgba(240,191,47,0.14) 0%, rgba(240,191,47,0.06) 100%)",
+                      border: "1px solid rgba(10,38,30,0.08)",
+                      minHeight: 74,
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontWeight: 900,
+                          fontFamily: "'Poppins', sans-serif",
+                          color: "#0c2a44",
+                          fontSize: { xs: "0.9rem", sm: "0.96rem" },
+                          lineHeight: 1.2,
+                        }}
+                      >
+                        {item}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          mt: 0.35,
+                          color: "#5d7582",
+                          fontSize: "0.76rem",
+                          lineHeight: 1.35,
+                        }}
+                      >
+                        {index === 0
+                          ? "Support without pressure."
+                          : index === 1
+                            ? "Guidance that keeps learning on track."
+                            : "Curiosity and confidence growing together."}
+                      </Typography>
+                    </Box>
+                  </Box>
+                ))}
+              </Box>
+            </Box>
+
+            <Box
+              sx={{
+                position: "relative",
+                minHeight: { xs: 230, sm: 280, md: "100%" },
+                background:
+                  "linear-gradient(135deg, rgba(248,250,246,0.98) 0%, rgba(241,246,250,0.98) 50%, rgba(243,249,244,0.98) 100%)",
+                overflow: "hidden",
+                order: { xs: 2, md: 1 },
+              }}
+            >
+              <Box
+                sx={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "radial-gradient(circle at 22% 18%, rgba(27,131,204,0.12) 0, rgba(255,255,255,0) 24%), radial-gradient(circle at 78% 24%, rgba(11,143,99,0.10) 0, rgba(255,255,255,0) 26%), radial-gradient(circle at 50% 82%, rgba(10,38,30,0.05) 0, rgba(255,255,255,0) 24%)",
+                }}
+              />
+              <Box
+                sx={{
+                  position: "relative",
+                  zIndex: 1,
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  textAlign: "center",
+                  px: 3,
+                  py: 4,
+                  color: "#0c2a44",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontFamily: "'Poppins', sans-serif",
+                    fontWeight: 900,
+                    fontSize: { xs: "1.12rem", sm: "1.42rem", md: "1.62rem" },
+                    letterSpacing: "0.02em",
+                    textTransform: "uppercase",
+                    mb: 1.1,
+                    color: "#083c2c",
+                  }}
+                >
+                  {"Trust, structure and confidence"}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: { xs: "0.95rem", sm: "1rem" },
+                    lineHeight: 1.7,
+                    maxWidth: "30ch",
+                    color: "#4f6760",
+                  }}
+                >
+                  {"When everyone understands their role, the learning path becomes calmer, clearer, and more enjoyable."}
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Container>
+    </Box>
   );
-};
+}
 
 export default Areas;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -77,11 +77,10 @@ const Footer = () => {
     <Box
       sx={{
         position: "relative",
-        padding: "20px 0",
+        padding: "28px 0 20px",
         color: "#1f2a37",
         backgroundColor: "#f7f4ee",
         overflow: "hidden",
-        borderTop: "1px solid rgba(31,42,55,0.18)",
       }}
     >
       <Container maxWidth="lg">
