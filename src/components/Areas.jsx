@@ -57,7 +57,7 @@ function Areas() {
         zIndex: 0,
         background:
           "linear-gradient(180deg, #ffffff 0%, #f6faf7 38%, #f5f7fb 100%)",
-        pt: { xs: 1.8, sm: 2.4 },
+        pt: { xs: 0.4, sm: 0.6 },
         pb: { xs: 2.5, sm: 3.5 },
       }}
     >
@@ -241,6 +241,7 @@ function Areas() {
 
         <Box
           sx={{
+            display: "none",
             mt: { xs: 2.2, sm: 3.2 },
             borderRadius: { xs: 4, sm: 5 },
             border: "1px solid rgba(10,38,30,0.08)",
@@ -431,6 +432,7 @@ function Areas() {
 
         <Box
           sx={{
+            display: "none",
             mt: { xs: 2.2, sm: 3.2 },
             borderRadius: { xs: 4, sm: 5 },
             border: "1px solid rgba(10,38,30,0.08)",

@@ -124,10 +124,127 @@ function Features() {
       }}
     >
       <Container sx={{ maxWidth: { xs: "900px !important", md: "1220px !important" } }}>
+
+        {/* ── Welcome Section ── */}
+        <Box
+          sx={{
+            mt: { xs: 1.5, sm: 2 },
+            mb: { xs: 0.5, sm: 0.8 },
+            borderRadius: 4,
+            background: "linear-gradient(150deg, #edf7f2 0%, #f4f8ff 55%, #fff6ed 100%)",
+            px: { xs: 2, sm: 4 },
+            py: { xs: 2.5, sm: 3.5 },
+          }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, ease: "easeOut" }}
+          >
+            <Typography
+              sx={{
+                textAlign: "center",
+                fontSize: { xs: "0.97rem", sm: "1.12rem" },
+                color: "#0d3324",
+                fontFamily: "'Poppins', sans-serif",
+                fontWeight: 600,
+                mb: { xs: 2.5, sm: 3 },
+                lineHeight: 1.7,
+                maxWidth: "760px",
+                mx: "auto",
+              }}
+            >
+              Golf in Colors is a learning system designed to bring parents, kids, and coaches together as{" "}
+              <Box
+                component="span"
+                sx={{
+                  color: "#1aa97a",
+                  fontWeight: 900,
+                  borderBottom: "2.5px solid #1aa97a",
+                  pb: "1px",
+                  letterSpacing: "0.04em",
+                }}
+              >
+                ONE TEAM
+              </Box>
+            </Typography>
+
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: { xs: "1fr", md: "1fr 1fr 1fr" },
+                gap: { xs: 2, sm: 2.5 },
+              }}
+            >
+              {[
+                {
+                  color: "#1aa97a",
+                  label: "Fun & Learning",
+                  text: "We believe a child's connection with golf is built through fun experiences, meaningful family moments, positive coaching, and creative games that make learning enjoyable and memorable.",
+                },
+                {
+                  color: "#2c95e3",
+                  label: "Family Journey",
+                  text: "The system creates an engaging experience for children while guiding parents through every stage of their child's golf journey — helping families enjoy, understand, and support the development process together.",
+                },
+                {
+                  color: "#f08b32",
+                  label: "Lasting Connection",
+                  text: "Through creativity, fun, and connection, Golf in Colors helps children fall in love with the game while creating lasting memories on and off the course.",
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: i * 0.13, ease: "easeOut" }}
+                  style={{ height: "100%" }}
+                >
+                  <Box
+                    sx={{
+                      borderLeft: `3px solid ${item.color}`,
+                      pl: 2.2,
+                      py: 0.5,
+                      height: "100%",
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "0.78rem", sm: "0.82rem" },
+                        fontWeight: 800,
+                        fontFamily: "'Poppins', sans-serif",
+                        color: item.color,
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                        mb: 0.8,
+                      }}
+                    >
+                      {item.label}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "0.87rem", sm: "0.93rem" },
+                        color: "#2a4a3e",
+                        lineHeight: 1.8,
+                        fontFamily: "'Poppins', sans-serif",
+                        fontWeight: 400,
+                      }}
+                    >
+                      {item.text}
+                    </Typography>
+                  </Box>
+                </motion.div>
+              ))}
+            </Box>
+          </motion.div>
+        </Box>
+
         <Box
           sx={{
             borderRadius: 4,
-            pt: { xs: 0.5, sm: 1.2 },
+            pt: { xs: 0.2, sm: 0.5 },
             px: { xs: 2, sm: 3 },
             pb: { xs: 0.9, sm: 2.2 },
             background: "transparent",

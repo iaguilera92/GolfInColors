@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./css/Hero.css";
 import CircularProgress from "@mui/material/CircularProgress";
 
-function AnimatedLine({ text, delay = 0, startDelay = 0, size, color = "#ffffff", weight = 800, stroke, isMobile }) {
+function AnimatedLine({ text, delay = 0, startDelay = 0, size, color = "#ffffff", weight = 800, stroke, isMobile, isRepeat = false }) {
   const letters = text.split("");
 
   return (
@@ -27,9 +27,15 @@ function AnimatedLine({ text, delay = 0, startDelay = 0, size, color = "#ffffff"
       {letters.map((char, index) => (
         <motion.span
           key={`${char}-${index}-${text}`}
-          initial={{ y: -30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.25, ease: "easeOut", delay: startDelay + delay + index * 0.03 }}
+          initial={isRepeat ? { y: 0, opacity: 1 } : { y: -30, opacity: 0 }}
+          animate={isRepeat
+            ? { y: [0, -10, 0], opacity: 1 }
+            : { y: 0, opacity: 1 }
+          }
+          transition={isRepeat
+            ? { duration: 0.45, ease: "easeInOut", delay: startDelay + index * 0.035 }
+            : { duration: 0.25, ease: "easeOut", delay: startDelay + delay + index * 0.03 }
+          }
           style={{
             position: "relative",
             display: "inline-block",
@@ -52,18 +58,11 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
   const [showButton, setShowButton] = useState(false);
   const [loadingVideo, setLoadingVideo] = useState(true);
   const [mostrarTransicion, setMostrarTransicion] = useState(false);
-  const [phraseIndex, setPhraseIndex] = useState(0);
-
+  const [titleKey, setTitleKey] = useState(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const heroRef = useRef(null);
   const navigate = useNavigate();
-
-  const rotatingPhrases = [
-    "Welcome Golf In Colors",
-    "Together, we're shaping the future of golf.",
-    "One colorful step at the time.",
-  ];
 
   useEffect(() => {
     const timer = setTimeout(() => setShowButton(true), 1000);
@@ -88,12 +87,11 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
   }, [loadingVideo]);
 
   useEffect(() => {
-    const delay = phraseIndex === 0 ? 7000 : 5000;
-    const timeout = setTimeout(() => {
-      setPhraseIndex((prev) => (prev + 1) % rotatingPhrases.length);
-    }, delay);
-    return () => clearTimeout(timeout);
-  }, [phraseIndex, rotatingPhrases.length]);
+    const interval = setInterval(() => {
+      setTitleKey((prev) => prev + 1);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
@@ -205,14 +203,11 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
                 }}
               >
                 <AnimatedLine
-                  key={`hero-phrase-${phraseIndex}`}
-                  text={rotatingPhrases[phraseIndex]}
+                  key={titleKey}
+                  text="Welcome to Golf In Colors"
+                  isRepeat={titleKey > 0}
                   startDelay={0.2}
-                  size={
-                    phraseIndex === 0
-                      ? (isMobile ? "1.0rem !important" : "2rem !important")
-                      : (isMobile ? "1.2rem !important" : "2.1rem !important")
-                  }
+                  size={isMobile ? "1.0rem !important" : "2rem !important"}
                   color="#ffffff"
                   weight={700}
                   stroke={isMobile ? "0.4px rgba(255,255,255,0.65)" : "0.8px rgba(255,255,255,0.75)"}
