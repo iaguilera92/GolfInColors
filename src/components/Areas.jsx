@@ -68,55 +68,45 @@ const Card = ({ item }) => (
       "&::before": {
         content: '""',
         position: "absolute",
-        inset: "auto auto -24px -24px",
-        width: 110,
-        height: 110,
+        inset: "auto auto -28px -28px",
+        width: 120,
+        height: 120,
         borderRadius: "50%",
-        background: item.glow,
+        background: `radial-gradient(circle, ${item.color}55 0%, ${item.color}22 45%, transparent 72%)`,
         pointerEvents: "none",
       },
     }}
   >
-    {/* Circle — star + step badge */}
-    <Box sx={{ position: "relative", width: 54, height: 54, flexShrink: 0 }}>
-      <Box
+    {/* Circle — star with number inside */}
+    <Box
+      sx={{
+        position: "relative",
+        width: 58,
+        height: 58,
+        flexShrink: 0,
+        borderRadius: "50%",
+        background: item.color,
+        boxShadow: `0 8px 18px ${item.glow}`,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <StarRoundedIcon sx={{ fontSize: 56, color: "#ffffff", position: "absolute" }} />
+      <Typography
         sx={{
-          width: 54,
-          height: 54,
-          borderRadius: "50%",
-          background: item.color,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "#ffffff",
-          boxShadow: `0 8px 18px ${item.glow}`,
-        }}
-      >
-        <StarRoundedIcon sx={{ fontSize: 26 }} />
-      </Box>
-      {/* Step number badge */}
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: -2,
-          right: -2,
-          width: 20,
-          height: 20,
-          borderRadius: "50%",
-          background: "#fff",
-          border: `2px solid ${item.color}`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          position: "relative",
           fontFamily: "'Poppins', sans-serif",
           fontWeight: 900,
-          fontSize: "0.65rem",
+          fontSize: "1.3rem",
           color: item.color,
           lineHeight: 1,
+          zIndex: 1,
+          mt: "3px",
         }}
       >
         {item.step}
-      </Box>
+      </Typography>
     </Box>
 
     <Typography
@@ -165,7 +155,7 @@ function Areas() {
           sx={{
             borderRadius: { xs: 4, sm: 5 },
             border: "1px solid rgba(10,38,30,0.08)",
-            background: "linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(245,250,247,0.96) 100%)",
+            background: "#ffffff",
             boxShadow: "0 14px 34px rgba(0,0,0,0.08)",
             px: { xs: 2.2, sm: 4 },
             py: { xs: 1.7, sm: 3.1 },

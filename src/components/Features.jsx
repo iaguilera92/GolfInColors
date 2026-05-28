@@ -145,34 +145,6 @@ function Features() {
             viewport={{ once: true }}
             transition={{ duration: 0.55, ease: "easeOut" }}
           >
-            <Typography
-              sx={{
-                textAlign: "center",
-                fontSize: { xs: "0.97rem", sm: "1.12rem" },
-                color: "#0d3324",
-                fontFamily: "'Poppins', sans-serif",
-                fontWeight: 600,
-                mb: { xs: 2.5, sm: 3 },
-                lineHeight: 1.7,
-                maxWidth: "760px",
-                mx: "auto",
-              }}
-            >
-              Golf in Colors is a learning system designed to bring parents, kids, and coaches together as{" "}
-              <Box
-                component="span"
-                sx={{
-                  color: "#1aa97a",
-                  fontWeight: 900,
-                  borderBottom: "2.5px solid #1aa97a",
-                  pb: "1px",
-                  letterSpacing: "0.04em",
-                }}
-              >
-                ONE TEAM
-              </Box>
-            </Typography>
-
             <Box
               sx={{
                 display: "grid",
@@ -184,16 +156,19 @@ function Features() {
               {[
                 {
                   color: "#017458",
+                  subtitle: "LEARN. PLAY. GROW.",
                   label: "Fun & Learning",
                   text: "We believe a child's connection with golf is built through fun experiences, meaningful family moments, positive coaching, and creative games that make learning enjoyable and memorable.",
                 },
                 {
                   color: "#1B83CC",
+                  subtitle: "ENJOY. GUIDE. SUPPORT.",
                   label: "Family Journey",
                   text: "The system creates an engaging experience for children while guiding parents through every stage of their child's golf journey — helping families enjoy, understand, and support the development process together.",
                 },
                 {
                   color: "#FF6A00",
+                  subtitle: "TOGETHER WE WIN.",
                   label: "Lasting Connection",
                   text: "Through creativity, fun, and connection, Golf in Colors helps children fall in love with the game while creating lasting memories on and off the course.",
                 },
@@ -210,47 +185,48 @@ function Features() {
                     sx={{
                       height: "100%",
                       borderRadius: 3,
-                      border: "1px solid rgba(10,38,30,0.09)",
-                      borderTop: `3px solid ${item.color}`,
-                      background: "#ffffff",
-                      boxShadow: "0 8px 22px rgba(13,43,69,0.08)",
-                      px: { xs: 2.2, sm: 2.6 },
+                      background: item.color,
+                      boxShadow: "0 8px 28px rgba(0,0,0,0.18)",
+                      px: { xs: 2, sm: 2.2 },
                       py: { xs: 2, sm: 2.4 },
                       display: "flex",
                       flexDirection: "column",
-                      gap: 1,
+                      gap: 0.8,
                     }}
                   >
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                      <Box
-                        sx={{
-                          width: 10,
-                          height: 10,
-                          borderRadius: "50%",
-                          background: item.color,
-                          flexShrink: 0,
-                        }}
-                      />
-                      <Typography
-                        sx={{
-                          fontSize: { xs: "0.78rem", sm: "0.82rem" },
-                          fontWeight: 800,
-                          fontFamily: "'Poppins', sans-serif",
-                          color: item.color,
-                          letterSpacing: "0.08em",
-                          textTransform: "uppercase",
-                        }}
-                      >
-                        {item.label}
-                      </Typography>
-                    </Box>
                     <Typography
                       sx={{
-                        fontSize: { xs: "0.87rem", sm: "0.93rem" },
-                        color: "#2a4a3e",
-                        lineHeight: 1.8,
+                        fontSize: { xs: "1.2rem", sm: "1.35rem" },
+                        fontWeight: 900,
+                        fontFamily: "'Poppins', sans-serif",
+                        color: "#ffffff",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.03em",
+                        lineHeight: 1.1,
+                      }}
+                    >
+                      {item.label}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "0.76rem", sm: "0.82rem" },
+                        fontWeight: 800,
+                        fontFamily: "'Poppins', sans-serif",
+                        color: "#FFE566",
+                        letterSpacing: "0.09em",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {item.subtitle}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: { xs: "0.8rem", sm: "0.85rem" },
+                        color: "rgba(255,255,255,0.92)",
+                        lineHeight: 1.7,
                         fontFamily: "'Poppins', sans-serif",
                         fontWeight: 400,
+                        mt: 0.2,
                       }}
                     >
                       {item.text}
@@ -430,7 +406,7 @@ function Features() {
                 letterSpacing: "0.01em",
               }}
             >
-              &ldquo;Together We&apos;re Shaping the Future of Golf&rdquo;
+              &ldquo;Together We&apos;re Shaping the Future of Golf &mdash; One colorful step at a time&rdquo;
             </Typography>
           </Box>
         </Box>

@@ -198,8 +198,10 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
                 sx={{
                   minHeight: { xs: 42, sm: 58 },
                   display: "flex",
+                  flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
+                  gap: { xs: 0.8, sm: 1 },
                 }}
               >
                 <AnimatedLine
@@ -212,6 +214,29 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
                   weight={700}
                   stroke={isMobile ? "0.4px rgba(255,255,255,0.65)" : "0.8px rgba(255,255,255,0.75)"}
                 />
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: "easeOut", delay: 0.6 }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: { xs: "0.78rem", sm: "1.13rem" },
+                      color: "rgba(255,255,255,0.88)",
+                      fontFamily: "'Poppins', sans-serif",
+                      fontWeight: 400,
+                      textAlign: "center",
+                      textShadow: "0 2px 8px rgba(0,0,0,0.4)",
+                      letterSpacing: "0.01em",
+                      maxWidth: { xs: "82vw", sm: "540px" },
+                    }}
+                  >
+                    A learning system designed to bring parents, kids & coaches together as{" "}
+                    <Box component="span" sx={{ fontWeight: 700, color: "#7eeec8" }}>
+                      ONE TEAM
+                    </Box>
+                  </Typography>
+                </motion.div>
               </Box>
 
               {showButton && (
@@ -220,7 +245,7 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, ease: "easeOut" }}
                 >
-                  <Box sx={{ mt: isMobile ? 6 : 4 }}>
+                  <Box sx={{ mt: isMobile ? 9 : 7 }}>
                     <button
                       className="btn-3"
                       onClick={() => navigate("/nosotros")}

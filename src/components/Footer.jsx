@@ -1,11 +1,12 @@
-import { Box, Container, Typography, SvgIcon } from "@mui/material";
+import { Box, Container, Typography, Link, keyframes, useMediaQuery, useTheme, SvgIcon } from "@mui/material";
 import { useState, useEffect } from "react";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import CallRoundedIcon from "@mui/icons-material/CallRounded";
-import MailRoundedIcon from "@mui/icons-material/MailRounded";
-import LocationOnRoundedIcon from "@mui/icons-material/LocationOnRounded";
-import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
+import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
+
+const growElement = keyframes`0% { transform: scale(0.5); opacity: 0.5; } 100% { transform: scale(1); opacity: 1; }`;
+const shrinkCircle = keyframes`0% { transform: scale(1); opacity: 1; } 100% { transform: scale(0); opacity: 0; }`;
+const expandIcon = keyframes`0% { transform: scale(1); } 100% { transform: scale(1.5); }`;
 
 const TikTokIcon = (props) => (
   <SvgIcon {...props} viewBox="0 0 24 24">
@@ -13,334 +14,209 @@ const TikTokIcon = (props) => (
   </SvgIcon>
 );
 
-const SocialButton = ({ href, Icon, label }) => (
+const SocialButton = ({ href, Icon, bgColor, hoverStyles, isMobile }) => (
   <Box
     component="a"
     href={href}
     target="_blank"
-    rel="noopener noreferrer"
-    aria-label={label}
+    rel="noopener"
     sx={{
-      width: 38,
-      height: 38,
+      width: isMobile ? 50 : 34,
+      height: isMobile ? 50 : 34,
       borderRadius: "50%",
-      display: "grid",
-      placeItems: "center",
-      background: "rgba(15,27,40,0.06)",
-      border: "1px solid rgba(15,27,40,0.10)",
-      color: "#0f1b28",
-      transition: "background 180ms ease, transform 180ms ease",
-      "&:hover": {
-        background: "rgba(27,131,204,0.14)",
-        transform: "translateY(-2px)",
-      },
-    }}
-  >
-    <Icon sx={{ fontSize: 20 }} />
-  </Box>
-);
-
-const FooterPill = ({ icon: Icon, title, text, href, color }) => (
-  <Box
-    component={href ? "a" : "div"}
-    href={href}
-    sx={{
+      position: "relative",
       display: "flex",
       alignItems: "center",
-      gap: 1.2,
-      px: 1.4,
-      py: 1.1,
-      borderRadius: 2.5,
-      background: "rgba(15,27,40,0.03)",
-      border: "1px solid rgba(15,27,40,0.07)",
-      textDecoration: "none",
-      color: "inherit",
+      justifyContent: "center",
+      overflow: "hidden",
+      "&:hover .circle": { animation: `${shrinkCircle} 900ms forwards` },
+      "&:hover .icon": { animation: `${expandIcon} 150ms 150ms ease-in forwards`, ...hoverStyles },
     }}
   >
     <Box
+      className="circle"
       sx={{
-        width: 32,
-        height: 32,
+        position: "absolute",
+        width: "100%",
+        height: "100%",
         borderRadius: "50%",
-        display: "grid",
-        placeItems: "center",
-        background: color || "#1B83CC",
-        flexShrink: 0,
+        background: bgColor,
+        transition: "transform 300ms ease-out",
       }}
-    >
-      <Icon sx={{ fontSize: 17, color: "#fff" }} />
-    </Box>
-    <Box>
-      <Typography
-        sx={{
-          fontWeight: 800,
-          fontSize: "0.76rem",
-          color: "#8a9aa8",
-          letterSpacing: "0.06em",
-          textTransform: "uppercase",
-          lineHeight: 1,
-        }}
-      >
-        {title}
-      </Typography>
-      <Typography
-        sx={{
-          fontWeight: 600,
-          fontSize: "0.91rem",
-          color: "#0f1b28",
-          lineHeight: 1.3,
-          mt: 0.2,
-        }}
-      >
-        {text}
-      </Typography>
-    </Box>
+    />
+    <Icon
+      className="icon"
+      sx={{
+        color: "white",
+        fontSize: isMobile ? 29 : 20,
+        position: "absolute",
+        transition: "color 300ms ease-in, transform 300ms ease-in",
+      }}
+    />
   </Box>
 );
 
 const Footer = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
+  const { ref: logoRef, inView: logoInView } = useInView({ triggerOnce: true, threshold: 0.1 });
+  const { ref: socialRef, inView: socialInView } = useInView({ triggerOnce: true, threshold: 0.1 });
   const [version, setVersion] = useState("");
+
+  const handleAreaClick = () => navigate("/administracion");
 
   useEffect(() => {
     fetch("/version.json")
       .then((res) => res.json())
       .then((data) => setVersion(data.version))
-      .catch(() => {});
+      .catch(() => { });
   }, []);
-
-  const shortcuts = [
-    { label: "Home", onClick: () => navigate("/") },
-    { label: "Kids", onClick: () => navigate("/kids") },
-    { label: "Parents", onClick: () => navigate("/parents") },
-    { label: "Coaches", onClick: () => navigate("/coaches") },
-    { label: "Administration", onClick: () => navigate("/administracion") },
-  ];
 
   return (
     <Box
-      component="footer"
       sx={{
         position: "relative",
+        padding: "28px 0 20px",
+        color: "#1f2a37",
+        backgroundColor: "#f7f4ee",
         overflow: "hidden",
-        color: "#0f1b28",
-        background: "#f7f4ee",
-        borderTop: "none",
       }}
     >
+      <Container maxWidth="lg">
+        {!isMobile && (
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: 4,
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}>
+              <Typography variant="h6" sx={{ color: "inherit" }}>
+                Contact
+              </Typography>
 
-      <Container
-        maxWidth="lg"
-        sx={{
-          position: "relative",
-          zIndex: 1,
-          py: { xs: 4.5, md: 6 },
-        }}
-      >
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: { xs: "1fr", md: "repeat(3, minmax(0, 1fr))" },
-            gap: { xs: 3, md: 4 },
-            alignItems: "stretch",
-          }}
+              <Typography sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <img src="telefono-icon.png" alt="Telefono" width={14} style={{ filter: "brightness(0)" }} />
+                <Link href="tel:+15617975986" color="inherit">+1 (561) 7975986</Link>
+              </Typography>
+
+              <Typography sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <img src="mail-icon.png" alt="Correo" width={14} style={{ filter: "brightness(0)" }} />
+                <Link href="mailto:anikaveintemilla@gmail.com" color="inherit">anikaveintemilla@gmail.com</Link>
+              </Typography>
+
+              <Typography sx={{ display: "flex", alignItems: "center", gap: 1 }} color="inherit">
+                <img src="location-icon.png" alt="Ubicacion" width={14} style={{ filter: "brightness(0)" }} />
+                Crandon Golf Academy. Miami. Key Biscayne
+              </Typography>
+            </Box>
+
+            <Box
+              ref={logoRef}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                pt: 2,
+                animation: logoInView ? `${growElement} 1s forwards` : "none",
+              }}
+            >
+              <img src="/logo.png" alt="Logo" style={{ height: "74px", marginBottom: "8px" }} />
+            </Box>
+
+            <Box
+              ref={socialRef}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 2.5,
+                mt: 0.5,
+                animation: socialInView ? `${growElement} 1s forwards` : "none",
+              }}
+            >
+              <SocialButton
+                href="https://www.instagram.com/golfincolors/"
+                Icon={InstagramIcon}
+                bgColor="linear-gradient(45deg, #cf198c, #f41242)"
+                hoverStyles={{
+                  color: "#cf198c",
+                  background: "-webkit-linear-gradient(45deg, #cf198c, #f41242)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              />
+
+              <SocialButton
+                href="https://www.tiktok.com/@golfincolors"
+                Icon={TikTokIcon}
+                bgColor="linear-gradient(45deg, #111111, #25F4EE)"
+                hoverStyles={{
+                  color: "#25F4EE",
+                  background: "-webkit-linear-gradient(45deg, #25F4EE, #FE2C55)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              /></Box>
+          </Box>
+        )}
+
+        {isMobile && (
+          <Box display="flex" flexDirection="column" alignItems="center" mb={7}>
+            <Box ref={logoRef} sx={{ pt: 1.5, animation: logoInView ? `${growElement} 1s forwards` : "none" }}>
+              <img src="/logo-golfincolors.png" alt="Logo" style={{ height: "68px", marginBottom: "0" }} />
+            </Box>
+
+            <Box
+              ref={socialRef}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 2.25,
+                mt: 1.25,
+                mb: 2,
+                animation: socialInView ? `${growElement} 1s forwards` : "none",
+              }}
+            >
+              <SocialButton
+                href="https://www.instagram.com/golfincolors/"
+                Icon={InstagramIcon}
+                bgColor="linear-gradient(45deg, #cf198c, #f41242)"
+                isMobile={isMobile}
+              />
+              <SocialButton
+                href="https://www.tiktok.com/@golfincolors"
+                Icon={TikTokIcon}
+                bgColor="linear-gradient(45deg, #111111, #25F4EE)"
+                isMobile={isMobile}
+              /></Box>
+          </Box>
+        )}
+
+        <Typography variant="body2" align="center" mt={2} sx={{ marginTop: "4.2vh", color: "#213547", fontFamily: "'Poppins', sans-serif", fontWeight: 700, letterSpacing: "0.03em", fontSize: { xs: "0.88rem", md: "0.94rem" }, textShadow: "0 1px 0 rgba(255,255,255,0.65)" }}>
+          @golfincolors 2026 {version && `- v${version}`}
+        </Typography>
+        <Typography
+          variant="body2"
+          align="center"
+          mt={2}
+          sx={{ marginTop: "0.8vh", cursor: "pointer", color: "#2f4f4f", fontFamily: "'Poppins', sans-serif", fontWeight: 600, letterSpacing: "0.02em", fontSize: { xs: "0.74rem", md: "0.8rem" }, textDecoration: "underline", textDecorationThickness: "1px", textUnderlineOffset: "3px", opacity: 0.9 }}
+          onClick={() => window.open("http://plataformas-web.cl", "_blank")}
         >
-          {/* Brand */}
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              p: { xs: 2.2, md: 2.8 },
-              minHeight: { md: 310 },
-              borderRadius: 4,
-              background: "rgba(255,255,255,0.85)",
-              border: "1px solid rgba(15,27,40,0.08)",
-              boxShadow: "0 18px 34px rgba(15,27,40,0.06)",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
-          >
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1.2, mb: 1.4 }}>
-              <img src="/logo-golfincolors.png" alt="Golf In Colors" style={{ height: 46 }} />
-              <Box>
-                <Typography
-                  sx={{
-                    fontFamily: "'Poppins', sans-serif",
-                    fontWeight: 900,
-                    fontSize: "1.18rem",
-                    letterSpacing: "0.04em",
-                    color: "#0f1b28",
-                  }}
-                >
-                  Golf In Colors
-                </Typography>
-                <Typography sx={{ color: "#536472", fontSize: "0.9rem" }}>
-                  Golf education for kids
-                </Typography>
-              </Box>
-            </Box>
-
-            <Typography
-              sx={{
-                color: "#4f6170",
-                lineHeight: 1.75,
-                maxWidth: "42ch",
-                mb: 2,
-                fontSize: "0.95rem",
-              }}
-            >
-              Inspiring kids to discover golf through creativity, color, and play. A structured learning journey for young golfers and their families at Crandon Golf Academy, Miami.
-            </Typography>
-
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1.2, flexWrap: "wrap", mt: "auto" }}>
-              <SocialButton href="https://www.instagram.com/golfincolors/" Icon={InstagramIcon} label="Instagram" />
-              <SocialButton href="https://www.tiktok.com/@golfincolors" Icon={TikTokIcon} label="TikTok" />
-            </Box>
-          </Box>
-
-          {/* Contact */}
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              p: { xs: 2.2, md: 2.8 },
-              minHeight: { md: 310 },
-              borderRadius: 4,
-              background: "rgba(255,255,255,0.85)",
-              border: "1px solid rgba(15,27,40,0.08)",
-              boxShadow: "0 18px 34px rgba(15,27,40,0.05)",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <Typography
-              sx={{
-                fontFamily: "'Poppins', sans-serif",
-                fontWeight: 900,
-                fontSize: "1rem",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                mb: 2,
-                color: "#0f1b28",
-              }}
-            >
-              Contact
-            </Typography>
-
-            <Box sx={{ display: "grid", gap: 1.1 }}>
-              <FooterPill icon={CallRoundedIcon} title="Phone" text="+1 (561) 797-5986" href="tel:+15617975986" color="#1B83CC" />
-              <FooterPill icon={MailRoundedIcon} title="Email" text="anikaveintemilla@gmail.com" href="mailto:anikaveintemilla@gmail.com" color="#017458" />
-              <FooterPill icon={LocationOnRoundedIcon} title="Location" text="Crandon Golf Academy. Miami. Key Biscayne" color="#FF6A00" />
-            </Box>
-          </Box>
-
-          {/* Quick Links */}
-          <Box
-            sx={{
-              width: "100%",
-              height: "100%",
-              p: { xs: 2.2, md: 2.8 },
-              minHeight: { md: 310 },
-              borderRadius: 4,
-              background: "rgba(255,255,255,0.85)",
-              border: "1px solid rgba(15,27,40,0.08)",
-              boxShadow: "0 18px 34px rgba(15,27,40,0.05)",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <Typography
-              sx={{
-                fontFamily: "'Poppins', sans-serif",
-                fontWeight: 900,
-                fontSize: "1rem",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                mb: 2,
-                color: "#0f1b28",
-              }}
-            >
-              Quick Links
-            </Typography>
-
-            <Box sx={{ display: "grid", gap: 1.05 }}>
-              {shortcuts.map((item) => (
-                <Box
-                  key={item.label}
-                  component="button"
-                  onClick={item.onClick}
-                  sx={{
-                    all: "unset",
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: 1,
-                    px: 1.5,
-                    py: 1.2,
-                    borderRadius: 3,
-                    background: "rgba(15,27,40,0.03)",
-                    border: "1px solid rgba(15,27,40,0.08)",
-                    color: "#0f1b28",
-                    transition: "transform 180ms ease, background 180ms ease",
-                    "&:hover": {
-                      transform: "translateY(-1px)",
-                      background: "rgba(27,131,204,0.10)",
-                    },
-                  }}
-                >
-                  <Typography sx={{ fontWeight: 700, fontSize: "0.94rem" }}>{item.label}</Typography>
-                  <ArrowForwardRoundedIcon sx={{ fontSize: 18, color: "#1B83CC" }} />
-                </Box>
-              ))}
-            </Box>
-          </Box>
-        </Box>
-
-        {/* Bottom bar */}
-        <Box
-          sx={{
-            mt: { xs: 3.5, md: 4.2 },
-            pt: 2.2,
-            borderTop: "1px solid rgba(15,27,40,0.08)",
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 1.4,
-          }}
-        >
-          <Typography
-            sx={{
-              color: "#536472",
-              fontFamily: "'Poppins', sans-serif",
-              fontWeight: 600,
-              fontSize: { xs: "0.84rem", md: "0.9rem" },
-              textAlign: { xs: "center", md: "left" },
-            }}
-          >
-            © {new Date().getFullYear()} Golf In Colors.{version ? ` v${version}` : ""}
-          </Typography>
-
-          <Typography
-            onClick={() => window.open("http://plataformas-web.cl", "_blank", "noopener,noreferrer")}
-            sx={{
-              cursor: "pointer",
-              color: "#1B83CC",
-              fontFamily: "'Poppins', sans-serif",
-              fontWeight: 600,
-              fontSize: { xs: "0.76rem", md: "0.82rem" },
-              textDecoration: "underline",
-              textUnderlineOffset: "3px",
-            }}
-          >
-            Designed by plataformas-web.cl
-          </Typography>
-        </Box>
+          Disenado por www.plataformas-web.cl
+        </Typography>
       </Container>
     </Box>
   );
 };
 
 export default Footer;
+
+
+
+
