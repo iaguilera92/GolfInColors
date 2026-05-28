@@ -19,31 +19,31 @@ const journeySteps = [
     text: "Discover the Game",
     desc: "Children are introduced to the basic elements of golf in a playful, approachable way.",
     hideLine: false,
-    tone: "#4FC3F7",
+    tone: "#1B83CC",
   },
   {
     text: "Build The Foundations",
     desc: "Through guided activities and early skill development.",
     hideLine: false,
-    tone: "#66BB6A",
+    tone: "#FDBB2F",
   },
   {
     text: "Experience the Game of Golf",
     desc: "Children explore the environment of golf.",
     hideLine: false,
-    tone: "#FFB74D",
+    tone: "#FF471F",
   },
   {
     text: "Understand How to Play",
     desc: "They are introduced to simple rules and etiquette.",
     hideLine: false,
-    tone: "#BA68C8",
+    tone: "#FF6A00",
   },
   {
     text: "Step into Structured Training",
     desc: "They transition into academy-style learning.",
     hideLine: true,
-    tone: "#EF5350",
+    tone: "#017458",
   },
 ];
 
@@ -75,7 +75,7 @@ function Informations() {
       sx={{
         position: "relative",
         zIndex: 3,
-        backgroundImage: "url(PATTERN.avif)",
+        backgroundImage: "url(fondo-3.jpg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: isMobile ? "scroll" : "fixed",

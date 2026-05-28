@@ -32,8 +32,8 @@ export default function Parents() {
       {/* 1. YOUR CHILD'S GOLF JOURNEY STARTS WITH YOU + FIRST AT HOME  |  2. A WINNING TEAM */}
       <Box
         sx={{
-          pt: { xs: 13.5, sm: 15 },
-          pb: { xs: 1, sm: 1.5 },
+          pt: { xs: 11.5, sm: 12.5 },
+          pb: 0,
           backgroundColor: "rgb(248 246 241)",
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -53,7 +53,7 @@ export default function Parents() {
                 textAlign: "center",
                 color: "#0d2b45",
                 px: { xs: 1, sm: 4 },
-                mt: { xs: 1, sm: 2 },
+                mt: { xs: 0, sm: 0.5 },
               }}
             >
               <Typography
@@ -127,7 +127,7 @@ export default function Parents() {
             transition={{ duration: 0.75, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.15 }}
           >
-            <Box sx={{ mt: { xs: 3, sm: 4 } }}>
+            <Box sx={{ mt: { xs: 1.8, sm: 2.2 } }}>
               <Box
                 sx={{
                   p: { xs: 2, sm: 2.6 },
@@ -248,56 +248,6 @@ export default function Parents() {
                     Golf in Colors provides parents with a clear framework to understand their role in their child&apos;s development, allowing them to support without creating pressure or confusion. It offers a structured environment where progress is visible and consistent, giving parents confidence in the process and in the decisions they are making. By connecting what happens at the academy with experiences at home, it turns golf into a shared activity, creating meaningful moments between children and their families. This approach brings clarity, trust, and involvement to each stage of the journey, while allowing parents to feel part of a positive and guided experience.
                   </Typography>
 
-                  <Box
-                    sx={{
-                      mt: 0.5,
-                      display: "grid",
-                      gridTemplateColumns: { xs: "1fr", sm: "repeat(3, minmax(0, 1fr))" },
-                      gap: 1.2,
-                    }}
-                  >
-                    {[
-                      { label: "Clear guidance", sub: "Simple direction that removes uncertainty." },
-                      { label: "Visible progress", sub: "Steady progress you can see and trust." },
-                      { label: "Shared family growth", sub: "Home and academy working as one." },
-                    ].map((item, index) => (
-                      <Box
-                        key={item.label}
-                        sx={{
-                          borderRadius: 3,
-                          px: 1.5,
-                          py: 1.45,
-                          background:
-                            index === 0
-                              ? "linear-gradient(180deg, rgba(77,211,192,0.10) 0%, rgba(77,211,192,0.04) 100%)"
-                              : index === 1
-                              ? "linear-gradient(180deg, rgba(27,131,204,0.10) 0%, rgba(27,131,204,0.04) 100%)"
-                              : "linear-gradient(180deg, rgba(52,169,111,0.10) 0%, rgba(52,169,111,0.04) 100%)",
-                          border: "1px solid rgba(10,38,30,0.08)",
-                          minHeight: 74,
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        <Box>
-                          <Typography
-                            sx={{
-                              fontWeight: 900,
-                              fontFamily: "'Poppins', sans-serif",
-                              color: "#0c2a44",
-                              fontSize: { xs: "0.9rem", sm: "0.96rem" },
-                              lineHeight: 1.2,
-                            }}
-                          >
-                            {item.label}
-                          </Typography>
-                          <Typography sx={{ mt: 0.35, color: "#5d7582", fontSize: "0.76rem", lineHeight: 1.35 }}>
-                            {item.sub}
-                          </Typography>
-                        </Box>
-                      </Box>
-                    ))}
-                  </Box>
                 </Box>
 
                 <Box
@@ -314,7 +264,7 @@ export default function Parents() {
                     sx={{
                       position: "absolute",
                       inset: 0,
-                      background: "rgba(5,30,20,0.52)",
+                      background: "rgba(5,30,20,0.72)",
                     }}
                   />
                   <Box
@@ -325,8 +275,6 @@ export default function Parents() {
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "center",
-                      alignItems: "center",
-                      textAlign: "center",
                       px: 3,
                       py: 4,
                     }}
@@ -335,194 +283,47 @@ export default function Parents() {
                       sx={{
                         fontFamily: "'Poppins', sans-serif",
                         fontWeight: 900,
-                        fontSize: { xs: "1.18rem", sm: "1.5rem", md: "1.68rem" },
-                        letterSpacing: "0.02em",
-                        textTransform: "uppercase",
-                        mb: 0.9,
                         color: "#ffffff",
-                        textShadow: "0 2px 8px rgba(0,0,0,0.3)",
+                        fontSize: { xs: "1.34rem", sm: "1.5rem", md: "1.62rem" },
+                        lineHeight: 1.15,
+                        mb: 1.2,
+                        textShadow: "0 3px 12px rgba(0,0,0,0.5)",
+                        letterSpacing: "0.01em",
                       }}
                     >
-                      Family clarity
+                      Understanding the Roles
                     </Typography>
-                    <Typography sx={{ fontSize: { xs: "0.95rem", sm: "1rem" }, lineHeight: 1.7, maxWidth: "29ch", color: "rgba(255,255,255,0.85)" }}>
-                      Support becomes easier when everyone knows the role they play in the journey.
-                    </Typography>
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-          </motion.div>
 
-          {/* Understanding the Roles */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.15 }}
-          >
-            <Box
-              sx={{
-                mt: { xs: 2.2, sm: 3.2 },
-                borderRadius: { xs: 4, sm: 5 },
-                border: "1px solid rgba(10,38,30,0.08)",
-                background: "linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(243,248,250,0.98) 100%)",
-                boxShadow: "0 14px 34px rgba(0,0,0,0.08)",
-                overflow: "hidden",
-              }}
-            >
-              <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" } }}>
-                <Box
-                  sx={{
-                    px: { xs: 2.2, sm: 3.8 },
-                    py: { xs: 3, sm: 4.2 },
-                    order: { xs: 1, md: 2 },
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontFamily: "'Poppins', sans-serif",
-                      fontWeight: 900,
-                      color: "#083c2c",
-                      fontSize: { xs: "1.34rem", sm: "1.7rem", md: "1.9rem" },
-                      lineHeight: 1.12,
-                      mb: 1.2,
-                    }}
-                  >
-                    Understanding the Roles
-                  </Typography>
-
-                  <Typography
-                    sx={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      px: 1.1,
-                      py: 0.45,
-                      borderRadius: 99,
-                      background: "rgba(11,143,99,0.10)",
-                      color: "#087a55",
-                      fontWeight: 800,
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      fontSize: "0.72rem",
-                      mb: 1.4,
-                    }}
-                  >
-                    Roles in sync
-                  </Typography>
-
-                  <Typography
-                    sx={{
-                      color: "#35536a",
-                      fontSize: { xs: "0.96rem", sm: "1.02rem" },
-                      lineHeight: 1.75,
-                      maxWidth: "62ch",
-                      mb: 2,
-                    }}
-                  >
-                    Clear roles are essential because they create structure, consistency, and trust throughout a child&apos;s learning experience. When each person understands their responsibility - the parent providing emotional support, the coach guiding the learning process, and the child exploring and growing - everything becomes more aligned and effective. This clarity eliminates confusion, reduces unnecessary pressure, and creates a positive environment where the child feels safe, motivated, and confident. With everyone working in the same direction, the learning process becomes more natural, progress becomes consistent, and the overall experience becomes something both the child and the family can truly enjoy.
-                  </Typography>
-
-                  <Box
-                    sx={{
-                      mt: 0.5,
-                      display: "grid",
-                      gridTemplateColumns: { xs: "1fr", sm: "repeat(3, minmax(0, 1fr))" },
-                      gap: 1.2,
-                    }}
-                  >
-                    {[
-                      { label: "Parent support", sub: "Support without pressure." },
-                      { label: "Coach guidance", sub: "Guidance that keeps learning on track." },
-                      { label: "Child growth", sub: "Curiosity and confidence growing together." },
-                    ].map((item, index) => (
-                      <Box
-                        key={item.label}
-                        sx={{
-                          borderRadius: 3,
-                          px: 1.6,
-                          py: 1.5,
-                          background:
-                            index === 0
-                              ? "linear-gradient(180deg, rgba(27,131,204,0.14) 0%, rgba(27,131,204,0.06) 100%)"
-                              : index === 1
-                              ? "linear-gradient(180deg, rgba(11,143,99,0.14) 0%, rgba(11,143,99,0.06) 100%)"
-                              : "linear-gradient(180deg, rgba(240,191,47,0.14) 0%, rgba(240,191,47,0.06) 100%)",
-                          border: "1px solid rgba(10,38,30,0.08)",
-                          minHeight: 74,
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        <Box>
-                          <Typography
-                            sx={{
-                              fontWeight: 900,
-                              fontFamily: "'Poppins', sans-serif",
-                              color: "#0c2a44",
-                              fontSize: { xs: "0.9rem", sm: "0.96rem" },
-                              lineHeight: 1.2,
-                            }}
-                          >
-                            {item.label}
-                          </Typography>
-                          <Typography sx={{ mt: 0.35, color: "#5d7582", fontSize: "0.76rem", lineHeight: 1.35 }}>
-                            {item.sub}
-                          </Typography>
-                        </Box>
-                      </Box>
-                    ))}
-                  </Box>
-                </Box>
-
-                <Box
-                  sx={{
-                    position: "relative",
-                    minHeight: { xs: 230, sm: 280, md: "100%" },
-                    backgroundImage: "url(PATTERN.avif)",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    overflow: "hidden",
-                    order: { xs: 2, md: 1 },
-                  }}
-                >
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      inset: 0,
-                      background: "rgba(5,30,20,0.52)",
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      position: "relative",
-                      zIndex: 1,
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      textAlign: "center",
-                      px: 3,
-                      py: 4,
-                    }}
-                  >
                     <Typography
                       sx={{
-                        fontFamily: "'Poppins', sans-serif",
-                        fontWeight: 900,
-                        fontSize: { xs: "1.12rem", sm: "1.42rem", md: "1.62rem" },
-                        letterSpacing: "0.02em",
-                        textTransform: "uppercase",
-                        mb: 1.1,
+                        display: "inline-flex",
+                        alignItems: "center",
+                        px: 1.2,
+                        py: 0.5,
+                        borderRadius: 99,
+                        background: "rgba(255,255,255,0.22)",
+                        border: "1px solid rgba(255,255,255,0.35)",
                         color: "#ffffff",
-                        textShadow: "0 2px 8px rgba(0,0,0,0.3)",
+                        fontWeight: 800,
+                        letterSpacing: "0.10em",
+                        textTransform: "uppercase",
+                        fontSize: "0.72rem",
+                        mb: 1.8,
+                        width: "fit-content",
                       }}
                     >
-                      Trust, structure and confidence
+                      Roles in sync
                     </Typography>
-                    <Typography sx={{ fontSize: { xs: "0.95rem", sm: "1rem" }, lineHeight: 1.7, maxWidth: "30ch", color: "rgba(255,255,255,0.85)" }}>
-                      When everyone understands their role, the learning path becomes calmer, clearer, and more enjoyable.
+
+                    <Typography
+                      sx={{
+                        color: "rgba(255,255,255,0.95)",
+                        fontSize: { xs: "0.93rem", sm: "0.98rem" },
+                        lineHeight: 1.82,
+                        textShadow: "0 1px 4px rgba(0,0,0,0.4)",
+                      }}
+                    >
+                      Clear roles are essential because they create structure, consistency, and trust throughout a child&apos;s learning experience. When each person understands their responsibility - the parent providing emotional support, the coach guiding the learning process, and the child exploring and growing - everything becomes more aligned and effective. This clarity eliminates confusion, reduces unnecessary pressure, and creates a positive environment where the child feels safe, motivated, and confident. With everyone working in the same direction, the learning process becomes more natural, progress becomes consistent, and the overall experience becomes something both the child and the family can truly enjoy.
                     </Typography>
                   </Box>
                 </Box>
@@ -595,9 +396,9 @@ export default function Parents() {
                     borderRadius: "50%",
                     display: "grid",
                     placeItems: "center",
-                    background: "linear-gradient(135deg, #1B83CC 0%, #0b8f63 100%)",
+                    background: "#017458",
                     color: "#fff",
-                    boxShadow: "0 10px 18px rgba(27,131,204,0.18)",
+                    boxShadow: "0 10px 18px rgba(1,116,88,0.25)",
                     flexShrink: 0,
                   }}
                 >
@@ -686,7 +487,13 @@ export default function Parents() {
                         flexShrink: 0,
                         display: "grid",
                         placeItems: "center",
-                        background: "linear-gradient(135deg, #0d2b45 0%, #1B83CC 100%)",
+                        background: [
+                          "#1B83CC",
+                          "#FDBB2F",
+                          "#FF471F",
+                          "#FF6A00",
+                          "#017458",
+                        ][index],
                         color: "#fff",
                         fontWeight: 900,
                         fontFamily: "'Poppins', sans-serif",
@@ -767,9 +574,9 @@ export default function Parents() {
                       borderRadius: "50%",
                       display: "grid",
                       placeItems: "center",
-                      background: "linear-gradient(135deg, #2b3a45 0%, #087a55 100%)",
+                      background: "#1B83CC",
                       color: "#fff",
-                      boxShadow: "0 8px 16px rgba(11,143,99,0.18)",
+                      boxShadow: "0 8px 16px rgba(27,131,204,0.25)",
                     }}
                   >
                     <HelpOutlineRoundedIcon sx={{ fontSize: 20 }} />

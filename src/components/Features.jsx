@@ -118,7 +118,7 @@ function Features() {
     <Box
       id="category-features-section"
       sx={{
-        background: "#ffffff",
+        background: "#f7f4ee",
         pt: { xs: 0.2, sm: 0.6 },
         pb: { xs: 1.1, sm: 2.4 },
       }}
@@ -130,10 +130,8 @@ function Features() {
           sx={{
             mt: { xs: 1.5, sm: 2 },
             mb: { xs: 0.5, sm: 0.8 },
-            borderRadius: 4,
-            background: "linear-gradient(150deg, #edf7f2 0%, #f4f8ff 55%, #fff6ed 100%)",
-            px: { xs: 2, sm: 4 },
-            py: { xs: 2.5, sm: 3.5 },
+            px: { xs: 1, sm: 2 },
+            py: { xs: 2, sm: 3 },
           }}
         >
           <motion.div
@@ -175,21 +173,22 @@ function Features() {
                 display: "grid",
                 gridTemplateColumns: { xs: "1fr", md: "1fr 1fr 1fr" },
                 gap: { xs: 2, sm: 2.5 },
+                alignItems: "stretch",
               }}
             >
               {[
                 {
-                  color: "#1aa97a",
+                  color: "#017458",
                   label: "Fun & Learning",
                   text: "We believe a child's connection with golf is built through fun experiences, meaningful family moments, positive coaching, and creative games that make learning enjoyable and memorable.",
                 },
                 {
-                  color: "#2c95e3",
+                  color: "#1B83CC",
                   label: "Family Journey",
                   text: "The system creates an engaging experience for children while guiding parents through every stage of their child's golf journey — helping families enjoy, understand, and support the development process together.",
                 },
                 {
-                  color: "#f08b32",
+                  color: "#FF6A00",
                   label: "Lasting Connection",
                   text: "Through creativity, fun, and connection, Golf in Colors helps children fall in love with the game while creating lasting memories on and off the course.",
                 },
@@ -204,25 +203,42 @@ function Features() {
                 >
                   <Box
                     sx={{
-                      borderLeft: `3px solid ${item.color}`,
-                      pl: 2.2,
-                      py: 0.5,
                       height: "100%",
+                      borderRadius: 3,
+                      border: "1px solid rgba(10,38,30,0.09)",
+                      borderTop: `3px solid ${item.color}`,
+                      background: "#ffffff",
+                      boxShadow: "0 8px 22px rgba(13,43,69,0.08)",
+                      px: { xs: 2.2, sm: 2.6 },
+                      py: { xs: 2, sm: 2.4 },
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 1,
                     }}
                   >
-                    <Typography
-                      sx={{
-                        fontSize: { xs: "0.78rem", sm: "0.82rem" },
-                        fontWeight: 800,
-                        fontFamily: "'Poppins', sans-serif",
-                        color: item.color,
-                        letterSpacing: "0.08em",
-                        textTransform: "uppercase",
-                        mb: 0.8,
-                      }}
-                    >
-                      {item.label}
-                    </Typography>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                      <Box
+                        sx={{
+                          width: 10,
+                          height: 10,
+                          borderRadius: "50%",
+                          background: item.color,
+                          flexShrink: 0,
+                        }}
+                      />
+                      <Typography
+                        sx={{
+                          fontSize: { xs: "0.78rem", sm: "0.82rem" },
+                          fontWeight: 800,
+                          fontFamily: "'Poppins', sans-serif",
+                          color: item.color,
+                          letterSpacing: "0.08em",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        {item.label}
+                      </Typography>
+                    </Box>
                     <Typography
                       sx={{
                         fontSize: { xs: "0.87rem", sm: "0.93rem" },
@@ -391,69 +407,26 @@ function Features() {
 
           <Box
             sx={{
-              position: "relative",
               mt: { xs: 2.4, sm: 3.2 },
-              minHeight: { xs: 170, sm: 210, md: 220 },
-              borderRadius: { xs: 3, sm: 4 },
-              overflow: "hidden",
-              boxShadow: "0 12px 28px rgba(0,0,0,0.12)",
+              px: { xs: 2, sm: 5, md: 8 },
+              py: { xs: 3, sm: 4 },
+              textAlign: "center",
+              position: "relative",
             }}
           >
-            <Box
-              component="video"
-              src="/video-golf-2.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
+            <Typography
               sx={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "center center",
-                filter: "saturate(1.05) contrast(1.02)",
-              }}
-            />
-
-            <Box
-              sx={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "linear-gradient(180deg, rgba(2,14,10,0.18) 0%, rgba(2,14,10,0.52) 100%)",
-              }}
-            />
-
-            <Box
-              sx={{
-                position: "relative",
-                zIndex: 1,
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                px: { xs: 2.2, sm: 4 },
-                py: { xs: 4.2, sm: 5 },
-                textAlign: "center",
+                fontFamily: "’Georgia’, ‘Times New Roman’, serif",
+                fontSize: { xs: "1.5rem", sm: "2rem", md: "2.4rem" },
+                fontWeight: 400,
+                fontStyle: "italic",
+                color: "#0d3324",
+                lineHeight: 1.45,
+                letterSpacing: "0.01em",
               }}
             >
-              <Typography
-                sx={{
-                  color: "#ffffff",
-                  fontWeight: 900,
-                  fontFamily: "'Poppins', sans-serif",
-                  fontSize: { xs: "1.22rem", sm: "1.7rem", md: "2rem" },
-                  lineHeight: 1.08,
-                  letterSpacing: "0.02em",
-                  textShadow: "0 6px 18px rgba(0,0,0,0.35)",
-                  maxWidth: "12ch",
-                }}
-              >
-                {"Together We’re Shaping the Future of Golf"}
-              </Typography>
-            </Box>
+              &ldquo;Together We&apos;re Shaping the Future of Golf&rdquo;
+            </Typography>
           </Box>
         </Box>
       </Container>

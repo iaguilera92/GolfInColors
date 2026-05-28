@@ -40,7 +40,7 @@ const SocialButton = ({ href, Icon, label }) => (
   </Box>
 );
 
-const FooterPill = ({ icon: Icon, title, text, href }) => (
+const FooterPill = ({ icon: Icon, title, text, href, color }) => (
   <Box
     component={href ? "a" : "div"}
     href={href}
@@ -64,7 +64,7 @@ const FooterPill = ({ icon: Icon, title, text, href }) => (
         borderRadius: "50%",
         display: "grid",
         placeItems: "center",
-        background: "linear-gradient(135deg, #1B83CC 0%, #0b8f63 100%)",
+        background: color || "#1B83CC",
         flexShrink: 0,
       }}
     >
@@ -124,20 +124,10 @@ const Footer = () => {
         position: "relative",
         overflow: "hidden",
         color: "#0f1b28",
-        background:
-          "radial-gradient(circle at top left, rgba(27,131,204,0.10) 0, rgba(27,131,204,0) 24%), radial-gradient(circle at 82% 18%, rgba(11,143,99,0.08) 0, rgba(11,143,99,0) 22%), linear-gradient(180deg, #f9fbfd 0%, #eef3f7 55%, #e7eef4 100%)",
+        background: "#f7f4ee",
         borderTop: "none",
       }}
     >
-      <Box
-        sx={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(135deg, rgba(255,255,255,0.46) 0%, rgba(255,255,255,0) 24%, rgba(255,255,255,0.20) 100%)",
-          pointerEvents: "none",
-        }}
-      />
 
       <Container
         maxWidth="lg"
@@ -239,9 +229,9 @@ const Footer = () => {
             </Typography>
 
             <Box sx={{ display: "grid", gap: 1.1 }}>
-              <FooterPill icon={CallRoundedIcon} title="Phone" text="+1 (561) 797-5986" href="tel:+15617975986" />
-              <FooterPill icon={MailRoundedIcon} title="Email" text="anikaveintemilla@gmail.com" href="mailto:anikaveintemilla@gmail.com" />
-              <FooterPill icon={LocationOnRoundedIcon} title="Location" text="Crandon Golf Academy. Miami. Key Biscayne" />
+              <FooterPill icon={CallRoundedIcon} title="Phone" text="+1 (561) 797-5986" href="tel:+15617975986" color="#1B83CC" />
+              <FooterPill icon={MailRoundedIcon} title="Email" text="anikaveintemilla@gmail.com" href="mailto:anikaveintemilla@gmail.com" color="#017458" />
+              <FooterPill icon={LocationOnRoundedIcon} title="Location" text="Crandon Golf Academy. Miami. Key Biscayne" color="#FF6A00" />
             </Box>
           </Box>
 

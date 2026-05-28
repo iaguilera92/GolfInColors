@@ -60,7 +60,7 @@ const Nosotros = () => {
             position: "relative",
             display: "inline-flex",
             letterSpacing: "0.04em",
-            color: "#1f6d56",
+            color: "#017458",
 
             "&::after": {
               content: '""',
@@ -71,7 +71,7 @@ const Nosotros = () => {
               width: "60%",
               height: "4px",
               borderRadius: "4px",
-              background: "#1f6d56",
+              background: "#017458",
             },
           }}
         >
@@ -250,7 +250,7 @@ const Nosotros = () => {
               }}
             >
               <CardContent sx={{ p: 2 }}>
-                <Typography variant="h5" gutterBottom sx={{ color: '#1c5a47', fontWeight: 900, letterSpacing: '0.05em', position: 'relative', display: 'inline-block', pr: 1.4, pb: 0.45, mb: 1.6, '&::before': { content: '""', position: 'absolute', right: 0, top: '46%', width: 8, height: 8, borderRadius: '50%', transform: 'translateY(-50%)', background: '#f0bf67' }, '&::after': { content: '""', position: 'absolute', left: 0, bottom: 0, width: '100%', height: 3, borderRadius: 999, background: 'linear-gradient(90deg, #1f6d56 0%, #2b8a69 100%)' } }}>
+                <Typography variant="h5" gutterBottom sx={{ color: '#017458', fontWeight: 900, letterSpacing: '0.05em', position: 'relative', display: 'inline-block', pr: 1.4, pb: 0.45, mb: 1.6, '&::before': { content: '""', position: 'absolute', right: 0, top: '46%', width: 8, height: 8, borderRadius: '50%', transform: 'translateY(-50%)', background: '#f0bf67' }, '&::after': { content: '""', position: 'absolute', left: 0, bottom: 0, width: '100%', height: 3, borderRadius: 999, background: 'linear-gradient(90deg, #017458 0%, #2b8a69 100%)' } }}>
                   Purpose
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify', mb: 1.5 }}>
@@ -286,14 +286,14 @@ const Nosotros = () => {
               }}
             >
               <CardContent sx={{ p: 2 }}>
-                <Typography variant="h5" gutterBottom sx={{ color: '#1c5a47', fontWeight: 900, letterSpacing: '0.04em', position: 'relative', display: 'inline-block', pr: 1.35, pb: 0.42, mb: 1.45, '&::before': { content: '""', position: 'absolute', right: 0, top: '46%', width: 8, height: 8, borderRadius: '50%', transform: 'translateY(-50%)', background: '#7fc9b1' }, '&::after': { content: '""', position: 'absolute', left: 0, bottom: 0, width: '100%', height: 3, borderRadius: 999, background: 'linear-gradient(90deg, #1f6d56 0%, #56a587 100%)' } }}>
+                <Typography variant="h5" gutterBottom sx={{ color: '#017458', fontWeight: 900, letterSpacing: '0.04em', position: 'relative', display: 'inline-block', pr: 1.35, pb: 0.42, mb: 1.45, '&::before': { content: '""', position: 'absolute', right: 0, top: '46%', width: 8, height: 8, borderRadius: '50%', transform: 'translateY(-50%)', background: '#7fc9b1' }, '&::after': { content: '""', position: 'absolute', left: 0, bottom: 0, width: '100%', height: 3, borderRadius: 999, background: 'linear-gradient(90deg, #017458 0%, #56a587 100%)' } }}>
                   Mission
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify', mb: 1.5 }}>
                   At Golf in Colors, our mission is to inspire children to discover golf in a fun, creative, and meaningful way. We support parents and coaches with tools, learning materials, and experiences designed to make the game engaging, natural, and emotionally positive for young players. Through this approach, we aim to create environments where curiosity, joy, and motivation encourage children to continue exploring and enjoying the game.
                 </Typography>
 
-                <Typography variant="h5" gutterBottom sx={{ color: '#1c5a47', fontWeight: 900, letterSpacing: '0.04em', position: 'relative', display: 'inline-block', pr: 1.35, pb: 0.42, mb: 1.45, mt: 0.6, '&::before': { content: '""', position: 'absolute', right: 0, top: '46%', width: 8, height: 8, borderRadius: '50%', transform: 'translateY(-50%)', background: '#f0bf67' }, '&::after': { content: '""', position: 'absolute', left: 0, bottom: 0, width: '100%', height: 3, borderRadius: 999, background: 'linear-gradient(90deg, #1f6d56 0%, #56a587 100%)' } }}>
+                <Typography variant="h5" gutterBottom sx={{ color: '#017458', fontWeight: 900, letterSpacing: '0.04em', position: 'relative', display: 'inline-block', pr: 1.35, pb: 0.42, mb: 1.45, mt: 0.6, '&::before': { content: '""', position: 'absolute', right: 0, top: '46%', width: 8, height: 8, borderRadius: '50%', transform: 'translateY(-50%)', background: '#f0bf67' }, '&::after': { content: '""', position: 'absolute', left: 0, bottom: 0, width: '100%', height: 3, borderRadius: 999, background: 'linear-gradient(90deg, #017458 0%, #56a587 100%)' } }}>
                   Vision
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'black', textAlign: 'justify' }}>
@@ -311,7 +311,7 @@ const Nosotros = () => {
           fontWeight={700}
           mb={3}
           sx={{
-            color: "#163d32",
+            color: "#017458",
             position: "relative",
             display: "inline-block",
             "&::after": {
@@ -321,7 +321,7 @@ const Nosotros = () => {
               left: 0,
               width: "100%",
               height: "4px",
-              backgroundColor: "#1f6d56",
+              backgroundColor: "#017458",
               borderRadius: 2,
             },
           }}
@@ -439,7 +439,7 @@ const Nosotros = () => {
                 >
                   <Typography
                     sx={{
-                      color: activeFounder === coach.key ? "#0f4e3d" : "#1f6d56",
+                      color: activeFounder === coach.key ? "#0f4e3d" : "#017458",
                       fontWeight: 700,
                       fontSize: { xs: "0.82rem", sm: "0.9rem" },
                       lineHeight: 1.1,
@@ -454,7 +454,7 @@ const Nosotros = () => {
                       display: "inline-flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      color: activeFounder === coach.key ? "#0f4e3d" : "#1f6d56",
+                      color: activeFounder === coach.key ? "#0f4e3d" : "#017458",
                       lineHeight: 1,
                       transform: activeFounder === coach.key ? "translateY(-0.5px) rotate(180deg)" : "translateY(0) rotate(0deg)",
                       transition: "transform 0.22s ease, color 0.2s ease",
@@ -486,7 +486,7 @@ const Nosotros = () => {
           >
             {activeFounder === "anika" ? (
               <>
-                <Typography sx={{ color: "#163d32", fontWeight: 800, mb: 0.35 }}>
+                <Typography sx={{ color: "#017458", fontWeight: 800, mb: 0.35 }}>
                   Anika Veintemilla
                 </Typography>
                 <Typography
@@ -512,7 +512,7 @@ const Nosotros = () => {
                       borderRadius: "999px",
                       border: "1px solid rgba(31,109,86,0.28)",
                       backgroundColor: "rgba(31,109,86,0.08)",
-                      color: "#1f6d56",
+                      color: "#017458",
                       fontSize: "0.92em",
                     }}
                   >
@@ -534,7 +534,7 @@ const Nosotros = () => {
               </>
             ) : (
               <>
-                <Typography sx={{ color: "#163d32", fontWeight: 800, mb: 0.35 }}>
+                <Typography sx={{ color: "#017458", fontWeight: 800, mb: 0.35 }}>
                   Sergio Murtinho
                 </Typography>
                 <Typography
@@ -560,7 +560,7 @@ const Nosotros = () => {
                       borderRadius: "999px",
                       border: "1px solid rgba(31,109,86,0.28)",
                       backgroundColor: "rgba(31,109,86,0.08)",
-                      color: "#1f6d56",
+                      color: "#017458",
                       fontSize: "0.92em",
                     }}
                   >
