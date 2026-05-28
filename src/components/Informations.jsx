@@ -69,16 +69,12 @@ function Informations() {
         marginBottom: "-20px",
         color: "white",
         overflow: "hidden",
-        borderBottomLeftRadius: isMobile ? "90px" : "120px",
-        borderBottomRightRadius: isMobile ? "90px" : "120px",
         "&::before": {
           content: '""',
           position: "absolute",
           inset: 0,
           bgcolor: "rgba(0,0,0,0.5)",
           zIndex: 1,
-          borderBottomLeftRadius: isMobile ? "90px" : "120px",
-          borderBottomRightRadius: isMobile ? "90px" : "120px",
         },
       }}
     >

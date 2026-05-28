@@ -295,31 +295,11 @@ function App() {
           <Outlet context={{ showApp, informationsRef, openDialogInicio: openCategoryFeatures }} />        </Box>
         {/* Secciones visibles solo en la pÃƒÆ’Ã‚Â¡gina de inicio */}
         {["/", ""].includes(location.pathname) && (
-          <>
-            <Suspense fallback={null}>
-              <div ref={informationsRef} style={{ backgroundColor: "#f7f4ee" }}>
-                {isMobile ?
-                  < InformationsMobile
-                    informationsRef={informationsRef}
-                    triggerInformations={triggerInformations}
-                  />
-                  :
-                  <Informations
-                    informationsRef={informationsRef}
-                    triggerInformations={triggerInformations}
-                  />
-                }
-              </div>
-            </Suspense>
-
-
-            <Suspense fallback={null}>
-              <Box ref={contactoRef}>
-                <Contacto />
-              </Box>
-            </Suspense>
-
-          </>
+          <Suspense fallback={null}>
+            <Box ref={contactoRef}>
+              <Contacto />
+            </Box>
+          </Suspense>
         )}
 
         {/* Footer (excepto en administraciÃƒÆ’Ã‚Â³n) */}
