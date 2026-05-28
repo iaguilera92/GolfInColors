@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Container, Typography } from "@mui/material";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
+import { motion } from "framer-motion";
 
 const colorCards = [
   {
@@ -154,6 +155,12 @@ function Areas() {
       }}
     >
       <Container sx={{ maxWidth: { xs: "980px !important", md: "1180px !important" } }}>
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.12 }}
+          transition={{ duration: 0.65, ease: "easeOut" }}
+        >
         <Box
           sx={{
             borderRadius: { xs: 4, sm: 5 },
@@ -187,7 +194,7 @@ function Areas() {
               mb: 1,
             }}
           >
-            <Box sx={{ width: { xs: 34, sm: 58 }, height: 2, borderRadius: 999, background: "rgba(46,125,50,0.75)", flexShrink: 0 }} />
+            <Box sx={{ display: { xs: "none", sm: "block" }, width: 58, height: 2, borderRadius: 999, background: "rgba(46,125,50,0.75)", flexShrink: 0 }} />
             <Typography
               sx={{
                 textAlign: "center",
@@ -196,14 +203,14 @@ function Areas() {
                 color: "rgba(46,125,50,0.92)",
                 fontSize: { xs: "0.92rem", sm: "1.15rem", md: "1.48rem" },
                 lineHeight: 1.1,
-                letterSpacing: { xs: "0.14em", sm: "0.16em", md: "0.18em" },
+                letterSpacing: { xs: "0.06em", sm: "0.16em", md: "0.18em" },
                 textTransform: "uppercase",
                 whiteSpace: "nowrap",
               }}
             >
               THE 5 COLORS OF OUR SYSTEM
             </Typography>
-            <Box sx={{ width: { xs: 34, sm: 58 }, height: 2, borderRadius: 999, background: "rgba(46,125,50,0.75)", flexShrink: 0 }} />
+            <Box sx={{ display: { xs: "none", sm: "block" }, width: 58, height: 2, borderRadius: 999, background: "rgba(46,125,50,0.75)", flexShrink: 0 }} />
           </Box>
 
           {/* Subtitle */}
@@ -268,6 +275,7 @@ function Areas() {
             ))}
           </Box>
         </Box>
+        </motion.div>
       </Container>
     </Box>
   );

@@ -115,6 +115,11 @@ function Features() {
   };
 
   return (
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      animate={reveal ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
+      transition={{ duration: 0.65, ease: "easeOut" }}
+    >
     <Box
       id="category-features-section"
       sx={{
@@ -431,6 +436,7 @@ function Features() {
         </Box>
       </Container>
     </Box>
+    </motion.div>
   );
 }
 

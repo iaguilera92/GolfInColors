@@ -207,7 +207,7 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
                   text="Welcome to Golf In Colors"
                   isRepeat={titleKey > 0}
                   startDelay={0.2}
-                  size={isMobile ? "1.0rem !important" : "2rem !important"}
+                  size={isMobile ? "1.3rem !important" : "2rem !important"}
                   color="#ffffff"
                   weight={700}
                   stroke={isMobile ? "0.4px rgba(255,255,255,0.65)" : "0.8px rgba(255,255,255,0.75)"}

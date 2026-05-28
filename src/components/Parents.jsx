@@ -32,7 +32,7 @@ export default function Parents() {
       {/* 1. YOUR CHILD'S GOLF JOURNEY STARTS WITH YOU + FIRST AT HOME  |  2. A WINNING TEAM */}
       <Box
         sx={{
-          pt: { xs: 11.5, sm: 12.5 },
+          pt: { xs: 13.5, sm: 12.5 },
           pb: 0,
           backgroundColor: "rgb(248 246 241)",
           backgroundSize: "cover",
@@ -344,8 +344,8 @@ export default function Parents() {
       {/* 4. ROLES  |  5. FAQ's */}
       <Box
         sx={{
-          pt: { xs: 3, sm: 4 },
-          pb: 8,
+          pt: { xs: 5, sm: 4 },
+          pb: { xs: 3, sm: 3.5 },
           backgroundColor: "rgb(248 246 241)",
           backgroundSize: "cover",
           backgroundPosition: "center",

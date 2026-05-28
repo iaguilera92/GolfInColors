@@ -34,7 +34,7 @@ function Contacto() {
         pb: { xs: 2, sm: 3 },
         position: "relative",
         overflow: "hidden",
-        background: "#ffffff",
+        background: "#f7f4ee",
       }}
     >
       <Box
