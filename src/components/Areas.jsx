@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { motion } from "framer-motion";
@@ -77,36 +78,46 @@ const Card = ({ item }) => (
       },
     }}
   >
-    {/* Circle — star with number inside */}
-    <Box
-      sx={{
-        position: "relative",
-        width: 58,
-        height: 58,
-        flexShrink: 0,
-        borderRadius: "50%",
-        background: item.color,
-        boxShadow: `0 8px 18px ${item.glow}`,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <StarRoundedIcon sx={{ fontSize: 56, color: "#ffffff", position: "absolute" }} />
-      <Typography
+    {/* Circle — star + número badge */}
+    <Box sx={{ position: "relative", width: 62, height: 62, flexShrink: 0 }}>
+      <Box
         sx={{
-          position: "relative",
+          width: 62,
+          height: 62,
+          borderRadius: "50%",
+          background: item.color,
+          boxShadow: `0 8px 18px ${item.glow}`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <StarRoundedIcon sx={{ fontSize: 42, color: "#ffffff" }} />
+      </Box>
+      {/* Badge número */}
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: -3,
+          right: -3,
+          width: 26,
+          height: 26,
+          borderRadius: "50%",
+          background: "#fff",
+          border: `2.5px solid ${item.color}`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           fontFamily: "'Poppins', sans-serif",
           fontWeight: 900,
-          fontSize: "1.3rem",
+          fontSize: "0.82rem",
           color: item.color,
           lineHeight: 1,
-          zIndex: 1,
-          mt: "3px",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.12)",
         }}
       >
         {item.step}
-      </Typography>
+      </Box>
     </Box>
 
     <Typography
@@ -134,6 +145,7 @@ const Card = ({ item }) => (
 );
 
 function Areas() {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -265,6 +277,53 @@ function Areas() {
             ))}
           </Box>
         </Box>
+
+          {/* ── CTA ── */}
+          <Box
+            sx={{
+              mt: { xs: 3.5, sm: 4.5 },
+              py: { xs: 3, sm: 4 },
+              px: { xs: 2, sm: 4 },
+              borderRadius: 3,
+              background: "#017458",
+              textAlign: "center",
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "'Poppins', sans-serif",
+                fontWeight: 700,
+                fontSize: { xs: "1.15rem", sm: "1.5rem" },
+                color: "#ffffff",
+                mb: { xs: 2, sm: 2.5 },
+              }}
+            >
+              Ready to start your child&apos;s golf journey?
+            </Typography>
+            <Button
+              onClick={() => navigate("/parents")}
+              variant="contained"
+              sx={{
+                background: "#ffffff",
+                color: "#017458",
+                fontFamily: "'Poppins', sans-serif",
+                fontWeight: 800,
+                fontSize: { xs: "0.9rem", sm: "1rem" },
+                px: { xs: 3.5, sm: 5 },
+                py: { xs: 1.2, sm: 1.5 },
+                borderRadius: 99,
+                textTransform: "none",
+                boxShadow: "0 4px 14px rgba(0,0,0,0.15)",
+                "&:hover": {
+                  background: "#f0faf6",
+                  boxShadow: "0 6px 20px rgba(0,0,0,0.18)",
+                },
+              }}
+            >
+              Start Here
+            </Button>
+          </Box>
+
         </motion.div>
       </Container>
     </Box>

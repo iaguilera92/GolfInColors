@@ -125,7 +125,7 @@ function Features() {
       sx={{
         background: "#f7f4ee",
         pt: { xs: 0.2, sm: 0.6 },
-        pb: { xs: 1.1, sm: 2.4 },
+        pb: { xs: 0.4, sm: 0.8 },
       }}
     >
       <Container sx={{ maxWidth: { xs: "900px !important", md: "1220px !important" } }}>
@@ -155,22 +155,22 @@ function Features() {
             >
               {[
                 {
-                  color: "#017458",
-                  subtitle: "LEARN. PLAY. GROW.",
-                  label: "Fun & Learning",
-                  text: "We believe a child's connection with golf is built through fun experiences, meaningful family moments, positive coaching, and creative games that make learning enjoyable and memorable.",
-                },
-                {
                   color: "#1B83CC",
-                  subtitle: "ENJOY. GUIDE. SUPPORT.",
-                  label: "Family Journey",
-                  text: "The system creates an engaging experience for children while guiding parents through every stage of their child's golf journey — helping families enjoy, understand, and support the development process together.",
+                  subtitle: "LEARN. PLAY. GROW.",
+                  label: "Skills",
+                  text: "Our fun learning system brings golf to life with coloring books, stories, characters, games and challenges that make kids excited to learn and play more!",
                 },
                 {
                   color: "#FF6A00",
+                  subtitle: "SPARK CURIOSITY. INSPIRE FOR LIFE.",
+                  label: "Purpose",
+                  text: "We spark curiosity and build confidence so golf becomes part of who they are. More than a sport — it's a journey that lasts a lifetime.",
+                },
+                {
+                  color: "#017458",
                   subtitle: "TOGETHER WE WIN.",
-                  label: "Lasting Connection",
-                  text: "Through creativity, fun, and connection, Golf in Colors helps children fall in love with the game while creating lasting memories on and off the course.",
+                  label: "Connection",
+                  text: "We build the winning team! Parents, coaches and kids — each with an important role in the journey. When we work together, kids thrive.",
                 },
               ].map((item, i) => (
                 <motion.div
@@ -393,6 +393,10 @@ function Features() {
               py: { xs: 3, sm: 4 },
               textAlign: "center",
               position: "relative",
+              background: "#ffffff",
+              borderRadius: 3,
+              border: "1px solid rgba(10,38,30,0.12)",
+              boxShadow: "0 4px 16px rgba(0,0,0,0.05)",
             }}
           >
             <Typography

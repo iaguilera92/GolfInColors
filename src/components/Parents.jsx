@@ -29,10 +29,99 @@ export default function Parents() {
 
   return (
     <>
+      {/* BANNER */}
+      <Box
+        sx={{
+          position: "relative",
+          height: { xs: 190, sm: 260, md: 300 },
+          overflow: "hidden",
+          backgroundImage: "url(/fondo-1.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center 30%",
+        }}
+      >
+        {/* Overlay */}
+        <Box
+          sx={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(135deg, rgba(5,25,15,0.72) 0%, rgba(10,40,60,0.58) 100%)",
+          }}
+        />
+        {/* Contenido */}
+        <Box
+          sx={{
+            position: "relative",
+            zIndex: 1,
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: { xs: 1, sm: 1.4 },
+            px: 2,
+            pt: { xs: 7, sm: 8 },
+          }}
+        >
+          <Box
+            sx={{
+              px: 1.6,
+              py: 0.5,
+              borderRadius: 99,
+              border: "1px solid rgba(255,255,255,0.35)",
+              background: "rgba(255,255,255,0.12)",
+              backdropFilter: "blur(6px)",
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "'Poppins', sans-serif",
+                fontWeight: 700,
+                fontSize: { xs: "0.72rem", sm: "0.8rem" },
+                color: "#ffffff",
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+              }}
+            >
+              For Parents
+            </Typography>
+          </Box>
+
+          <Typography
+            sx={{
+              fontFamily: "'Poppins', sans-serif",
+              fontWeight: 900,
+              fontSize: { xs: "1.6rem", sm: "2.2rem", md: "2.8rem" },
+              color: "#ffffff",
+              textAlign: "center",
+              lineHeight: 1.1,
+              textShadow: "0 3px 16px rgba(0,0,0,0.45)",
+              letterSpacing: "0.01em",
+            }}
+          >
+            Your Role Makes the Difference
+          </Typography>
+
+          <Typography
+            sx={{
+              fontFamily: "'Poppins', sans-serif",
+              fontWeight: 400,
+              fontSize: { xs: "0.88rem", sm: "1.05rem" },
+              color: "rgba(255,255,255,0.82)",
+              textAlign: "center",
+              maxWidth: 520,
+              textShadow: "0 2px 8px rgba(0,0,0,0.35)",
+            }}
+          >
+            Be part of your child&apos;s golf journey — every step of the way
+          </Typography>
+        </Box>
+      </Box>
+
       {/* 1. YOUR CHILD'S GOLF JOURNEY STARTS WITH YOU + FIRST AT HOME  |  2. A WINNING TEAM */}
       <Box
         sx={{
-          pt: { xs: 13.5, sm: 12.5 },
+          pt: { xs: 2, sm: 2.5 },
           pb: 0,
           backgroundColor: "rgb(248 246 241)",
           backgroundSize: "cover",
@@ -120,213 +209,247 @@ export default function Parents() {
             </Box>
           </motion.div>
 
-          {/* FIRST AT HOME */}
+          {/* FIRST AT HOME — 3 columns */}
           <motion.div
-            initial={{ opacity: 0, x: 90 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.75, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.15 }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.12 }}
           >
-            <Box sx={{ mt: { xs: 1.8, sm: 2.2 } }}>
+            <Box
+              sx={{
+                mt: { xs: 2, sm: 2.8 },
+                display: "grid",
+                gridTemplateColumns: { xs: "1fr", md: "1fr 1fr 1fr" },
+                gap: { xs: 2, sm: 2.5 },
+                alignItems: "stretch",
+              }}
+            >
+              {/* Col 1 — texto */}
               <Box
                 sx={{
-                  p: { xs: 2, sm: 2.6 },
+                  p: { xs: 2.2, sm: 2.8 },
                   borderRadius: 3,
-                  border: "1px solid rgba(13,43,69,0.12)",
-                  background: "linear-gradient(165deg, #ffffff 0%, #f4f9ff 100%)",
-                  boxShadow: "0 14px 28px rgba(13,43,69,0.10)",
+                  border: "1px solid rgba(13,43,69,0.10)",
+                  background: "#ffffff",
+                  boxShadow: "0 8px 24px rgba(13,43,69,0.07)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 1.4,
                 }}
               >
                 <Typography
                   sx={{
-                    color: "#35536a",
-                    fontWeight: 700,
-                    fontSize: { xs: "1rem", sm: "1.12rem" },
-                    lineHeight: 1.35,
-                    textAlign: "center",
-                    mb: 1.6,
+                    fontFamily: "'Poppins', sans-serif",
+                    fontWeight: 900,
+                    fontSize: { xs: "1.1rem", sm: "1.18rem" },
+                    color: "#1B83CC",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    borderBottom: "2px solid #1B83CC",
+                    pb: 0.8,
                   }}
                 >
-                  FIRST AT HOME
+                  First At Home
                 </Typography>
+                {[
+                  "As a parent, you play one of the most important roles in your child's journey. Your support, encouragement, and presence help create a positive environment where they can grow, explore, and truly enjoy the game. Being there for them, celebrating their progress and guiding them toward the right opportunities, makes all the difference.",
+                  "Choosing the right coach is a key part of this experience. A great coach helps create connection, confidence, and excitement for learning, allowing your child to feel motivated and engaged.",
+                  "When there is open communication between you, your child, and the coach, the experience becomes even more meaningful, creating a strong foundation for growth, enjoyment, and long-term development in the game.",
+                ].map((txt, i) => (
+                  <Typography key={i} sx={{ color: "#27475f", fontSize: { xs: "0.92rem", sm: "0.97rem" }, lineHeight: 1.75 }}>
+                    {txt}
+                  </Typography>
+                ))}
+              </Box>
 
+              {/* Col 2 — imagen */}
+              <Box
+                sx={{
+                  borderRadius: 3,
+                  overflow: "hidden",
+                  minHeight: { xs: 220, sm: 280, md: "100%" },
+                  backgroundImage: "url(/nino-parents.avif)",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  boxShadow: "0 8px 24px rgba(13,43,69,0.12)",
+                }}
+              />
+
+              {/* Col 3 — Let Us Show You the Way */}
+              <Box
+                sx={{
+                  p: { xs: 2.2, sm: 2.8 },
+                  borderRadius: 3,
+                  border: "1px solid rgba(13,43,69,0.10)",
+                  background: "#ffffff",
+                  boxShadow: "0 8px 24px rgba(13,43,69,0.07)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 1.2,
+                }}
+              >
                 <Typography
                   sx={{
-                    color: "#27475f",
-                    fontSize: { xs: "0.95rem", sm: "1rem" },
-                    lineHeight: 1.75,
-                    mb: 1.2,
+                    fontFamily: "'Poppins', sans-serif",
+                    fontWeight: 900,
+                    color: "#083c2c",
+                    fontSize: { xs: "1.15rem", sm: "1.28rem" },
+                    lineHeight: 1.15,
+                    borderBottom: "2px solid #017458",
+                    pb: 0.8,
                   }}
                 >
-                  As a parent, you play one of the most important roles in your child&apos;s journey. Your support, encouragement, and presence help create a positive environment where they can grow, explore, and truly enjoy the game. Being there for them, celebrating their progress and guiding them toward the right opportunities, makes all the difference.
+                  Let Us Show You the Way
                 </Typography>
-
-                <Typography
+                <Box
                   sx={{
-                    color: "#27475f",
-                    fontSize: { xs: "0.95rem", sm: "1rem" },
-                    lineHeight: 1.75,
-                    mb: 1.2,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    px: 1.1,
+                    py: 0.45,
+                    borderRadius: 99,
+                    background: "rgba(27,131,204,0.10)",
+                    color: "#1B83CC",
+                    fontWeight: 800,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    fontSize: "0.72rem",
+                    width: "fit-content",
                   }}
                 >
-                  Choosing the right coach is a key part of this experience. A great coach helps create connection, confidence, and excitement for learning, allowing your child to feel motivated and engaged.
-                </Typography>
-
-                <Typography
-                  sx={{
-                    color: "#27475f",
-                    fontSize: { xs: "0.95rem", sm: "1rem" },
-                    lineHeight: 1.75,
-                  }}
-                >
-                  When there is open communication between you, your child, and the coach, the experience becomes even more meaningful, creating a strong foundation for growth, enjoyment, and long-term development in the game.
+                  Parent framework
+                </Box>
+                <Typography sx={{ color: "#35536a", fontSize: { xs: "0.92rem", sm: "0.97rem" }, lineHeight: 1.75 }}>
+                  Golf in Colors provides parents with a clear framework to understand their role in their child&apos;s development, allowing them to support without creating pressure or confusion. It offers a structured environment where progress is visible and consistent, giving parents confidence in the process and in the decisions they are making. By connecting what happens at the academy with experiences at home, it turns golf into a shared activity, creating meaningful moments between children and their families. This approach brings clarity, trust, and involvement to each stage of the journey, while allowing parents to feel part of a positive and guided experience.
                 </Typography>
               </Box>
             </Box>
           </motion.div>
 
-          {/* Family clarity */}
+          {/* Understanding the Roles — full width */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.15 }}
+            viewport={{ once: true, amount: 0.12 }}
           >
             <Box
               sx={{
-                mt: { xs: 2.2, sm: 3.2 },
-                borderRadius: { xs: 4, sm: 5 },
-                border: "1px solid rgba(10,38,30,0.08)",
-                background: "linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(244,249,251,0.98) 100%)",
-                boxShadow: "0 14px 34px rgba(0,0,0,0.08)",
+                mt: { xs: 2.2, sm: 3 },
+                borderRadius: 3,
                 overflow: "hidden",
+                boxShadow: "0 14px 34px rgba(0,0,0,0.14)",
+                display: "grid",
+                gridTemplateColumns: { xs: "1fr", md: "1fr 1.6fr" },
               }}
             >
-              <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" } }}>
-                <Box sx={{ px: { xs: 2.2, sm: 3.8 }, py: { xs: 3, sm: 4.2 } }}>
-                  <Typography
-                    sx={{
-                      fontFamily: "'Poppins', sans-serif",
-                      fontWeight: 900,
-                      color: "#083c2c",
-                      fontSize: { xs: "1.36rem", sm: "1.72rem", md: "1.95rem" },
-                      lineHeight: 1.12,
-                      mb: 0.9,
-                    }}
-                  >
-                    Let Us Show You the Way
-                  </Typography>
-
-                  <Typography
-                    sx={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      px: 1.1,
-                      py: 0.45,
-                      borderRadius: 99,
-                      background: "rgba(27,131,204,0.10)",
-                      color: "#1B83CC",
-                      fontWeight: 800,
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      fontSize: "0.72rem",
-                      mb: 1.4,
-                    }}
-                  >
-                    Parent framework
-                  </Typography>
-
-                  <Typography
-                    sx={{
-                      color: "#35536a",
-                      fontSize: { xs: "0.96rem", sm: "1.02rem" },
-                      lineHeight: 1.75,
-                      maxWidth: "62ch",
-                      mb: 2,
-                    }}
-                  >
-                    Golf in Colors provides parents with a clear framework to understand their role in their child&apos;s development, allowing them to support without creating pressure or confusion. It offers a structured environment where progress is visible and consistent, giving parents confidence in the process and in the decisions they are making. By connecting what happens at the academy with experiences at home, it turns golf into a shared activity, creating meaningful moments between children and their families. This approach brings clarity, trust, and involvement to each stage of the journey, while allowing parents to feel part of a positive and guided experience.
-                  </Typography>
-
-                </Box>
-
+              {/* Imagen fondo */}
+              <Box
+                sx={{
+                  position: "relative",
+                  minHeight: { xs: 180, sm: 220, md: "100%" },
+                  backgroundImage: "url(/PATTERN.avif)",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
+                <Box sx={{ position: "absolute", inset: 0, background: "rgba(5,30,20,0.65)" }} />
                 <Box
                   sx={{
                     position: "relative",
-                    minHeight: { xs: 210, sm: 260, md: "100%" },
-                    backgroundImage: "url(PATTERN.avif)",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    overflow: "hidden",
+                    zIndex: 1,
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: { xs: "center", md: "flex-start" },
+                    px: { xs: 3, sm: 4 },
+                    py: { xs: 3.5, sm: 4 },
+                    gap: 1.2,
                   }}
                 >
                   <Box
                     sx={{
-                      position: "absolute",
-                      inset: 0,
-                      background: "rgba(5,30,20,0.72)",
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      position: "relative",
-                      zIndex: 1,
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      px: 3,
-                      py: 4,
+                      px: 1.4,
+                      py: 0.5,
+                      borderRadius: 99,
+                      background: "rgba(255,255,255,0.18)",
+                      border: "1px solid rgba(255,255,255,0.32)",
+                      color: "#ffffff",
+                      fontWeight: 700,
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      fontSize: "0.72rem",
+                      width: "fit-content",
                     }}
                   >
-                    <Typography
-                      sx={{
-                        fontFamily: "'Poppins', sans-serif",
-                        fontWeight: 900,
-                        color: "#ffffff",
-                        fontSize: { xs: "1.34rem", sm: "1.5rem", md: "1.62rem" },
-                        lineHeight: 1.15,
-                        mb: 1.2,
-                        textShadow: "0 3px 12px rgba(0,0,0,0.5)",
-                        letterSpacing: "0.01em",
-                      }}
-                    >
-                      Understanding the Roles
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        px: 1.2,
-                        py: 0.5,
-                        borderRadius: 99,
-                        background: "rgba(255,255,255,0.22)",
-                        border: "1px solid rgba(255,255,255,0.35)",
-                        color: "#ffffff",
-                        fontWeight: 800,
-                        letterSpacing: "0.10em",
-                        textTransform: "uppercase",
-                        fontSize: "0.72rem",
-                        mb: 1.8,
-                        width: "fit-content",
-                      }}
-                    >
-                      Roles in sync
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        color: "rgba(255,255,255,0.95)",
-                        fontSize: { xs: "0.93rem", sm: "0.98rem" },
-                        lineHeight: 1.82,
-                        textShadow: "0 1px 4px rgba(0,0,0,0.4)",
-                      }}
-                    >
-                      Clear roles are essential because they create structure, consistency, and trust throughout a child&apos;s learning experience. When each person understands their responsibility - the parent providing emotional support, the coach guiding the learning process, and the child exploring and growing - everything becomes more aligned and effective. This clarity eliminates confusion, reduces unnecessary pressure, and creates a positive environment where the child feels safe, motivated, and confident. With everyone working in the same direction, the learning process becomes more natural, progress becomes consistent, and the overall experience becomes something both the child and the family can truly enjoy.
-                    </Typography>
+                    Roles in sync
                   </Box>
+                  <Typography
+                    sx={{
+                      fontFamily: "'Poppins', sans-serif",
+                      fontWeight: 900,
+                      color: "#ffffff",
+                      fontSize: { xs: "1.5rem", sm: "1.85rem" },
+                      lineHeight: 1.1,
+                      textShadow: "0 3px 14px rgba(0,0,0,0.5)",
+                    }}
+                  >
+                    Understanding<br />the Roles
+                  </Typography>
                 </Box>
+              </Box>
+
+              {/* Texto */}
+              <Box
+                sx={{
+                  background: "#0d2e1e",
+                  px: { xs: 2.8, sm: 4.2 },
+                  py: { xs: 3, sm: 4.5 },
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  gap: 2.2,
+                }}
+              >
+                {[
+                  { role: "Parent", color: "#1B83CC", text: "Provides emotional support, celebrates progress, and creates a positive environment at home where golf feels exciting and enjoyable." },
+                  { role: "Coach", color: "#FF6A00", text: "Guides the learning process with structure, patience, and creativity — building confidence and excitement for the game at every stage." },
+                  { role: "Child", color: "#1aa97a", text: "Explores, learns, and grows at their own pace — developing skills, curiosity, and a lasting love for golf." },
+                ].map((item) => (
+                  <Box key={item.role} sx={{ display: "flex", gap: 1.8, alignItems: "flex-start" }}>
+                    <Box
+                      sx={{
+                        mt: "3px",
+                        width: 10,
+                        height: 10,
+                        borderRadius: "50%",
+                        background: item.color,
+                        flexShrink: 0,
+                        boxShadow: `0 0 8px ${item.color}`,
+                      }}
+                    />
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontFamily: "'Poppins', sans-serif",
+                          fontWeight: 800,
+                          fontSize: "0.82rem",
+                          color: item.color,
+                          letterSpacing: "0.1em",
+                          textTransform: "uppercase",
+                          mb: 0.3,
+                        }}
+                      >
+                        {item.role}
+                      </Typography>
+                      <Typography sx={{ color: "rgba(255,255,255,0.85)", fontSize: { xs: "0.9rem", sm: "0.96rem" }, lineHeight: 1.72 }}>
+                        {item.text}
+                      </Typography>
+                    </Box>
+                  </Box>
+                ))}
               </Box>
             </Box>
           </motion.div>
