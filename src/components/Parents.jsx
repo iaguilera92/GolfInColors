@@ -33,7 +33,7 @@ export default function Parents() {
       <Box
         sx={{
           position: "relative",
-          height: { xs: 190, sm: 260, md: 300 },
+          minHeight: { xs: 230, sm: 260, md: 300 },
           overflow: "hidden",
           backgroundImage: "url(/fondo-1.png)",
           backgroundSize: "cover",
@@ -58,63 +58,70 @@ export default function Parents() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: { xs: 1, sm: 1.4 },
-            px: 2,
-            pt: { xs: 7, sm: 8 },
+            gap: { xs: 0.8, sm: 1.4 },
+            px: { xs: 2, sm: 3 },
+            pt: { xs: 14, sm: 12, md: 15 },
+            pb: { xs: 4.5, sm: 3 },
           }}
         >
-          <Box
-            sx={{
-              px: 1.6,
-              py: 0.5,
-              borderRadius: 99,
-              border: "1px solid rgba(255,255,255,0.35)",
-              background: "rgba(255,255,255,0.12)",
-              backdropFilter: "blur(6px)",
-            }}
-          >
+          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}>
+            <Box
+              sx={{
+                px: 1.6,
+                py: 0.5,
+                borderRadius: 99,
+                border: "1px solid rgba(255,255,255,0.35)",
+                background: "rgba(255,255,255,0.12)",
+                backdropFilter: "blur(6px)",
+              }}
+            >
+              <Typography
+                sx={{
+                  fontFamily: "'Poppins', sans-serif",
+                  fontWeight: 700,
+                  fontSize: { xs: "0.72rem", sm: "0.8rem" },
+                  color: "#ffffff",
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
+                }}
+              >
+                For Parents
+              </Typography>
+            </Box>
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, ease: "easeOut", delay: 0.28 }}>
             <Typography
               sx={{
                 fontFamily: "'Poppins', sans-serif",
-                fontWeight: 700,
-                fontSize: { xs: "0.72rem", sm: "0.8rem" },
+                fontWeight: 900,
+                fontSize: { xs: "1.3rem", sm: "2.2rem", md: "2.8rem" },
                 color: "#ffffff",
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
+                textAlign: "center",
+                lineHeight: 1.1,
+                textShadow: "0 3px 16px rgba(0,0,0,0.45)",
+                letterSpacing: "0.01em",
               }}
             >
-              For Parents
+              Your Role Makes the Difference
             </Typography>
-          </Box>
+          </motion.div>
 
-          <Typography
-            sx={{
-              fontFamily: "'Poppins', sans-serif",
-              fontWeight: 900,
-              fontSize: { xs: "1.6rem", sm: "2.2rem", md: "2.8rem" },
-              color: "#ffffff",
-              textAlign: "center",
-              lineHeight: 1.1,
-              textShadow: "0 3px 16px rgba(0,0,0,0.45)",
-              letterSpacing: "0.01em",
-            }}
-          >
-            Your Role Makes the Difference
-          </Typography>
-
-          <Typography
-            sx={{
-              fontFamily: "'Poppins', sans-serif",
-              fontWeight: 400,
-              fontSize: { xs: "0.88rem", sm: "1.05rem" },
-              color: "rgba(255,255,255,0.82)",
-              textAlign: "center",
-              maxWidth: 520,
-              textShadow: "0 2px 8px rgba(0,0,0,0.35)",
-            }}
-          >
-            Be part of your child&apos;s golf journey — every step of the way
-          </Typography>
+          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: "easeOut", delay: 0.48 }}>
+            <Typography
+              sx={{
+                fontFamily: "'Poppins', sans-serif",
+                fontWeight: 400,
+                fontSize: { xs: "0.88rem", sm: "1.05rem" },
+                color: "rgba(255,255,255,0.82)",
+                textAlign: "center",
+                maxWidth: 520,
+                textShadow: "0 2px 8px rgba(0,0,0,0.35)",
+              }}
+            >
+              Be part of your child&apos;s golf journey — every step of the way
+            </Typography>
+          </motion.div>
         </Box>
       </Box>
 
@@ -131,83 +138,66 @@ export default function Parents() {
       >
         <Container maxWidth="lg">
           {/* YOUR CHILD'S GOLF JOURNEY STARTS WITH YOU */}
-          <motion.div
-            initial={{ opacity: 0, x: 90 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.75, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.2 }}
+          <Box
+            sx={{
+              textAlign: "center",
+              color: "#0d2b45",
+              px: { xs: 1, sm: 4 },
+              mt: { xs: 0, sm: 0.5 },
+            }}
           >
-            <Box
-              sx={{
-                textAlign: "center",
-                color: "#0d2b45",
-                px: { xs: 1, sm: 4 },
-                mt: { xs: 0, sm: 0.5 },
-              }}
-            >
-              <Typography
-                sx={{
-                  fontWeight: 900,
-                  fontFamily: "'Poppins', sans-serif",
-                  lineHeight: { xs: 0.98, sm: 1.0 },
-                  letterSpacing: "0.015em",
-                  fontSize: { xs: "1.6rem", sm: "2.2rem", md: "2.6rem" },
-                  textShadow: "none",
-                }}
+            {[
+              { text: "YOUR CHILD'S", color: "#0d2b45", fontSize: { xs: "1.65rem", sm: "2.05rem", md: "2.25rem" }, fontWeight: 950 },
+              { text: "GOLF JOURNEY", color: "#0d2b45", fontSize: { xs: "1.65rem", sm: "2.05rem", md: "2.25rem" }, fontWeight: 950 },
+              { text: "STARTS", color: "#35536a", fontSize: { xs: "1.55rem", sm: "1.95rem", md: "2.1rem" }, fontWeight: 800 },
+            ].map((line, i) => (
+              <motion.div
+                key={line.text}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.12 }}
               >
                 <Box
                   component="span"
                   sx={{
                     display: "block",
-                    color: "#0d2b45",
-                    fontSize: { xs: "1.65rem", sm: "2.05rem", md: "2.25rem" },
-                    fontWeight: 950,
+                    color: line.color,
+                    fontSize: line.fontSize,
+                    fontWeight: line.fontWeight,
+                    fontFamily: "'Poppins', sans-serif",
+                    lineHeight: { xs: 0.98, sm: 1.0 },
+                    letterSpacing: "0.015em",
                     textShadow: "0 2px 10px rgba(0,0,0,0.08)",
                   }}
                 >
-                  YOUR CHILD&apos;S
+                  {line.text}
                 </Box>
-                <Box
-                  component="span"
-                  sx={{
-                    display: "block",
-                    color: "#0d2b45",
-                    fontSize: { xs: "1.65rem", sm: "2.05rem", md: "2.25rem" },
-                    fontWeight: 950,
-                    textShadow: "0 2px 10px rgba(0,0,0,0.08)",
-                  }}
-                >
-                  GOLF JOURNEY
-                </Box>
-                <Box
-                  component="span"
-                  sx={{
-                    display: "block",
-                    color: "#35536a",
-                    fontSize: { xs: "1.55rem", sm: "1.95rem", md: "2.1rem" },
-                    fontWeight: 800,
-                    mt: { xs: 0.2, sm: 0.25 },
-                  }}
-                >
-                  STARTS
-                </Box>
-                <Box
-                  component="span"
-                  sx={{
-                    display: "block",
-                    fontSize: { xs: "1.7rem", sm: "2.1rem", md: "2.35rem" },
-                    fontWeight: 950,
-                    lineHeight: 0.95,
-                    background: "linear-gradient(90deg, #1B83CC 0%, #0b8f63 55%, #1aa97a 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                >
-                  WITH YOU
-                </Box>
-              </Typography>
-            </Box>
-          </motion.div>
+              </motion.div>
+            ))}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.36 }}
+            >
+              <Box
+                component="span"
+                sx={{
+                  display: "block",
+                  fontSize: { xs: "1.7rem", sm: "2.1rem", md: "2.35rem" },
+                  fontWeight: 950,
+                  fontFamily: "'Poppins', sans-serif",
+                  lineHeight: 0.95,
+                  background: "linear-gradient(90deg, #1B83CC 0%, #0b8f63 55%, #1aa97a 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                WITH YOU
+              </Box>
+            </motion.div>
+          </Box>
 
           {/* FIRST AT HOME — 3 columns */}
           <motion.div
@@ -271,7 +261,7 @@ export default function Parents() {
                   minHeight: { xs: 220, sm: 280, md: "100%" },
                   backgroundImage: "url(/nino-parents.avif)",
                   backgroundSize: "cover",
-                  backgroundPosition: "center",
+                  backgroundPosition: { xs: "center 30%", md: "center" },
                   boxShadow: "0 8px 24px rgba(13,43,69,0.12)",
                 }}
               />

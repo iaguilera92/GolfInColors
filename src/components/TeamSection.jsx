@@ -35,9 +35,15 @@ function RoleIcon({ color }) {
   return <img className="ts-roleImg" src="/coach.png" alt="" aria-hidden="true" />;
 }
 
-function Card({ title, subtitle, items, color }) {
+function Card({ title, subtitle, items, color, delay = 0 }) {
   return (
-    <div className={`ts-card ts-card-${color}`}>
+    <motion.div
+      className={`ts-card ts-card-${color}`}
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.55, ease: "easeOut", delay }}
+    >
       <div className={`ts-roleBadge ts-roleBadge-${color}`} aria-hidden="true">
         <RoleIcon color={color} />
       </div>
@@ -51,20 +57,21 @@ function Card({ title, subtitle, items, color }) {
           </li>
         ))}
       </ul>
-    </div>
+    </motion.div>
   );
 }
 
 export default function TeamSection() {
   return (
     <section className="ts-container" aria-label="A winning team: Parent Child Coach">
-      <motion.div
-        className="ts-inner"
-        initial={{ opacity: 0, y: 18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <header className="ts-header">
+      <div className="ts-inner">
+        <motion.header
+          className="ts-header"
+          initial={{ opacity: 0, y: 22 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <div className="ts-tagFlagTop" aria-hidden="true">
             <svg viewBox="0 0 24 24" className="ts-flagSvgMini">
               <path d="M6 3v18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
@@ -82,46 +89,15 @@ export default function TeamSection() {
           <p className="ts-description">
             When each role works together, the experience becomes meaningful and real growth begins.
           </p>
-        </header>
+        </motion.header>
 
         <div className="ts-cards">
-          <Card
-            title="Parents"
-            subtitle="The Leader & Foundation"
-            color="blue"
-            items={[
-              "Ensure your child arrives rested, nourished, and ready",
-              "Be their main source of support and encouragement",
-              "Choose the right coach and learning environment",
-              "Provide the appropriate equipment",
-              "Set the tone: keeping the experience positive, balanced, and encouraging",
-            ]}
-          />
-          <Card
-            title="Children"
-            subtitle="The Heart of the Experience"
-            color="yellow"
-            items={[
-              "Have fun and enjoy the process",
-              "Stay engaged and open to learning",
-              "Try their best without fear of mistakes",
-              "Show respect for the game, the coach, and others",
-            ]}
-          />
-          <Card
-            title="Coaches"
-            subtitle="The Guides of the Journey"
-            color="green"
-            items={[
-              "Respect and align with the parent's role as the leader",
-              "Create a safe and engaging environment",
-              "Keep sessions fun, focused, and age-appropriate",
-              "Promote safety, discipline, and positive habits",
-            ]}
-          />
+          <Card title="Parents" subtitle="The Leader & Foundation" color="blue" delay={0} items={["Ensure your child arrives rested, nourished, and ready","Be their main source of support and encouragement","Choose the right coach and learning environment","Provide the appropriate equipment","Set the tone: keeping the experience positive, balanced, and encouraging"]} />
+          <Card title="Children" subtitle="The Heart of the Experience" color="yellow" delay={0.14} items={["Have fun and enjoy the process","Stay engaged and open to learning","Try their best without fear of mistakes","Show respect for the game, the coach, and others"]} />
+          <Card title="Coaches" subtitle="The Guides of the Journey" color="green" delay={0.28} items={["Respect and align with the parent's role as the leader","Create a safe and engaging environment","Keep sessions fun, focused, and age-appropriate","Promote safety, discipline, and positive habits"]} />
         </div>
 
-      </motion.div>
+      </div>
     </section>
   );
 }
