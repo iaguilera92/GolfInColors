@@ -77,7 +77,7 @@ const Footer = () => {
     <Box
       sx={{
         position: "relative",
-        padding: "28px 0 20px",
+        padding: "48px 0 36px",
         color: "#1f2a37",
         backgroundColor: "#f7f4ee",
         overflow: "hidden",
