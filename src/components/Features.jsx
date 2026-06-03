@@ -158,19 +158,19 @@ function Features() {
                   color: "#1B83CC",
                   subtitle: "LEARN. PLAY. GROW.",
                   label: "Skills",
-                  text: "Our fun learning system brings golf to life with coloring books, stories, characters, games and challenges that make kids excited to learn and play more!",
+                  text: "Our unique learning system brings golf to life through stories, coloring books, characters, games, and fun challenges that spark curiosity and keep kids excited to learn, practice, and play.",
                 },
                 {
                   color: "#FF6A00",
                   subtitle: "SPARK CURIOSITY. INSPIRE FOR LIFE.",
                   label: "Purpose",
-                  text: "We spark curiosity and build confidence so golf becomes part of who they are. More than a sport — it's a journey that lasts a lifetime.",
+                  text: "We create experiences that make golf part of who they are—not just something they play, but something they carry with them for life.",
                 },
                 {
                   color: "#017458",
                   subtitle: "TOGETHER WE WIN.",
                   label: "Connection",
-                  text: "We build the winning team! Parents, coaches and kids — each with an important role in the journey. When we work together, kids thrive.",
+                  text: "We build the ultimate team: parents, coaches, and kids—each with an important role in the journey. When everyone works together, children grow with confidence and love the game.",
                 },
               ].map((item, i) => (
                 <motion.div
@@ -389,7 +389,7 @@ function Features() {
           <Box
             sx={{
               mt: { xs: 2.4, sm: 3.2 },
-              px: { xs: 2, sm: 5, md: 8 },
+              px: { xs: 1, sm: 5, md: 8 },
               py: { xs: 3, sm: 4 },
               textAlign: "center",
               position: "relative",
@@ -402,15 +402,21 @@ function Features() {
             <Typography
               sx={{
                 fontFamily: "’Georgia’, ‘Times New Roman’, serif",
-                fontSize: { xs: "1.5rem", sm: "2rem", md: "2.4rem" },
+                fontSize: { xs: "0.88rem", sm: "1.6rem", md: "1.85rem" },
                 fontWeight: 400,
                 fontStyle: "italic",
                 color: "#0d3324",
-                lineHeight: 1.45,
+                lineHeight: 1.5,
                 letterSpacing: "0.01em",
+                whiteSpace: { xs: "normal", md: "nowrap" },
               }}
             >
-              &ldquo;Together We&apos;re Shaping the Future of Golf &mdash; One colorful step at a time&rdquo;
+              <Box component="span" sx={{ display: { xs: "block", md: "inline" } }}>
+                &ldquo;Together We&apos;re Shaping the Future of Golf &mdash;
+              </Box>
+              <Box component="span" sx={{ display: { xs: "block", md: "inline" } }}>
+                One colorful step at a time&rdquo;
+              </Box>
             </Typography>
           </Box>
         </Box>

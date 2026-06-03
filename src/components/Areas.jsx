@@ -227,7 +227,7 @@ function Areas() {
               mx: "auto",
             }}
           >
-            A simple framework built around fun, progression, understanding, structure, and confidence — follow the colors to guide your child&apos;s journey.
+            Colors matter because they help children see progress in a simple, motivating way. They represent growth, effort, belonging, and achievement.
           </Typography>
 
           {/* ── Desktop: cards + arrows ── */}

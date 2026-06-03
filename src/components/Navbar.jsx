@@ -90,7 +90,8 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
   const pdfSrc = `/plataformasweb-pdf.pdf#zoom=${isMobile ? 100 : 60}`;
   const location = useLocation();
   const isHome = location.pathname === "/" || location.pathname === "";
-  const navActive = !isHome || isScrolled;
+  const hasBanner = isHome || location.pathname === "/parents";
+  const navActive = !hasBanner || isScrolled;
   const mostrarAnimacion = videoReady || (location.pathname !== '/' && location.pathname !== '');
   const [animacionMostrada, setAnimacionMostrada] = useState(false);
   const [scrollY, setScrollY] = useState(0);

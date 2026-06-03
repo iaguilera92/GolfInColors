@@ -35,9 +35,9 @@ export default function Parents() {
           position: "relative",
           minHeight: { xs: 230, sm: 260, md: 300 },
           overflow: "hidden",
-          backgroundImage: "url(/fondo-1.png)",
+          backgroundImage: "url(/fondo-banner.avif)",
           backgroundSize: "cover",
-          backgroundPosition: "center 30%",
+          backgroundPosition: "center 75%",
         }}
       >
         {/* Overlay */}
@@ -90,20 +90,21 @@ export default function Parents() {
             </Box>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, ease: "easeOut", delay: 0.28 }}>
+          <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, ease: "easeOut", delay: 0.28 }} style={{ marginTop: "14px" }}>
             <Typography
               sx={{
                 fontFamily: "'Poppins', sans-serif",
                 fontWeight: 900,
-                fontSize: { xs: "1.3rem", sm: "2.2rem", md: "2.8rem" },
+                fontSize: { xs: "1.05rem", sm: "1.6rem", md: "2rem" },
                 color: "#ffffff",
                 textAlign: "center",
-                lineHeight: 1.1,
+                lineHeight: 1.15,
                 textShadow: "0 3px 16px rgba(0,0,0,0.45)",
-                letterSpacing: "0.01em",
+                letterSpacing: "0.02em",
+                whiteSpace: { xs: "normal", sm: "nowrap" },
               }}
             >
-              Your Role Makes the Difference
+              YOUR CHILD&apos;S GOLF JOURNEY<Box component="span" sx={{ display: { xs: "block", sm: "inline" } }}> STARTS WITH YOU</Box>
             </Typography>
           </motion.div>
 
@@ -116,6 +117,8 @@ export default function Parents() {
                 color: "rgba(255,255,255,0.82)",
                 textAlign: "center",
                 maxWidth: 520,
+                whiteSpace: { xs: "nowrap", sm: "normal" },
+                fontSize: { xs: "0.7rem", sm: "1.05rem" },
                 textShadow: "0 2px 8px rgba(0,0,0,0.35)",
               }}
             >
@@ -137,67 +140,6 @@ export default function Parents() {
         }}
       >
         <Container maxWidth="lg">
-          {/* YOUR CHILD'S GOLF JOURNEY STARTS WITH YOU */}
-          <Box
-            sx={{
-              textAlign: "center",
-              color: "#0d2b45",
-              px: { xs: 1, sm: 4 },
-              mt: { xs: 0, sm: 0.5 },
-            }}
-          >
-            {[
-              { text: "YOUR CHILD'S", color: "#0d2b45", fontSize: { xs: "1.65rem", sm: "2.05rem", md: "2.25rem" }, fontWeight: 950 },
-              { text: "GOLF JOURNEY", color: "#0d2b45", fontSize: { xs: "1.65rem", sm: "2.05rem", md: "2.25rem" }, fontWeight: 950 },
-              { text: "STARTS", color: "#35536a", fontSize: { xs: "1.55rem", sm: "1.95rem", md: "2.1rem" }, fontWeight: 800 },
-            ].map((line, i) => (
-              <motion.div
-                key={line.text}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.12 }}
-              >
-                <Box
-                  component="span"
-                  sx={{
-                    display: "block",
-                    color: line.color,
-                    fontSize: line.fontSize,
-                    fontWeight: line.fontWeight,
-                    fontFamily: "'Poppins', sans-serif",
-                    lineHeight: { xs: 0.98, sm: 1.0 },
-                    letterSpacing: "0.015em",
-                    textShadow: "0 2px 10px rgba(0,0,0,0.08)",
-                  }}
-                >
-                  {line.text}
-                </Box>
-              </motion.div>
-            ))}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, ease: "easeOut", delay: 0.36 }}
-            >
-              <Box
-                component="span"
-                sx={{
-                  display: "block",
-                  fontSize: { xs: "1.7rem", sm: "2.1rem", md: "2.35rem" },
-                  fontWeight: 950,
-                  fontFamily: "'Poppins', sans-serif",
-                  lineHeight: 0.95,
-                  background: "linear-gradient(90deg, #1B83CC 0%, #0b8f63 55%, #1aa97a 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                WITH YOU
-              </Box>
-            </motion.div>
-          </Box>
 
           {/* FIRST AT HOME — 3 columns */}
           <motion.div
@@ -276,43 +218,31 @@ export default function Parents() {
                   boxShadow: "0 8px 24px rgba(13,43,69,0.07)",
                   display: "flex",
                   flexDirection: "column",
-                  gap: 1.2,
+                  gap: 1.4,
                 }}
               >
                 <Typography
                   sx={{
                     fontFamily: "'Poppins', sans-serif",
                     fontWeight: 900,
-                    color: "#083c2c",
-                    fontSize: { xs: "1.15rem", sm: "1.28rem" },
-                    lineHeight: 1.15,
-                    borderBottom: "2px solid #017458",
+                    fontSize: { xs: "1.1rem", sm: "1.18rem" },
+                    color: "#1B83CC",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    borderBottom: "2px solid #1B83CC",
                     pb: 0.8,
                   }}
                 >
                   Let Us Show You the Way
                 </Typography>
-                <Box
-                  sx={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    px: 1.1,
-                    py: 0.45,
-                    borderRadius: 99,
-                    background: "rgba(27,131,204,0.10)",
-                    color: "#1B83CC",
-                    fontWeight: 800,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    fontSize: "0.72rem",
-                    width: "fit-content",
-                  }}
-                >
-                  Parent framework
-                </Box>
-                <Typography sx={{ color: "#35536a", fontSize: { xs: "0.92rem", sm: "0.97rem" }, lineHeight: 1.75 }}>
-                  Golf in Colors provides parents with a clear framework to understand their role in their child&apos;s development, allowing them to support without creating pressure or confusion. It offers a structured environment where progress is visible and consistent, giving parents confidence in the process and in the decisions they are making. By connecting what happens at the academy with experiences at home, it turns golf into a shared activity, creating meaningful moments between children and their families. This approach brings clarity, trust, and involvement to each stage of the journey, while allowing parents to feel part of a positive and guided experience.
-                </Typography>
+                {[
+                  "Golf in Colors provides parents with a clear framework to understand their role in their child's development, allowing them to support without creating pressure or confusion. It offers a structured environment where progress is visible and consistent, giving parents confidence in the process and in the decisions they are making.",
+                  "By connecting what happens at the academy with experiences at home, it turns golf into a shared activity, creating meaningful moments between children and their families. This approach brings clarity, trust, and involvement to each stage of the journey, while allowing parents to feel part of a positive and guided experience.",
+                ].map((txt, i) => (
+                  <Typography key={i} sx={{ color: "#27475f", fontSize: { xs: "0.92rem", sm: "0.97rem" }, lineHeight: 1.75 }}>
+                    {txt}
+                  </Typography>
+                ))}
               </Box>
             </Box>
           </motion.div>
@@ -457,7 +387,7 @@ export default function Parents() {
       {/* 4. ROLES  |  5. FAQ's */}
       <Box
         sx={{
-          pt: { xs: 5, sm: 4 },
+          pt: { xs: 7, sm: 7 },
           pb: { xs: 3, sm: 3.5 },
           backgroundColor: "rgb(248 246 241)",
           backgroundSize: "cover",
@@ -466,172 +396,6 @@ export default function Parents() {
         }}
       >
         <Container maxWidth="lg">
-          {/* ROLES */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <Box
-              sx={{
-                mb: { xs: 3.4, sm: 4.4 },
-                p: { xs: 2.2, sm: 3, md: 3.4 },
-                borderRadius: 4,
-                border: "1px solid rgba(13,43,69,0.10)",
-                background: "linear-gradient(165deg, #ffffff 0%, #f4f9ff 100%)",
-                boxShadow: "0 16px 30px rgba(13,43,69,0.10)",
-                overflow: "hidden",
-                position: "relative",
-                "&::before": {
-                  content: '""',
-                  position: "absolute",
-                  inset: 0,
-                  pointerEvents: "none",
-                  background: "radial-gradient(circle at top right, rgba(27,131,204,0.08) 0, rgba(27,131,204,0) 38%)",
-                },
-              }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 1.2,
-                  mb: 1.15,
-                  position: "relative",
-                  zIndex: 1,
-                }}
-              >
-                <Box
-                  sx={{
-                    width: 42,
-                    height: 42,
-                    borderRadius: "50%",
-                    display: "grid",
-                    placeItems: "center",
-                    background: "#017458",
-                    color: "#fff",
-                    boxShadow: "0 10px 18px rgba(1,116,88,0.25)",
-                    flexShrink: 0,
-                  }}
-                >
-                  <HelpOutlineRoundedIcon sx={{ fontSize: 24 }} />
-                </Box>
-
-                <Box>
-                  <Typography
-                    sx={{
-                      fontFamily: "'Poppins', sans-serif",
-                      fontWeight: 900,
-                      color: "#0c2a44",
-                      fontSize: { xs: "1.1rem", sm: "1.18rem" },
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      lineHeight: 1.05,
-                    }}
-                  >
-                    ROLES
-                  </Typography>
-                  <Typography
-                    sx={{
-                      color: "#35536a",
-                      fontWeight: 700,
-                      fontSize: { xs: "0.9rem", sm: "0.98rem" },
-                      lineHeight: 1.3,
-                      mt: 0.25,
-                    }}
-                  >
-                    How the Journey Works at Home
-                  </Typography>
-                </Box>
-              </Box>
-
-              <Typography
-                sx={{
-                  position: "relative",
-                  zIndex: 1,
-                  color: "#27475f",
-                  fontSize: { xs: "0.94rem", sm: "1rem" },
-                  lineHeight: 1.72,
-                  maxWidth: "72ch",
-                }}
-              >
-                Reinforcing what children learn at the academy while creating meaningful parent-child connection through golf.
-              </Typography>
-
-              <Box
-                sx={{
-                  mt: 0,
-                  display: "grid",
-                  gridTemplateColumns: { xs: "1fr", sm: "repeat(2, minmax(0, 1fr))", md: "repeat(5, minmax(0, 1fr))" },
-                  gap: 1.1,
-                  position: "relative",
-                  zIndex: 1,
-                }}
-              >
-                {[
-                  "Discover the game",
-                  "Build the foundation",
-                  "Experience the Game of Golf",
-                  "Understand How to Play",
-                  "Step into structured training",
-                ].map((step, index) => (
-                  <Box
-                    key={step}
-                    sx={{
-                      p: 1.45,
-                      borderRadius: 3,
-                      border: "1px solid rgba(13,43,69,0.10)",
-                      background:
-                        index % 2 === 0
-                          ? "linear-gradient(180deg, rgba(27,131,204,0.08) 0%, rgba(27,131,204,0.03) 100%)"
-                          : "linear-gradient(180deg, rgba(11,143,99,0.08) 0%, rgba(11,143,99,0.03) 100%)",
-                      minHeight: 92,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 1.1,
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        width: 30,
-                        height: 30,
-                        borderRadius: "50%",
-                        flexShrink: 0,
-                        display: "grid",
-                        placeItems: "center",
-                        background: [
-                          "#1B83CC",
-                          "#FDBB2F",
-                          "#FF471F",
-                          "#FF6A00",
-                          "#017458",
-                        ][index],
-                        color: "#fff",
-                        fontWeight: 900,
-                        fontFamily: "'Poppins', sans-serif",
-                        boxShadow: "0 8px 14px rgba(13,43,69,0.18)",
-                      }}
-                    >
-                      {index + 1}
-                    </Box>
-                    <Typography
-                      sx={{
-                        color: "#0c2a44",
-                        fontFamily: "'Poppins', sans-serif",
-                        fontWeight: 800,
-                        fontSize: { xs: "0.92rem", sm: "0.98rem" },
-                        lineHeight: 1.25,
-                      }}
-                    >
-                      {step}
-                    </Typography>
-                  </Box>
-                ))}
-              </Box>
-            </Box>
-          </motion.div>
-
           {/* FAQ's */}
           <motion.div
             initial={{ opacity: 0, x: 90 }}
