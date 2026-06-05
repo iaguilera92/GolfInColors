@@ -333,49 +333,21 @@ export default function Parents() {
                   gap: 2.2,
                 }}
               >
-                {[
-                  { role: "Parent", color: "#1B83CC", text: "Provides emotional support, celebrates progress, and creates a positive environment at home where golf feels exciting and enjoyable." },
-                  { role: "Coach", color: "#FF6A00", text: "Guides the learning process with structure, patience, and creativity — building confidence and excitement for the game at every stage." },
-                  { role: "Child", color: "#1aa97a", text: "Explores, learns, and grows at their own pace — developing skills, curiosity, and a lasting love for golf." },
-                ].map((item) => (
-                  <Box key={item.role} sx={{ display: "flex", gap: 1.8, alignItems: "flex-start" }}>
-                    <Box
-                      sx={{
-                        mt: "3px",
-                        width: 10,
-                        height: 10,
-                        borderRadius: "50%",
-                        background: item.color,
-                        flexShrink: 0,
-                        boxShadow: `0 0 8px ${item.color}`,
-                      }}
-                    />
-                    <Box>
-                      <Typography
-                        sx={{
-                          fontFamily: "'Poppins', sans-serif",
-                          fontWeight: 800,
-                          fontSize: "0.82rem",
-                          color: item.color,
-                          letterSpacing: "0.1em",
-                          textTransform: "uppercase",
-                          mb: 0.3,
-                        }}
-                      >
-                        {item.role}
-                      </Typography>
-                      <Typography sx={{ color: "rgba(255,255,255,0.85)", fontSize: { xs: "0.9rem", sm: "0.96rem" }, lineHeight: 1.72 }}>
-                        {item.text}
-                      </Typography>
-                    </Box>
-                  </Box>
-                ))}
+                <Typography sx={{ color: "rgba(255,255,255,0.90)", fontSize: { xs: "0.92rem", sm: "0.98rem" }, lineHeight: 1.82 }}>
+                  Clear roles are essential because they create structure, consistency, and trust throughout a child&apos;s learning experience. When each person understands their responsibility — the parent providing emotional support, the coach guiding the learning process, and the child exploring and growing — everything becomes more aligned and effective. This clarity eliminates confusion, reduces unnecessary pressure, and creates a positive environment where the child feels safe, motivated, and confident. With everyone working in the same direction, the learning process becomes more natural, progress becomes consistent, and the overall experience becomes something both the child and the family can truly enjoy.
+                </Typography>
               </Box>
             </Box>
           </motion.div>
 
+          {/* Flechas conector */}
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", px: { xs: "8%", sm: "14%" }, pt: { xs: 4, sm: 5 }, pb: 0 }}>
+            <Box component="img" src="/flecha.png" alt="" sx={{ width: { xs: 45, sm: 100 }, opacity: 0.85, transform: "scaleY(-1) rotate(-50deg)" }} />
+            <Box component="img" src="/flecha.png" alt="" sx={{ width: { xs: 45, sm: 100 }, opacity: 0.85, transform: "scaleX(-1) rotate(-50deg)" }} />
+          </Box>
+
           {/* 2. A WINNING TEAM */}
-          <Box sx={{ mt: { xs: 2.4, sm: 3.2 }, mb: 0 }}>
+          <Box sx={{ mt: { xs: -4, sm: -9 }, mb: 0 }}>
             <TeamSection />
           </Box>
         </Container>

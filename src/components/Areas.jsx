@@ -66,58 +66,38 @@ const Card = ({ item }) => (
       flexDirection: "column",
       justifyContent: "flex-start",
       gap: 1.15,
-      "&::before": {
-        content: '""',
-        position: "absolute",
-        inset: "auto auto -28px -28px",
-        width: 120,
-        height: 120,
-        borderRadius: "50%",
-        background: `radial-gradient(circle, ${item.color}55 0%, ${item.color}22 45%, transparent 72%)`,
-        pointerEvents: "none",
-      },
     }}
   >
-    {/* Circle — star + número badge */}
-    <Box sx={{ position: "relative", width: 62, height: 62, flexShrink: 0 }}>
-      <Box
+    {/* Circle — estrella con número dentro */}
+    <Box
+      sx={{
+        position: "relative",
+        width: 62,
+        height: 62,
+        flexShrink: 0,
+        borderRadius: "50%",
+        background: item.color,
+        boxShadow: `0 8px 18px ${item.glow}`,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <StarRoundedIcon sx={{ fontSize: 54, color: "#ffffff", position: "absolute" }} />
+      <Typography
         sx={{
-          width: 62,
-          height: 62,
-          borderRadius: "50%",
-          background: item.color,
-          boxShadow: `0 8px 18px ${item.glow}`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <StarRoundedIcon sx={{ fontSize: 42, color: "#ffffff" }} />
-      </Box>
-      {/* Badge número */}
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: -3,
-          right: -3,
-          width: 26,
-          height: 26,
-          borderRadius: "50%",
-          background: "#fff",
-          border: `2.5px solid ${item.color}`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          position: "relative",
+          zIndex: 1,
           fontFamily: "'Poppins', sans-serif",
           fontWeight: 900,
-          fontSize: "0.82rem",
+          fontSize: "1.15rem",
           color: item.color,
           lineHeight: 1,
-          boxShadow: "0 2px 6px rgba(0,0,0,0.12)",
+          mt: "5px",
         }}
       >
         {item.step}
-      </Box>
+      </Typography>
     </Box>
 
     <Typography
