@@ -232,7 +232,7 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
                     }}
                   >
                     A learning system designed to bring parents, kids & coaches together as{" "}
-                    <Box component="span" sx={{ fontWeight: 700, color: "#7eeec8" }}>
+                    <Box component="span" sx={{ fontWeight: 700, color: "#FF6A00" }}>
                       ONE TEAM
                     </Box>
                   </Typography>
