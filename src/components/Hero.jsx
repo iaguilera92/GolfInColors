@@ -248,7 +248,7 @@ function Hero({ informationsRef, setVideoReady, onStartClick }) {
                   <Box sx={{ mt: isMobile ? 9 : 7 }}>
                     <button
                       className="btn-3"
-                      onClick={() => navigate("/nosotros")}
+                      onClick={() => navigate("/aboutUs")}
                     >
                       <span>About Us</span>
                     </button>

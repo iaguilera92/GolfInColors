@@ -87,7 +87,7 @@ const router = createBrowserRouter(
       children: [
         { path: "", element: <HomeWrapper /> },
         { path: "servicios", element: withSuspense(Servicios) },
-        { path: "nosotros", element: withSuspense(Nosotros) },
+        { path: "aboutUs", element: withSuspense(Nosotros) },
         { path: "contacto", element: withSuspense(Contacto) },
         { path: "administracion", element: withSuspense(Administracion) },
         { path: "catalogo", element: withSuspense(Catalogo) },

@@ -90,7 +90,7 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
   const pdfSrc = `/plataformasweb-pdf.pdf#zoom=${isMobile ? 100 : 60}`;
   const location = useLocation();
   const isHome = location.pathname === "/" || location.pathname === "";
-  const hasBanner = isHome || location.pathname === "/parents";
+  const hasBanner = isHome || location.pathname === "/parents" || location.pathname === "/aboutUs";
   const navActive = !hasBanner || isScrolled;
   const mostrarAnimacion = videoReady || (location.pathname !== '/' && location.pathname !== '');
   const [animacionMostrada, setAnimacionMostrada] = useState(false);
@@ -154,8 +154,8 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
 
       Servicios: () => navigate("/servicios"),
       Catalogo: goToCatalogo,
-      Nosotros: () => navigate("/nosotros"),
-      "About Us": () => navigate("/nosotros"),
+      Nosotros: () => navigate("/aboutUs"),
+      "About Us": () => navigate("/aboutUs"),
       Presentacion: handleOpenPDF,
     };
 
