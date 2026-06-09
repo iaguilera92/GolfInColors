@@ -1,12 +1,14 @@
-﻿import { Box, Typography, Grid, Container, useTheme, useMediaQuery, Card, CardContent, Collapse, Dialog, DialogContent, IconButton } from "@mui/material";
+﻿import { Box, Button, Typography, Grid, Container, useTheme, useMediaQuery, Card, CardContent, Collapse, Dialog, DialogContent, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Nosotros = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const navigate = useNavigate();
   const [scrollY, setScrollY] = useState(0);
   const [activeFounder, setActiveFounder] = useState(null);
   const [dialogFounder, setDialogFounder] = useState(null);
@@ -723,6 +725,60 @@ const Nosotros = () => {
           </>
         )}
       </Dialog>
+
+      {/* CTA — Ready to start */}
+      <Box maxWidth="1200px" mx="auto" mt={{ xs: 5, sm: 6 }} mb={2} px={{ xs: 2, sm: 0 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.65, ease: "easeOut" }}
+        >
+          <Box
+            sx={{
+              py: { xs: 3, sm: 4 },
+              px: { xs: 2, sm: 4 },
+              borderRadius: 3,
+              background: "#017458",
+              textAlign: "center",
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "'Poppins', sans-serif",
+                fontWeight: 700,
+                fontSize: { xs: "1.15rem", sm: "1.5rem" },
+                color: "#ffffff",
+                mb: { xs: 2, sm: 2.5 },
+              }}
+            >
+              Ready to start your child&apos;s golf journey?
+            </Typography>
+            <Button
+              onClick={() => navigate("/parents")}
+              variant="contained"
+              sx={{
+                background: "#ffffff",
+                color: "#017458",
+                fontFamily: "'Poppins', sans-serif",
+                fontWeight: 800,
+                fontSize: { xs: "0.9rem", sm: "1rem" },
+                px: { xs: 3.5, sm: 5 },
+                py: { xs: 1.2, sm: 1.5 },
+                borderRadius: 99,
+                textTransform: "none",
+                boxShadow: "0 4px 14px rgba(0,0,0,0.15)",
+                "&:hover": {
+                  background: "#f0faf6",
+                  boxShadow: "0 6px 20px rgba(0,0,0,0.18)",
+                },
+              }}
+            >
+              Start Here
+            </Button>
+          </Box>
+        </motion.div>
+      </Box>
 
     </Container>
   );
