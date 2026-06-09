@@ -634,11 +634,10 @@ function Navbar({ contactoRef, informationsRef, videoReady }) {
                 <Box
                   sx={{
                     borderRadius: 3,
-                    px: 2,
-                    py: 1,
+                    px: 2.2,
+                    py: 1.6,
                     mx: 2,
                     mb: 0,
-                    pt: 0,
                     color: "white",
                     backdropFilter: "blur(8px)",
 

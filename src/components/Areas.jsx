@@ -263,7 +263,7 @@ function Areas() {
             sx={{
               mt: { xs: 3.5, sm: 4.5 },
               py: { xs: 3, sm: 4 },
-              px: { xs: 2, sm: 4 },
+              px: { xs: 1.5, sm: 4 },
               borderRadius: 3,
               background: "#017458",
               textAlign: "center",
@@ -273,9 +273,10 @@ function Areas() {
               sx={{
                 fontFamily: "'Poppins', sans-serif",
                 fontWeight: 700,
-                fontSize: { xs: "1.15rem", sm: "1.5rem" },
+                fontSize: { xs: "0.98rem", sm: "1.5rem" },
                 color: "#ffffff",
                 mb: { xs: 2, sm: 2.5 },
+                whiteSpace: { xs: "nowrap", sm: "normal" },
               }}
             >
               Ready to start your child&apos;s golf journey?
