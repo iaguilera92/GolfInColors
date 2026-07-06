@@ -369,7 +369,7 @@ export default function Parents() {
       >
         <Container maxWidth="lg">
           {/* FAQ's */}
-          <motion.div
+          <motion.div style={{ display: "none" }}
             initial={{ opacity: 0, x: 90 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.75, ease: "easeOut" }}

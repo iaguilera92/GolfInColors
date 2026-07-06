@@ -322,8 +322,7 @@ const Nosotros = () => {
               overflow: "hidden",
             }}
           >
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 2 }}>
-              <Box sx={{ width: 28, height: 3, borderRadius: 99, background: "#FDBB2F" }} />
+            <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
               <Typography sx={{ fontSize: "0.9rem", fontWeight: 700, color: "#FDBB2F", letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "'Poppins', sans-serif" }}>
                 Purpose
               </Typography>

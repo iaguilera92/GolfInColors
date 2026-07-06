@@ -65,14 +65,14 @@ function Features() {
         image: "/IMAGE_09.avif",
       },
       {
-        label: "Parents",
+        label: "For Parents",
         value: "parents",
         toneA: "#2c95e3",
         toneB: "#0f6fb8",
         image: "/IMAGE_10.avif",
       },
       {
-        label: "Coaches",
+        label: "For Coaches",
         value: "coaches",
         toneA: "#f08b32",
         toneB: "#cf6710",

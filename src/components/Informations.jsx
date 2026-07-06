@@ -59,7 +59,7 @@ function Informations() {
       sx={{
         position: "relative",
         zIndex: 10,
-        backgroundImage: "url(fondo-3.jpg)",
+        backgroundImage: "url(/PATTERN.avif)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "fixed",

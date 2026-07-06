@@ -101,10 +101,10 @@ const Footer = () => {
 
               <Typography sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                 <img src="telefono-icon.png" alt="Telefono" width={14} style={{ filter: "brightness(0)" }} />
-                <Link href="tel:+15617975986" color="inherit">+1 (561) 7975986</Link>
+                <Link href="tel:+17865035088" color="inherit">+1 (786) 503 5088</Link>
               </Typography>
 
-              <Typography sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <Typography sx={{ display: "none", alignItems: "center", gap: 1 }}>
                 <img src="mail-icon.png" alt="Correo" width={14} style={{ filter: "brightness(0)" }} />
                 <Link href="mailto:anikaveintemilla@gmail.com" color="inherit">anikaveintemilla@gmail.com</Link>
               </Typography>
