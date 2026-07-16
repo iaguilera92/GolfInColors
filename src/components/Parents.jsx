@@ -356,11 +356,11 @@ export default function Parents() {
       {/* 3. How the Journey Works (Informations) */}
       <Informations />
 
-      {/* 4. ROLES  |  5. FAQ's */}
+      {/* 4. BE PART OF THEIR JOURNEY  |  5. ROLES  |  6. FAQ's */}
       <Box
         sx={{
-          pt: { xs: 7, sm: 7 },
-          pb: { xs: 3, sm: 3.5 },
+          pt: { xs: 4, sm: 5 },
+          pb: { xs: 1.5, sm: 2 },
           backgroundColor: "rgb(248 246 241)",
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -368,6 +368,111 @@ export default function Parents() {
         }}
       >
         <Container maxWidth="lg">
+
+          {/* BE PART OF THEIR JOURNEY */}
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.72, ease: "easeOut" }}
+          >
+            <Box
+              sx={{
+                px: { xs: 2.5, md: 5 },
+                py: { xs: 3.5, md: 4.5 },
+                mb: { xs: 3.5, md: 4 },
+                borderRadius: 4,
+                background: "linear-gradient(160deg, #ffffff 0%, #f4fbf8 100%)",
+                border: "1px solid rgba(1,116,88,0.12)",
+                boxShadow: "0 16px 36px rgba(1,116,88,0.08)",
+                textAlign: "center",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  px: 1.6,
+                  py: 0.55,
+                  borderRadius: 99,
+                  background: "rgba(1,116,88,0.09)",
+                  border: "1px solid rgba(1,116,88,0.25)",
+                  mb: 2,
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: "#017458",
+                    fontFamily: "'Poppins', sans-serif",
+                    fontWeight: 800,
+                    fontSize: { xs: "0.68rem", md: "0.74rem" },
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  BE PART OF THEIR JOURNEY
+                </Typography>
+              </Box>
+
+              <Typography
+                sx={{
+                  fontFamily: "'Georgia', 'Times New Roman', serif",
+                  fontStyle: "italic",
+                  fontSize: { xs: "1.1rem", md: "1.28rem" },
+                  color: "#0d2b45",
+                  lineHeight: 1.7,
+                  mb: 2.2,
+                }}
+              >
+                Your child has a journey to follow.<br />
+                And you have an important role in it.
+              </Typography>
+
+              <Typography
+                sx={{
+                  fontFamily: "'Poppins', sans-serif",
+                  fontSize: { xs: "0.91rem", md: "0.98rem" },
+                  color: "#35536a",
+                  lineHeight: 1.85,
+                  mb: 3,
+                  maxWidth: "64ch",
+                  mx: "auto",
+                }}
+              >
+                To help you be part of that journey, we created the{" "}
+                <Box component="span" sx={{ color: "#017458", fontWeight: 700 }}>
+                  World of Golf in Colors
+                </Box>
+                —a world of characters, stories, games, and adventures designed to help you share the experience, support their learning, and connect with your child through golf.
+              </Typography>
+
+              <Box
+                sx={{
+                  display: "inline-block",
+                  px: { xs: 2.2, md: 3.8 },
+                  py: { xs: 1.2, md: 1.6 },
+                  borderRadius: 99,
+                  background: "#017458",
+                  boxShadow: "0 6px 20px rgba(1,116,88,0.28)",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontFamily: "'Poppins', sans-serif",
+                    fontWeight: 900,
+                    fontSize: { xs: "0.85rem", md: "1.05rem" },
+                    letterSpacing: { xs: "0.05em", md: "0.08em" },
+                    textTransform: "uppercase",
+                    color: "#ffffff",
+                    lineHeight: 1.4,
+                  }}
+                >
+                  WELCOME TO THE WORLD OF GOLF IN COLORS!
+                </Typography>
+              </Box>
+            </Box>
+          </motion.div>
+
           {/* FAQ's */}
           <motion.div style={{ display: "none" }}
             initial={{ opacity: 0, x: 90 }}
